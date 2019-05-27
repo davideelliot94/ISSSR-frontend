@@ -332,15 +332,8 @@ mainAngularModule
                             console.error(response.data);
                             //ToasterNotifierHandler.handleError(response);
                             if (response.status === 424) {
-                                if (response.data.length === 0) {
-                                    ToasterNotifierHandler.showErrorToast("Reflective relation is forbidden");
-                                } else {
-                                    var cicle = "" + response.data[0].id;
-                                    for (var i = 1; i < response.data.length; i++) {
-                                        cicle += ", " + response.data[i].id;
-                                    }
-                                    ToasterNotifierHandler.showErrorToast("Creation failed due to this cycle: " + cicle);
-                                }
+                                ToasterNotifierHandler.showErrorToast("Operazione non permessa. " +
+                                    "La relazione che stai provando a creare introduce un ciclo di dipendenze tra ticket.")
                             }
                         });
             }

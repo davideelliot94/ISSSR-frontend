@@ -59,16 +59,16 @@
                                   {{t}}
                               </div></td>
                           </tr>
-                            <tr> <td>Dependency</td>
-                                <td><div ng-repeat = "x in  ticket.dependentTickets">
-                                    {{x.id}} {{x.title}}
-                                </div></td>
-                            </tr>
-                            <tr> <td>Regression</td>
-                                <td><div ng-repeat = "y in  ticket.regressionTicketsGenerator">
-                                    {{y.id}} {{y.title}}
-                                </div></td>
-                            </tr>
+                          <tr> <td>Precede:</td>
+                              <td><div ng-repeat = "x in  ticket.dependentTickets">
+                                  {{x.id}} {{x.title}}
+                              </div></td>
+                          </tr>
+                          <tr> <td>Generato dalla risoluzione di:</td>
+                              <td><div ng-repeat = "y in  ticket.regressionTicketsGenerator">
+                                  {{y.id}} {{y.title}}
+                              </div></td>
+                          </tr>
                             <tr ng-repeat = "y in relationName">
                                 <td>{{y.name}}</td>
                                 <td ng-repeat="rel in relTicket | filter: y.name:rel.name">

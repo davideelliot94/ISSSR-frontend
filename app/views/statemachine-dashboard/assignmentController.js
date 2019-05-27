@@ -130,9 +130,22 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
                     ToasterNotifierHandler.showErrorToast(messageError);
                 }
 
-                if (err.status === 424) {
+                if (err.status === 424) { // Codice d'errore restituito quando si prova a far avanzare nel workflow un ticket che dipende da altri.
 
-                    var init = function () {
+                    httpService.get('http://localhost:8200/ticketingsystem/tickets/findFatherTicket/' + getTicket.id).then(function(response) {
+                        if (response.status === 200) {
+                            var dependingTickets = '';
+
+                            for (var i = 0; i < response.data.length; i++) {
+                                dependingTickets = dependingTickets + ' ' +  (response.data[i]).id;
+                            }
+                            ToasterNotifierHandler.showErrorToast('Operazione non consentita. Devi prima risolvere i ticket ' + dependingTickets);
+                        }
+                    }, function() {
+
+                    });
+
+                    /*var init = function () {
                         var param = {};
                         PlanningDataFactory.getFatherTicket(param, $scope.ticket, function (response) {
                             messageError = "Planning failed. Need to resolve the following ticket first: ";
@@ -151,7 +164,7 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
 
                             ToasterNotifierHandler.showErrorToast(messageError);
                         });
-                    };
+                    };*/
                 }
             });
 
