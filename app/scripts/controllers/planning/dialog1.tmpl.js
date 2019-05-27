@@ -48,7 +48,19 @@ mainAngularModule.controller('DialogController',['$scope','myService','$mdDialog
                 alert("Error getting relation's name");
             });
 
+        };
 
+        $scope.showEquivalentTickets = function (ticketId) {
+            var param = {};
+            PlanningDataFactory.getEquivalentTickets(param, ticketId, function (response) {
+
+                if (response.status === 200) {
+                    $scope.equivalentTickets = response.data;
+                }
+            }, function () {
+
+                alert("Errore nell'ottenimento dei ticket equivalenti.");
+            });
         };
 
         $scope.showRelationCustomTicket = function (ticketId) {
@@ -69,6 +81,8 @@ mainAngularModule.controller('DialogController',['$scope','myService','$mdDialog
             $scope.showRelationTicket();
 
             $scope.showRelationCustomTicket($scope.ticket.id);
+
+            $scope.showEquivalentTickets($scope.ticket.id);
 
             init();
         }

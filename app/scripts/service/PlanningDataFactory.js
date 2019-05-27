@@ -36,6 +36,8 @@ mainAngularModule
             thisCrudService.getTickets = getTickets;
             thisCrudService.getDetailsTicket = getDetailsTicket;
             thisCrudService.getTeamsByTeamMember = getTeamsByTeamMember;
+            thisCrudService.getEquivalentTickets = getEquivalentTickets;
+
 
             // delete the data from database
             function getTicketsForRel(params, successCB, errorCB) {
@@ -180,6 +182,30 @@ mainAngularModule
                             ToasterNotifierHandler.handleError(response);
                         });
             }
+
+            //_______________________________________TOMMASO___________
+            function getEquivalentTickets(data, ticketId, successCB, errorCB) {
+
+                $http({
+                    method: 'GET',
+                    url: "http://localhost:8200/ticketingsystem/tickets/relation/equivalence/" + ticketId,
+                    params: data
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
+            //_________________________________________________________
 
 
             // delete the data from database
