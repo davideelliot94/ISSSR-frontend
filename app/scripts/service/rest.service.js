@@ -29,6 +29,9 @@ mainAngularModule.service('restService', function () {
         "resolvedTickets": CONNECTION.url + '/tickets/findTicketByStatus/RESOLVED',
         "closedTickets": CONNECTION.url + '/tickets/findTicketByStatus/CLOSED',
 
+        "updateTickets": CONNECTION.url + '/tickets/getTicketById2',
+        "updt": CONNECTION.url + '/tickets/upd',
+
         //  Ticket by openerUser
         "readMyTickets": CONNECTION.url + '/tickets/ticketByOpenerUser',
 

@@ -95,6 +95,7 @@ mainAngularModule
                 ctrl.refreshTickets = refreshTicketsFn;
                 ctrl.assignTicketToAssistant = assignTicketToAssistantFn;
                 ctrl.showAssignButton = showAssignButtonFn;
+                ctrl.saveTicket = saveTicketFn;
 
                 init();
 
@@ -139,6 +140,16 @@ mainAngularModule
                     httpService.get(restService.getTeamCoordinator)
                         .then(function (data) {
 
+                                httpService.put(restService.updt + '/' + ticket.id, ticket)
+                                    .then(function (secondData) {
+                                            $state.reload();
+                                        },
+                                        function (err) {
+                                            console.log(err);
+                                        });
+
+                                saveTicketFn(ticket);
+
                                 httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
                                     .then(function (secondData) {
                                             $state.reload();
@@ -146,11 +157,25 @@ mainAngularModule
                                         function (err) {
                                             console.log(err);
                                         });
+
+                                //saveTicketFn(ticket);
+
                             },
                             function (err) {
 
                             });
                 };
+
+                function saveTicketFn(ticket) {
+
+                    TicketDataFactory.Update2(ticket,
+                        function (response) {
+                            console.log(response);
+                        }, function (response) {
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel salvataggio del Ticket"})
+                        });
+
+                }
 
                 /**
                  * @ngdoc           function

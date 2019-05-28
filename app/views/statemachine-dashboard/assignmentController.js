@@ -197,12 +197,25 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
      */
     $scope.searchResolverUsers = function () {
         if (getRole !== "CUSTOMER") {
-            httpService.get(restService.getEmployedUserByRole + '/' + getRole)
-                .then(function (response) {
-                    $scope.membersList = response.data;
-                }, function err(response) {
 
-                });
+            if (AuthFactory.getAuthInfo().userRole === 'TEAM_COORDINATOR') {
+                httpService.get(restService.getEmployedUserByRole + '/' + 'TEAM_LEADER')
+                    .then(function (response) {
+                        $scope.membersList = response.data;
+                    }, function err(response) {
+
+                    });
+
+            } else if (AuthFactory.getAuthInfo().userRole === 'TEAM_LEADER') {
+
+                httpService.get(restService.getEmployedUserByRole + '/' + 'TEAM_MEMBER')
+                    .then(function (response) {
+                        $scope.membersList = response.data;
+                    }, function err(response) {
+
+                    });
+            }
+
         } else {
             return [];
         }

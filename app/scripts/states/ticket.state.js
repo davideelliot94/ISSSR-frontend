@@ -34,6 +34,12 @@ mainAngularModule.config(['$stateProvider',
                     }
                 }*/
             })
+            .state('ticket.update', {
+                url: '/{ticketId:int}/update',
+                templateUrl: 'views/ticket/ticket-update.html',
+                controller: 'TicketUpdateCtrl',
+                controllerAs: 'ctrl',
+            })
             .state('ticket.ofCurrentAssistant', {
                 url: '/ofCurrentAssistant',
                 templateUrl: 'views/ticket/ticket-list-acquired.html',

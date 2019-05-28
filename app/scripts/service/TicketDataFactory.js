@@ -392,6 +392,48 @@ mainAngularModule
                         })
             }
 
+            function FunctionFn(ticketId, successCB, errorCB) {
+                $http({
+                    method: 'GET',
+                    url: _endPointJSON + 'getTicketById2/' + ticketId
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
+
+            function Update2Fn(ticket, successCB, errorCB) {
+
+                $http({
+                    method: 'PUT',
+                    url: _endPointJSON + 'upd/' + ticket.id,
+                    data: ticket
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                                ToasterNotifierHandler.showSuccessToast('Aggiornamento effettuato con successo');
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
+
             /*
             thisCrudService.GetTicketCategories = GetTicketCategoriesFn;
             thisCrudService.GetTicketCustomerPriorities = GetTicketCustomerPrioritiesFn;
@@ -412,6 +454,8 @@ mainAngularModule
             thisCrudService.Remove = RemoveFn;
             thisCrudService.DownloadAttached = DownloadAttachedFn;
             thisCrudService.getMetadata = getMetadata;
+            thisCrudService.Function = FunctionFn;
+            thisCrudService.Update2 = Update2Fn;
 
             return thisCrudService;
         }]);
