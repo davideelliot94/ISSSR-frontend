@@ -68,16 +68,11 @@
                                             class="btn btn-xs btn-warning">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    <button title = "Close Ticket" ng-controller="TicketListCtrl"  ng-if="t.currentTicketStatus == 'ACCEPTANCE' || t.currentTicketStatus == 'EDIT'" ng-click="closeTicket(t)"
-                                            class="btn btn-xs btn-success">
-                                        <i class="fa fa-check"></i>
-                                    </button>
+
                                     <button title = "Read Ticket comments" ng-controller="modalController" ng-if="t.currentTicketStatus == 'EDIT'" ng-click="showMessageForm(t)" class="btn btn-xs btn-info">
                                         <i class="fa fa-comments"></i>
                                     </button>
-                                    <button title = "Reject Ticket resolution" ng-controller="TicketListCtrl" ng-if="t.currentTicketStatus == 'ACCEPTANCE'" ng-click="rejectResolvedTicket(t)" class="btn btn-xs btn-danger">
-                                        <i class="fa fa-minus-circle"></i>
-                                    </button>
+
                                 </td>
                             </tr>
                             </tbody>

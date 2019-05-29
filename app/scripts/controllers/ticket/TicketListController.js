@@ -9,8 +9,8 @@
 mainAngularModule
     .controller(
         'TicketListCtrl',
-        ['$scope', 'AuthFactory', 'TicketDataFactory', 'DTOptionsBuilder', 'DTColumnDefBuilder','ErrorStateRedirector', '$state', '$mdDialog', 'myService', 'httpService', 'restService',
-            function ($scope, AuthFactory, TicketDataFactory, DTOptionsBuilder, DTColumnDefBuilder,ErrorStateRedirector, $state, $mdDialog, myService, httpService, restService) {
+        ['$scope', 'AuthFactory', 'TicketDataFactory', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'ErrorStateRedirector', '$state', '$mdDialog', 'myService', 'httpService', 'restService',
+            function ($scope, AuthFactory, TicketDataFactory, DTOptionsBuilder, DTColumnDefBuilder, ErrorStateRedirector, $state, $mdDialog, myService, httpService, restService) {
                 let ctrl = this;
 
                 $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -54,38 +54,38 @@ mainAngularModule
                     return ticket.currentTicketStatus === 'VALIDATION';
                 }
 
-                $scope.showDetails = function(tipo,param) {
+                $scope.showDetails = function (tipo, param) {
                     let idTick = param;
                     myService.dataObj = {"id": idTick};
-       //             if (tipo === 2) {
+                    //             if (tipo === 2) {
 
 
-                        $mdDialog.show({
-                            controller: "DialogController",
-                            templateUrl: 'views/planning/dialog1.tmpl.html',
-                            parent: angular.element(document.body),
-                            clickOutsideToClose: true
+                    $mdDialog.show({
+                        controller: "DialogController",
+                        templateUrl: 'views/planning/dialog1.tmpl.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true
 
-                        })
-/*
-                    } else if (tipo === 1) {
+                    })
+                    /*
+                                        } else if (tipo === 1) {
 
-                        $mdDialog.show({
-                            controller: "DialogController",
-                            templateUrl: 'vews/planning/modalDetailsMyTickets.html',
-                            parent: angular.element(document.body),
-                            clickOutsideToClose: true
+                                            $mdDialog.show({
+                                                controller: "DialogController",
+                                                templateUrl: 'vews/planning/modalDetailsMyTickets.html',
+                                                parent: angular.element(document.body),
+                                                clickOutsideToClose: true
 
-                        })
-                    }*/
+                                            })
+                                        }*/
                 };
 
-/*
-                function showAssignButtonFn(ticket) {
-                    return ticket.state == '0' ||
-                        ticket.state == '4';
-                }
-*/
+                /*
+                                function showAssignButtonFn(ticket) {
+                                    return ticket.state == '0' ||
+                                        ticket.state == '4';
+                                }
+                */
                 function init() {
                     refreshTicketsFn();
                     ctrl.userInfo = AuthFactory.getAuthInfo();
@@ -95,13 +95,8 @@ mainAngularModule
                 ctrl.refreshTickets = refreshTicketsFn;
                 ctrl.assignTicketToAssistant = assignTicketToAssistantFn;
                 ctrl.showAssignButton = showAssignButtonFn;
-                ctrl.saveTicket = saveTicketFn;
 
                 init();
-
-
-
-
 
 
                 /**
@@ -126,6 +121,22 @@ mainAngularModule
                             })
                 };
 
+
+                /**
+                 * @ngdoc           function
+                 * @name            modifyTicket
+                 * @description     Function used for saving an edited ticket.
+                 *
+                 * @param item     selected item
+                 * @param index    iterator offset
+                 */
+                /*            $scope.modifyTicket = function (item, index) {
+                                $scope.edit = resetIndexes($scope.edit);
+                                $scope.editTicket = angular.copy(item);
+                                $scope.edit[index] = true;
+                                $scope.index = index;
+                            };*/
+
                 /**
                  * @ngdoc               function
                  * @name                rejectResolvedTicket
@@ -140,58 +151,55 @@ mainAngularModule
                     httpService.get(restService.getTeamCoordinator)
                         .then(function (data) {
 
-                                httpService.put(restService.updt + '/' + ticket.id, ticket)
-                                    .then(function (secondData) {
-                                            $state.reload();
-                                        },
-                                        function (err) {
-                                            console.log(err);
-                                        });
-
-                                saveTicketFn(ticket);
-
                                 httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
                                     .then(function (secondData) {
-                                            $state.reload();
+                                            
                                         },
                                         function (err) {
                                             console.log(err);
                                         });
-
-                                //saveTicketFn(ticket);
-
                             },
                             function (err) {
 
                             });
                 };
 
-                function saveTicketFn(ticket) {
+                /**
+                 * @ngdoc               function
+                 * @name                findAction
+                 * @description         Function to find the action necessary to send the ticket in the specified state.
+                 *
+                 * @param stateName     state of which find the action
+                 * @param ticket        the ticket
+                 * @returns {*}
+                 */
+                var findAction = function (stateName, ticket) {
+                    for (let i = 0; i < ticket.stateInformation[2].length; i++) {
+                        if (ticket.stateInformation[2][i] === stateName) {
+                            return ticket.stateInformation[0][i];
+                        }
+                    }
 
-                    TicketDataFactory.Update2(ticket,
-                        function (response) {
-                            console.log(response);
-                        }, function (response) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel salvataggio del Ticket"})
-                        });
-
-                }
+                    return null;
+                };
 
                 /**
-                 * @ngdoc           function
-                 * @name            modifyTicket
-                 * @description     Function used for saving an edited ticket.
+                 * @ngdoc               function
+                 * @name                updateDescription
+                 * @description         Function used to update ticket description
                  *
-                 * @param item     selected item
-                 * @param index    iterator offset
+                 * @param ticket        ticket
                  */
-    /*            $scope.modifyTicket = function (item, index) {
-                    $scope.edit = resetIndexes($scope.edit);
-                    $scope.editTicket = angular.copy(item);
-                    $scope.edit[index] = true;
-                    $scope.index = index;
-                };*/
+                $scope.updateDescription = function (ticket) {
 
+                    httpService.post(restService.updt + '/' + ticket.id + '/' + ticket.description)
+                        .then(function (secondData) {
+                            },
+                            function (err) {
+                                console.log(err);
+                            });
+                    $state.reload();
+                };
 
 
                 /**
@@ -258,11 +266,11 @@ mainAngularModule
                  * @param item     selected item
                  * @param index    iterator offset
                  */
-            /*    $scope.modifyTicket = function (item, index) {
-                    $scope.edit = resetIndexes($scope.edit);
-                    $scope.editTicket = angular.copy(item);
-                    $scope.edit[index] = true;
-                    $scope.index = index;
-                };*/
+                /*    $scope.modifyTicket = function (item, index) {
+                        $scope.edit = resetIndexes($scope.edit);
+                        $scope.editTicket = angular.copy(item);
+                        $scope.edit[index] = true;
+                        $scope.index = index;
+                    };*/
 
             }]);

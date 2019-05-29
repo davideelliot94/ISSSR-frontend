@@ -9,8 +9,10 @@
  */
 
 mainAngularModule
-    .controller('TicketUpdateCtrl', ['$scope', '$state', '$stateParams', 'AuthFactory', 'TicketDataFactory', 'ErrorStateRedirector',
-        function ($scope, $state, $stateParams, AuthFactory, TicketDataFactory, ErrorStateRedirector) {
+    .controller(
+        'TicketUpdateCtrl',
+        ['$scope', '$state', '$stateParams', 'AuthFactory', 'TicketDataFactory', 'ErrorStateRedirector', 'httpService', 'restService',
+        function ($scope, $state, $stateParams, AuthFactory, TicketDataFactory, ErrorStateRedirector, httpService, restService) {
 
             var ctrl = this;
 
