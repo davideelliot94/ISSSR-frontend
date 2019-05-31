@@ -24,8 +24,6 @@ mainAngularModule
     .constant('ACL_RECORDS_ENDPOINT_URL', '/acl-records/')
     .constant('REQUESTS_LOGS_ENDPOINT_URL', '/requests-logs/')
     .constant('AUDITING_ENDPOINT_URL', '/auditing-logs/')
-
-
     .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
 
 ;

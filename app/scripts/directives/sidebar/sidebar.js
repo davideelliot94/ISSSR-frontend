@@ -166,6 +166,17 @@ mainAngularModule
                                             "state": "state_machine.create"
                                         }
                                     ]
+                                },
+                                {
+                                    "title": "Scrum",
+                                    "num": 14,
+                                    //"icon": "fa-list-alt", //TODO
+                                    item: [
+                                        {
+                                            "nome": "Gestione Backlog",
+                                            "state": "backlog_management.view"
+                                        }
+                                    ]
                                 }
                             ]
                         }
