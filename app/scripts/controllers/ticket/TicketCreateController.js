@@ -16,6 +16,7 @@ mainAngularModule
 
                 getFields();
 
+                //prende i metadati che li servono con una get
                 function getFields() {
                     TicketDataFactory.getMetadata(function (response) {
                         console.log("Metadata", response.data);
@@ -33,6 +34,7 @@ mainAngularModule
 
                 function resetFieldsFn() {
                     console.log('reset ticket form');
+                    //currentTicket prende il campo customer con l'id dell'utente loggato
                     ctrl.currentTicket = {
                         customer: ctrl.userInfo.userId
                     };
@@ -40,6 +42,9 @@ mainAngularModule
 
                 }
 
+                //questa funzione cerca di inserire i ticket, i campi lo prende dalla view.
+                //se la post ha successo faccio resetFieldsFn e visualizzo un'altra pagina
+                //altrimenti vado alla pagina di errore.
                 function insertTicketFn() {
                     console.log('insert ticket', ctrl.currentTicket);
 //ctrl.currentTicket['attachmentType'] =
@@ -107,6 +112,7 @@ mainAngularModule
 
             }])
     // se inserisco multiple nell'html, la direttiva carica cmq solo il primo file
+    //qui si parla del file allegato.
     .directive(
         'loadfile',
         [function () {

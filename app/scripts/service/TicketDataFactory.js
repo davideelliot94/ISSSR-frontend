@@ -262,7 +262,8 @@ mainAngularModule
                         });
             }
 
-            // post the data from database
+            // post the data from database. manda il ticket.
+
             function InsertFn(ticket, successCB, errorCB) {
                 console.log("Ticket: ", ticket);
                 $http({

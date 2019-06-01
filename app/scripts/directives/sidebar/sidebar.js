@@ -166,6 +166,17 @@ mainAngularModule
                                             "state": "state_machine.create"
                                         }
                                     ]
+                                },
+
+                            {
+                                    "title": "scrum",
+                                    "num": 14,
+                                    item: [
+                                        {
+                                            "nome": "Create sprint",
+                                            "state": "scrum.sprint_create_state"
+                                        }
+                                    ]
                                 }
                             ]
                         }
