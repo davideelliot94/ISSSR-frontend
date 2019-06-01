@@ -1,9 +1,16 @@
 <div class="container">
     <label>Prodotti
         <select class="form-control"
-                ng-init="backlogItem.priority = backlogItemPriorityClasses[0]"
-                ng-options="priorityClass for priorityClass in backlogItemPriorityClasses"
-                ng-model="backlogItem.priority">
+                ng-options="product.name for product in productsOfScrumMember"
+                ng-model="backlogItem.product">
         </select>
     </label>
+
+    <br>
+
+    <button type="button"
+            class="btn btn-primary"
+            ng-click="openBacklogItemCreationDialog()">
+            Aggiungi Item al Backlog
+    </button>
 </div>

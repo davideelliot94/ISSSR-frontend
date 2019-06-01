@@ -6,8 +6,8 @@
  * # LoginCtrl
  */
 mainAngularModule
-    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory', 'BacklogItemService',
-        function ($scope, $state, AuthFactory, BacklogItemService) {
+    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory',
+        function ($scope, $state, AuthFactory) {
 
             let ctrl = this;
             ctrl.authRequest = {username: 'admin', password: 'password'};
@@ -37,8 +37,6 @@ mainAngularModule
                         console.log("userType: " + authInfo.userRole);
                     }
                     AuthFactory.setJWTAuthInfo(authInfo);
-
-                    BacklogItemService.insertBacklogItem(); // TODO rimuovere
 
                     $state.go("dashboard.home");
                 }

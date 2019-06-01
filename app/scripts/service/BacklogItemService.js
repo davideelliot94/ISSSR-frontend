@@ -5,7 +5,7 @@ mainAngularModule
             //TODO parametrizzare
             this.insertBacklogItem = function () {
                 let deferred = $q.defer();
-                $http.post('http://localhost:8200/ticketingsystem/backlog/target/2/item', {'title': 'Item di Prova', 'description' : 'descrizione di prova', 'priority' : 'LOW', 'effortEstimation': 1, 'status':'INIT'})
+                $http.post('http://localhost:8200/ticketingsystem/backlog/target/1/item', {'title': 'Item di Prova', 'description' : 'descrizione di prova', 'priority' : 'LOW', 'effortEstimation': 1, 'status':'INIT'})
                     .then(function successCallback(response) {
                         if (response.status === 201) {
                             console.log(response.data);
@@ -16,4 +16,6 @@ mainAngularModule
                 });
                 return deferred.promise;
             };
-        }]);
+        }
+
+        ]);

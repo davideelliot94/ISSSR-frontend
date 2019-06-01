@@ -1,11 +1,16 @@
 'use strict';
 
-mainAngularModule.controller('backlogManagementController', ['$scope', '$state', '$mdDialog', function ($scope, $state, $mdDialog) {
-    var initializeProductList = function () {
-        //TODO ottenere i prodotti su cui il Product Owner sta lavorando
-    };
+mainAngularModule.controller('backlogManagementController', ['$scope', '$state', '$mdDialog', 'ScrumProductService',
+    function ($scope, $state, $mdDialog, ScrumProductService) {
 
-    initializeProductList();
+    let initializeProductList = function () {
+        ScrumProductService.getProductByScrumMember()
+            .then(function successCallback(products) {
+                $scope.productsOfScrumMember = products;
+            }, function errorCallback(){
+                // TODO far comparire alert
+            });
+    };
 
     $scope.openBacklogItemCreationDialog = function() {
         $mdDialog.show({
@@ -15,4 +20,6 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             clickOutsideToClose: true
         });
     };
+
+    initializeProductList();
 }]);
