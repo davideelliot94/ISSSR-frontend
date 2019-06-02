@@ -6,7 +6,7 @@
  * # LoginCtrl
  */
 mainAngularModule
-    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory',
+    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory', 'BacklogItemService',
         function ($scope, $state, AuthFactory) {
 
             let ctrl = this;

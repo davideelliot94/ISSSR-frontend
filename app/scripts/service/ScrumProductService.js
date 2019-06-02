@@ -16,9 +16,9 @@ mainAngularModule
                     }, function errorCallback(response) {
                         if (response.status === 400) {
                             deferred.reject(new Error(' Richiesta non valida'));
-                        } else
+                        } else{
                             deferred.reject(new Error('Errore Interno'));
-                        }
+                        }}
                     );
                 return deferred.promise;
             };
