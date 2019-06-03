@@ -15,19 +15,19 @@ mainAngularModule.config(['$stateProvider',
 
             .state('scrumteam.create', {
                 url: '/create',
-                templateUrl: 'views/team/scrum-team-create.html',
+                templateUrl: 'views/scrumTeam/scrum-team-create.html',
                 controller: 'ScrumTeamCreateCtrl',
-                controllerAs: 'ctrl'/*,
+                controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('team_create');
+                        return AclRouteProtector.checkRoutePermission('scrum_team_create');
                     }
-                }*/
+                }
             })
 
             .state('scrumteam.assign', {
                 url: '/{teamId:int}/assign',
-                templateUrl: 'views/team/scrum-team-assign.html',
+                templateUrl: 'views/scrumTeam/scrum-team-assign.html',
                 controller: 'ScrumTeamAssignCtrl',
                 controllerAs: 'ctrl',
                 resolve: {

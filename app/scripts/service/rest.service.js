@@ -82,6 +82,8 @@ mainAngularModule.service('restService', function () {
         "getTeamCoordinator": CONNECTION.url + '/users/team_coordinator',
 
         "createTeam": CONNECTION.url + '/teams',
+        "createScrumTeam": CONNECTION.url + '/scrumteams',
+
         "getTeams": CONNECTION.url + '/teams',
         "updateTeamMember": CONNECTION.url + '/teams/add_team_member',
 

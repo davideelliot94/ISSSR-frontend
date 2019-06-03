@@ -18,10 +18,11 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
             ROLE_TICKET_COORDINATOR: ['ticket_view', 'ticket_create', 'ticket_update', 'ticket_delete', 'ticket_permission'],
             ROLE_TICKET_READER: ['ticket_view'],
 
-            ROLE_ADMIN: ['log_view', 'log_delete', 'users_list', 'user_create', 'user_permission', 'user_info', 'show_queue', 'define_escalation', 'new_relation', 'define_relation', 'state_machine_create'],
+            ROLE_ADMIN: ['log_view','scrum_team_create', 'log_delete', 'users_list', 'user_create', 'user_permission', 'user_info', 'show_queue', 'define_escalation', 'new_relation', 'define_relation', 'state_machine_create'],
             //ROLE_ASSISTANT: ['users_list'],
             ROLE_CUSTOMER: ['ticket_create', 'ticket_view', 'user_info']
         };
+        console.log("running")
         AclService.setAbilities(aclData);
         $rootScope.hasPermission = AclService.can;
 

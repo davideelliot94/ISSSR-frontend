@@ -17,10 +17,13 @@ mainAngularModule
             ctrl.insertScrumTeam = insertScrumTeamFn;
 
             function resetFieldsFn() {
+                console.log('ResetScurmTeamFn')
+
                 ctrl.currentScrumTeam = {};
             }
 
             function insertScrumTeamFn() {
+                console.log('insertScurmTeamFn')
                 ScrumTeamDataFactory.Insert(ctrl.currentScrumTeam,
                     function (response) {
                         console.log(response);

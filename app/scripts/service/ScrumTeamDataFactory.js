@@ -18,8 +18,8 @@ mainAngularModule
             thisCrudService.GetAll = GetAllFn;
             thisCrudService.GetSingle = GetSingleFn;
             thisCrudService.Insert = InsertFn;
-            thisCrudService.Update = UpdateFn;
-            thisCrudService.Remove = RemoveFn;
+            //thisCrudService.Update = UpdateFn;
+            //thisCrudService.Remove = RemoveFn;
 
             thisCrudService.BuildScrumTeam = BuildScrumTeamFn;
             thisCrudService.GetAssistantsByTeamID = GetAssistantsByTeamIDFn;
@@ -27,7 +27,7 @@ mainAngularModule
 
 
             // get all data from database
-/*            function GetAllFn(successCB, errorCB) {
+            function GetAllFn(successCB, errorCB) {
 
                 // alert("team get all fn: " + _endPointJSON);
                 $http({
@@ -50,7 +50,7 @@ mainAngularModule
                             console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
-            }*/
+            }
 
             //TODO usare questa versione
 
@@ -78,7 +78,7 @@ mainAngularModule
 
             // POST request to backend for srum team creation, id and name inserted in db
             function InsertFn(team, successCB, errorCB) {
-
+                console.log("inserting")
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
@@ -93,6 +93,7 @@ mainAngularModule
                             //return response.data;
                         },
                         function (response) {
+                            console.log("returning error")
                             if (errorCB) {
                                 errorCB(response);
                             }

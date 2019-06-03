@@ -78,13 +78,14 @@ mainAngularModule
 
             // post the data from database
             function InsertFn(team, successCB, errorCB) {
-
+                console.log("insertFn")
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
                     data: team
                 })
                     .then(function (response) {
+                            console.log("function response")
                             if (successCB) {
                                 console.log(response.data)
                                 successCB(response.data);
