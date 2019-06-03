@@ -15,7 +15,7 @@ mainAngularModule
 
             var _endPointJSON = BACKEND_BASE_URL + SCRUMTEAM_ENDPOINT_URL;
 
-            thisCrudService.GetAll = GetAllFn;
+            //thisCrudService.GetAll = GetAllFn;
             thisCrudService.GetSingle = GetSingleFn;
             thisCrudService.Insert = InsertFn;
             //thisCrudService.Update = UpdateFn;

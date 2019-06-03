@@ -25,7 +25,7 @@ mainAngularModule.config(['$stateProvider',
                 }
             })
 
-            .state('scrumteam.assign', {
+        /*    .state('scrumteam.assign', {
                 url: '/{teamId:int}/assign',
                 templateUrl: 'views/scrumTeam/scrum-team-assign.html',
                 controller: 'ScrumTeamAssignCtrl',
@@ -35,6 +35,6 @@ mainAngularModule.config(['$stateProvider',
                         return AclRouteProtector.checkRoutePermission('team_assign');
                     }
                 }
-            })
+            })*/
 
     }]);
