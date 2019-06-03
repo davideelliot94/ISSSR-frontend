@@ -10,7 +10,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
             ROLE_SOFTWARE_PRODUCT_COORDINATOR: ['software_view', 'software_create', 'software_update', 'software_delete', 'software_permission'],
             ROLE_SOFTWARE_PRODUCT_READER: ['software_view'],
 
-            ROLE_TEAM_COORDINATOR: ['team_view', 'team_create', 'team_update', 'team_delete', 'team_permission', 'team_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
+            ROLE_TEAM_COORDINATOR: ['team_view','scrum_team_create', 'team_create', 'team_update', 'team_delete', 'team_permission', 'team_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
             ROLE_TEAM_READER: ['team_view'],
             ROLE_TEAM_MEMBER: ['user_info', 'ticket_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
             ROLE_TEAM_LEADER: ['user_info', 'ticket_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
@@ -30,16 +30,16 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
 
         $transitions.onError({}, ($transition$) => {
             var toStateName = $transition$.to().name;
-            var fromStateName = $transition$.from().name;
-            if (toStateName != fromStateName) {
+        var fromStateName = $transition$.from().name;
+        if (toStateName != fromStateName) {
 
-                let Msg = "Rotta non autorizzata";
-                if (DEBUG) {
-                    Msg += ": " + toStateName;
-                }
-                ErrorStateRedirector.GoToErrorPage({Messaggio: Msg});
+            let Msg = "Rotta non autorizzata";
+            if (DEBUG) {
+                Msg += ": " + toStateName;
             }
-        });
+            ErrorStateRedirector.GoToErrorPage({Messaggio: Msg});
+        }
+    });
 
         authManager.checkAuthOnRefresh();
         authManager.redirectWhenUnauthenticated();

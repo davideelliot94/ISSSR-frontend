@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html xml:lang="en_US" lang="en_US" class="no-js">
 <head>
     <meta charset="utf-8">
     <title></title>
@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css(.)
+
+     styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css">
@@ -69,6 +71,7 @@
     <script src="scripts/states/ticket.state.js"></script>
     <script src="scripts/states/user.state.js"></script>
     <script src="scripts/states/team.state.js"></script>
+    <script src="scripts/states/scrumTeam.state.js"></script>       <!-- aggiunto ora-->
     <script src="scripts/states/software-product.state.js"></script>
     <script src="scripts/states/permissions.state.js"></script>
     <script src="scripts/states/group.state.js"></script>
@@ -89,6 +92,10 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/controllers.js -->
+
+
+    <!-- Se aggiungo una pagina devo aggiungere il controllore qui!!!!!!-->
+
     <script src='scripts/controllers/main.js'></script>
     <script src='scripts/controllers/auth/loginController.js'></script>
     <script src='scripts/controllers/auth/registrationController.js'></script>
@@ -97,14 +104,15 @@
     <script src='scripts/controllers/product-software/productSoftwareListController.js'></script>
     <script src='scripts/controllers/team/TeamAssignController.js'></script>
     <script src='scripts/controllers/team/TeamCreateController.js'></script>
+    <script src='scripts/controllers/team/TeamCreateController.js'></script>
     <script src='scripts/controllers/team/TeamEditController.js'></script>
     <script src='scripts/controllers/team/TeamListController.js'></script>
+    <script src='scripts/controllers/scrumTeam/ScrumTeamCreateController.js'></script>  <!--aggiunto ora-->
     <script src='scripts/controllers/ticket/TicketCreateController.js'></script>
     <script src='scripts/controllers/ticket/TicketListCustomerController.js'></script>
     <script src='scripts/controllers/ticket/TicketListController.js'></script>
     <script src='scripts/controllers/ticket/TicketListOfCurrentAssistantController.js'></script>
     <script src='scripts/controllers/ticket/TicketEditController.js'></script>
-    <script src='scripts/controllers/ticket/TicketUpdateController.js'></script>
     <script src='scripts/controllers/permission/PermissionHandlerController.js'></script>
     <script src='scripts/controllers/user/UserCreateController.js'></script>
     <script src='scripts/controllers/user/UserInfoController.js'></script>
@@ -138,8 +146,7 @@
     <script src='scripts/service/PermissionDataFactory.js'></script>
     <script src='scripts/service/SoftwareProductDataFactory.js'></script>
     <script src='scripts/service/TeamDataFactory.js'></script>
-    <script src='scripts/service/TeamDataFactory.js'></script>
-    <script src='scripts/service/TicketDataFactory.js'></script>
+    <script src='scripts/service/ScrumTeamDataFactory.js'></script>       <!--aggiunto ora-->
     <script src='scripts/service/UserDataFactory.js'></script>
     <script src='scripts/service/GroupDataFactory.js'></script>
     <script src="scripts/service/ACLRecordsDataFactory.js"></script>
@@ -201,7 +208,8 @@
     <script src="scripts/controllers/planning/modalTeam.js"></script>
     <script src="scripts/controllers/planning/showGantt.js"></script>
 
-    <script src="scripts/controllers/planning/planningDialog.js"></script>
+    <!--<script src="/isssr1718-ticketing-system-frontend/app/scripts/controllers/planning/planningDialog.js"></script>-->
+    <script src="./scripts/controllers/planning/planningDialog.js"></script>
 
     <script src="scripts/states/workflow.state.js"></script>
 

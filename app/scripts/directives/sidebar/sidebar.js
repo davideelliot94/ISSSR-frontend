@@ -40,7 +40,7 @@ mainAngularModule
                                     item: [
                                         {
                                             "nome": "Inserisci Utente",
-                                            "state": "user.create",
+                                            "state": "user.create"
                                         },
                                         {
                                             "nome": "Elenco Utenti",
@@ -94,8 +94,22 @@ mainAngularModule
                                         }]
                                 },
                                 {
-                                    "title": "Prodotto Software",
+                                    "title": "ScrumTeam",
                                     "num": 9,
+                                    "icon": "fa-users",
+                                    item: [
+                                        {
+                                            "nome": "Inserisci Scrum Team",
+                                            "state": "scrumteam.create"
+                                        },
+                                        {
+                                            "nome": "Assegna Scrum Team",
+                                            "state": "scrumteam.assign"
+                                        }]
+                                },
+                                {
+                                    "title": "Prodotto Software",
+                                    "num": 10,
                                     "icon": "fa-desktop",
                                     item: [
                                         {
@@ -109,7 +123,7 @@ mainAngularModule
                                 },
                                 {
                                     "title": "Logging",
-                                    "num": 10,
+                                    "num": 11,
                                     "icon": "fa-list-alt",
                                     item: [
                                         {
@@ -128,7 +142,7 @@ mainAngularModule
                                 },
                                 {
                                     "title": "Relation",
-                                    "num": 11,
+                                    "num": 12,
                                     //"icon": "fa-list-alt",
                                     item: [
                                         {
@@ -143,7 +157,7 @@ mainAngularModule
                                 },
                                 {
                                     "title": "Escalation",
-                                    "num": 12,
+                                    "num": 13,
                                     //"icon": "fa-list-alt",
                                     item: [
                                         {
@@ -158,7 +172,7 @@ mainAngularModule
                                 },
                                 {
                                     "title": "State Machine",
-                                    "num": 13,
+                                    "num": 14,
                                     //"icon": "fa-list-alt",
                                     item: [
                                         {
@@ -418,39 +432,39 @@ mainAngularModule
                                     ]
                                 }
                             ]}
-                        }
+                    }
 
-                    };
+                };
 
-                    $scope.incrementCounter = function () {
-                        $scope.counter++;
-                    };
+                $scope.incrementCounter = function () {
+                    $scope.counter++;
+                };
 
-                    $scope.resetCounter = function () {
-                        $scope.counter = 0;
-                    };
+                $scope.resetCounter = function () {
+                    $scope.counter = 0;
+                };
 
-                    $scope.$watch(function () {
-                        return AuthFactory.getAuthInfo;
-                    }, function () {
-                        $scope.setSidebar();
-                    });
+                $scope.$watch(function () {
+                    return AuthFactory.getAuthInfo;
+                }, function () {
+                    $scope.setSidebar();
+                });
 
-                    $scope.check = function (x) {
+                $scope.check = function (x) {
 
-                        if (x == $scope.collapseVar)
-                            $scope.collapseVar = 0;
-                        else
-                            $scope.collapseVar = x;
-                    };
+                    if (x == $scope.collapseVar)
+                        $scope.collapseVar = 0;
+                    else
+                        $scope.collapseVar = x;
+                };
 
-                    $scope.multiCheck = function (y) {
+                $scope.multiCheck = function (y) {
 
-                        if (y == $scope.multiCollapseVar)
-                            $scope.multiCollapseVar = 0;
-                        else
-                            $scope.multiCollapseVar = y;
-                    };
-                }
+                    if (y == $scope.multiCollapseVar)
+                        $scope.multiCollapseVar = 0;
+                    else
+                        $scope.multiCollapseVar = y;
+                };
             }
-        }]);
+        }
+    }]);

@@ -4,7 +4,7 @@ mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
         $stateProvider
-            .state('scrumTeam', {
+            .state('scrumteam', {
                 abstract: true,
                 url: '/scrumteam',
                 templateUrl: 'views/dashboard/main.html',
@@ -12,28 +12,29 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state('scrumTeam.create', {
+
+            .state('scrumteam.create', {
                 url: '/create',
-                templateUrl: 'views/scrumTeam/scrumteam-create.html',
+                templateUrl: 'views/team/scrum-team-create.html',
                 controller: 'ScrumTeamCreateCtrl',
-                controllerAs: 'ctrl',
+                controllerAs: 'ctrl'/*,
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('scrum_team_create');
+                        return AclRouteProtector.checkRoutePermission('team_create');
                     }
-                }
+                }*/
             })
-            .state('scrumTeam.assign', {
-                url: '/{scrumTeamId:int}/assign',
-                templateUrl: 'views/scrumTeam/scrumTeam-assign.html',
+
+            .state('scrumteam.assign', {
+                url: '/{teamId:int}/assign',
+                templateUrl: 'views/team/scrum-team-assign.html',
                 controller: 'ScrumTeamAssignCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('scrum_team_assign');
+                        return AclRouteProtector.checkRoutePermission('team_assign');
                     }
                 }
             })
-
 
     }]);
