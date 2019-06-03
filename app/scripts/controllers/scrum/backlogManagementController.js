@@ -12,7 +12,9 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.sprintBacklogItems = {};
     // default option for datatable
     $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
-    $scope.isActiveSprint = true;
+
+    $scope.isActiveSprint = false;
+    $scope.isSelectedProduct = false;
 
     // Si inizializza la combobox con tutti i prodotti su cui lavora uno Scrum Team di cui fa parte l'utente loggato
     let initializeProductList = function () {
@@ -69,6 +71,8 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
 
     // Funzione che popola il backlog e lo sprint backlog con gli item ricevuti dal backend
     $scope.populateBacklogAndSprintBacklog = function() {
+        $scope.isSelectedProduct = true;
+
         // Popolamento del product backlog
         BacklogItemService.getProductBacklogItemService($scope.backlogItem.product.id)
             .then(function successCallback(items) {
@@ -87,6 +91,15 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 } else{
                     ToasterNotifierHandler.handleError(response);
                 }
+            });
+    };
+
+    $scope.changeStatusToSprintBacklogItem = function(itemId, direction){
+        BacklogItemService.changeStatusToSprintBacklogItemService(itemId, direction)
+            .then(function successCallback() {
+                $scope.populateBacklogAndSprintBacklog();
+            }, function errorCallback(response){
+                ToasterNotifierHandler.handleError(response);
             });
     };
 

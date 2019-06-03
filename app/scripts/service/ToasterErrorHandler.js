@@ -42,7 +42,7 @@ mainAngularModule
         this.showErrorToast = function (message) {
             toaster.pop({
                 type: 'error',
-                title: 'An error occurred',
+                title: 'Errore:',
                 body: message,
             });
         };

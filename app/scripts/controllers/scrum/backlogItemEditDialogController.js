@@ -19,7 +19,11 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
                     $state.go('backlog_management.view');
 
                 }, function errorCallback(response){
-                    ToasterNotifierHandler.handleError(response);
+                    if (response.status === 422){
+                        ToasterNotifierHandler.showErrorToast("Prima di inserire un item nello Spint Backlog è necessario avviare lo sprint.");
+                    } else {
+                        ToasterNotifierHandler.handleError(response);
+                    }
                 });
         };
 

@@ -56,10 +56,17 @@
                             <td>{{item.effortEstimation}}</td>
                             <td>{{item.status}}</td>
                             <td align="center">
-                                <!-- Bottone passaggio di stato item -->
-                                <button ng-if="item.status != 'COMPLETED'"
+                                <!-- Bottone passaggio di stato all'indietro -->
+                                <button ng-disabled="item.status == 'TODO'"
+                                        title="Ritorna nello stato precedente"
+                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'backward')"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-arrow-left"></i>
+                                </button>    
+                                <!-- Bottone passaggio di stato item in avanti -->
+                                <button ng-disabled="item.status == 'COMPLETED'"
                                         title="Passa allo stato successivo"
-                                        ng-click=""
+                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'forward')"
                                         class="btn btn-primary">
                                     <i class="fa fa-arrow-right"></i>
                                 </button>
@@ -79,7 +86,8 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Product Backlog</div>
             <div class="panel-body">
-                <div class="table-responsive">
+                <div class="table-responsive"
+                     ng-show="isSelectedProduct">
                     <table datatable="ng"
                            class="table table-striped table-bordered"
                            id="backlogItemListTable"
