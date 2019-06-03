@@ -35,4 +35,5 @@ mainAngularModule.config(['$stateProvider',
                 }
             })
 
+
     }]);

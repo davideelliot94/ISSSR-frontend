@@ -27,7 +27,7 @@ mainAngularModule
 
 
             // get all data from database
-            function GetAllFn(successCB, errorCB) {
+/*            function GetAllFn(successCB, errorCB) {
 
                 // alert("team get all fn: " + _endPointJSON);
                 $http({
@@ -50,7 +50,7 @@ mainAngularModule
                             console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
-            }
+            }*/
 
             //TODO usare questa versione
 
@@ -76,7 +76,7 @@ mainAngularModule
                         });
             }
 
-            // POST request to backend for srum team creation
+            // POST request to backend for srum team creation, id and name inserted in db
             function InsertFn(team, successCB, errorCB) {
 
                 $http({
@@ -102,7 +102,7 @@ mainAngularModule
             }
 
             // put the data from database
-            function UpdateFn(team, successCB, errorCB) {
+/*            function UpdateFn(team, successCB, errorCB) {
 
                 delete team.teamLeader;
                 $http({
@@ -123,11 +123,11 @@ mainAngularModule
                             console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
-            }
+            }*/
 
 
             // delete the data from database
-            function RemoveFn(teamId, successCB, errorCB) {
+/*            function RemoveFn(teamId, successCB, errorCB) {
 
                 $http({
                     method: 'DELETE',
@@ -147,14 +147,14 @@ mainAngularModule
                             console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
-            }
+            }*/
 
             function GetAssistantsByTeamIDFn(teamID, successCB, errorCB) {
 
 
                 $http({
                     method: 'GET',
-                    url: _endPointJSON + teamID + '/assistants/'
+                    url: _endPointJSON + teamID + '/teammembers/'
                 })
                     .then(function (response) {
                             if (successCB) {
@@ -217,7 +217,8 @@ mainAngularModule
                     })
                 }
 
-                let ep = _endPointJSON + team.id + '/leader/' + team.teamLeader.id + '/assistants/' + assistantsList.join();
+                let ep = _endPointJSON + team.id + '/scrummaster/' + team.scrumMaster.id +
+                    '/productowner/' + team.productOwner.id + '/teammembers/' + assistantsList.join();
                 $http({
                     method: 'PUT',
                     url: ep

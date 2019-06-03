@@ -29,4 +29,5 @@ mainAngularModule
 
     .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
 
+
 ;

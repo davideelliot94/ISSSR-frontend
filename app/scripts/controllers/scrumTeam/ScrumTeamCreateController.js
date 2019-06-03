@@ -32,4 +32,5 @@ mainAngularModule
             }
         }
 
+
     ]);

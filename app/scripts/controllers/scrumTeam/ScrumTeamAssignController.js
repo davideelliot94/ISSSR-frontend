@@ -16,13 +16,15 @@ mainAngularModule
                 "productOwner": null,
                 "teamMembers": []
             };
-            ctrl.assistantList = [];
+            ctrl.assistantList = []; // lista delle persone registrate
 
             ctrl.value = true;
 
             ctrl.getAllAssistant = getAllAssistantFn;
-            ctrl.setTeamLeader = setTeamLeaderFn;
-            ctrl.unsetTeamLeader = unsetTeamLeaderFn;
+            ctrl.setScrumMaster = setScrumMasterFn;
+            ctrl.setProductOwner = setProductOwnerFn;
+            ctrl.unsetScrumMaster = unsetScrumMasterFn;
+            ctrl.unsetProductOwner = unsetProductOwnerFn;
             ctrl.setTeamMember = setTeamMemberFn;
             ctrl.unsetTeamMember = unsetTeamMemberFn;
             ctrl.buildTeam = buildTeamFn;
@@ -45,13 +47,13 @@ mainAngularModule
 
             function filterWhatNotAssistant(user) {
                 //return user.roles[0].name === 'assistant';
-                return user.role === 'TEAM_MEMBER' || user.role === 'TEAM_COORDINATOR' || user.role === 'TEAM_LEADER';
+                return user.role === 'SCRUM_TEAM_MEMBER' || user.role === 'SCRUM_MASTER' || user.role === 'PRODUCT_OWNER';
             }
 
 
             function setCurrentTeam() {
 
-                TeamDataFactory.GetCompleteTeam($stateParams.teamId, function (completeTeam) {
+                ScrumTeamDataFactory.GetCompleteTeam($stateParams.teamId, function (completeTeam) {
                     ctrl.currentTeam = completeTeam;
                     getAllAssistantFn();
                 }, function (error) {
@@ -76,18 +78,32 @@ mainAngularModule
                 }
             }
 
-            function setTeamLeaderFn(member) {
+            function setScrumMasterFn(member) {
                 changeStateFn();
 
-                ctrl.currentTeam.teamLeader = member;
+                ctrl.currentTeam.scrumMaster = member;
                 let index = ctrl.assistantList.indexOf(member);
                 ctrl.assistantList.splice(index, 1);
             }
 
-            function unsetTeamLeaderFn() {
+            function unsetScrumMasterFn() {
                 changeStateFn();
-                ctrl.assistantList.push(ctrl.currentTeam.teamLeader);
-                ctrl.currentTeam.teamLeader = null;
+                ctrl.assistantList.push(ctrl.currentTeam.scrumMaster);
+                ctrl.currentTeam.scrumMaster = null;
+            }
+
+            function setProductOwnerFn(member) {
+                changeStateFn();
+
+                ctrl.currentTeam.productOwner = member;
+                let index = ctrl.assistantList.indexOf(member);
+                ctrl.assistantList.splice(index, 1);
+            }
+
+            function unsetProductOwnerFn() {
+                changeStateFn();
+                ctrl.assistantList.push(ctrl.currentTeam.productOwner);
+                ctrl.currentTeam.productOwner = null;
             }
 
             function setTeamMemberFn(member) {
@@ -108,8 +124,8 @@ mainAngularModule
             function buildTeamFn() {
 
                 //da rivedere i parametri passati
-                TeamDataFactory.BuildTeam(ctrl.currentTeam, function () {
-                    $state.go('team.list')
+                ScrumTeamDataFactory.BuildTeam(ctrl.currentTeam, function () {
+                    $state.go('') // home
                 });
             }
 
@@ -120,7 +136,11 @@ mainAngularModule
             function mergeAssistantFn() {
 
                 ctrl.assistantList.forEach(function (assistant) {
-                    if (ctrl.currentTeam.teamLeader.id === assistant.id) {
+                    if (ctrl.currentTeam.scrumMaster.id === assistant.id) {
+                        let index = ctrl.assistantList.indexOf(assistant);
+                        ctrl.assistantList.splice(index, 1);
+                    }
+                    if (ctrl.currentTeam.productOwner.id === assistant.id) {
                         let index = ctrl.assistantList.indexOf(assistant);
                         ctrl.assistantList.splice(index, 1);
                     }
