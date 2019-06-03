@@ -218,7 +218,7 @@ mainAngularModule
                     })
                 }
 
-                let ep = _endPointJSON + team.id + '/scrummaster/' + team.scrumMaster.id +
+                let ep = _endPointJSON + 'create' + '/name/' + team.name + '/scrummaster/' + team.scrumMaster.id +
                     '/productowner/' + team.productOwner.id + '/teammembers/' + assistantsList.join();
                 $http({
                     method: 'PUT',

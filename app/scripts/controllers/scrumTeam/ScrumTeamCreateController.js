@@ -28,7 +28,7 @@ mainAngularModule
             ctrl.unsetProductOwner = unsetProductOwnerFn;
             ctrl.setTeamMember = setTeamMemberFn;
             ctrl.unsetTeamMember = unsetTeamMemberFn;
-            ctrl.buildTeam = buildTeamFn;
+            ctrl.buildScrumTeam = buildScrumTeamFn;
             ctrl.resetFields = resetFieldsFn;
 
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -66,13 +66,14 @@ mainAngularModule
             init();
 
             function init() {
-                setCurrentScrumTeam();
+                //setCurrentScrumTeam();
+                getAllAssistantFn();
             }
 
-            function filterWhatNotAssistant(user) {
+            /*function filterWhatNotAssistant(user) {
                 //return user.roles[0].name === 'assistant';
                 return user.role === 'SCRUM_TEAM_MEMBER' || user.role === 'SCRUM_MASTER' || user.role === 'PRODUCT_OWNER';
-            }
+            }*/
 
 
             function setCurrentScrumTeam() {
@@ -87,7 +88,7 @@ mainAngularModule
 
             function getAllAssistantFn() {
                 UserDataFactory.GetAll(function (assistants) {
-                    ctrl.assistantList = assistants.filter(filterWhatNotAssistant);
+                    ctrl.assistantList = assistants;//.filter(filterWhatNotAssistant);
                     mergeAssistantFn();
                 }, function (error) {
                     ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei membri"});
@@ -119,7 +120,7 @@ mainAngularModule
             function setProductOwnerFn(member) {
                 changeStateFn();
 
-                ctrl.currentTeam.productOwner = member;
+                ctrl.currentScrumTeam.productOwner = member;
                 let index = ctrl.assistantList.indexOf(member);
                 ctrl.assistantList.splice(index, 1);
             }
@@ -145,10 +146,10 @@ mainAngularModule
                 ctrl.currentScrumTeam.teamMembers.splice(index, 1)
             }
 
-            function buildTeamFn() {
+            function buildScrumTeamFn() {
 
                 //da rivedere i parametri passati
-                ScrumTeamDataFactory.BuildTeam(ctrl.currentScrumTeam, function () {
+                ScrumTeamDataFactory.BuildScrumTeam(ctrl.currentScrumTeam, function () {
                     $state.go('') // home
                 });
             }
