@@ -21,7 +21,7 @@ mainAngularModule.config(['$stateProvider',
                 }
 
                  */
-                //TODO fare il controllo se sitratta di Product Owner.
+                //TODO fare il controllo se si tratta di Product Owner.
                 /*resolve: {
                     acl: function (AclRouteProtector) {
                         return AclRouteProtector.checkRoutePermission('PO');

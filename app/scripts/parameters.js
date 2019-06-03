@@ -16,6 +16,7 @@ mainAngularModule
     .constant('TEAM_ENDPOINT_URL', '/teams/')
     .constant('USER_ENDPOINT_URL', '/users/')
     .constant('TICKET_ENDPOINT_URL', '/tickets/')
+    .constant('SPRINT_ENDPOINT_URL', '/sprint/')
     .constant('LOGIN_ENDPOINT_URL', '/public/login/')
     .constant('REGISTRATION_ENDPOINT_URL', '/public/register/')
     .constant('PERMS_ENDPOINT_URL', '/permissions/')
@@ -24,7 +25,7 @@ mainAngularModule
     .constant('ACL_RECORDS_ENDPOINT_URL', '/acl-records/')
     .constant('REQUESTS_LOGS_ENDPOINT_URL', '/requests-logs/')
     .constant('AUDITING_ENDPOINT_URL', '/auditing-logs/')
-    .constant('SPRINT_ENDPOINT_URL', '/sprint/')
+
 
 
     .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')

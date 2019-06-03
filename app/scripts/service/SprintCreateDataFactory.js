@@ -9,17 +9,17 @@
  */
 
 mainAngularModule
-    .factory('SprintCreateDataFactory', ['$http', 'BACKEND_BASE_URL', 'SPRINT_ENDPOINT_URL', 'ToasterNotifierHandler',
+   .factory('SprintCreateDataFactory', ['$http', 'BACKEND_BASE_URL', 'SPRINT_ENDPOINT_URL', 'ToasterNotifierHandler',
         function ($http, BACKEND_BASE_URL, SPRINT_ENDPOINT_URL, ToasterNotifierHandler) {
             let thisCrudService = {};
             let _endPointJSON = BACKEND_BASE_URL + SPRINT_ENDPOINT_URL;
 
 
             function InsertFn(sprint, successCB, errorCB) {
-                console.log("Sprint: ", sprint);
+                console.log('Sprint: ', sprint);
                 $http({
                     method: 'POST',
-                    url: _endPointJSON,
+                    url: _endPointJSON+'create',
                     data: sprint
                 })
                     .then(function (response) {
@@ -44,8 +44,8 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: _endPointJSON + 'target',
-                    data: {id: productOwnerId}
+                    url: _endPointJSON  +'create/'+productOwnerId
+
                 })
                     .then(function (response) {
                             success(response);
