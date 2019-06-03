@@ -175,6 +175,10 @@ mainAngularModule
                                         {
                                             "nome": "Create sprint",
                                             "state": "scrum.sprint_create_state"
+                                        },
+                                        {
+                                            "nome": "Visualizza Sprint Attivi",
+                                            "state": "scrum.sprints_view"
                                         }
                                     ]
                                 }

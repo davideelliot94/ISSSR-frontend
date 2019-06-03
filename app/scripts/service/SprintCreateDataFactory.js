@@ -9,10 +9,10 @@
  */
 
 mainAngularModule
-    .factory('SprintCreateDataFactory', ['$http', 'BACKEND_BASE_URL', 'TICKET_ENDPOINT_URL', 'ToasterNotifierHandler',
-        function ($http, BACKEND_BASE_URL, TICKET_ENDPOINT_URL, ToasterNotifierHandler) {
+    .factory('SprintCreateDataFactory', ['$http', 'BACKEND_BASE_URL', 'SPRINT_ENDPOINT_URL', 'ToasterNotifierHandler',
+        function ($http, BACKEND_BASE_URL, SPRINT_ENDPOINT_URL, ToasterNotifierHandler) {
             let thisCrudService = {};
-            let _endPointJSON = BACKEND_BASE_URL + TICKET_ENDPOINT_URL;
+            let _endPointJSON = BACKEND_BASE_URL + SPRINT_ENDPOINT_URL;
 
 
             function InsertFn(sprint, successCB, errorCB) {
@@ -60,12 +60,33 @@ mainAngularModule
             }
 
 
+            // get all data from database
+            function GetAllFn(productOwnerId, successCB, errorCB) {
 
+                $http({
+                    method: 'GET',
+                    url: _endPointJSON + productOwnerId+  '/visualize',
+
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
 
 
             thisCrudService.Insert = InsertFn;
             thisCrudService.getMetadata = getMetadata;
-
+            thisCrudService.GetAll = GetAllFn;
 
             return thisCrudService;
         }]);

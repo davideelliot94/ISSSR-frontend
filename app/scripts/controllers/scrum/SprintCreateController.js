@@ -13,9 +13,7 @@ mainAngularModule
             function ($scope, $state, AuthFactory, UserDataFactory, SprintCreateDataFactory, softwareProductDataFactory, ErrorStateRedirector) {
                 const ctrl = this;
 
-                ctrl.targets ={
-                    id: 1
-                };
+
                 getFields();
 
 
@@ -58,10 +56,12 @@ mainAngularModule
                                 $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             } else if (ctrl.userInfo.userRole === 'CUSTOMER') {
                                 $state.go('ticket.customer', {}, {reload: 'ticket.customer'});
-                            }  else if (ctrl.userInfo.userRole === 'ADMIN') {
-                                $state.go('ticket.list', {}, {reload: 'ticket.list'});
-                            }
                             */
+                            if (ctrl.userInfo.userRole === 'ADMIN') {
+
+                                $state.go('scrum.sprints', {}, {reload: 'scrum.sprint'});
+                            }
+
                              //TODO visulizzazione successiva sprint attivi
                         }, function (response) {
                             console.error(response);

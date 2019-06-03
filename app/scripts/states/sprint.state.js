@@ -27,5 +27,10 @@ mainAngularModule.config(['$stateProvider',
                         return AclRouteProtector.checkRoutePermission('PO');
                     }
                 }*/
-            });
+            }).state('scrum.sprints_view', {
+            url: '/sprints',
+            templateUrl: 'views/scrum/sprints-view.html',
+            controller: 'SprintsCtrl',
+            controllerAs: 'ctrl',
+        });
     }]);
