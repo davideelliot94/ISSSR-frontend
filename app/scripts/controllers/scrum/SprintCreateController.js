@@ -12,15 +12,16 @@ mainAngularModule
         ['$scope', '$state', 'AuthFactory', 'UserDataFactory', 'SprintCreateDataFactory', 'softwareProductDataFactory', 'ErrorStateRedirector',
             function ($scope, $state, AuthFactory, UserDataFactory, SprintCreateDataFactory, softwareProductDataFactory, ErrorStateRedirector) {
                 const ctrl = this;
-                ctrl.currentSprint={
-                    productOwnerId: AuthFactory.getAuthInfo().userId
-                }
+
+                ctrl.currentSprint = {};
+
                 console.log("SprintCreate");
                 getFields();
 
                 //prende i metadati che li servono con una get
                 function getFields() {
-                    SprintCreateDataFactory.getMetadata(ctrl.currentSprint.productOwnerId, function (response) {
+                    let authInfo = AuthFactory.getAuthInfo();
+                    SprintCreateDataFactory.getMetadata(authInfo.userId, function (response) {
 
                         console.log('targets', response.data);
                         ctrl.targets = response.data;
@@ -38,9 +39,7 @@ mainAngularModule
                 function resetFieldsFn() {
                     console.log('reset ticket form');
                     //inseriamo l'id del PO
-                    ctrl.currentSprint = {
-                        productOwnerId: ctrl.userInfo.userId
-                    };
+
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                 }
@@ -50,10 +49,11 @@ mainAngularModule
                 //altrimenti vado alla pagina di errore.
                 function insertSprintFn() {
                     console.log('insert sprint', ctrl.currentSprint, ctrl.targets);
-                    ctrl.currentSprint.target=ctrl.selectedTarget;
-                    ctrl.currentSprint.id=null;
-                    ctrl.currentSprint.number='0';
-                    ctrl.currentSprint.sprintGoal='0';
+
+
+
+                    ctrl.currentSprint.duration = ctrl.duration;
+                    ctrl.currentSprint.idProduct=ctrl.selectedTarget; //setting just the id
 
                     SprintCreateDataFactory.Insert(
                         ctrl.currentSprint,

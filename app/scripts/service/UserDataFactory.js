@@ -137,7 +137,7 @@ mainAngularModule
 
             // post the data from database
             function InsertFn(user, successCB, errorCB) {
-console.log("insertFN", user);
+                console.log("insertFN", user);
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
