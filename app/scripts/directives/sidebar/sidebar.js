@@ -167,6 +167,17 @@ mainAngularModule
                                         }
                                     ]
                                 },
+                                {
+                                    "title": "Scrum",
+                                    "num": 14,
+                                    //"icon": "fa-list-alt", //TODO
+                                    item: [
+                                        {
+                                            "nome": "Gestione Backlog",
+                                            "state": "backlog_management.view"
+                                        }
+                                    ]
+                                }
                             ]
                         }
                         //} else if ($scope.userInfo.userType === "assistant") {
