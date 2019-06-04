@@ -21,7 +21,20 @@ mainAngularModule
                     title: 'Operazione non permessa',
                     body: response.data.message,
                 });
+            } else if (response.status === 400) {
+                toaster.pop({
+                    type: 'error',
+                    title: 'Richiesta non valida',
+                    body: response.data.message,
+                });
+            } else if (response.status === 500) {
+                toaster.pop({
+                    type: 'error',
+                    title: 'Errore inatteso',
+                    body: response.data.message,
+                });
             } else {
+                //DEBUG
                 console.error(response.data);
             }
         };
@@ -29,7 +42,7 @@ mainAngularModule
         this.showErrorToast = function (message) {
             toaster.pop({
                 type: 'error',
-                title: 'An error occurred',
+                title: 'Errore:',
                 body: message,
             });
         };
@@ -43,7 +56,6 @@ mainAngularModule
         };
 
         this.handleCreation = function (response) {
-            console.log('Sono nella handlecreation');
             if (response.status === 201) {
                 toaster.pop({
                     type: 'success',

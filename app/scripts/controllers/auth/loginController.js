@@ -7,7 +7,7 @@
  */
 mainAngularModule
     .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory', 'BacklogItemService',
-        function ($scope, $state, AuthFactory, BacklogItemService) {
+        function ($scope, $state, AuthFactory) {
 
             let ctrl = this;
             ctrl.authRequest = {username: 'admin', password: 'password'};

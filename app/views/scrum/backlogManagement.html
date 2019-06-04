@@ -1,0 +1,137 @@
+<!-- Titolo -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Gestione Backlog {{backlogItem.product.name}}</h1>
+    </div>
+</div>
+
+<!-- Pannello selezione prodotto -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">Seleziona il prodotto di cui visualizzare il Backlog</div>
+            <div class="panel-body">
+                <label>Prodotto:</label>
+                <select class="form-control"
+                        ng-options="product.name for product in productsOfScrumMember"
+                        ng-model="backlogItem.product"
+                        ng-required="true"
+                        ng-change="populateBacklogAndSprintBacklog()">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pannello Sprint Backlog -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Sprint Backlog</div>
+            <div class="panel-body">
+                <div class="table-responsive"
+                     ng-show="isActiveSprint">
+                    <table datatable="ng"
+                           class="table table-striped table-bordered"
+                           id="sprintBacklogItemListTable"
+                           dt-options="dtOptions">
+                        <thead>
+                        <tr>
+                            <th class="col-md-1">ID</th>
+                            <th class="col-md-1">Titolo</th>
+                            <th class="col-md-1">Descrizione</th>
+                            <th class="col-md-1">Priorità</th>
+                            <th class="col-md-1">Stima dell'effort</th>
+                            <th class="col-md-1">Stato</th>
+                            <th class="col-md-1"></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat= "item  in sprintBacklogItems">
+                            <td>{{item.id}}</td>
+                            <td>{{item.title | date}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.priority}}</td>
+                            <td>{{item.effortEstimation}}</td>
+                            <td>{{item.status}}</td>
+                            <td align="center">
+                                <!-- Bottone passaggio di stato all'indietro -->
+                                <button ng-disabled="item.status == 'TODO'"
+                                        title="Ritorna nello stato precedente"
+                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'backward')"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-arrow-left"></i>
+                                </button>
+                                <!-- Bottone passaggio di stato item in avanti -->
+                                <button ng-disabled="item.status == 'COMPLETED'"
+                                        title="Passa allo stato successivo"
+                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'forward')"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pannello Product Backlog -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Product Backlog</div>
+            <div class="panel-body">
+                <div class="table-responsive"
+                     ng-show="isSelectedProduct">
+                    <table datatable="ng"
+                           class="table table-striped table-bordered"
+                           id="backlogItemListTable"
+                           dt-options="dtOptions">
+                        <thead>
+                        <tr>
+                            <th class="col-md-1">ID</th>
+                            <th class="col-md-1">Titolo</th>
+                            <th class="col-md-1">Descrizione</th>
+                            <th class="col-md-1">Priorità</th>
+                            <th class="col-md-1">Stima dell'effort</th>
+                            <th class="col-md-1"></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat= "item  in backlogItems">
+                            <td>{{item.id}}</td>
+                            <td>{{item.title | date}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.priority}}</td>
+                            <td>{{item.effortEstimation}}</td>
+                            <td align="center">
+                                <!-- Bottone aggiunta Item allo Sprint Backlog -->
+                                <button ng-if="item.status != 'COMPLETED'"
+                                     title="Inserisci nello Sprint Backlog"
+                                     ng-click="openBacklogItemEditDialog(item)"
+                                     class="btn btn-primary">
+                                 <i class="fa fa-arrow-up"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottone aggiunta Item al Backlog -->
+<button type="button"
+        class="btn btn-primary"
+        ng-click="openBacklogItemCreationDialog()"
+        ng-disabled= "!backlogItem.product">
+        Aggiungi Item al Backlog
+</button>

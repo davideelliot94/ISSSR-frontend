@@ -1,0 +1,76 @@
+
+<md-dialog aria-label="Inserimento Item nello Sprint Backlog">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #457AB2">
+            <h2>Inserimento Item nello Sprint Backlog</h2>
+        </div>
+    </md-toolbar>
+    <div class="container">
+        <form name="backlogItemEditForm">
+            <br>
+
+            <div class="form-group"
+                 ng-class="{'has-error': backlogItemEditForm.backlogItemTitle.$invalid &&
+                                         backlogItemEditForm.backlogItemTitle.$dirty,
+                            'has-success': backlogItemEditForm.backlogItemTitle.$valid &&
+                                           backlogItemEditForm.backlogItemTitle.$dirty}">
+                <label>Titolo *</label>
+                <input name="backlogItemTitle"
+                       type="text"
+                       class="form-control"
+                       ng-required="true"
+                       ng-maxlength="255"
+                       ng-model="backlogItem.title">
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': backlogItemEditForm.backlogItemDescription.$invalid &&
+                                         backlogItemEditForm.backlogItemDescription.$dirty,
+                            'has-success': backlogItemEditForm.backlogItemDescription.$valid &&
+                                           backlogItemEditForm.backlogItemDescription.$dirty}">
+                <label>Descrizione</label>
+                <textarea name="backlogItemDescription"
+                          class="form-control"
+                          ng-maxlength="255"
+                          ng-model="backlogItem.description">
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label>Priorità
+                    <select class="form-control"
+                            ng-init="backlogItem.priority = backlogItemPriorityClasses[1]"
+                            ng-options="priorityClass for priorityClass in backlogItemPriorityClasses"
+                            ng-model="backlogItem.priority">
+                    </select>
+                </label>
+            </div>
+            <div class="form-group"
+                 ng-class="{'has-error': backlogItemEditForm.backlogItemEffortEstimation.$invalid &&
+                                         backlogItemEditForm.backlogItemEffortEstimation.$dirty,
+                            'has-success': backlogItemEditForm.backlogItemEffortEstimation.$valid &&
+                                           backlogItemEditForm.backlogItemEffortEstimation.$dirty}">
+                <label>Stima dell'effort (Story Point) *
+                    <input name="backlogItemEffortEstimation"
+                           type="number"
+                           class="form-control"
+                           min="1"
+                           ng-model="backlogItem.effortEstimation"
+                           ng-required="true">
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="closeDialog()">
+                    Annulla
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-disabled="backlogItemEditForm.$invalid"
+                        ng-click="insertBacklogItemToSprintBacklog()">
+                    Conferma
+                </button>
+            </div>
+        </form>
+    </div>
+</md-dialog>
