@@ -79,7 +79,7 @@
                     </md-content>
                 </md-tab>
           <div ng-controller="ctrlRelation">
-                <md-tab label="create relation">
+                <md-tab label="create relation" ng-if="ticket.currentTicketStatus === 'VALIDATION'">
                     <md-content class="md-padding">
                         <table align="center" class="table table-dark">
                         <thead>
