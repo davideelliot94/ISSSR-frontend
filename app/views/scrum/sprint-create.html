@@ -29,7 +29,7 @@
 <!--                                        <div class="panel-heading">Elenco Prodotti Software</div>-->
                                         <div class="panel-body">
                                             <div class="form-group"
-                                                 ng-class="{'has-error': formCreateSprint.description.$invalid && formCreateSprint.description.$touched}">
+                                                 ng-class="{'has-error': formCreateSprint.sprintGoal.$invalid && formCreateSprint.sprintGoal.$touched}">
                                                 <label>SprintGoal</label>
                                                 <textarea name="sprintGoal" class="form-control" rows="8"
                                                           ng-model="ctrl.currentSprint.sprintGoal" required></textarea>
@@ -57,7 +57,8 @@
                                                         <td>{{p.targetType}}</td>
                                                         <td>{{p.scrumTeamId}}</td>
                                                         <td align="right">
-                                                            <input type="radio" ng-model="ctrl.selectedTarget" value="{{p.id}}">
+                                                            <input type="radio" ng-model="ctrl.selectedTarget" value="{{p.id}}"
+                                                                   ng-required="true">
 
                                                             <i class="fa fa-reddit-square"></i></button>
                                                         </td>
