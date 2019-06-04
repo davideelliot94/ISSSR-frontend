@@ -48,7 +48,12 @@ mainAngularModule
             function resetFieldsFn() {
                 console.log('ResetScurmTeamFn')
 
-                ctrl.currentScrumTeam = {};
+                ctrl.currentScrumTeam = {
+                    "name": null,
+                    "scrumMaster": null,
+                    "productOwner": null,
+                    "teamMembers": []
+                };
             }
 
             function insertScrumTeamFn() {
@@ -57,7 +62,7 @@ mainAngularModule
                     function (response) {
                         console.log(response);
                         resetFieldsFn();
-                        $state.go('scrumteam.assign', {}, {reload: 'scrumteam.assign'});
+                        $state.go('', {}, {reload: ''});
                     }, function (response) {
                         ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento dello scrum team"})
                     });
@@ -152,10 +157,6 @@ mainAngularModule
                 ScrumTeamDataFactory.BuildScrumTeam(ctrl.currentScrumTeam, function () {
                     $state.go('') // home
                 });
-            }
-
-            function resetFieldsFn() {
-                //da fare
             }
 
             function mergeAssistantFn() {

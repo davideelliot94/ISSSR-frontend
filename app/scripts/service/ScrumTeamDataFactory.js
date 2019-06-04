@@ -79,6 +79,7 @@ mainAngularModule
             // POST request to backend for srum team creation, id and name inserted in db
             function InsertFn(team, successCB, errorCB) {
                 console.log("inserting")
+                console.log(team)
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
