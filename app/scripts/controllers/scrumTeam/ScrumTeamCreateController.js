@@ -28,16 +28,16 @@ mainAngularModule
             ctrl.unsetProductOwner = unsetProductOwnerFn;
             ctrl.setTeamMember = setTeamMemberFn;
             ctrl.unsetTeamMember = unsetTeamMemberFn;
-            ctrl.buildScrumTeam = buildScrumTeamFn;
+            //ctrl.buildScrumTeam = buildScrumTeamFn;
             ctrl.resetFields = resetFieldsFn;
 
-            $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
-            $scope.dtColumnDefsLeft = [
-                DTColumnDefBuilder.newColumnDef(4).notSortable()
-            ];
-            $scope.dtColumnDefsRight = [
-                DTColumnDefBuilder.newColumnDef(3).notSortable()
-            ];
+            // $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
+            // $scope.dtColumnDefsLeft = [
+            //     DTColumnDefBuilder.newColumnDef(4).notSortable()
+            // ];
+            // $scope.dtColumnDefsRight = [
+            //     DTColumnDefBuilder.newColumnDef(3).notSortable()
+            // ];
 
 
             resetFieldsFn();
@@ -54,6 +54,7 @@ mainAngularModule
                     "productOwner": null,
                     "teamMembers": []
                 };
+                init();
             }
 
             function insertScrumTeamFn() {
@@ -62,7 +63,7 @@ mainAngularModule
                     function (response) {
                         console.log(response);
                         resetFieldsFn();
-                        $state.go('', {}, {reload: ''});
+                        $state.go('dashboard');
                     }, function (response) {
                         ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento dello scrum team"})
                     });
@@ -71,18 +72,11 @@ mainAngularModule
             init();
 
             function init() {
-                //setCurrentScrumTeam();
                 getAllAssistantFn();
             }
 
-            /*function filterWhatNotAssistant(user) {
-                //return user.roles[0].name === 'assistant';
-                return user.role === 'SCRUM_TEAM_MEMBER' || user.role === 'SCRUM_MASTER' || user.role === 'PRODUCT_OWNER';
-            }*/
-
 
             function setCurrentScrumTeam() {
-    console.log("errore?")
                 ScrumTeamDataFactory.GetCompleteTeam($stateParams.teamId, function (completeTeam) {
                     ctrl.currentScrumTeam = completeTeam;
                     getAllAssistantFn();
@@ -92,7 +86,7 @@ mainAngularModule
             }
 
             function getAllAssistantFn() {
-                UserDataFactory.GetAll(function (assistants) {
+                UserDataFactory.GetAllNotCustomer(function (assistants) {
                     ctrl.assistantList = assistants;//.filter(filterWhatNotAssistant);
                     mergeAssistantFn();
                 }, function (error) {
@@ -151,13 +145,13 @@ mainAngularModule
                 ctrl.currentScrumTeam.teamMembers.splice(index, 1)
             }
 
-            function buildScrumTeamFn() {
-
-                //da rivedere i parametri passati
-                ScrumTeamDataFactory.BuildScrumTeam(ctrl.currentScrumTeam, function () {
-                    $state.go('') // home
-                });
-            }
+            // function buildScrumTeamFn() {
+            //
+            //     //da rivedere i parametri passati
+            //     ScrumTeamDataFactory.BuildScrumTeam(ctrl.currentScrumTeam, function () {
+            //         $state.go('') // home
+            //     });
+            // }
 
             function mergeAssistantFn() {
 

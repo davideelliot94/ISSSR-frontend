@@ -17,6 +17,7 @@ mainAngularModule
 
 
             thisCrudService.GetAll = GetAllFn;
+            thisCrudService.GetAllNotCustomer = GetAllNotCustomerFn;
             thisCrudService.GetSingle = GetSingleFn;
             thisCrudService.Insert = InsertFn;
             thisCrudService.Update = UpdateFn;
@@ -27,6 +28,27 @@ mainAngularModule
 
             thisCrudService.user = null;
 
+            function GetAllNotCustomerFn(successCB, errorCB) {
+
+                console.log(_endPointJSON + 'not_customer')
+                $http({
+                    method: 'GET',
+                    url: _endPointJSON + 'not_customer'
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
 
             function getMetadata(success, error) {
 

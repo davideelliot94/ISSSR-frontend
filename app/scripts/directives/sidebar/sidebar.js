@@ -101,10 +101,6 @@ mainAngularModule
                                         {
                                             "nome": "Inserisci Scrum Team",
                                             "state": "scrumteam.create"
-                                        },
-                                        {
-                                            "nome": "Assegna Scrum Team",
-                                            "state": "scrumteam.assign"
                                         }]
                                 },
                                 {
