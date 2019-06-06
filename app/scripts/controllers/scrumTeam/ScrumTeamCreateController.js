@@ -31,13 +31,6 @@ mainAngularModule
             //ctrl.buildScrumTeam = buildScrumTeamFn;
             ctrl.resetFields = resetFieldsFn;
 
-            // $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
-            // $scope.dtColumnDefsLeft = [
-            //     DTColumnDefBuilder.newColumnDef(4).notSortable()
-            // ];
-            // $scope.dtColumnDefsRight = [
-            //     DTColumnDefBuilder.newColumnDef(3).notSortable()
-            // ];
 
 
             resetFieldsFn();
@@ -63,7 +56,7 @@ mainAngularModule
                     function (response) {
                         console.log(response);
                         resetFieldsFn();
-                        $state.go('dashboard');
+                        $state.go('dashboard.home');
                     }, function (response) {
                         ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento dello scrum team"})
                     });
