@@ -27,7 +27,6 @@ mainAngularModule
 
             thisCrudService.user = null;
 
-
             function getMetadata(success, error) {
 
                 $http({
@@ -35,9 +34,9 @@ mainAngularModule
                     url: _endPointJSON + "metadata"
                 })
                     .then(function (response) {
-                        console.log("succe", response);
-                        success(response);
-                    },
+                            console.log("succe", response);
+                            success(response);
+                        },
                         function (response) {
                             if (error) {
                                 error(response);
@@ -137,7 +136,7 @@ mainAngularModule
 
             // post the data from database
             function InsertFn(user, successCB, errorCB) {
-console.log("insertFN", user);
+                console.log("insertFN", user);
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
@@ -147,9 +146,48 @@ console.log("insertFN", user);
                             if (successCB) {
                                 successCB(response.data);
                                 ToasterNotifierHandler.handleCreation(response);
+
+                                $http({
+                                    method: 'GET',
+                                    url: _endPointJSON + 'getMaxId'
+                                })
+
+                                    .then(function (response) {
+
+                                            if (successCB) {
+                                                successCB(response.data);
+                                                ToasterNotifierHandler.handleCreation(response);
+
+                                                $http({
+                                                    method: 'POST',
+                                                    url: _endPointJSON + 'insertUserInGroup/' + response.data + '/' + user.role,
+                                                })
+                                                    .then(function (response) {
+
+                                                            if (successCB) {
+                                                                successCB(response.data);
+                                                                ToasterNotifierHandler.handleCreation(response);
+                                                            }
+                                                        },
+                                                        function (response) {
+                                                            if (errorCB) {
+                                                                errorCB(response.data);
+                                                            }
+                                                            console.error(response.data);
+                                                            ToasterNotifierHandler.handleError(response);
+                                                        });
+                                            }
+                                        },
+                                        function (response) {
+                                            if (errorCB) {
+                                                errorCB(response.data);
+                                            }
+                                            console.error(response.data);
+                                            ToasterNotifierHandler.handleError(response);
+                                        });
                             }
-                            //return response.data;
                         },
+
                         function (response) {
                             if (errorCB) {
                                 errorCB(response.data);
@@ -206,5 +244,6 @@ console.log("insertFN", user);
 
 
             return thisCrudService;
+
         }]);
 

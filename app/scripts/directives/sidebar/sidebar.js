@@ -105,6 +105,10 @@ mainAngularModule
                                         {
                                             "nome": "Elenco Prodotti Software",
                                             "state": "productsoftware.list"
+                                        },
+                                        {
+                                            "nome": "Associa prodotti software",
+                                            "state": "productsoftware.listassociate"
                                         }]
                                 },
                                 {

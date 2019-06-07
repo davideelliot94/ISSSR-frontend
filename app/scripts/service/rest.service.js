@@ -93,7 +93,21 @@ mainAngularModule.service('restService', function () {
         "getEmployedUserByRole": CONNECTION.url + '/users/getEmployedUserByRole',
 
         //  change ticket difficulty
-        "changeTicketDifficulty": CONNECTION.url + '/tickets/changeDifficulty'
+        "changeTicketDifficulty": CONNECTION.url + '/tickets/changeDifficulty',
+
+        "insertUserInGroup": CONNECTION.url + '/groups/insertUserInGroup',
+
+        "getMaxId": CONNECTION.url + '/users/getMaxId',
+
+        "getScrumTeamList": CONNECTION.url + '/scrumteam/getScrumTeamList',
+
+        "getProductOwnerBySTId": CONNECTION.url + '/scrumteam/getProductOwnerBySTId',
+
+        "getScrumTeamBySTId": CONNECTION.url + '/scrumteam/getScrumMasterSTId',
+
+        "getMembersBySTId": CONNECTION.url + '/scrumteam/getMembersBySTId',
+
+        "assignProductToST": CONNECTION.url + '/scrumteam/assignProductToST'
 
     };
 })

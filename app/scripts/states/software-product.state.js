@@ -45,4 +45,15 @@ mainAngularModule.config(['$stateProvider',
                     }
                 }
             })
+            .state('productsoftware.listassociate', {
+                url: '/associate',
+                templateUrl: 'views/productsoftware/productsoftware-list-associate.html',
+                controller: 'ProductSoftwareListCtrl',
+                controllerAs: 'ctrl',
+                resolve: {
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('software_view');
+                    }
+                }
+            })
     }]);
