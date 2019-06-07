@@ -67,6 +67,7 @@
     <!-- build:js({.tmp,app}) scripts/states.js -->
     <script src="scripts/states/dashboard.state.js"></script>
     <script src="scripts/states/ticket.state.js"></script>
+    <script src="scripts/states/sprint.state.js"></script>
     <script src="scripts/states/user.state.js"></script>
     <script src="scripts/states/team.state.js"></script>
     <script src="scripts/states/software-product.state.js"></script>
@@ -129,6 +130,8 @@
     <script src="scripts/controllers/planning/planning.js"></script>
     <script src="scripts/controllers/planning/relation.js"></script>
     <script src="scripts/controllers/planning/showQueue.js"></script>
+    <script src='scripts/controllers/scrum/SprintCreateController.js'></script>
+    <script src='scripts/controllers/scrum/SprintsController.js'></script>
     <script src="scripts/controllers/scrum/backlogManagementController.js"></script>
     <script src="scripts/controllers/scrum/backlogItemCreationDialogController.js"></script>
     <script src="scripts/controllers/scrum/backlogItemEditDialogController.js"></script>
@@ -142,6 +145,7 @@
     <script src='scripts/service/SoftwareProductDataFactory.js'></script>
     <script src='scripts/service/TeamDataFactory.js'></script>
     <script src='scripts/service/TeamDataFactory.js'></script>
+    <script src='scripts/service/SprintCreateDataFactory.js'></script>
     <script src='scripts/service/TicketDataFactory.js'></script>
     <script src='scripts/service/UserDataFactory.js'></script>
     <script src='scripts/service/GroupDataFactory.js'></script>
@@ -219,7 +223,6 @@
 
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.min.js"></script>
-
 
 
 </head>
