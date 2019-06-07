@@ -44,5 +44,5 @@ mainAngularModule.config(['$stateProvider',
                         return AclRouteProtector.checkRoutePermission('software_update');
                     }
                 }
-            })
+            });
     }]);

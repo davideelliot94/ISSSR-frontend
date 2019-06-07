@@ -94,16 +94,6 @@ mainAngularModule
                                         }]
                                 },
                                 {
-                                    "title": "ScrumTeam",
-                                    "num": 9,
-                                    "icon": "fa-users",
-                                    item: [
-                                        {
-                                            "nome": "Inserisci Scrum Team",
-                                            "state": "scrumteam.create"
-                                        }]
-                                },
-                                {
                                     "title": "Prodotto Software",
                                     "num": 10,
                                     "icon": "fa-desktop",
@@ -179,12 +169,16 @@ mainAngularModule
                                 },
                                 {
                                     "title": "Scrum",
-                                    "num": 14,
-                                    //"icon": "fa-list-alt", //TODO
+                                    "num": 15,
+                                    // TODO "icon": "fa-circle-notch",
                                     item: [
                                         {
-                                            "nome": "Gestione Backlog",
-                                            "state": "backlog_management.view"
+                                            "nome": "Inserisci Scrum Team",
+                                            "state": "scrumteam.create"
+                                        },
+                                        {
+                                            "nome": "Associa prodotti software",
+                                            "state": "scrumteam.listassociate"
                                         },
                                         {
                                             "nome": "Create sprint",
@@ -193,6 +187,10 @@ mainAngularModule
                                         {
                                             "nome": "Visualizza Sprint Attivi",
                                             "state": "scrum.sprints_view"
+                                        },
+                                        {
+                                            "nome": "Gestione Backlog",
+                                            "state": "backlog_management.view"
                                         }
                                     ]
                                 }

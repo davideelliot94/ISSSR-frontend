@@ -17,11 +17,12 @@ mainAngularModule.config(['$stateProvider',
                 url: '/create',
                 templateUrl: 'views/scrumTeam/scrum-team-create.html',
                 controller: 'ScrumTeamCreateCtrl',
-                controllerAs: 'ctrl',
-                resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('scrum_team_create');
-                    }
-                }
+                controllerAs: 'ctrl'
             })
+            .state('scrumteam.listassociate', {
+            url: '/associate',
+            templateUrl: 'views/scrum/productsoftware-list-associate.html',
+            controller: 'ProductSoftwareListCtrl',
+            controllerAs: 'ctrl'
+        });
     }]);

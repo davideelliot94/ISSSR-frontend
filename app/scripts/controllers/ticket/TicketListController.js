@@ -153,7 +153,7 @@ mainAngularModule
 
                                 httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
                                     .then(function (secondData) {
-                                            
+
                                         },
                                         function (err) {
                                             console.log(err);

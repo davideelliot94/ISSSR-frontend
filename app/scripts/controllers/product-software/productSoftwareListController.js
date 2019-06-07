@@ -7,19 +7,18 @@
  * Controller of the sbAdminApp
  */
 mainAngularModule
-    .controller('ProductSoftwareListCtrl', ['$scope', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
+    .controller('ProductSoftwareListCtrl', ['$scope', '$window', 'ToasterNotifierHandler', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
         'DTColumnDefBuilder', 'AclService', 'httpService',
-        function ($scope, softwareProductDataFactory, ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder, AclService, httpService) {
+        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory, ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder, AclService, httpService) {
 
             var ctrl = this;
             ctrl.refreshProduct = refreshProductFn;
+            ctrl.getScrumTeamList = getScrumTeamListFN;
             ctrl.editProduct = editProductFN;
             ctrl.deleteProduct = deleteProductFN;
             ctrl.retireTarget = retireTargetFN;
             ctrl.rehabTarget = rehabTargetFN;
             ctrl.isRetired = isRetiredFN;
-
-
 
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
             $scope.dtColumnDefs = [
@@ -27,6 +26,7 @@ mainAngularModule
             ];
 
 
+            getScrumTeamListFN();
             refreshProductFn();
 
             function refreshProductFn() {
@@ -71,17 +71,17 @@ mainAngularModule
              *
              * @param index         id row of the Target
              */
-            function retireTargetFN ($index) {
+            function retireTargetFN($index) {
 
                 let targetToRetire = ctrl.products[$index];
                 let id = targetToRetire.id;
 
                 softwareProductDataFactory.Retire(id, function (response) {
-                            ctrl.products[$index].targetState = "RETIRED";
-                        },
-                        function error(response) {
-                            console.log("Error!" + response);
-                        });
+                        ctrl.products[$index].targetState = "RETIRED";
+                    },
+                    function error(response) {
+                        console.log("Error!" + response);
+                    });
             };
 
 
@@ -92,17 +92,17 @@ mainAngularModule
              *
              * @param index         id row of the Target
              */
-            function rehabTargetFN ($index) {
+            function rehabTargetFN($index) {
 
                 let targetToRehab = ctrl.products[$index];
                 let id = targetToRehab.id;
 
                 softwareProductDataFactory.Rehab(id, function (response) {
-                            ctrl.products[$index].targetState = "ACTIVE";
-                        },
-                        function error(response) {
-                            console.log("Error!" + response);
-                        });
+                        ctrl.products[$index].targetState = "ACTIVE";
+                    },
+                    function error(response) {
+                        console.log("Error!" + response);
+                    });
             };
 
 
@@ -114,11 +114,84 @@ mainAngularModule
              * @param index         id row to check
              * @returns {boolean}   true is the Target is "Unavailable", false otherwise
              */
-            function isRetiredFN ($index) {
+            function isRetiredFN($index) {
                 if (ctrl.products[$index].targetState === "RETIRED")
                     return true;
                 else
                     return false;
+            };
+
+            function getScrumTeamListFN() {
+
+                softwareProductDataFactory.GetScrumTeamList(function (scrumTeamList) {
+
+                    $scope.scrumTeamList = scrumTeamList;
+
+                }, function (error) {
+                    ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
+                });
+
+                $scope.value = false;
+
+            }
+
+            $scope.GetData = function (id) {
+                // Here Please add Code to fetch the data from database. Here userEmailFromDB and userPhoneFromDB are the values that you get from database.
+
+                if (id > 0) {
+
+                    softwareProductDataFactory.GetProductOwnerBySTId(id, function (productOwner) {
+
+                        $scope.productOwner = productOwner;
+
+                    }, function (error) {
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
+                    });
+
+                    softwareProductDataFactory.GetScrumMasterBySTId(id, function (scrumMaster) {
+
+                        $scope.scrumMaster = scrumMaster;
+
+                    }, function (error) {
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
+                    });
+
+                    softwareProductDataFactory.GetMembersBySTId(id, function (members) {
+
+                        $scope.members = members;
+                    }, function (error) {
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
+                    });
+
+                    $scope.value = true;
+
+                } else {
+
+                    $scope.value = false;
+
+                }
+
+            };
+
+            $scope.GetSelected = function (id) {
+
+                $scope.selected = id;
+
+            };
+
+            $scope.assignProduct = function(tid, pid) {
+
+                if (tid > 0) {
+
+                    softwareProductDataFactory.AssignProdToST(tid, pid);
+                    $window.location.reload();
+
+                } else {
+
+                    ToasterNotifierHandler.showErrorToast('Selezionare lo Scrum Team');
+
+                }
+
             };
 
         }]);

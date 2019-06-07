@@ -57,7 +57,6 @@ mainAngularModule
                     url: _endPointJSON + "metadata"
                 })
                     .then(function (response) {
-                        console.log("succe", response);
                         success(response);
                     },
                         function (response) {
@@ -169,8 +168,46 @@ mainAngularModule
                             if (successCB) {
                                 successCB(response.data);
                                 ToasterNotifierHandler.handleCreation(response);
+
+                                $http({
+                                    method: 'GET',
+                                    url: _endPointJSON + 'getMaxId'
+                                })
+
+                                    .then(function (response) {
+
+                                            if (successCB) {
+                                                successCB(response.data);
+                                                ToasterNotifierHandler.handleCreation(response);
+
+                                                $http({
+                                                    method: 'POST',
+                                                    url: _endPointJSON + 'insertUserInGroup/' + response.data + '/' + user.role,
+                                                })
+                                                    .then(function (response) {
+
+                                                            if (successCB) {
+                                                                successCB(response.data);
+                                                                ToasterNotifierHandler.handleCreation(response);
+                                                            }
+                                                        },
+                                                        function (response) {
+                                                            if (errorCB) {
+                                                                errorCB(response.data);
+                                                            }
+                                                            console.error(response.data);
+                                                            ToasterNotifierHandler.handleError(response);
+                                                        });
+                                            }
+                                        },
+                                        function (response) {
+                                            if (errorCB) {
+                                                errorCB(response.data);
+                                            }
+                                            console.error(response.data);
+                                            ToasterNotifierHandler.handleError(response);
+                                        });
                             }
-                            //return response.data;
                         },
                         function (response) {
                             if (errorCB) {

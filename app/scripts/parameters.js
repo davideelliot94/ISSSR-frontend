@@ -14,7 +14,7 @@ mainAngularModule
     //.constant('BACKEND_BASE_URL','http://localhost:3000')
     .constant('SOFTWARE_PRODUCTS_ENDPOINT_URL', '/targets/')
     .constant('TEAM_ENDPOINT_URL', '/teams/')
-    .constant('SCRUMTEAM_ENDPOINT_URL', '/scrumteams/')
+    .constant('SCRUMTEAM_ENDPOINT_URL', '/scrumteam/')
     .constant('USER_ENDPOINT_URL', '/users/')
     .constant('TICKET_ENDPOINT_URL', '/tickets/')
     .constant('SPRINT_ENDPOINT_URL', '/sprint/')

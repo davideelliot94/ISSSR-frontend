@@ -9,8 +9,8 @@
  */
 
 mainAngularModule
-    .factory('softwareProductDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL', 'SOFTWARE_PRODUCTS_ENDPOINT_URL',
-        function ($http, ToasterNotifierHandler, BACKEND_BASE_URL, SOFTWARE_PRODUCTS_ENDPOINT_URL) {
+    .factory('softwareProductDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL', 'SOFTWARE_PRODUCTS_ENDPOINT_URL', 'httpService', 'restService',
+        function ($http, ToasterNotifierHandler, BACKEND_BASE_URL, SOFTWARE_PRODUCTS_ENDPOINT_URL, httpService, restService) {
             var thisCrudService = {};
 
             var _endPointJSON = BACKEND_BASE_URL + SOFTWARE_PRODUCTS_ENDPOINT_URL;
@@ -23,6 +23,12 @@ mainAngularModule
             thisCrudService.metadata = getMetadata;
             thisCrudService.Retire = RetireFn;
             thisCrudService.Rehab = RehabFn;
+            thisCrudService.GetScrumTeamList = GetScrumTeamListFn;
+
+            thisCrudService.GetProductOwnerBySTId = GetProductOwnerBySTIdFn;
+            thisCrudService.GetScrumMasterBySTId = GetScrumMasterBySTIdFn;
+            thisCrudService.GetMembersBySTId = GetMembersBySTIdFn;
+            thisCrudService.AssignProdToST = AssignProdToSTFn;
 
             function RetireFn(id, success, error) {
 
@@ -88,6 +94,7 @@ mainAngularModule
                     method: 'GET',
                     url: _endPointJSON
                 })
+
                     .then(function (response) {
                             if (successCB) {
                                 successCB(response.data);
@@ -190,7 +197,105 @@ mainAngularModule
                         });
             }
 
+            function GetScrumTeamListFn(successCB, errorCB) {
+
+                $http({
+                    method: 'GET',
+                    url: BACKEND_BASE_URL + '/scrumteam/getScrumTeamList'
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+
+            }
+
 
             return thisCrudService;
+
+            function GetProductOwnerBySTIdFn(id, successCB, errorCB) {
+
+                $http({
+                    method: 'GET',
+                    url: BACKEND_BASE_URL + '/scrumteam/getProductOwnerBySTId/' + id
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+
+            }
+
+            function GetScrumMasterBySTIdFn(id, successCB, errorCB) {
+
+                $http({
+                    method: 'GET',
+                    url: BACKEND_BASE_URL + '/scrumteam/getScrumMasterBySTId/' + id
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+
+            }
+
+            function GetMembersBySTIdFn(id, successCB, errorCB) {
+
+                $http({
+                    method: 'GET',
+                    url: BACKEND_BASE_URL + '/scrumteam/getMembersBySTId/' + id
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+
+            }
+
+            function AssignProdToSTFn(tid, pid) {
+
+                httpService.post(restService.assignProductToST + '/' + tid + '/' + pid)
+                    .then(function (secondData) {
+                        },
+                        function (err) {
+                            console.log(err);
+                        });
+            }
         }]);
 
