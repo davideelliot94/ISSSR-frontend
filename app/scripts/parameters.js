@@ -14,6 +14,7 @@ mainAngularModule
     //.constant('BACKEND_BASE_URL','http://localhost:3000')
     .constant('SOFTWARE_PRODUCTS_ENDPOINT_URL', '/targets/')
     .constant('TEAM_ENDPOINT_URL', '/teams/')
+    .constant('SCRUMTEAM_ENDPOINT_URL', '/scrumteams/')
     .constant('USER_ENDPOINT_URL', '/users/')
     .constant('TICKET_ENDPOINT_URL', '/tickets/')
     .constant('SPRINT_ENDPOINT_URL', '/sprint/')
@@ -29,5 +30,6 @@ mainAngularModule
 
     .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
     .constant('SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL', '/backlog/')
+
 
 ;
