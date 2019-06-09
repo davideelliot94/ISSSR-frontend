@@ -1,6 +1,6 @@
 'use strict';
 
-mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService'
+mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService',
     function ($rootScope, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService) {
 
         var aclData = {};
@@ -9,7 +9,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
             aclData = JSON.parse(JSON.stringify(response.data));
             console.log(aclData);
             AclService.setAbilities(aclData.roles);
-            storageService.save('route', aclData.routes);
+            storageService.save('routes', JSON.stringify(aclData.routes));
             //var obj = JSON.parse(prova);
             //console.log(obj);
         }, function (response) {

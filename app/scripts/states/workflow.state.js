@@ -23,7 +23,7 @@ mainAngularModule.config(['$stateProvider',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('workflow');
+                        return AclRouteProtector.checkRoutePermission('workflow.dashboard');
                     }
                 }
             })

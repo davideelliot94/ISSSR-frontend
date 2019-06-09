@@ -1,5 +1,8 @@
 'use strict';
-
+var stateGroupList='group.list';
+var stateGroupCreate='group.create';
+var stateGroupEdit='group.edit';
+var stateGroupDetails='group.details';
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -11,44 +14,44 @@ mainAngularModule.config(['$stateProvider',
                 data: {
                     requiresLogin: true
                 }
-            }).state('group.list', {
+            }).state(stateGroupList, {
             url: '/list',
             templateUrl: 'views/group/group-list.html',
             controller: 'GroupListController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('group_view');
+                    return AclRouteProtector.checkRoutePermission(stateGroupList);
                 }
             }
-        }).state('group.create', {
+        }).state(stateGroupCreate, {
             url: '/create',
             templateUrl: 'views/group/group-create.html',
             controller: 'GroupCreateController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('group_create');
+                    return AclRouteProtector.checkRoutePermission(stateGroupCreate);
                 }
             }
-        }).state('group.edit', {
+        }).state(stateGroupEdit, {
             url: '/{groupId:int}/edit',
             templateUrl: 'views/group/group-edit.html',
             controller: 'GroupEditController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('group_update');
+                    return AclRouteProtector.checkRoutePermission(stateGroupEdit);
                 }
             }
-        }).state('group.details', {
+        }).state(stateGroupDetails, {
             url: '/details/{groupId}',
             templateUrl: 'views/group/group-details.html',
             controller: 'GroupHandlerController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('group_details');
+                    return AclRouteProtector.checkRoutePermission(stateGroupDetails);
                 }
             }
         })

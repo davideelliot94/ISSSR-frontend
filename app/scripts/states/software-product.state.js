@@ -1,5 +1,7 @@
 'use strict';
-
+var stateSoftwareProductList='productsoftware.list';
+var stateSoftwareProductCreate='productsoftware.create';
+var stateSoftwareProductEdit='productsoftware.edit';
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -12,36 +14,36 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state('productsoftware.list', {
+            .state(stateSoftwareProductList, {
                 url: '/list',
                 templateUrl: 'views/productsoftware/productsoftware-list.html',
                 controller: 'ProductSoftwareListCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('software_view');
+                        return AclRouteProtector.checkRoutePermission(stateSoftwareProductList);
                     }
                 }
             })
-            .state('productsoftware.create', {
+            .state(stateSoftwareProductCreate, {
                 url: '/create',
                 templateUrl: 'views/productsoftware/productsoftware-create.html',
                 controller: 'ProductSoftwareCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('software_create');
+                        return AclRouteProtector.checkRoutePermission(stateSoftwareProductCreate);
                     }
                 }
             })
-            .state('productsoftware.edit', {
+            .state(stateSoftwareProductEdit, {
                 url: '/{spId:int}/edit',
                 templateUrl: 'views/productsoftware/productsoftware-edit.html',
                 controller: 'ProductSoftwareEditCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('software_update');
+                        return AclRouteProtector.checkRoutePermission(stateSoftwareProductEdit);
                     }
                 }
             })

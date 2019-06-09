@@ -1,5 +1,8 @@
 'use strict';
-
+var statePermissionTeam  ='permission.team';
+var statePermissionTicket  ='permission.ticket';
+var statePermissionProduct  ='permission.product';
+var statePermissionGroup  ='permission.group';
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -12,44 +15,44 @@ mainAngularModule.config(['$stateProvider',
                 data: {
                     requiresLogin: true
                 }
-            }).state('permissions.team', {
+            }).state(statePermissionTeam, {
             url: '/{objectType}/team/{teamId}',
             templateUrl: 'views/permission/team-permission.html',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('team_permission');
+                    return AclRouteProtector.checkRoutePermission(statePermissionTeam);
                 }
             }
-        }).state('permissions.ticket', {
+        }).state(statePermissionTicket, {
             url: '/{objectType}/ticket/{ticketId}',
             templateUrl: 'views/permission/ticket-permission.html',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('ticket_permission');
+                    return AclRouteProtector.checkRoutePermission(statePermissionTicket);
                 }
             }
-        }).state('permissions.product', {
+        }).state(statePermissionProduct, {
             url: '/{objectType}/product/{productId}',
             templateUrl: 'views/permission/product-permission.html',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('software_permission');
+                    return AclRouteProtector.checkRoutePermission(statePermissionProduct);
                 }
             }
-        }).state('permissions.group', {
+        }).state(statePermissionGroup, {
             url: '/{objectType}/group/{groupId}',
             templateUrl: 'views/permission/group-permission.html',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
                 acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission('group_permission');
+                    return AclRouteProtector.checkRoutePermission(statePermissionGroup);
                 }
             }
         }).state('permissions.details', {
