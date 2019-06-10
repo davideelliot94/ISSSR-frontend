@@ -1,5 +1,7 @@
 'use strict';
-
+var stateRelationNew ="relation.new";
+var stateRelationCreate ="relation.create";
+var stateRelationView ="relation.view";
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -12,34 +14,34 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state('relation.new', {
+            .state(stateRelationNew, {
                 url: '/defineNewRelation',
                 templateUrl: "views/planning/defineNewRelation.html",
                 controller: "ctrlNewRelation",
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('define_relation');
+                        return AclRouteProtector.checkRoutePermission(stateRelationNew);
                     }
                 }
             })
-            .state('relation.create', {
+            .state(stateRelationCreate, {
                 controller:"ctrlRelation",
                 url: '/createNewRelation',
                 templateUrl: 'views/planning/relation.html',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('new_relation');
+                        return AclRouteProtector.checkRoutePermission(stateRelationCreate);
                     }
                 }
             })
-            .state('relation.view', {
+            .state(stateRelationView, {
                 templateUrl:"views/planning/dialog1.tmpl.html",
                 url: '/relationview',
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('new_relation');
+                        return AclRouteProtector.checkRoutePermission(stateRelationView);
                     }
                 }
             })

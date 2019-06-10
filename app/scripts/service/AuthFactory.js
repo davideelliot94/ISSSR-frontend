@@ -15,6 +15,8 @@ mainAngularModule
 
             var thisAuthService = {};
 
+
+
             var _endPointJSON = BACKEND_BASE_URL + LOGIN_ENDPOINT_URL;
 
             thisAuthService.sendLogin = sendLoginFn;
@@ -24,7 +26,31 @@ mainAngularModule
             thisAuthService.isAuthenticated = isAuthenticatedFn;
             thisAuthService.getAuthInfo = getAuthInfoFn;
             thisAuthService.deleteAuthInfo = deleteAuthInfoFn;
+            thisAuthService.getPermission = getPermissionFn;
 
+
+            function getPermissionFn(successCB, errorCB) {
+                $http({
+                    method: 'GET',
+                    url: BACKEND_BASE_URL + '/public/perm',
+                    skipAuthorization: true
+
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response);
+                            }
+
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+
+            }
 
             function sendLoginFn(authInfo, successCB, errorCB) {
 
@@ -71,6 +97,7 @@ mainAngularModule
             }
 
             function getJWTTokenFn() {
+
                 let authinfo = $sessionStorage.get('authInfo');
                 if (authinfo === undefined) {
                     return '';
@@ -90,4 +117,5 @@ mainAngularModule
 
             return thisAuthService;
         }]);
+
 

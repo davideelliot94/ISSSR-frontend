@@ -13,7 +13,7 @@ mainAngularModule.config([
                 },
                 resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('log_view');
+                        return AclRouteProtector.checkRoutePermission('auditing');
                     }
                 }
             })
