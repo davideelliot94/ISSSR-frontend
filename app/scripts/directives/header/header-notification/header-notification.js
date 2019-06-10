@@ -22,6 +22,7 @@ mainAngularModule
 
                 function LogoutFn() {
                     AuthFactory.deleteAuthInfo();
+                    localStorage.removeItem("response");
                 }
             }
         }

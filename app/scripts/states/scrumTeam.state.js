@@ -9,7 +9,7 @@ mainAngularModule.config(['$stateProvider',
                 url: '/scrumteam',
                 templateUrl: 'views/dashboard/main.html',
                 data: {
-                    requiresLogin: true
+                    gin: true
                 }
             })
 

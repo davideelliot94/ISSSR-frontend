@@ -152,7 +152,9 @@ angular.module('mm.acl').provider('AclService', [
      * @param role
      */
     AclService.attachRole = function (role) {
+        console.log("role: " + role);
       if (data.roles.indexOf(role) === -1) {
+        console.log("indexOf");
         data.roles.push(role);
         save();
       }

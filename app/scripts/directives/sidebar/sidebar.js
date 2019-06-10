@@ -24,9 +24,9 @@ mainAngularModule
                 $scope.counter = 5;
 
                 $scope.setSidebar = function () {
-                    //console.log("entro nella setSidebar");
+                    console.log("entro nella setSidebar");
                     $scope.userInfo = AuthFactory.getAuthInfo();
-                    console.log($scope.userInfo);
+                    console.log("userinfo scope: " + $scope.userInfo);
                     if ($scope.userInfo == null) {
                         //$state.go('login');
                         //} else if ($scope.userInfo.userType === 'admin') {

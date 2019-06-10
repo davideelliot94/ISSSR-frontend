@@ -1,6 +1,9 @@
 mainAngularModule.controller('ctrlTeam',['$scope','$mdDialog','AuthFactory','$location','$sessionStorage', 'PlanningDataFactory', '$state', 'myService', 'TeamDataFactory',
     function($scope,$mdDialog,AuthFactory,$location,$sessionStorage, PlanningDataFactory, $state, myService, TeamDataFactory){
 
+
+    console.log("starting modalTeam");
+
     $scope.myTeams = null;
     $scope.result = true;
 

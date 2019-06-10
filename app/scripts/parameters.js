@@ -4,7 +4,7 @@
  * @name sbAdminApp
  * @description
  * # sbAdminApp
- *
+ *a
  * Main module of the application.
  */
 mainAngularModule
