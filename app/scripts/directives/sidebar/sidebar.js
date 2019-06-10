@@ -177,11 +177,11 @@ mainAngularModule
                                             "state": "scrumteam.create"
                                         },
                                         {
-                                            "nome": "Associa prodotti software",
+                                            "nome": "Assegna prodotti",
                                             "state": "scrumteam.listassociate"
                                         },
                                         {
-                                            "nome": "Create sprint",
+                                            "nome": "Avvia sprint 1",
                                             "state": "scrum.sprint_create_state"
                                         },
                                         {
