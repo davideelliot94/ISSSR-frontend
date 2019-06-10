@@ -26,7 +26,10 @@ mainAngularModule
                 $scope.setSidebar = function () {
                     console.log("entro nella setSidebar");
                     $scope.userInfo = AuthFactory.getAuthInfo();
-                    console.log("userinfo scope: " + $scope.userInfo);
+                    let x = AuthFactory.getAuthInfo;
+                    console.log("userinfo scope: " + JSON.stringify($scope.userInfo));
+                    console.log("rolep " + $scope.userInfo.userRole);
+                    let x2 = console.log("rolep2 " + JSON.stringify(x.userRole));
                     if ($scope.userInfo == null) {
                         //$state.go('login');
                         //} else if ($scope.userInfo.userType === 'admin') {

@@ -77,6 +77,8 @@ mainAngularModule
 
 
             function retrieveJWTAuthInfoFn(authInfo){
+                console.log("putting data: " + authInfo);
+                console.log("putting data: " + JSON.stringify(authInfo));
 
                 $sessionStorage.put('authInfo', authInfo);
                authManager.authenticate();
@@ -89,12 +91,8 @@ mainAngularModule
             function setJWTAuthInfoFn(authInfo) {
                 $sessionStorage.put('authInfo', authInfo);
                 authManager.authenticate();
-                console.log("cristo 0 di authorities " + JSON.stringify(authInfo));
-                console.log("cristo 1 di authorities " + JSON.stringify(authInfo.authorities));
                 authInfo.authorities.forEach(function (a) {
-                    console.log("aa = " + a.authority);
                     AclService.attachRole(a.authority);
-                    console.log("aa2");
                 })
 
             }
@@ -125,7 +123,12 @@ mainAngularModule
                       return authInfo;
                   }
                   console.log("null/undefined");
-                  return $sessionStorage.get('authInfo');
+                  let response = localStorage.getItem("response");
+                  let response2 = JSON.parse(response);
+                  console.log("response 2.1 " + JSON.stringify(response2));
+                  console.log("userRole1 " + JSON.stringify(response2.userRole));
+                  return response2.data;
+                  //return $sessionStorage.get('authInfo');
                 //return ite
             }
 

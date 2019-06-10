@@ -12,10 +12,7 @@ mainAngularModule
             let ctrl = this;
             let response = localStorage.getItem("response");
             let response2 = JSON.parse(response);
-           /* if(response2 !== null){
-                console.log("response2 " + response2);
-                console.log("data response2 " + response2.data);
-            }*/
+
 
             ctrl.authRequest = {username: 'admin', password: 'password'};
 
@@ -24,7 +21,6 @@ mainAngularModule
             if(response2 !== null && response2 !== undefined){
                 let authInfo = response2.data;
                 let debugJWT = true;
-                console.log("authInfoRetr: " + JSON.stringify(authInfo));
                 AuthFactory.retrieveJWTAuthInfo(authInfo);
                 $state.go("dashboard.home");
             }
@@ -36,7 +32,7 @@ mainAngularModule
             ctrl.authMessage = '';
 
 
-            let sessionStorage_transfer = function(event) {
+            /*let sessionStorage_transfer = function(event) {
                 if(!event) { event = window.event; } // ie suq
                 if(!event.newValue) return;          // do nothing if no value to work with
                 if (event.key === 'getSessionStorage') {
@@ -50,7 +46,7 @@ mainAngularModule
                         sessionStorage.setItem(key, data[key]);
                     }
                 }
-            };
+            };*/
 
 // listen for changes to localStorage
             if(window.addEventListener) {

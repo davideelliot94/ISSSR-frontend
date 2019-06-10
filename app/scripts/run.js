@@ -30,7 +30,6 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
         console.info('isDebug: ' + $rootScope.isDebug);
 
         $transitions.onError({}, ($transition$) => {
-            //console.log("cristo");
             var toStateName = $transition$.to().name;
             var fromStateName = $transition$.from().name;
         if (toStateName != fromStateName) {
