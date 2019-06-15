@@ -1,7 +1,7 @@
 'use strict';
 
 mainAngularModule
-    .service('AclRouteProtector', ['$q', 'AclService','storageService', function ($q, AclService,storageService) {
+    .service('AclProtector', ['$q', 'AclService','storageService', function ($q, AclService,storageService) {
 
         /* TODO OLD PERMISSION CHECK
         this.checkRoutePermission = function (permission) {
@@ -35,4 +35,16 @@ mainAngularModule
                     }
                 };
 
-    }]);
+         /*
+           check if the current user has permission to visualize and evaluate DOM element related to simbolicPermission.
+           By default sensitive DOM elements are protected with ng-if with this function.
+          */
+        this.hasPermissionSimbolic = function (simbolicPermission) {
+            var permissionList=JSON.parse(storageService.get('simbolicPermissions')) ;
+            var permissionNeeded=permissionList[simbolicPermission];
+            var permissionResult =  AclService.can(permissionNeeded);
+            console.log('centralized Check simbolic permission'+simbolicPermission+'<-needed perm->'+permissionNeeded + ' resultOf permission: ' + permissionResult );
+            return permissionResult;
+        };
+        },
+        ]);

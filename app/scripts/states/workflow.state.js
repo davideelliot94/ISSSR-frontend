@@ -22,8 +22,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: "dashboardController",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('workflow.dashboard');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('workflow.dashboard');
                     }
                 }
             })
@@ -34,8 +34,8 @@ mainAngularModule.config(['$stateProvider',
                 controller:"MainGanttCtrl",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('gantt');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('gantt');
                     }
                 }
             })
@@ -44,8 +44,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: "planningDialog",
                 url: '/planning',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('gantt');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('gantt');
                     }
                 }
             })

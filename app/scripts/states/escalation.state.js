@@ -19,8 +19,8 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl: "views/planning/defineEscalation.html",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateEscalationNew);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateEscalationNew);
                     }
                 }
             })
@@ -30,8 +30,8 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl: "views/planning/showQueue.html",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateEscalationQueue);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateEscalationQueue);
                     }
                 }
             })

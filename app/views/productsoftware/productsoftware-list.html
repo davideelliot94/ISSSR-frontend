@@ -35,22 +35,22 @@
                                 <td>{{p.targetType}}</td>
                                 <td>{{p.targetState}}</td>
                                 <td>{{p.stateMachineName}}</td>
-                                <td align="right">
-                                    <button class="btn btn-danger" ng-disabled="!hasPermission('software_delete')"
+                                <td align="right" ng-if="hasPermission('softwareDeleteButton')">
+                                    <button class="btn btn-danger"
                                             ng-click="ctrl.retireTarget($index)" ng-show="!ctrl.isRetired($index)" title="Ritira">
                                         <i class="fa fa-dashcube"></i></button>
-                                    <button class="btn btn-success" ng-disabled="!hasPermission('software_delete')"
+                                    <button class="btn btn-success"
                                             ng-click="ctrl.rehabTarget($index)" ng-show="ctrl.isRetired($index)" title="Attiva">
                                         <i class="fa fa-reddit-square"></i></button>
                                 </td>
                                 <td align="right">
-                                    <button class="btn btn-primary" ng-disabled="!hasPermission('software_permission')"
+                                    <button class="btn btn-primary" ng-if="hasPermission('softwarePermissionButton')"
                                             ui-sref="permissions.product({objectType: 'product', productId: p.id})"
                                             title="Permessi"><i class="fa fa-lock"></i></button>
-                                    <button class="btn btn-warning" ng-disabled="!hasPermission('software_update')"
+                                    <button class="btn btn-warning" ng-if="hasPermission('softwareUpdateButton')"
                                             ui-sref="productsoftware.edit({spId: p.id})"
                                             title="Modifica"><i class="fa fa-edit"></i></button>
-                                    <button class="btn btn-danger" ng-disabled="!hasPermission('software_delete')"
+                                    <button class="btn btn-danger" ng-if="hasPermission('softwareDeleteButton')"
                                             ng-click="ctrl.deleteProduct(p.id)" title="Elimina">
                                         <i class="fa fa-trash"></i></button>
                                 </td>
@@ -66,7 +66,7 @@
         </div>
         <div class="row">
             <button class="btn btn-primary" ng-click="ctrl.refreshProduct()">Aggiorna dati</button>
-            <button class="btn btn-success" ui-sref="productsoftware.create" ng-disabled="!hasPermission('software_create')">Aggiungi Prodotto Software</button>
+            <button class="btn btn-success" ui-sref="productsoftware.create" ng-if="hasPermission('softwareCreateButton')">Aggiungi Prodotto Software</button>
         </div>
     </div>
 </div>

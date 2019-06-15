@@ -25,17 +25,17 @@
                                 <td>{{g.id}}</td>
                                 <td>{{g.name}}</td>
                                 <td align="right">
-                                    <button class="btn btn-primary" ng-disabled="!hasPermission('group_permission')"
+                                    <button class="btn btn-primary" ng-if="hasPermission('groupPermissionButton')"
                                             ui-sref="permissions.group({objectType: 'group',groupId: g.id})"
                                             title="Permessi"><i class="fa fa-lock"></i></button>
                                     <button class="btn btn-warning" ui-sref="group.details({groupId: g.id})"
-                                            ng-disabled="!hasPermission('group_details')"
+                                            ng-if="hasPermission('groupDetailsButton')"
                                             title="Visualizza"><i class="fa fa-eye"></i></button>
                                     <button class="btn btn-warning" ui-sref="group.edit({groupId: g.id})"
-                                            ng-disabled="!hasPermission('group_update')"
+                                            ng-if="hasPermission('groupUpdateButton')"
                                             title="Modifica"><i class="fa fa-edit"></i></button>
                                     <button class="btn btn-danger" ng-click="ctrl.deleteGroup(g.id)"
-                                            ng-disabled="!hasPermission('group_delete')" title="Elimina"><i
+                                            ng-if="hasPermission('groupDeleteButton')" title="Elimina"><i
                                             class="fa fa-trash"></i></button>
                                 </td>
                             </tr>

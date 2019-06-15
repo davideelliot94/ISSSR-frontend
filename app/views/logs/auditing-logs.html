@@ -74,7 +74,7 @@
                 <button class="btn btn-primary default" ng-click="ctrl.refreshAuditingLogs()">Aggiorna Richieste
                 </button>
                 <button class="btn btn-danger" ng-click="ctrl.removeAuditingLogs()"
-                        ng-disabled="!hasPermission('log_delete')">Rimuovi Tutti i Records
+                        ng-if ="hasPermission('logDeleteButton')">Rimuovi Tutti i Records
                 </button>
             </div>
 

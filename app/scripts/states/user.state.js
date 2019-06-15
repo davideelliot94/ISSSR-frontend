@@ -23,8 +23,8 @@ $stateProvider
         controller: 'UserListCtrl',
         controllerAs: 'ctrl',
         resolve: {
-            acl: function (AclRouteProtector) {
-                return AclRouteProtector.checkRoutePermission(stateUserList);
+            acl: function (AclProtector) {
+                return AclProtector.checkRoutePermission(stateUserList);
             }
         }
     })
@@ -34,8 +34,8 @@ $stateProvider
         controller: 'UserInfoController',
         controllerAs: 'ctrl',
         resolve: {
-            acl: function (AclRouteProtector) {
-                return AclRouteProtector.checkRoutePermission(stateUserInfo);
+            acl: function (AclProtector) {
+                return AclProtector.checkRoutePermission(stateUserInfo);
             }
         }
     })
@@ -45,8 +45,8 @@ $stateProvider
         controller: 'UserCreateCtrl',
         controllerAs: 'ctrl',
         resolve: {
-            acl: function (AclRouteProtector) {
-                return AclRouteProtector.checkRoutePermission(stateUserCreate);
+            acl: function (AclProtector) {
+                return AclProtector.checkRoutePermission(stateUserCreate);
             }
         }
     })
@@ -56,8 +56,8 @@ $stateProvider
         controller: 'UserPermissionController',
         controllerAs: 'ctrl',
         resolve: {
-            acl: function (AclRouteProtector) {
-                return AclRouteProtector.checkRoutePermission(stateUserPermission);
+            acl: function (AclProtector) {
+                return AclProtector.checkRoutePermission(stateUserPermission);
             }
         }
     })

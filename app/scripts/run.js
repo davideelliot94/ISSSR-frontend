@@ -1,7 +1,7 @@
 'use strict';
 
-mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService',
-    function ($rootScope, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService) {
+mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService','AclProtector',
+    function ($rootScope, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService,AclProtector) {
 
         var aclData = {};
 
@@ -10,6 +10,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
             console.log(aclData);
             AclService.setAbilities(aclData.roles);
             storageService.save('routes', JSON.stringify(aclData.routes));
+            storageService.save('simbolicPermissions', JSON.stringify(aclData.simbolicPermissions));
             //var obj = JSON.parse(prova);
             //console.log(obj);
         }, function (response) {
@@ -19,7 +20,9 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
 
 
         //AclService.setAbilities(aclData);
-        $rootScope.hasPermission = AclService.can;
+        // $rootScope.hasPermission = AclService.can;
+        $rootScope.hasPermission = AclProtector.hasPermissionSimbolic; //to check symbolic permissions inside DOM by json retrieved
+        $rootScope.hasPermissionDirect = AclProtector.can; //to direct permission evaluation
 
         $rootScope.isDebug = DEBUG;
         console.info('isDebug: ' + $rootScope.isDebug);

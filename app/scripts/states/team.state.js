@@ -22,12 +22,13 @@ mainAngularModule.config(['$stateProvider',
                 controllerAs: 'ctrl',
                 data: {
                     requiresLogin: true
-                },
-                resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateTeamList);
-                    }
                 }
+                ,
+                resolve: {
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateTeamList);
+                }
+            }
             })
             .state(stateTeamCreate, {
                 url: '/create',
@@ -35,8 +36,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'TeamCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateTeamCreate);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateTeamCreate);
                     }
                 }
             })
@@ -46,8 +47,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'TeamEditCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateTeamEdit);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateTeamEdit);
                     }
                 }
             })
@@ -57,8 +58,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'TeamAssignCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateTeamAssign);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateTeamAssign);
                     }
                 }
             })

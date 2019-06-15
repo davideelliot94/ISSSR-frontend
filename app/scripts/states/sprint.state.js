@@ -23,8 +23,8 @@ mainAngularModule.config(['$stateProvider',
                  */
                 //TODO fare il controllo se si tratta di Product Owner.
                 /*resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('PO');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('PO');
                     }
                 }*/
             }).state('scrum.sprints_view', {

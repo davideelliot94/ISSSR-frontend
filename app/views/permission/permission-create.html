@@ -274,7 +274,7 @@
         <div class="col-lg-12">
             <button class="btn btn-primary"
                     ng-click="ctrl.createPermission(ctrl.currentObject)"
-                    ng-disabled="!ctrl.currentObject.domain_object_id || !ctrl.currentObject.sid.id || hasPermission(ctrl.permissionACL)"
+                    ng-disabled="!ctrl.currentObject.domain_object_id || !ctrl.currentObject.sid.id || hasPermissionDirect(ctrl.permissionACL)"
             >
                 Crea Permesso
             </button>

@@ -26,17 +26,17 @@
                                 <td>{{t.id}}</td>
                                 <td>{{t.name}}</td>
                                 <td align="right">
-                                    <button class="btn btn-primary" ng-disabled="!hasPermission('team_permission')"
+                                    <button class="btn btn-primary" ng-if="hasPermission('teamPermissionButton')"
                                             ui-sref="permissions.team({objectType: 'team', teamId: t.id})"
                                             title="Permessi"><i class="fa fa-lock"></i></button>
                                     <button class="btn btn-success" ui-sref="team.assign({teamId: t.id})"
-                                            ng-disabled="!hasPermission('team_assign')"
+                                            ng-if="hasPermission('teamAssignButton')"
                                             title="Assistenti"><i class="fa fa-users"></i></button>
                                     <button class="btn btn-warning" ui-sref="team.edit({teamId: t.id})"
-                                            ng-disabled="!hasPermission('team_update')"
+                                            ng-if="hasPermission('teamUpdateButton')"
                                             title="Modifica"><i class="fa fa-edit"></i></button>
                                     <button class="btn btn-danger" ng-click="ctrl.deleteTeam(t.id)"
-                                            ng-disabled="!hasPermission('team_delete')" title="Elimina"><i
+                                            ng-if="hasPermission('teamDeleteButton')" title="Elimina"><i
                                             class="fa fa-trash"></i>
                                     </button>
                                 </td>
@@ -52,7 +52,7 @@
         </div>
         <div class="row">
             <button class="btn btn-primary" ng-click="ctrl.refreshTeam()">Aggiorna Elenco Team</button>
-            <button class="btn btn-success" ui-sref="team.create" ng-disabled="!hasPermission('team_create')">Aggiungi Team</button>
+            <button class="btn btn-success" ui-sref="team.create" ng-if="hasPermission('teamCreateButton')">Aggiungi Team</button>
         </div>
     </div>
 </div>

@@ -22,8 +22,8 @@ mainAngularModule.config(['$stateProvider',
                     //access: ['Admin']
                 },
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateMachineCreate);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateMachineCreate);
                     }
                 }
             })
@@ -36,8 +36,8 @@ mainAngularModule.config(['$stateProvider',
                     //access: ['Admin']
                 },
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateMachineDashboard);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateMachineDashboard);
                     }
                 }
             })
