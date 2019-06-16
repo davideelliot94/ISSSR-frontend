@@ -290,7 +290,7 @@ mainAngularModule
                             if (successCB) {
                                 successCB(response);
                             }
-                            ToasterNotifierHandler.showSuccessToast("Operation success", "Relation correctly created!");
+                            ToasterNotifierHandler.showSuccessToast("Operazione completata", "Relazione creata correttamente");
                             $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             //return response.data;
                         },
@@ -301,7 +301,7 @@ mainAngularModule
                             console.error(response.data);
                             //ToasterNotifierHandler.handleError(response);
                             if (response.status === 424) {
-                                ToasterNotifierHandler.showErrorToast("cannot create regression with the same ticket ");
+                                ToasterNotifierHandler.showErrorToast("Relazione riflessiva non ammessa");
                             }
                         });
             }
@@ -321,7 +321,7 @@ mainAngularModule
                             if (successCB) {
                                 successCB(response);
                             }
-                            ToasterNotifierHandler.showSuccessToast("Operation success", "Relation correctly created!");
+                            ToasterNotifierHandler.showSuccessToast("Operazione completata", "Relazione creata correttamente");
                             $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             //return response.data;
                         },
@@ -351,7 +351,7 @@ mainAngularModule
                             if (successCB) {
                                 successCB(response);
                             }
-                            ToasterNotifierHandler.showSuccessToast("Operation success", "Relation correctly created!");
+                            ToasterNotifierHandler.showSuccessToast("Operazione completata", "Relazione creata correttamente");
                             $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             //return response.data;
                         },
@@ -363,9 +363,15 @@ mainAngularModule
                             //ToasterNotifierHandler.handleError(response);
 
                             if (response.status === 424) {
-                                ToasterNotifierHandler.showErrorToast("Cannot create equality with the same ticket");
+                                if (response.data.ticketStatus === 'BAD_REQUEST') {
+                                    ToasterNotifierHandler.showSuccessToast("Nota!", "Relazione riflessiva");
+                                } else if (response.data.ticketStatus === 'FAILED_DEPENDENCY') {
+                                    ToasterNotifierHandler.showErrorToast('La relazione richiesta introdurrebbe un ciclo di dipendenze tra ticket');
+                                } else if (response.data.ticketStatus === 'BLOCKING_DEPENDENCY') {
+                                    ToasterNotifierHandler.showErrorToast('Il ticket dipende da un altro che ancora non è stato risolto');
+                                }
                             } else {
-                                ToasterNotifierHandler.showErrorToast("Error in creation");
+                                ToasterNotifierHandler.showErrorToast("Errore nella creazione della relazione");
                             }
                         });
             }
