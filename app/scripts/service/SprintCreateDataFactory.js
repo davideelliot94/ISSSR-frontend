@@ -9,8 +9,8 @@
  */
 
 mainAngularModule
-   .factory('SprintCreateDataFactory', ['$http', 'BACKEND_BASE_URL', 'SPRINT_ENDPOINT_URL', 'ToasterNotifierHandler',
-        function ($http, BACKEND_BASE_URL, SPRINT_ENDPOINT_URL, ToasterNotifierHandler) {
+   .factory('SprintCreateDataFactory', ['$http', 'BACKEND_BASE_URL', 'SPRINT_ENDPOINT_URL', 'ToasterNotifierHandler', '$q',
+        function ($http, BACKEND_BASE_URL, SPRINT_ENDPOINT_URL, ToasterNotifierHandle, $q) {
             let thisCrudService = {};
             let _endPointJSON = BACKEND_BASE_URL + SPRINT_ENDPOINT_URL;
 

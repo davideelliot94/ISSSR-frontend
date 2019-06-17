@@ -41,7 +41,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             }
         }).then(function successCallback(){
             // Se la creazione avviene con successo la schermata viene aggiornata
-            $scope.populateBacklogAndSprintBacklog();
+            $scope.populateBacklog();
         }, function errorCallback(){}
         );
     };
@@ -64,13 +64,13 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             }
         }).then(function successCallback(){
                 // Se l'utente conferma l'inserimento nello sprint backlog la schermata viene aggiornata
-                $scope.populateBacklogAndSprintBacklog();
+                $scope.populateBacklog();
             }, function errorCallback(){}
         );
     };
 
-    // Funzione che popola il backlog e lo sprint backlog con gli item ricevuti dal backend
-    $scope.populateBacklogAndSprintBacklog = function() {
+    // Funzione che popola il backlog con gli item ricevuti dal backend
+    $scope.populateBacklog = function() {
         $scope.isSelectedProduct = true;
 
         // Popolamento del product backlog
@@ -81,23 +81,32 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 ToasterNotifierHandler.handleError(response);
             });
         // Popolamento dello sprint backlog
-        BacklogItemService.getSprintBacklogItemService($scope.backlogItem.product.id)
-            .then(function successCallback(items) {
-                $scope.sprintBacklogItems = items;
-                $scope.isActiveSprint = true;
-            }, function errorCallback(response){
-                if (response.status === 404){
-                    $scope.isActiveSprint = false;
-                } else{
-                    ToasterNotifierHandler.handleError(response);
-                }
-            });
+        // BacklogItemService.getSprintBacklogItemService($scope.backlogItem.product.id)
+        //     .then(function successCallback(items) {
+        //         $scope.sprintBacklogItems = items;
+        //         $scope.isActiveSprint = true;
+        //     }, function errorCallback(response){
+        //         if (response.status === 404){
+        //             $scope.isActiveSprint = false;
+        //         } else{
+        //             ToasterNotifierHandler.handleError(response);
+        //         }
+        //     });
     };
 
-    $scope.changeStatusToSprintBacklogItem = function(itemId, direction){
-        BacklogItemService.changeStatusToSprintBacklogItemService(itemId, direction)
+    // $scope.changeStatusToSprintBacklogItem = function(itemId, direction){
+    //     BacklogItemService.changeStatusToSprintBacklogItemService(itemId, direction)
+    //         .then(function successCallback() {
+    //             $scope.populateBacklogAndSprintBacklog();
+    //         }, function errorCallback(response){
+    //             ToasterNotifierHandler.handleError(response);
+    //         });
+    // };
+
+    $scope.deleteBacklogItem = function (itemId){
+        BacklogItemService.deleteBacklogItemService(itemId)
             .then(function successCallback() {
-                $scope.populateBacklogAndSprintBacklog();
+                $scope.populateBacklog();
             }, function errorCallback(response){
                 ToasterNotifierHandler.handleError(response);
             });

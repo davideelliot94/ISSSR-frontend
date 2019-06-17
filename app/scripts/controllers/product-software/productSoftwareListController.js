@@ -1,36 +1,27 @@
 'use strict';
-/**
- * @ngdoc function
- * @name sbAdminApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the sbAdminApp
- */
 mainAngularModule
     .controller('ProductSoftwareListCtrl', ['$scope', '$window', 'ToasterNotifierHandler', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
-        'DTColumnDefBuilder', 'AclService', 'httpService',
-        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory, ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder, AclService, httpService) {
+        'DTColumnDefBuilder', 'ScrumProductWorkflowService',
+        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory, ErrorStateRedirector,
+                  DTOptionsBuilder, DTColumnDefBuilder, ScrumProductWorkflowService) {
 
             var ctrl = this;
             ctrl.refreshProduct = refreshProductFn;
-            ctrl.getScrumTeamList = getScrumTeamListFN;
             ctrl.editProduct = editProductFN;
             ctrl.deleteProduct = deleteProductFN;
             ctrl.retireTarget = retireTargetFN;
             ctrl.rehabTarget = rehabTargetFN;
             ctrl.isRetired = isRetiredFN;
 
+
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
             $scope.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(4).notSortable()
             ];
 
-
-            getScrumTeamListFN();
             refreshProductFn();
 
             function refreshProductFn() {
-                console.log("refresh Products");
                 softwareProductDataFactory.GetAll(
                     function (products) {
                         ctrl.products = products;
@@ -121,19 +112,6 @@ mainAngularModule
                     return false;
             };
 
-            function getScrumTeamListFN() {
-
-                softwareProductDataFactory.GetScrumTeamList(function (scrumTeamList) {
-
-                    $scope.scrumTeamList = scrumTeamList;
-
-                }, function (error) {
-                    ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
-                });
-
-                $scope.value = false;
-
-            }
 
             $scope.GetData = function (id) {
                 // Here Please add Code to fetch the data from database. Here userEmailFromDB and userPhoneFromDB are the values that you get from database.
@@ -174,24 +152,53 @@ mainAngularModule
             };
 
             $scope.GetSelected = function (id) {
-
                 $scope.selected = id;
-
             };
 
-            $scope.assignProduct = function(tid, pid) {
-
-                if (tid > 0) {
-
-                    softwareProductDataFactory.AssignProdToST(tid, pid);
+            $scope.assignProduct = function(pid) {
+                if (!angular.isUndefined($scope.association.scrumTeam) && !angular.isUndefined($scope.association.workflow)) {
+                    softwareProductDataFactory.AssignProdToST($scope.association.scrumTeam.id, pid, $scope.association.workflow.id);
                     $window.location.reload();
-
                 } else {
-
-                    ToasterNotifierHandler.showErrorToast('Selezionare lo Scrum Team');
-
+                    ToasterNotifierHandler.showErrorToast('Selezionare uno Scrum Team e uno Scrum Product Workflow');
                 }
 
             };
+
+            $scope.association = {};
+
+            // Recupera tutti i workflow per i prodotti Scrum
+            function getScrumProductWorkflows(){
+                ScrumProductWorkflowService.getAllScrumProductWorkflowService()
+                    .then(function successCallback(response) {
+                        $scope.scrumProductWorkflows = response.data;
+                    }, function errorCallback(response){
+                        ToasterNotifierHandler.handleError(response);
+                    });
+            }
+
+            // Recupera tutti gli scrum team nel sistema
+            function getScrumTeams(){
+                softwareProductDataFactory.GetScrumTeamList(
+                    function successCallback(response) {
+                        $scope.scrumTeams = response;
+                    }, function errorCallback(){
+                        ErrorStateRedirector.GoToErrorPage(
+                            {Messaggio: 'Errore nel recupero degli Scrum Team'
+                        });
+                    });
+                $scope.value = false;
+            }
+
+            $scope.setScrumTeam = function (scrumTeam) {
+                $scope.association.scrumTeam = scrumTeam;
+            };
+            $scope.setWorkflow = function (workflow) {
+                $scope.association.workflow = workflow;
+            };
+
+            getScrumTeams();
+            getScrumProductWorkflows();
+
 
         }]);

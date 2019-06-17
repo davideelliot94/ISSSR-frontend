@@ -7,8 +7,11 @@
  * Controller of the sbAdminApp
  */
 mainAngularModule
-    .controller('ScrumTeamCreateCtrl', ['$scope', '$state', 'ScrumTeamDataFactory', 'ErrorStateRedirector', '$location', '$anchorScroll', '$stateParams', 'UserDataFactory', 'DTOptionsBuilder', 'DTColumnDefBuilder',
-        function ($scope, $state, ScrumTeamDataFactory, ErrorStateRedirector, $location, $anchorScroll, $stateParams, UserDataFactory, DTOptionsBuilder, DTColumnDefBuilder) {
+    .controller('ScrumTeamCreateCtrl', ['$scope', '$state', 'ScrumTeamDataFactory', 'ErrorStateRedirector', '$location', '$anchorScroll', '$stateParams', 'UserDataFactory', 'DTOptionsBuilder',
+        function ($scope, $state, ScrumTeamDataFactory, ErrorStateRedirector, $location, $anchorScroll, $stateParams, UserDataFactory, DTOptionsBuilder) {
+
+            // default option for datatable
+            $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
 
             var ctrl = this;
             ctrl.currentScrumTeam = {

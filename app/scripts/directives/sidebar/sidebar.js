@@ -177,6 +177,10 @@ mainAngularModule
                                             "state": "scrumteam.create"
                                         },
                                         {
+                                            "nome": "Inserisci Product Workflow",
+                                            "state": "scrum.product_workflow"
+                                        },
+                                        {
                                             "nome": "Assegna prodotti",
                                             "state": "scrumteam.listassociate"
                                         },

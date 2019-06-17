@@ -288,9 +288,9 @@ mainAngularModule
 
             }
 
-            function AssignProdToSTFn(tid, pid) {
+            function AssignProdToSTFn(tid, pid, workflowId) {
 
-                httpService.post(restService.assignProductToST + '/' + tid + '/' + pid)
+                httpService.post(restService.assignProductToST + '/' + tid + '/' + pid + '/' + workflowId)
                     .then(function (secondData) {
                         },
                         function (err) {

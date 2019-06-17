@@ -16,15 +16,13 @@
                                dt-options="dtOptions" dt-column-defs="dtColumnDefs">
                             <thead>
                             <tr>
-                                <th></th>
-                                <th class="col-md-0.5">ID</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-1">ID</th>
                                 <th class="col-md-1">Nome</th>
-                                <th class="col-md-5">Descrizione</th>
-                                <th class="col-md-0.5">Versione</th>
-                                <th class="col-md-1">Target Type</th>
-                                <th class="col-md-1">State</th>
-                                <th class="col-md-1">State Machine</th>
-                                <th class="col-md-1">Select Scrum Team</th>
+                                <th class="col-md-2">Descrizione</th>
+                                <th class="col-md-1">Versione</th>
+                                <th class="col-md-1">Seleziona Scrum Team</th>
+                                <th class="col-md-2">Seleziona Workflow per il prodotto Scrum</th>
                                 <th class="col-md-1"></th>
                             </tr>
                             </thead>
@@ -40,21 +38,28 @@
                                     <td>{{p.name}}</td>
                                     <td>{{p.description}}</td>
                                     <td>{{p.version}}</td>
-                                    <td>{{p.targetType}}</td>
-                                    <td>{{p.targetState}}</td>
-                                    <td>{{p.stateMachineName}}</td>
                                     <td>
-                                        <select ng-model="item" ng-change="GetData(item.id)"
+                                        <select class="form-control"
+                                                ng-model="scrumTeam"
+                                                ng-change="setScrumTeam(scrumTeam)"
                                                 ng-disabled="p.id !== selected"
-                                                ng-options="blisterPackTemplate as blisterPackTemplate.name for blisterPackTemplate in scrumTeamList">
-                                            <option value="">Select Scrum Team</option>
+                                                ng-options="scrumTeam.name for scrumTeam in scrumTeams">
                                         </select>
                                     </td>
                                     <td>
+                                        <select class="form-control"
+                                                ng-model="workflow"
+                                                ng-change="setWorkflow(workflow)"
+                                                ng-disabled="p.id !== selected"
+                                                ng-options="workflow.name for workflow in scrumProductWorkflows">
+                                        </select>
+                                    </td>
+                                    <td align="center" style="vertical-align:middle">
                                         <button type="button" class="btn btn-xs"
                                                 style="background-color: #337ab7; color: white"
-                                                ng-click="assignProduct(item.id, p.id); refreshProduct()"
-                                                ng-disabled="p.id !== selected">Assegna Prodotto
+                                                ng-click="assignProduct( p.id); refreshProduct()"
+                                                ng-disabled="p.id !== selected">
+                                            Assegna
                                         </button>
                                     </td>
                                 </tr>
@@ -73,11 +78,6 @@
             <div class="panel panel-primary" ng-show="value">
                 <div class="panel-heading">Informazioni Scrum Team selezionato</div>
                 <div class="panel-body">
-
-                    <div class="form-group">
-                        <label>Effort: </label>
-                    </div>
-
                     <div class="table">
                         <table id="datatable4" class="table table-striped table-bordered">
                             <thead>
@@ -107,57 +107,6 @@
                                 <td>{{scrumMaster.lastName}}</td>
                                 <td>{{scrumMaster.email}}</td>
                             </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!--  <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Product Owner</label>
-                                <input name="username" class="form-control" placeholder=""
-                                       ng-disabled="true" ng-model="productOwner.username" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Scrum Master</label>
-                                <input name="username" class="form-control" placeholder=""
-                                       ng-disabled="true" ng-model="scrumMaster.username" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Effort</label>
-                                <input name="effort" class="form-control" placeholder="effort"
-                                       ng-disabled="true" ng-model="effort" required>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <div class="panel panel-primary" ng-show="value">
-                <div class="panel-heading">Membri Scrum Team selezionato</div>
-                <div class="panel-body">
-
-                    <div class="table-responsive">
-                        <table id="datatable3" datatable="ng" class="table table-striped table-bordered"
-                               dt-options="dtOptions" dt-column-defs="dtColumnDefs">
-                            <thead>
-                            <tr>
-                                <th class="col-md-0.5">ID</th>
-                                <th class="col-md-2">Ruolo</th>
-                                <th class="col-md-3">Username</th>
-                                <th class="col-md-2">Firstname</th>
-                                <th class="col-md-2">Surname</th>
-                                <th class="col-md-3">E-Mail</th>
-                            </tr>
-                            </thead>
-                            <tbody>
                             <tr ng-repeat="m in members">
                                 <td>{{m.id}}</td>
                                 <th>Team Member</th>
@@ -170,7 +119,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
