@@ -17,6 +17,18 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.isActiveSprint = false;
     $scope.isSelectedProduct = false;
 
+    // Questa funzione valorizza la priorità di un item in modo tale da poter
+    // ordinare le voci all'interno dello Sprint Backlog
+    $scope.priorityLevel = function(backlogItem) {
+        if (backlogItem.priority === 'HIGH') {
+            return 1;
+        } else if (backlogItem.priority === 'MEDIUM') {
+            return 2;
+        } else {
+            return 3;
+        }
+    };
+
     // Si inizializza la combobox con tutti i prodotti su cui lavora uno Scrum Team di cui fa parte l'utente loggato
     let initializeProductList = function () {
         ScrumProductService.getProductByScrumMember()

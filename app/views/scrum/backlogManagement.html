@@ -111,20 +111,23 @@
                     <br>
                     <label style="vertical-align: super; ">{{state.split('*')[1]}}</label>
                     <div  class="panel panel-primary"
-                          ng-repeat="item in sprintBacklogItems"
+                          ng-repeat="item in sprintBacklogItems | orderBy:priorityLevel"
                           ng-if="item.status === state"
                           data-drag="true"
                           data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
                           jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'>
                         <div class="panel-heading" style="width: 200px" >
-                            <button class="btn btn-xs btn-default" ng-click="execution[$index]=!execution[$index]" ng-hide="execution[$index]">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <button class="btn btn-xs btn-default" ng-click="execution[$index]=!execution[$index]" ng-hide="!execution[$index]">
-                                <i class="fa fa-minus"></i>
-                            </button>
+                            <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
                             <span class="badge pull-right">{{item.effortEstimation}}</span>
                             <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
+                            <br>
+                            <button class="btn btn-info btn-circle" ng-click="execution[$index]=!execution[$index]" ng-hide="execution[$index]">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <!-- Vecchio class="btn btn-xs btn-default"                            -->
+                            <button class="btn btn-info btn-circle" ng-click="execution[$index]=!execution[$index]" ng-hide="!execution[$index]">
+                                <i class="fa fa-minus"></i>
+                            </button>
 
                         </div>
                         <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 200px" ng-show="execution[$index]">

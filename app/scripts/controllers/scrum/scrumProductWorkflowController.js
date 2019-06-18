@@ -14,7 +14,7 @@ mainAngularModule
                 }, function errorCallback(response) {
                     ToasterNotifierHandler.handleError(response);
                 });
-        }
+        };
 
         // Apertura di una finestra di dialogo per la visualizzazione di uno Scrum Product Workflow
         $scope.openScrumProductWorkflowDialog = function(item) {
@@ -33,7 +33,7 @@ mainAngularModule
                     $scope.populateScrumProductWorkflowTable();
                 },function errorCallback(){}
             );
-        }
+        };
 
         // Metodo che invoca il service delegato all'interazione con il backend per la cancellazione dello scrum product workflow
         $scope.deleteScrumProductWorkflow = function(scrumProductWorkflow) {
@@ -44,7 +44,7 @@ mainAngularModule
                 }, function errorCallback(response){
                     ToasterNotifierHandler.handleError(response);
                 });
-        }
+        };
 
         $scope.populateScrumProductWorkflowTable();
 }]);
