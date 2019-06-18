@@ -65,7 +65,7 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
 
         // Invoca il servizio responsabile alla chiamata al backend per l'inserimento
         $scope.insertScrumProductWorkflow = function () {
-            $scope.scrumProductWorkflow.states.push(($scope.statesNumber + 1) + '*Completato');
+            $scope.scrumProductWorkflow.states.push(($scope.statesNumber) + '*Completato');
             ScrumProductWorkflowService.insertScrumProductWorkflowService($scope.scrumProductWorkflow)
                 .then(function successCallback(response) {
                     ToasterNotifierHandler.handleCreation(response);

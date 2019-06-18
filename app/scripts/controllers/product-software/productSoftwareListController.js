@@ -114,8 +114,6 @@ mainAngularModule
 
 
             $scope.GetData = function (id) {
-                // Here Please add Code to fetch the data from database. Here userEmailFromDB and userPhoneFromDB are the values that you get from database.
-
                 if (id > 0) {
 
                     softwareProductDataFactory.GetProductOwnerBySTId(id, function (productOwner) {

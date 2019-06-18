@@ -6,8 +6,13 @@
     "url": "https://github.com/simonezacca/ISSSR1718-FRONTEND"
   },
   "dependencies": {
+    "@angular/animations": "^8.0.1",
+    "@angular/cdk": "^8.0.1",
+    "@angular/material": "^8.0.1",
+    "DlhSoft.KanbanLibrary": "http://DlhSoft.com/Packages/DlhSoft.KanbanLibrary.tar",
     "angular-aria": "^1.7.4",
     "angular-datatables": "^0.6.2",
+    "angular-drag-and-drop-lists": "^2.1.0",
     "angular-material": "^1.1.10",
     "angular-messages": "^1.7.4",
     "angular-moment": "^1.3.0",

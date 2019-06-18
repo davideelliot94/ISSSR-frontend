@@ -41,7 +41,7 @@
                                     <td>
                                         <select class="form-control"
                                                 ng-model="scrumTeam"
-                                                ng-change="setScrumTeam(scrumTeam)"
+                                                ng-change="setScrumTeam(scrumTeam); GetData(scrumTeam.id)"
                                                 ng-disabled="p.id !== selected"
                                                 ng-options="scrumTeam.name for scrumTeam in scrumTeams">
                                         </select>

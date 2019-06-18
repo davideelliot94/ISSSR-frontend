@@ -47,7 +47,8 @@ mainAngularModule
             // del prodotto passato come parametro.
             this.getSprintBacklogItemService = function (productId) {
                 let deferred = $q.defer();
-                $http.get(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/product/' + productId + '/sprint')
+                //TODO MODIFICARE QUERY TOGLIERE IL NUMERO DELLO SPRINT
+                $http.get(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/product/' + productId + '/sprint/' + 1)
                     .then(function successCallback(response) {
                         if (response.status === 200) {
                             deferred.resolve(response.data);
@@ -80,9 +81,9 @@ mainAngularModule
                 return deferred.promise;
             };
 
-            this.changeStatusToSprintBacklogItemService = function (itemId, direction) {
+            this.changeItemStateToService = function (itemId, newState) {
                 let deferred = $q.defer();
-                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + direction + '/' + itemId)
+                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + itemId + '/' + newState)
                     .then(function successCallback(response) {
                         if (response.status === 200) {
                             deferred.resolve(response);

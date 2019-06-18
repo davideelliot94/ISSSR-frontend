@@ -1,8 +1,9 @@
 'use strict';
 
 mainAngularModule.controller('backlogManagementController', ['$scope', '$state', '$mdDialog', 'ScrumProductService',
-    'ToasterNotifierHandler', 'BacklogItemService', 'DTOptionsBuilder',
-    function ($scope, $state, $mdDialog, ScrumProductService, ToasterNotifierHandler, BacklogItemService, DTOptionsBuilder) {
+    'ToasterNotifierHandler', 'BacklogItemService', 'DTOptionsBuilder', 'DTColumnDefBuilder',
+    function ($scope, $state, $mdDialog, ScrumProductService, ToasterNotifierHandler, BacklogItemService,
+              DTOptionsBuilder, DTColumnDefBuilder){
 
     // backlogItem selected
     $scope.backlogItem = {};
@@ -12,7 +13,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.sprintBacklogItems = {};
     // default option for datatable
     $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
-
+    $scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(4).notSortable()];
     $scope.isActiveSprint = false;
     $scope.isSelectedProduct = false;
 
@@ -72,7 +73,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     // Funzione che popola il backlog con gli item ricevuti dal backend
     $scope.populateBacklog = function() {
         $scope.isSelectedProduct = true;
-
+        $scope.states = $scope.backlogItem.product.scrumProductWorkflow.states;
         // Popolamento del product backlog
         BacklogItemService.getProductBacklogItemService($scope.backlogItem.product.id)
             .then(function successCallback(items) {
@@ -81,27 +82,31 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 ToasterNotifierHandler.handleError(response);
             });
         // Popolamento dello sprint backlog
-        // BacklogItemService.getSprintBacklogItemService($scope.backlogItem.product.id)
-        //     .then(function successCallback(items) {
-        //         $scope.sprintBacklogItems = items;
-        //         $scope.isActiveSprint = true;
-        //     }, function errorCallback(response){
-        //         if (response.status === 404){
-        //             $scope.isActiveSprint = false;
-        //         } else{
-        //             ToasterNotifierHandler.handleError(response);
-        //         }
-        //     });
+        BacklogItemService.getSprintBacklogItemService($scope.backlogItem.product.id)
+            .then(function successCallback(items) {
+                $scope.sprintBacklogItems = items;
+                $scope.isActiveSprint = true;
+            }, function errorCallback(response){
+                if (response.status === 404){
+                    $scope.isActiveSprint = false;
+                } else{
+                    ToasterNotifierHandler.handleError(response);
+                }
+            });
     };
 
-    // $scope.changeStatusToSprintBacklogItem = function(itemId, direction){
-    //     BacklogItemService.changeStatusToSprintBacklogItemService(itemId, direction)
-    //         .then(function successCallback() {
-    //             $scope.populateBacklogAndSprintBacklog();
-    //         }, function errorCallback(response){
-    //             ToasterNotifierHandler.handleError(response);
-    //         });
-    // };
+    $scope.setItemToChange = function(event, ui, backlogItem){
+        $scope.backlogItemToChange = backlogItem;
+    };
+
+    $scope.changeItemStateTo = function(event, ui, newState){
+        BacklogItemService.changeItemStateToService($scope.backlogItemToChange.id, newState)
+            .then(function successCallback() {
+                $scope.populateBacklog();
+            }, function errorCallback(response){
+                ToasterNotifierHandler.handleError(response);
+            });
+    };
 
     $scope.deleteBacklogItem = function (itemId){
         BacklogItemService.deleteBacklogItemService(itemId)
@@ -113,5 +118,8 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     };
 
     initializeProductList();
+
+    //////////////////////////////////////////////////TUTTO QUESTO NON VA QUI
+    $scope.states = [];
 
 }]);
