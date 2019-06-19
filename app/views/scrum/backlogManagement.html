@@ -102,33 +102,32 @@
 <!--                    </div>-->
 <!--                </div>-->
 <div style="overflow-x: scroll; white-space: nowrap" >
-                <div style=" display: inline-table; width: 200px; "
+                <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue;"
                      class="col col-2 col-md-offset-1"
                      ng-repeat="state in states"
                      data-drop="true"
                      data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
                      ng-style="">
                     <br>
-                    <label style="vertical-align: super; ">{{state.split('*')[1]}}</label>
+                    <h4 style="vertical-align: super; ">{{state.split('*')[1]}}</h4>
                     <div  class="panel panel-primary"
                           ng-repeat="item in sprintBacklogItems | orderBy:priorityLevel"
-                          ng-if="item.status === state"
-                          data-drag="true"
+                          ng-if="item.title === 'placeholder' || item.status === state"
+                          data-drag="item.title != 'placeholder'"
                           data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
-                          jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'>
-                        <div class="panel-heading" style="width: 200px" >
+                          jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
+                          ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
+                        <div class="container" style="width: 200px; height: 100px;" ng-if="item.title === 'placeholder'">
+                        </div>
+                        <div class="panel-heading" style="width: 200px; border: 0;" ng-if="item.title != 'placeholder'">
                             <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
                             <span class="badge pull-right">{{item.effortEstimation}}</span>
                             <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
                             <br>
-                            <button class="btn btn-info btn-circle" ng-click="execution[$index]=!execution[$index]" ng-hide="execution[$index]">
-                                <i class="fa fa-plus"></i>
+                            <button class="btn btn-info btn-circle" ng-click="openSprintBacklogItemDetailDialog(item)">
+                                <i class="glyphicon glyphicon-new-window"></i>
                             </button>
                             <!-- Vecchio class="btn btn-xs btn-default"                            -->
-                            <button class="btn btn-info btn-circle" ng-click="execution[$index]=!execution[$index]" ng-hide="!execution[$index]">
-                                <i class="fa fa-minus"></i>
-                            </button>
-
                         </div>
                         <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 200px" ng-show="execution[$index]">
                             Titolo: {{item.title}}<br>

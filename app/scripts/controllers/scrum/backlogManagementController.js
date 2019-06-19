@@ -24,8 +24,10 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             return 1;
         } else if (backlogItem.priority === 'MEDIUM') {
             return 2;
-        } else {
+        } else if (backlogItem.priority === 'LOW'){
             return 3;
+        } else {
+            return 4;
         }
     };
 
@@ -96,6 +98,8 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
         // Popolamento dello sprint backlog
         BacklogItemService.getSprintBacklogItemService($scope.backlogItem.product.id)
             .then(function successCallback(items) {
+                // Alla lista degli item viene aggiunto un item fittizio che servirà da placeholder nell'interfaccia grafica
+                items.push({'id': '', title: 'placeholder', description: 'placeholder', status: '', effortEstimation: 0, priority: 'PLACEHOLDER'});
                 $scope.sprintBacklogItems = items;
                 $scope.isActiveSprint = true;
             }, function errorCallback(response){
@@ -133,5 +137,21 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
 
     //////////////////////////////////////////////////TUTTO QUESTO NON VA QUI
     $scope.states = [];
+
+    // Apre la finestra di dettaglio contenente le informazioni sull'item del backlog
+    $scope.openSprintBacklogItemDetailDialog = function(sprintBacklogItem) {
+        $mdDialog.show({
+            controller: 'backlogItemDetailDialogController',
+            templateUrl: 'views/scrum/backlogItemDetailDialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            // Passaggio del prodotto e dell'item selezionato
+            resolve: {
+                selectedBacklogItem: function () {
+                    return sprintBacklogItem;
+                }
+            }
+        });
+    };
 
 }]);
