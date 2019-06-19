@@ -18,7 +18,7 @@ mainAngularModule
                 function refreshSprintsFn() {
                     console.log('refresh sprints');
                     let authInfo = AuthFactory.getAuthInfo();
-                    SprintCreateDataFactory.GetAll(authInfo.userId,
+                    SprintCreateDataFactory.GetAllByProductOwner(authInfo.userId,
                         function (sprints) {
                             ctrl.sprints = sprints;
                             console.log("SprintsController", ctrl.sprints)

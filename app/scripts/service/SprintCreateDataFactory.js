@@ -61,11 +61,34 @@ mainAngularModule
 
 
             // get all data from database
-            function GetAllFn(productOwnerId, successCB, errorCB) {
+            function GetAllFnByProduct(productId, successCB, errorCB) {
 
                 $http({
                     method: 'GET',
-                    url: _endPointJSON + productOwnerId+  '/visualize',
+                    url: _endPointJSON +'product/'+ productId+  '/visualize',
+
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
+
+            // get all data from database
+            function GetAllFnProductOwner(productOwnerId, successCB, errorCB) {
+
+                $http({
+                    method: 'GET',
+                    url: _endPointJSON +'productOwner/'+ productOwnerId+  '/visualize',
 
                 })
                     .then(function (response) {
@@ -86,7 +109,8 @@ mainAngularModule
 
             thisCrudService.Insert = InsertFn;
             thisCrudService.getMetadata = getMetadata;
-            thisCrudService.GetAll = GetAllFn;
+            thisCrudService.GetAllByProductOwner = GetAllFnProductOwner;
+            thisCrudService.GetAllByProduct = GetAllFnByProduct;
 
             return thisCrudService;
         }]);

@@ -9,68 +9,43 @@
 mainAngularModule
     .controller(
         'SprintCreateCtrl',
-        ['$scope', '$state', 'AuthFactory', 'UserDataFactory', 'SprintCreateDataFactory', 'softwareProductDataFactory', 'ErrorStateRedirector',
-            function ($scope, $state, AuthFactory, UserDataFactory, SprintCreateDataFactory, softwareProductDataFactory, ErrorStateRedirector) {
+        ['$scope', '$state', '$stateParams','AuthFactory', 'UserDataFactory', 'SprintCreateDataFactory', 'softwareProductDataFactory', 'ErrorStateRedirector',
+            function ($scope, $state,$stateParams, AuthFactory, UserDataFactory, SprintCreateDataFactory, softwareProductDataFactory, ErrorStateRedirector) {
                 const ctrl = this;
 
                 ctrl.currentSprint = {};
 
                 console.log("SprintCreate");
-                getFields();
+
 
                 //prende i metadati che li servono con una get
-                function getFields() {
-                    let authInfo = AuthFactory.getAuthInfo();
-                    SprintCreateDataFactory.getMetadata(authInfo.userId, function (response) {
 
-                        console.log('targets', response.data);
-                        ctrl.targets = response.data;
-                        // ctrl.max_sprint_duration = response.headers()['MAX_ALLOWED_SPRINT_DURATION'];
-                        ctrl.max_sprint_duration = 5;           //TODO HEADER GET
-                        ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys())
-                        console.log( 'SprintCreateMAXDURATION' ,ctrl.max_sprint_duration);
-
-                    }, function () {
-                        alert("Invalid metadata");
-                    });
-                }
 
 
                 function resetFieldsFn() {
                     console.log('reset ticket form');
                     //inseriamo l'id del PO
-
+                    ctrl.max_sprint_duration = 5;           //TODO HEADER GET
+                    ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys())
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                 }
 
-                //questa funzione cerca di inserire i ticket, i campi lo prende dalla view.
+                // i campi lo prende dalla view.
                 //se la post ha successo faccio resetFieldsFn e visualizzo un'altra pagina
                 //altrimenti vado alla pagina di errore.
                 function insertSprintFn() {
-                    console.log('insert sprint', ctrl.currentSprint, ctrl.targets);
-
-
+                    console.log('insert sprint', ctrl.currentSprint, $stateParams.target);
 
                     ctrl.currentSprint.duration = ctrl.duration;
-                    ctrl.currentSprint.idProduct=ctrl.selectedTarget; //setting just the id
-
+                    ctrl.currentSprint.idProduct= $stateParams.target.id;
                     SprintCreateDataFactory.Insert(
                         ctrl.currentSprint,
                         function (response) {
                             console.log(response);
                             resetFieldsFn();
-                            /*
-                            if (ctrl.userInfo.userRole === 'TEAM_MEMBER') {
-                                $state.go('ticket.list', {}, {reload: 'ticket.list'});
-                            } else if (ctrl.userInfo.userRole === 'CUSTOMER') {
-                                $state.go('ticket.customer', {}, {reload: 'ticket.customer'});
-                            }  else if (ctrl.userInfo.userRole === 'ADMIN') {
-                                $state.go('ticket.list', {}, {reload: 'ticket.list'});
-                            }
-                            */
 
-                            $state.go('scrum.sprints_view');
+                            $state.go('sprint.view'); //TODO link to sprint backlog insert??
                         }, function (response) {
                             console.error(response);
                             ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nella creazione dello sprint'});
