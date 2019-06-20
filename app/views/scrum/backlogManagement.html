@@ -79,6 +79,7 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
+
 <!-------------------------------------------------------------------------------------------------------------------->
 <!-- Pannello Sprint Backlog -->
 <div class="row">
@@ -86,113 +87,46 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Sprint Backlog</div>
             <div class="panel-body"  >
-
-
-<!--                <div class="example-container"-->
-<!--                     ng-repeat="state in states">-->
-<!--                    <h4>{{state}}</h4>-->
-<!--                    <div-->
-<!--                            cdkDropList-->
-<!--                            #todoList="cdkDropList"-->
-<!--                            [cdkDropListData]="todo"-->
-<!--                            [cdkDropListConnectedTo]="[doneList]"-->
-<!--                            class="example-list"-->
-<!--                            (cdkDropListDropped)="drop($event)">-->
-<!--                        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<div style="overflow-x: scroll; white-space: nowrap" >
-                <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
-                     class="col col-2"
-                     ng-repeat="state in states"
-                     data-drop="true"
-                     data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
-                     ng-style="">
-                    <br>
-                    <h4 style="vertical-align: super; ">{{state.split('*')[1]}}</h4>
-                    <div  class="panel panel-primary"
-                          ng-repeat="item in sprintBacklogItems | orderBy:priorityLevel"
-                          ng-if="item.title === 'placeholder' || item.status === state"
-                          data-drag="item.title != 'placeholder'"
-                          data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
-                          jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
-                          ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
-                        <div class="container" style="width: 250px; height: 100px;" ng-if="item.title === 'placeholder'">
-                        </div>
-                        <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
-                            <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
-                            <span class="badge pull-right">{{item.effortEstimation}}</span>
-                            <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
-                            <br>
-                            <button class="btn btn-info btn-circle" ng-click="openSprintBacklogItemDetailDialog(item)">
-                                <i class="glyphicon glyphicon-new-window"></i>
-                            </button>
-                            <!-- Vecchio class="btn btn-xs btn-default"                            -->
-                        </div>
-                        <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
-                            Titolo: {{item.title}}<br>
-                            Descrizione: {{item.description}}<br>
-                            Priorità: {{item.priority}}<br>
+                <div style="overflow-x: scroll; white-space: nowrap" >
+                    <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
+                         class="col col-2"
+                         ng-repeat="state in states"
+                         data-drop="true"
+                         data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
+                         ng-style="">
+                        <br>
+                        <h4 style="vertical-align: super; ">{{state.split('*')[1]}}</h4>
+                        <div  class="panel panel-primary"
+                              ng-repeat="item in sprintBacklogItems | orderBy:priorityLevel"
+                              ng-if="item.title === 'placeholder' || item.status === state"
+                              data-drag="item.title != 'placeholder'"
+                              data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
+                              jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
+                              ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
+                            <div class="container" style="width: 250px; height: 100px;" ng-if="item.title === 'placeholder'">
+                            </div>
+                            <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
+                                <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
+                                <span class="badge pull-right">{{item.effortEstimation}}</span>
+                                <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
+                                <br>
+                                <button class="btn btn-info btn-circle" ng-click="openSprintBacklogItemDetailDialog(item)">
+                                    <i class="glyphicon glyphicon-new-window"></i>
+                                </button>
+                                <!-- Vecchio class="btn btn-xs btn-default"                            -->
+                            </div>
+                            <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
+                                Titolo: {{item.title}}<br>
+                                Descrizione: {{item.description}}<br>
+                                Priorità: {{item.priority}}<br>
+                            </div>
                         </div>
                     </div>
+                    <br><br>
                 </div>
-</div>
-<!--                <ul class="list-group-horizontal" ng-repeat="state in states">-->
-<!--                    <li class="list-group">-->
-<!--                        <li class="list-group-item">{{state}}</li>-->
-<!--                        <li class="list-group-item">Dapibus ac facilisis in</li>-->
-<!--                        <li class="list-group-item">Morbi leo risus</li>-->
-<!--                        <li class="list-group-item">Porta ac consectetur ac</li>-->
-<!--                        <li class="list-group-item">Vestibulum at eros</li>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                <div style="float: left" ng-repeat="state in states">-->
-<!--                    <ul class="list-group">-->
-<!--                        <li class="list-group-item">{{state}}</li>-->
-<!--                    </ul>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
-</div>
-<!--    <div  class="panel panel-primary" ng-repeat="t in myTickets" ng-if="t.currentTicketStatus == state && t.target.name == selectedTarget.name" ng-controller="modalController"-->
-<!--          data-drag="false" ng-model="t" data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"-->
-<!--          jqyoui-draggable='{animate: true, onStart:"setTicketToChange({ticket: t})"}'>-->
-
-<!--        <div class="panel-heading" ng-style="{ 'background-color' : ttlColor(t) }" >-->
-<!--            <button class="btn btn-xs btn-default" ng-click="execution[$index]=!execution[$index]" ng-hide="execution[$index]">-->
-<!--                <i class="fa fa-plus"></i>-->
-<!--            </button>-->
-<!--            <button class="btn btn-xs btn-default" ng-click="execution[$index]=!execution[$index]" ng-hide="!execution[$index]">-->
-<!--                <i class="fa fa-minus"></i>-->
-<!--            </button>-->
-<!--            Ticket #{{t.id}}-->
-<!--            <button title="Ticket information" ng-click="showInfoForm(t)" class="btn btn-xs btn-default" style="float: right;">-->
-<!--                <i class="fa fa-info-circle icon-small"></i>-->
-<!--            </button>-->
-<!--            <button title="See ticket attachment " ng-if="t.attachedFile" ng-click="showImage(t)" class="btn btn-xs btn-default"-->
-<!--                    style="float: right;">-->
-<!--                <i class="fa fa-image"></i>-->
-<!--            </button>-->
-<!--            <button  title="Comment Ticket" ng-click="showMessageForm(t)" class="btn btn-xs btn-default"-->
-<!--                     style="float: right;">-->
-<!--                <i class="fa fa-comments"></i>-->
-<!--            </button>-->
-<!--            <button title="TTL information"  class="btn btn-xs btn-default" style="float: right;" ng-click="showTTLForm(t)">-->
-<!--                <i class="fa fa-clock-o"></i>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--        <div class="panel-body" style="font-size: 11px;" ng-show="execution[$index]">-->
-<!--            &lt;!&ndash;ng-class="{'animationDisplay':visible[$index]}"&ndash;&gt;-->
-<!--            Title: {{t.title}}<br>-->
-<!--            Date: {{t.creationTimestamp}}<br>-->
-<!--            Presumed Priority : {{t.customerPriority}}<br>-->
-<!--            Priority: {{t.actualPriority || "To Assign"}}<br>-->
-<!--            Presumed Category: {{t.presumedType}}<br>-->
-<!--            Actual Category: {{t.actualType || "To Assign"}}<br>-->
-<!--            Difficulty: {{t.difficulty || "To Assign"}}<br>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
 <br><br>
 <!-------------------------------------------------------------------------------------------------------------------->
