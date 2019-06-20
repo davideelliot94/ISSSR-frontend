@@ -45,10 +45,10 @@ mainAngularModule
 
             // La funzione invia una richiesta al back end per l'ottenimento di tutti gli item all'interno dello sprint backlog
             // del prodotto passato come parametro.
-            this.getSprintBacklogItemService = function (productId) {
+            this.getSprintBacklogItemService = function (productId, sprintNumber) {
                 let deferred = $q.defer();
-                //TODO MODIFICARE QUERY TOGLIERE IL NUMERO DELLO SPRINT
-                $http.get(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/product/' + productId + '/sprint/' + 1)
+                $http.get(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL +
+                    'items/product/' + productId + '/sprint/' + sprintNumber)
                     .then(function successCallback(response) {
                         if (response.status === 200) {
                             deferred.resolve(response.data);

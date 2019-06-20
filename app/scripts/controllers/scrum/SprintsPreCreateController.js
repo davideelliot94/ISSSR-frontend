@@ -6,7 +6,6 @@ mainAngularModule
             function ($scope, AuthFactory, SprintCreateDataFactory, DTOptionsBuilder, DTColumnDefBuilder, ErrorStateRedirector, $state, $stateParams) {
                 let ctrl = this;
                 console.clear();
-                console.log('ciao');
                 ctrl.visualizeSprints = false;
                 //ctrl.selectedTarget = null;
 
@@ -35,7 +34,7 @@ mainAngularModule
                         ctrl.targets = response.data;
                         //ctrl.max_sprint_duration = response.headers()['Max-Allowed-Sprint-Duration'];
                         ctrl.max_sprint_duration = 5;           //TODO HEADER GET
-                        ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys())
+                        ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys());
                         console.log( 'SprintCreateMAXDURATION' ,ctrl.max_sprint_duration);
 
                     }, function () {
@@ -64,18 +63,19 @@ mainAngularModule
                     $state.go('sprint.create');
                 }
 
-                function showSprintFn() {
-                    //state.go dove viene mostrato i dettagli dello sprint.
-                }
-
                 function visualizeSprintsTriggerFn(){
                     populateSprintsFn();
                     ctrl.visualizeSprints = true;
                 }
 
+                this.viewSprintBacklog = function(sprint) {
+                    sessionStorage.setItem('product', JSON.stringify(ctrl.selectedTarget));
+                    sessionStorage.setItem('sprint', JSON.stringify(sprint));
+                    $state.go('sprint.viewSprintBacklog');
+                };
+
                 ctrl.addSprint = addSprintFn;
                 ctrl.populateSprints = populateSprintsFn;
-                ctrl.showSprint = showSprintFn;
                 ctrl.visualizeSprintsTrigger = visualizeSprintsTriggerFn;
 
 
