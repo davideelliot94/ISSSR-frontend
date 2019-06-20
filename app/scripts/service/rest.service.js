@@ -109,7 +109,12 @@ mainAngularModule.service('restService', function () {
 
         "getMembersBySTId": CONNECTION.url + '/scrumteam/getMembersBySTId',
 
-        "assignProductToST": CONNECTION.url + '/scrumteam/assignProductToST'
+        "assignProductToST": CONNECTION.url + '/scrumteam/assignProductToST',
+
+        "closeSprint": CONNECTION.url + '/sprint/close',
+
+        "getFinishedBacklogItem": CONNECTION.url + '/backlog/getFinishedBacklogItems'
+
 
     };
 })

@@ -14,7 +14,6 @@ mainAngularModule
                 ];
 
 
-
                 function refreshSprintsFn() {
                     console.log('refresh sprints');
                     let authInfo = AuthFactory.getAuthInfo();
@@ -31,11 +30,21 @@ mainAngularModule
                     //state.go dove viene mostrato i dettagli dello sprint.
                 }
 
+                $scope.closeSprint = function(id) {
+                    console.log('close sprint');
+                    SprintCreateDataFactory.closeSprint(id,
+                        function () {
+                            console.log("closed");
+                        }, function (error) {
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella chiusura dello Sprint"});
+                        });
+                };
+
                 ctrl.refreshSprints = refreshSprintsFn;
                 ctrl.showSprint = showSprintFn;
-
 
                 refreshSprintsFn();
 
 
-            }]);
+            }])
+;

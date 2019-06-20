@@ -19,6 +19,12 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'ScrumTeamCreateCtrl',
                 controllerAs: 'ctrl'
             })
+            .state('scrumteam.burnDownChart', {
+                url: '/{sprintId:int}/viewGraph',
+                templateUrl: 'views/scrum/burnDownChart.html',
+                controller: 'LineCtrl',
+                controllerAs: 'ctrl'
+            })
             .state('scrumteam.listassociate', {
             url: '/associate',
             templateUrl: 'views/scrum/productsoftware-list-associate.html',

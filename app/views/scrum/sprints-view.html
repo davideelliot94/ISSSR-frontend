@@ -32,13 +32,50 @@
                                 <td>{{u.nameProduct}}</td>
                                 <td>{{u.isActive | activeSprintFilter}}</td>
 
+                    <div ng-controller="SprintsCtrl">
+                        <div class="table-responsive">
+                            <table datatable="ng" class="table table-striped table-bordered"
+                                   dt-column-defs="dtColumnDefs"
+                                   dt-options="dtOptions">
+                                <thead>
+                                <tr>
+                                    <th class="col-md-1">ID</th>
+                                    <th class="col-md-1">Numero</th>
+                                    <th class="col-md-1.5">Durata (Settimane)</th>
+                                    <th class="col-md-1.5">Sprint Goal</th>
+                                    <th class="col-md-1.5">Prodotto</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="u in ctrl.sprints">
+                                    <td>{{u.id}}</td>
+                                    <td>{{u.number}}</td>
+                                    <td>{{u.duration}}</td>
+                                    <td>{{u.sprintGoal}}</td>
+                                    <td>{{u.nameProduct}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-xs"
+                                                style="background-color: #337ab7; color: white"
+                                                ng-click="closeSprint(u.id)">
+                                            Chiudi Sprint
+                                        </button>
+                                    </td>
+                                    <td>
+                                    <button type="button" class="btn btn-xs"
+                                            style="background-color: #337ab7; color: white"
+                                            ui-sref="scrumteam.burnDownChart({sprintId:u.id})">
+                                        Burndown Chart
+                                    </button>
+                                </td>
 
-                            </tr>
-                            </tbody>
-                        </table>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
                     </div>
-                    <!-- /.table-responsive -->
-
                 </div>
                 <!-- /.panel-body -->
             </div>
