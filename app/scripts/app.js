@@ -14,5 +14,6 @@ var mainAngularModule = angular
         'mm.acl',
         'ngMaterial', 'ngAnimate',
         'ngTagsInput',
-        'drag-and-drop'
+        'drag-and-drop',
+        'chart.js'
     ]);
