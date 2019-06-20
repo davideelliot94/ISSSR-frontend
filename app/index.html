@@ -80,6 +80,7 @@
     <script src="scripts/states/relation.state.js"></script>
     <script src="scripts/states/escalation.state.js"></script>
     <script src="scripts/states/gantt.state.js"></script>
+    <script src="scripts/states/sprint.state.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/directives.js -->
@@ -134,6 +135,8 @@
     <script src="scripts/controllers/planning/showQueue.js"></script>
     <script src='scripts/controllers/scrum/SprintCreateController.js'></script>
     <script src='scripts/controllers/scrum/SprintsController.js'></script>
+    <script src='scripts/controllers/scrum/SprintsPreCreateController.js'></script>
+
     <script src="scripts/controllers/scrum/backlogManagementController.js"></script>
     <script src="scripts/controllers/scrum/backlogItemCreationDialogController.js"></script>
     <script src="scripts/controllers/scrum/backlogItemEditDialogController.js"></script>
@@ -173,6 +176,7 @@
 
     <!-- build:js({.tmp,app}) scripts/filters.js -->
     <script src='scripts/filters/filterPermission.js'></script>
+    <script src='scripts/filters/activeSprintFilter.js'></script>
     <script src='scripts/filters/PrincipalFilter.js'></script>
     <script src='scripts/filters/PermissionMaskFilter.js'></script>
     <script src='scripts/filters/TicketCategoryFilter.js'></script>

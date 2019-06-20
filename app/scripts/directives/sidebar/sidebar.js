@@ -186,16 +186,16 @@ mainAngularModule
                                             "state": "scrumteam.listassociate"
                                         },
                                         {
-                                            "nome": "Avvia sprint 1",
-                                            "state": "scrum.sprint_create_state"
-                                        },
-                                        {
                                             "nome": "Visualizza Sprint Attivi",
-                                            "state": "scrum.sprints_view"
+                                            "state": "sprint.view"
                                         },
                                         {
                                             "nome": "Gestione Backlog",
                                             "state": "backlog_management.view"
+                                        },
+                                        {
+                                            "nome": "Gestione Sprint",
+                                            "state": "sprint.selectTargetForCreate"
                                         }
                                     ]
                                 }
