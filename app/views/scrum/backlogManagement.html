@@ -102,8 +102,8 @@
 <!--                    </div>-->
 <!--                </div>-->
 <div style="overflow-x: scroll; white-space: nowrap" >
-                <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue;"
-                     class="col col-2 col-md-offset-1"
+                <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
+                     class="col col-2"
                      ng-repeat="state in states"
                      data-drop="true"
                      data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
@@ -117,9 +117,9 @@
                           data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
                           jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
                           ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
-                        <div class="container" style="width: 200px; height: 100px;" ng-if="item.title === 'placeholder'">
+                        <div class="container" style="width: 250px; height: 100px;" ng-if="item.title === 'placeholder'">
                         </div>
-                        <div class="panel-heading" style="width: 200px; border: 0;" ng-if="item.title != 'placeholder'">
+                        <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
                             <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
                             <span class="badge pull-right">{{item.effortEstimation}}</span>
                             <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
@@ -129,7 +129,7 @@
                             </button>
                             <!-- Vecchio class="btn btn-xs btn-default"                            -->
                         </div>
-                        <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 200px" ng-show="execution[$index]">
+                        <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
                             Titolo: {{item.title}}<br>
                             Descrizione: {{item.description}}<br>
                             Priorità: {{item.priority}}<br>
