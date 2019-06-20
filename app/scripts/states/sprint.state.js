@@ -15,9 +15,7 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl: 'views/scrum/sprint-create.html',
                 controller: 'SprintCreateCtrl',
                 controllerAs: 'ctrl',
-                params: {
-                    target: null
-                }
+
                 /*
                 data: {
                     requiresLogin: true
@@ -40,5 +38,8 @@ mainAngularModule.config(['$stateProvider',
             templateUrl: 'views/scrum/sprints-view-byproduct.html',
             controller: 'SprintsPreCreateCtrl',
             controllerAs: 'ctrl',
+            params: {
+                target: null
+            }
         })
     }]);

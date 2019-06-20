@@ -9,8 +9,8 @@
 mainAngularModule
     .controller(
         'SprintCreateCtrl',
-        ['$scope', '$state', '$stateParams','AuthFactory', 'UserDataFactory', 'SprintCreateDataFactory', 'softwareProductDataFactory', 'ErrorStateRedirector',
-            function ($scope, $state,$stateParams, AuthFactory, UserDataFactory, SprintCreateDataFactory, softwareProductDataFactory, ErrorStateRedirector) {
+        ['$scope', '$state', '$stateParams','AuthFactory', 'UserDataFactory', 'SprintCreateDataFactory', 'softwareProductDataFactory', 'ErrorStateRedirector', '$sessionStorage',
+            function ($scope, $state,$stateParams, AuthFactory, UserDataFactory, SprintCreateDataFactory, softwareProductDataFactory, ErrorStateRedirector, $sessionStorage) {
                 const ctrl = this;
 
                 ctrl.currentSprint = {};
@@ -26,7 +26,7 @@ mainAngularModule
                     console.log('reset ticket form');
                     //inseriamo l'id del PO
                     ctrl.max_sprint_duration = 5;           //TODO HEADER GET
-                    ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys())
+                    ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys());
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                 }
@@ -38,14 +38,14 @@ mainAngularModule
                     console.log('insert sprint', ctrl.currentSprint, $stateParams.target);
 
                     ctrl.currentSprint.duration = ctrl.duration;
-                    ctrl.currentSprint.idProduct= $stateParams.target.id;
+                    ctrl.currentSprint.idProduct= ctrl.target.id;
                     SprintCreateDataFactory.Insert(
                         ctrl.currentSprint,
                         function (response) {
                             console.log(response);
                             resetFieldsFn();
 
-                            $state.go('sprint.view'); //TODO link to sprint backlog insert??
+                            $state.go('sprint.selectTargetForCreate', {target: ctrl.target}); //TODO link to sprint backlog insert??
                         }, function (response) {
                             console.error(response);
                             ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nella creazione dello sprint'});
@@ -56,7 +56,7 @@ mainAngularModule
 
                 function init() {
                     ctrl.userInfo = AuthFactory.getAuthInfo();
-
+                    ctrl.target = JSON.parse(sessionStorage.getItem('target'));
                     resetFieldsFn();
                     //populateProductSoftwareListFn();
 

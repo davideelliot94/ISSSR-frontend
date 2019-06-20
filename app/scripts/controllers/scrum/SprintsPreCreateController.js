@@ -2,13 +2,13 @@
 mainAngularModule
     .controller(
         'SprintsPreCreateCtrl',
-        ['$scope', 'AuthFactory', 'SprintCreateDataFactory', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'ErrorStateRedirector', '$state',
-            function ($scope, AuthFactory, SprintCreateDataFactory, DTOptionsBuilder, DTColumnDefBuilder, ErrorStateRedirector, $state) {
+        ['$scope', 'AuthFactory', 'SprintCreateDataFactory', 'DTOptionsBuilder', 'DTColumnDefBuilder', 'ErrorStateRedirector', '$state', '$stateParams',
+            function ($scope, AuthFactory, SprintCreateDataFactory, DTOptionsBuilder, DTColumnDefBuilder, ErrorStateRedirector, $state, $stateParams) {
                 let ctrl = this;
                 console.clear();
                 console.log('ciao');
                 ctrl.visualizeSprints = false;
-                ctrl.selectedTarget = null;
+                //ctrl.selectedTarget = null;
 
                 $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
                 $scope.dtColumnDefs = [
@@ -21,6 +21,14 @@ mainAngularModule
                 //prende i metadati che li servono alla get
                 function getFields() {
                     let authInfo = AuthFactory.getAuthInfo();
+                    if($stateParams.target !== null) {
+                        ctrl.selectedTarget = $stateParams.target;
+                        ctrl.visualizeSprintsTrigger();
+                    }
+                    else {
+                        ctrl.selectedTarget = null;
+                    }
+
                     SprintCreateDataFactory.getMetadata(authInfo.userId, function (response) {
 
                         console.log('targets', response.data);
@@ -51,7 +59,9 @@ mainAngularModule
                 }
 
                 function addSprintFn() {
-                    $state.go('sprint.create', {target: ctrl.selectedTarget});
+                    sessionStorage.setItem('target', JSON.stringify(ctrl.selectedTarget));
+                    console.log(JSON.parse(sessionStorage.getItem('target')));
+                    $state.go('sprint.create');
                 }
 
                 function showSprintFn() {

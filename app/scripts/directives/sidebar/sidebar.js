@@ -190,7 +190,7 @@ mainAngularModule
                                             "state": "backlog_management.view"
                                         },
                                         {
-                                            "nome": "Aggiungi Sprint",
+                                            "nome": "Gestione Sprint",
                                             "state": "sprint.selectTargetForCreate"
                                         }
                                     ]

@@ -3,13 +3,13 @@ mainAngularModule
         return function (input) {
 
             if (input == true) {
-                return 'Sprint Attivo';
+                return 'Attivo';
             }
             if (input == false) {
-                return 'Sprint chiuso';
+                return 'Chiuso';
             }
             if (input == null) {
-                return 'Sprint non attivo';
+                return 'Non attivo';
             }
 
             return 'Non specificato';
