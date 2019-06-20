@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label>Priorità
                     <select class="form-control"
-                            ng-init="backlogItem.priority = backlogItemPriorityClasses[1]"
+                            ng-init="backlogItem.priority"
                             ng-options="priorityClass for priorityClass in backlogItemPriorityClasses"
                             ng-model="backlogItem.priority">
                     </select>
@@ -56,6 +56,20 @@
                            min="1"
                            ng-model="backlogItem.effortEstimation"
                            ng-required="true">
+                </label>
+            </div>
+            <div class="form-group"
+                 ng-class="{'has-error': backlogItemEditForm.selectedSprint.$invalid &&
+                                         backlogItemEditForm.selectedSprint.$dirty,
+                            'has-success': backlogItemEditForm.selectedSprint.$valid &&
+                                           backlogItemEditForm.selectedSprint.$dirty}">
+                <label>Sprint in cui inserire l'Item *
+                    <select class="form-control"
+                            name="selectedSprint"
+                            ng-options="productSprint.number for productSprint in productSprints"
+                            ng-model="backlogItem.sprint"
+                            ng-required="true">
+                    </select>
                 </label>
             </div>
             <div class="modal-footer">

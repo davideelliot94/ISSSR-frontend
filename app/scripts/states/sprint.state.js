@@ -3,18 +3,19 @@
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
-        $stateProvider.state('scrum', {
+        $stateProvider.state('sprint', {
             abstract: true,
-            url: '/scrum',
+            url: '/scrum/sprint',
             templateUrl: 'views/dashboard/main.html',
             data: {
                 requiresLogin: true
             }
-        }).state('scrum.sprint_create_state', {
+        }).state('sprint.create', {
                 url: '/sprintCreateState',
                 templateUrl: 'views/scrum/sprint-create.html',
                 controller: 'SprintCreateCtrl',
                 controllerAs: 'ctrl',
+
                 /*
                 data: {
                     requiresLogin: true
@@ -27,10 +28,18 @@ mainAngularModule.config(['$stateProvider',
                         return AclProtector.checkRoutePermission('PO');
                     }
                 }*/
-            }).state('scrum.sprints_view', {
-            url: '/sprints',
+            }).state('sprint.view', {
+            url: '/sprintsViewByPO',
             templateUrl: 'views/scrum/sprints-view.html',
             controller: 'SprintsCtrl',
             controllerAs: 'ctrl',
-        });
+        }).state('sprint.selectTargetForCreate', {
+            url: '/sprintsCreateSelectProduct',
+            templateUrl: 'views/scrum/sprints-view-byproduct.html',
+            controller: 'SprintsPreCreateCtrl',
+            controllerAs: 'ctrl',
+            params: {
+                target: null
+            }
+        })
     }]);

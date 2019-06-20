@@ -1,0 +1,27 @@
+
+<md-dialog aria-label="Dettaglio Item">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #457AB2">
+            <h2>Dettaglio Item</h2>
+        </div>
+    </md-toolbar>
+    <div class="container">
+        <br>
+        <label>Titolo</label>
+        <p>{{backlogItem.title}}</p>
+        <label>Descrizione</label>
+        <p>{{backlogItem.description}}</p>
+        <label>Priorità</label>
+        <p>{{backlogItem.priority}}
+            <span ng-class="{'glyphicon glyphicon-arrow-up' : backlogItem.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': backlogItem.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': backlogItem.priority === 'MEDIUM'}"></span></p>
+        <label>Story Point</label>
+        <p><span class="badge">{{backlogItem.effortEstimation}}</span></p>
+        <div class="modal-footer">
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="closeDialog()">
+                Chiudi
+            </button>
+        </div>
+    </div>
+</md-dialog>

@@ -1,0 +1,82 @@
+<md-dialog aria-label="Creazione Scrum Product Workflow">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #457AB2">
+            <h2>Inserimento Item nel Backlog</h2>
+        </div>
+    </md-toolbar>
+    <div class="container">
+        <form name="scrumProductWorkflowCreationForm">
+            <br>
+            <div class="form-group" ng-class="{'has-error': scrumProductWorkflowCreationForm.scrumProductWorkflowName.$invalid &&
+                                                            scrumProductWorkflowCreationForm.scrumProductWorkflowName.$dirty,
+                                               'has-success': scrumProductWorkflowCreationForm.scrumProductWorkflowName.$valid &&
+                                                              scrumProductWorkflowCreationForm.scrumProductWorkflowName.$dirty}">
+                <label>Nome *</label>
+                <input name="scrumProductWorkflowName" type="text" class="form-control" ng-required="true" ng-maxlength="255" ng-model="scrumProductWorkflow.name">
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">N°</th>
+                        <th class="col-md-3">Nome Stato</th>
+                        <th class="col-md-1"></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat= "state  in scrumProductWorkflow.states | orderBy: getNumber" ng-show="state.split('*')[1] != 'Completato'">
+                        <td>{{state.split('*')[0]}}</td>
+                        <td>{{state.split('*')[1]}}</td>
+                        <td align="center" style="vertical-align:middle">
+                            <button ng-click="deleteScrumProductWorkflowState(state)"
+                                    ng-if="state.split('*')[1] != 'To do'"
+                                    class="btn btn-primary">
+                                    <i class="fa fa-minus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="vertical-align: middle;">
+                            <input class="form-control"
+                               placeholder="Inserisci il nome del nuovo stato"
+                               name="scrumProductWorkflowNewState"
+                               type="text"
+                               ng-model="newStateName"/>
+                        </td>
+                        <td align="center" style="vertical-align:middle">
+                            <button ng-disabled="newStateName == ''"
+                                    ng-click="insertScrumProductWorkflowState()"
+                                    class="btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>{{statesNumber}}</td>
+                        <td>Completato</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="closeDialog()">
+                        Annulla
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-disabled="scrumProductWorkflowCreationForm.$invalid"
+                        ng-click="doOp()">
+                        {{getOperation()}}
+                </button>
+            </div>
+        </form>
+    </div>
+</md-dialog>

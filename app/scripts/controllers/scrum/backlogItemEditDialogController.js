@@ -1,11 +1,11 @@
 'use strict';
 mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdDialog', 'selectedBacklogItem',
-    'BacklogItemService', 'ToasterNotifierHandler', '$state', 'productId',
-    function($scope, $mdDialog, selectedBacklogItem, BacklogItemService, ToasterNotifierHandler, $state, productId) {
+    'BacklogItemService', 'ToasterNotifierHandler', '$state', 'productId', 'SprintService',
+    function($scope, $mdDialog, selectedBacklogItem, BacklogItemService, ToasterNotifierHandler, $state, productId,
+             SprintService) {
 
         $scope.backlogItemPriorityClasses = ['LOW', 'MEDIUM', 'HIGH'];
         $scope.backlogItem = angular.copy(selectedBacklogItem);
-        console.log($scope.backlogItem);
 
         $scope.closeDialog = function() {
             $mdDialog.cancel();
@@ -13,18 +13,30 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
 
         $scope.insertBacklogItemToSprintBacklog = function () {
             BacklogItemService.insertBacklogItemToSprintBacklogService(productId, $scope.backlogItem)
-                .then(function successCallback(response) {
-                    ToasterNotifierHandler.handleCreation(response);
+                .then(function successCallback() {
+                    ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
                     $mdDialog.hide();
                     $state.go('backlog_management.view');
-
                 }, function errorCallback(response){
                     if (response.status === 422){
-                        ToasterNotifierHandler.showErrorToast("Prima di inserire un item nello Spint Backlog è necessario avviare lo sprint.");
+                        ToasterNotifierHandler.showErrorToast(
+                            'Prima di inserire un item nello Sprint Backlog è necessario creare lo sprint.');
                     } else {
                         ToasterNotifierHandler.handleError(response);
                     }
                 });
         };
+
+        let getAllSprintOfProduct = function () {
+            SprintService.getAllSprintOfProductService(productId)
+                .then(function successCallback(response) {
+                        $scope.productSprints = response;
+                    },
+                    function errorCallback(response){
+                        ToasterNotifierHandler.handleError(response);
+                    });
+        };
+
+        getAllSprintOfProduct();
 
     }]);

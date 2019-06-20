@@ -47,7 +47,8 @@ mainAngularModule
             // del prodotto passato come parametro.
             this.getSprintBacklogItemService = function (productId) {
                 let deferred = $q.defer();
-                $http.get(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/product/' + productId + '/sprint')
+                //TODO MODIFICARE QUERY TOGLIERE IL NUMERO DELLO SPRINT
+                $http.get(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/product/' + productId + '/sprint/' + 1)
                     .then(function successCallback(response) {
                         if (response.status === 200) {
                             deferred.resolve(response.data);
@@ -64,7 +65,8 @@ mainAngularModule
             // come parametro.
             this.insertBacklogItemToSprintBacklogService = function (productId, backlogItem) {
                 let deferred = $q.defer();
-                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'target/' + productId + '/item/sprint',
+                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'target/' + productId +
+                    '/item/sprint/' + backlogItem.sprint.number,
                     {'id': backlogItem.id, 'title': backlogItem.title, 'description' : backlogItem.description,
                         'priority' : backlogItem.priority, 'effortEstimation': backlogItem.effortEstimation})
                     .then(function successCallback(response) {
@@ -79,9 +81,24 @@ mainAngularModule
                 return deferred.promise;
             };
 
-            this.changeStatusToSprintBacklogItemService = function (itemId, direction) {
+            this.changeItemStateToService = function (itemId, newState) {
                 let deferred = $q.defer();
-                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + direction + '/' + itemId)
+                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + itemId + '/' + newState)
+                    .then(function successCallback(response) {
+                        if (response.status === 200) {
+                            deferred.resolve(response);
+                        } else {
+                            deferred.reject(response);
+                        }
+                    }, function errorCallback(response) {
+                        deferred.reject(response);
+                    });
+                return deferred.promise;
+            };
+
+            this.deleteBacklogItemService = function(itemId){
+                let deferred = $q.defer();
+                $http.delete(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + itemId)
                     .then(function successCallback(response) {
                         if (response.status === 200) {
                             deferred.resolve(response);

@@ -15,6 +15,7 @@ mainAngularModule
     .constant('SOFTWARE_PRODUCTS_ENDPOINT_URL', '/targets/')
     .constant('TEAM_ENDPOINT_URL', '/teams/')
     .constant('SCRUMTEAM_ENDPOINT_URL', '/scrumteam/')
+    .constant('SCRUM_PRODUCT_WORKFLOW_ENDPOINT_URL', '/scrumProductWorkflow/')
     .constant('USER_ENDPOINT_URL', '/users/')
     .constant('TICKET_ENDPOINT_URL', '/tickets/')
     .constant('SPRINT_ENDPOINT_URL', '/sprint/')

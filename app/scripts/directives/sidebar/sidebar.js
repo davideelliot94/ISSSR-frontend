@@ -178,20 +178,24 @@ mainAngularModule
                                             "state": "scrumteam.create"
                                         },
                                         {
+                                            "nome": "Inserisci Product Workflow",
+                                            "state": "scrum.product_workflow"
+                                        },
+                                        {
                                             "nome": "Assegna prodotti",
                                             "state": "scrumteam.listassociate"
                                         },
                                         {
-                                            "nome": "Avvia sprint 1",
-                                            "state": "scrum.sprint_create_state"
-                                        },
-                                        {
                                             "nome": "Visualizza Sprint Attivi",
-                                            "state": "scrum.sprints_view"
+                                            "state": "sprint.view"
                                         },
                                         {
                                             "nome": "Gestione Backlog",
                                             "state": "backlog_management.view"
+                                        },
+                                        {
+                                            "nome": "Gestione Sprint",
+                                            "state": "sprint.selectTargetForCreate"
                                         }
                                     ]
                                 }

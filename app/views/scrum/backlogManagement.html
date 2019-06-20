@@ -16,69 +16,121 @@
                         ng-options="product.name for product in productsOfScrumMember"
                         ng-model="backlogItem.product"
                         ng-required="true"
-                        ng-change="populateBacklogAndSprintBacklog()">
+                        ng-change="populateBacklog()">
                 </select>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Pannello Sprint Backlog OLD -->
+<!--<div class="row">-->
+<!--    <div class="col-lg-12">-->
+<!--        <div class="panel panel-primary">-->
+<!--            <div class="panel-heading">Sprint Backlog</div>-->
+<!--            <div class="panel-body">-->
+<!--                <div class="table-responsive"-->
+<!--                     ng-show="isActiveSprint">-->
+<!--                    <table datatable="ng"-->
+<!--                           class="table table-striped table-bordered"-->
+<!--                           id="sprintBacklogItemListTable"-->
+<!--                           dt-options="dtOptions">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th class="col-md-1">ID</th>-->
+<!--                            <th class="col-md-1">Titolo</th>-->
+<!--                            <th class="col-md-1">Descrizione</th>-->
+<!--                            <th class="col-md-1">Priorità</th>-->
+<!--                            <th class="col-md-1">Stima dell'effort</th>-->
+<!--                            <th class="col-md-1">Stato</th>-->
+<!--                            <th class="col-md-1"></th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+
+<!--                        <tbody>-->
+<!--                        <tr ng-repeat= "item  in sprintBacklogItems">-->
+<!--                            <td>{{item.id}}</td>-->
+<!--                            <td>{{item.title | date}}</td>-->
+<!--                            <td>{{item.description}}</td>-->
+<!--                            <td>{{item.priority}}</td>-->
+<!--                            <td>{{item.effortEstimation}}</td>-->
+<!--                            <td>{{item.status}}</td>-->
+<!--                            <td align="center">-->
+<!--                                &lt;!&ndash; Bottone passaggio di stato all'indietro &ndash;&gt;-->
+<!--                                <button ng-disabled="item.status == 'TODO'"-->
+<!--                                        title="Ritorna nello stato precedente"-->
+<!--                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'backward')"-->
+<!--                                        class="btn btn-primary">-->
+<!--                                    <i class="fa fa-arrow-left"></i>-->
+<!--                                </button>-->
+<!--                                &lt;!&ndash; Bottone passaggio di stato item in avanti &ndash;&gt;-->
+<!--                                <button ng-disabled="item.status == 'COMPLETED'"-->
+<!--                                        title="Passa allo stato successivo"-->
+<!--                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'forward')"-->
+<!--                                        class="btn btn-primary">-->
+<!--                                    <i class="fa fa-arrow-right"></i>-->
+<!--                                </button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-------------------------------------------------------------------------------------------------------------------->
 <!-- Pannello Sprint Backlog -->
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-heading">Sprint Backlog</div>
-            <div class="panel-body">
-                <div class="table-responsive"
-                     ng-show="isActiveSprint">
-                    <table datatable="ng"
-                           class="table table-striped table-bordered"
-                           id="sprintBacklogItemListTable"
-                           dt-options="dtOptions">
-                        <thead>
-                        <tr>
-                            <th class="col-md-1">ID</th>
-                            <th class="col-md-1">Titolo</th>
-                            <th class="col-md-1">Descrizione</th>
-                            <th class="col-md-1">Priorità</th>
-                            <th class="col-md-1">Stima dell'effort</th>
-                            <th class="col-md-1">Stato</th>
-                            <th class="col-md-1"></th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr ng-repeat= "item  in sprintBacklogItems">
-                            <td>{{item.id}}</td>
-                            <td>{{item.title | date}}</td>
-                            <td>{{item.description}}</td>
-                            <td>{{item.priority}}</td>
-                            <td>{{item.effortEstimation}}</td>
-                            <td>{{item.status}}</td>
-                            <td align="center">
-                                <!-- Bottone passaggio di stato all'indietro -->
-                                <button ng-disabled="item.status == 'TODO'"
-                                        title="Ritorna nello stato precedente"
-                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'backward')"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-arrow-left"></i>
+            <div class="panel-body"  >
+                <div style="overflow-x: scroll; white-space: nowrap" >
+                    <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
+                         class="col col-2"
+                         ng-repeat="state in states"
+                         data-drop="true"
+                         data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
+                         ng-style="">
+                        <br>
+                        <h4 style="vertical-align: super; ">{{state.split('*')[1]}}</h4>
+                        <div  class="panel panel-primary"
+                              ng-repeat="item in sprintBacklogItems | orderBy:priorityLevel"
+                              ng-if="item.title === 'placeholder' || item.status === state"
+                              data-drag="item.title != 'placeholder'"
+                              data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
+                              jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
+                              ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
+                            <div class="container" style="width: 250px; height: 100px;" ng-if="item.title === 'placeholder'">
+                            </div>
+                            <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
+                                <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
+                                <span class="badge pull-right">{{item.effortEstimation}}</span>
+                                <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
+                                <br>
+                                <button class="btn btn-info btn-circle" ng-click="openSprintBacklogItemDetailDialog(item)">
+                                    <i class="glyphicon glyphicon-new-window"></i>
                                 </button>
-                                <!-- Bottone passaggio di stato item in avanti -->
-                                <button ng-disabled="item.status == 'COMPLETED'"
-                                        title="Passa allo stato successivo"
-                                        ng-click="changeStatusToSprintBacklogItem(item.id, 'forward')"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                <!-- Vecchio class="btn btn-xs btn-default"                            -->
+                            </div>
+                            <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
+                                Titolo: {{item.title}}<br>
+                                Descrizione: {{item.description}}<br>
+                                Priorità: {{item.priority}}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<br><br>
+<!-------------------------------------------------------------------------------------------------------------------->
+
 
 <!-- Pannello Product Backlog -->
 <div class="row">
@@ -91,7 +143,8 @@
                     <table datatable="ng"
                            class="table table-striped table-bordered"
                            id="backlogItemListTable"
-                           dt-options="dtOptions">
+                           dt-options="dtOptions"
+                           dt-column-defs="dtColumnDefs">
                         <thead>
                         <tr>
                             <th class="col-md-1">ID</th>
@@ -116,7 +169,13 @@
                                      title="Inserisci nello Sprint Backlog"
                                      ng-click="openBacklogItemEditDialog(item)"
                                      class="btn btn-primary">
-                                 <i class="fa fa-arrow-up"></i>
+                                     <i class="fa fa-arrow-up"></i>
+                                </button>
+                                <!-- Bottone eliminazioen Item-->
+                                <button title="Elimina item dal Product Backlog"
+                                        ng-click="deleteBacklogItem(item.id)"
+                                        class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
