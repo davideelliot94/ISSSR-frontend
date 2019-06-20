@@ -139,7 +139,7 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
                             for (var i = 0; i < response.data.length; i++) {
                                 dependingTickets = dependingTickets + ' ' +  (response.data[i]).id;
                             }
-                            ToasterNotifierHandler.showErrorToast('Operazione non consentita. Devi prima risolvere i ticket ' + dependingTickets);
+                            ToasterNotifierHandler.showErrorToast('Operazione non consentita. Devi prima risolvere i seguenti ticket: ' + dependingTickets);
                         }
                     }, function() {
 

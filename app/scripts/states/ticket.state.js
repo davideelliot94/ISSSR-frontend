@@ -1,5 +1,6 @@
 'use strict';
-
+var stateTicketList='ticket.list';
+var stateTicketCreate='ticket.create';
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -12,27 +13,27 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state('ticket.list', {
+            .state(stateTicketList, {
                 url: '/list',
                 templateUrl: 'views/ticket/ticket-list.html',
                 controller: 'TicketListCtrl',
                 controllerAs: 'ctrl',
-                /*resolve: {
+                resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('ticket_view');
+                        return AclRouteProtector.checkRoutePermission(stateTicketList);
                     }
-                }*/
+                }
             })
-            .state('ticket.create', {
+            .state(stateTicketCreate, {
                 url: '/create',
                 templateUrl: 'views/ticket/ticket-create.html',
                 controller: 'TicketCreateCtrl',
                 controllerAs: 'ctrl',
-                /*resolve: {
+                resolve: {
                     acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('ticket_create');
+                        return AclRouteProtector.checkRoutePermission(stateTicketCreate);
                     }
-                }*/
+                }
             })
             .state('ticket.update', {
                 url: '/{ticketId:int}/update',

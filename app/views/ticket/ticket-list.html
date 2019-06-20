@@ -28,6 +28,7 @@
                                 <th class="col-md-1">Segnalato da</th>
                                 <th class="col-md-1">Visibilità</th>
                                 <th class="col-md-1"></th>
+                                <th class="col-md-1"></th>
                                 <th class="col-md-1" ng-show="ctrl.userInfo.userRole == 'TEAM_MEMBER'"></th> <!--assistant-->
                             </tr>
                             </thead>
@@ -43,6 +44,7 @@
                                 <td>{{t.customerPriority | TicketCustomerPriorityFilter}}</td>
                                 <td>{{t.teamPriority | TicketTeamPriorityFilter}}</td>
                                 <td>{{t.currentTicketStatus| TicketStateFilter}}</td>
+
                                 <td>{{t.customer.username}} (ruolo: {{t.customer.role}})</td>
                                 <td>{{t.visibility | TicketVisibilityFilter}}</td>
                                 <td> <!--assistant-->
@@ -51,6 +53,17 @@
                                             ng-click="showDetails(2,t.id)"
                                             class="btn btn-primary">
                                         <i class="fa fa-hand-o-down"></i>
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <button title = "Close Ticket" ng-controller="TicketListCtrl"  ng-if="t.currentTicketStatus == 'ACCEPTANCE' || t.currentTicketStatus == 'EDIT'" ng-click="closeTicket(t)"
+                                            class="btn btn-xs btn-success">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button title = "Reject Ticket resolution" ng-if="t.currentTicketStatus == 'ACCEPTANCE'" ui-sref="ticket.update({ticketId:t.id})"
+                                            class="btn btn-xs btn-danger">
+                                        <i class="fa fa-minus-circle"></i>
                                     </button>
                                 </td>
                                 <!--
@@ -72,7 +85,6 @@
                                     <button title = "Read Ticket comments" ng-controller="modalController" ng-if="t.currentTicketStatus == 'EDIT'" ng-click="showMessageForm(t)" class="btn btn-xs btn-info">
                                         <i class="fa fa-comments"></i>
                                     </button>
-
                                 </td>
                             </tr>
                             </tbody>

@@ -27,6 +27,7 @@ mainAngularModule
                     //console.log("entro nella setSidebar");
                     $scope.userInfo = AuthFactory.getAuthInfo();
                     console.log($scope.userInfo);
+                    //TODO ADD SIDEBAR TO JSON
                     if ($scope.userInfo == null) {
                         //$state.go('login');
                         //} else if ($scope.userInfo.userType === 'admin') {
@@ -48,7 +49,7 @@ mainAngularModule
                                         },
                                         {
                                             "nome": "Informazioni Utente",
-                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"
+                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"   //TODO WILDCARD AND SUBSTITUTE?
                                         }
                                     ]
                                 },
