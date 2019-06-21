@@ -30,11 +30,12 @@ mainAngularModule
                     //state.go dove viene mostrato i dettagli dello sprint.
                 }
 
-                $scope.closeSprint = function(id) {
+                $scope.closeSprint = function(sprint) {
                     console.log('close sprint');
-                    SprintCreateDataFactory.closeSprint(id,
+                    SprintCreateDataFactory.closeSprint(sprint.id,
                         function () {
                             console.log("closed");
+                            sprint.isActive = false;
                         }, function (error) {
                             ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella chiusura dello Sprint"});
                         });

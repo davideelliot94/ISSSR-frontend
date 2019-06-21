@@ -132,7 +132,6 @@ mainAngularModule
 
             thisCrudService.Insert = InsertFn;
             thisCrudService.getMetadata = getMetadata;
-            thisCrudService.GetAll = GetAllFn;
             thisCrudService.closeSprint = closeSprintFn;
             thisCrudService.GetAllByProductOwner = GetAllFnProductOwner;
             thisCrudService.GetAllByProduct = GetAllFnByProduct;

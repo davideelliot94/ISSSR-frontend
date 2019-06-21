@@ -113,7 +113,11 @@ mainAngularModule.service('restService', function () {
 
         "closeSprint": CONNECTION.url + '/sprint/close',
 
-        "getFinishedBacklogItem": CONNECTION.url + '/backlog/getFinishedBacklogItems'
+        "getFinishedBacklogItem": CONNECTION.url + '/backlog/getFinishedBacklogItems',
+
+        "getDates": CONNECTION.url + '/sprint/getDates',
+
+        "getStoryPint": CONNECTION.url + '/backlog/getStoryPoint'
 
 
     };
