@@ -186,7 +186,7 @@ mainAngularModule
                                             "state": "scrumteam.listassociate"
                                         },
                                         {
-                                            "nome": "Visualizza Sprint Attivi",
+                                            "nome": "Visualizza Sprint",
                                             "state": "sprint.view"
                                         },
                                         {
