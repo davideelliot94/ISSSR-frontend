@@ -29,7 +29,7 @@ $stateProvider
         }
     })
     .state(stateUserInfo, {
-        url: '/{userId: int}/info',
+        url: '/info',
         templateUrl: 'views/user/user-info.html',
         controller: 'UserInfoController',
         controllerAs: 'ctrl',

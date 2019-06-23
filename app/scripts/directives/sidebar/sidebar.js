@@ -8,7 +8,7 @@
  */
 
 mainAngularModule
-    .directive('sidebar', ['AuthFactory', function (AuthFactory) {
+    .directive('sidebar', ['AuthFactory', 'storageService', function (AuthFactory, storageService) {
         //console.log(AuthFactory);
         return {
             templateUrl: 'scripts/directives/sidebar/sidebar.html',
@@ -27,426 +27,39 @@ mainAngularModule
                     //console.log("entro nella setSidebar");
                     $scope.userInfo = AuthFactory.getAuthInfo();
                     console.log($scope.userInfo);
-                    //TODO ADD SIDEBAR TO JSON
-                    if ($scope.userInfo == null) {
-                        //$state.go('login');
-                        //} else if ($scope.userInfo.userType === 'admin') {
-                    } else if ($scope.userInfo.userRole === 'ADMIN') {
-                        $scope.sidebarList = {
-                            lists: [
-                                {
-                                    "title": "Utente",
-                                    "num": 5,
-                                    "icon": "fa-user",
-                                    item: [
-                                        {
-                                            "nome": "Inserisci Utente",
-                                            "state": "user.create"
-                                        },
-                                        {
-                                            "nome": "Elenco Utenti",
-                                            "state": "user.list"
-                                        },
-                                        {
-                                            "nome": "Informazioni Utente",
-                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"   //TODO WILDCARD AND SUBSTITUTE?
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Ticket",
-                                    "num": 6,
-                                    "icon": "fa-ticket",
-                                    item: [
-                                        {
-                                            "nome": "Inserisci Ticket",
-                                            "state": "ticket.create"
-                                        },
-                                        {
-                                            "nome": "Elenco Ticket",
-                                            "state": "ticket.list"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Permessi",
-                                    "num": 7,
-                                    "icon": "fa-lock",
-                                    item: [
-
-                                        {
-                                            "nome": "Gruppi",
-                                            "state": "group.list"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Team",
-                                    "num": 8,
-                                    "icon": "fa-users",
-                                    item: [
-                                        {
-                                            "nome": "Inserisci Team",
-                                            "state": "team.create"
-                                        },
-                                        {
-                                            "nome": "Elenco Team",
-                                            "state": "team.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Prodotto Software",
-                                    "num": 10,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Inserisci Prodotto Software",
-                                            "state": "productsoftware.create"
-                                        },
-                                        {
-                                            "nome": "Elenco Prodotti Software",
-                                            "state": "productsoftware.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Logging",
-                                    "num": 11,
-                                    "icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "ACL logs",
-                                            "state": "acl.logs"
-                                        },
-                                        {
-                                            "nome": "Logging richieste",
-                                            "state": "requestslogs.list"
-                                        },
-                                        {
-                                            "nome": "Auditing logs",
-                                            "state": "auditing.logs"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Relation",
-                                    "num": 12,
-                                    //"icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "Define new relation",
-                                            "state": "relation.new"
-                                        },
-                                        {
-                                            "nome": "Create relation",
-                                            "state": "relation.create"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Escalation",
-                                    "num": 13,
-                                    //"icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "Define escalation",
-                                            "state": "escalation.new"
-                                        },
-                                        {
-                                            "nome": "Show queue",
-                                            "state": "escalation.queue"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "State Machine",
-                                    "num": 14,
-                                    //"icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "Create state machine",
-                                            "state": "state_machine.create"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Scrum",
-                                    "num": 15,
-                                    // TODO "icon": "fa-circle-notch",
-                                    item: [
-                                        {
-                                            "nome": "Inserisci Scrum Team",
-                                            "state": "scrumteam.create"
-                                        },
-                                        {
-                                            "nome": "Assegna prodotti",
-                                            "state": "scrumteam.listassociate"
-                                        },
-                                        {
-                                            "nome": "Avvia sprint 1",
-                                            "state": "scrum.sprint_create_state"
-                                        },
-                                        {
-                                            "nome": "Visualizza Sprint Attivi",
-                                            "state": "scrum.sprints_view"
-                                        },
-                                        {
-                                            "nome": "Gestione Backlog",
-                                            "state": "backlog_management.view"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                        //} else if ($scope.userInfo.userType === "assistant") {
-                    } else if ($scope.userInfo.userRole === 'TEAM_MEMBER') {
-                        $scope.sidebarList = {
-                            lists: [
-                                {
-                                    "title": "Utente",
-                                    "num": 5,
-                                    "icon": "fa-user",
-                                    item: [
-                                        {
-                                            "nome": "Informazioni Utente",
-                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Ticket",
-                                    "num": 6,
-                                    "icon": "fa-ticket",
-                                    item: [
-                                        {
-                                            "nome": "Elenco Ticket",
-                                            "state": "ticket.list"
-                                        },
-                                        {
-                                            "nome": "Ticket acquisiti",
-                                            "state": "ticket.ofCurrentAssistant"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Team",
-                                    "num": 7,
-                                    "icon": "fa-users",
-                                    item: [{
-                                        "nome": "Informazioni Team",
-                                        "state": "team.list"
-                                    }]
-                                },
-                                {
-                                    "title": "Prodotto Software",
-                                    "num": 8,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Elenco Prodotti Software",
-                                            "state": "productsoftware.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Pianificazione",
-                                    "num": 9,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Visualizza Gantt",
-                                            "state": "gantt.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Workflow",
-                                    "num": 14,
-                                    //"icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "Gestione workflow",
-                                            "state": "workflow.dashboard"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                        //} else if ($scope.userInfo.userType === "customer") {
-                    } else if ($scope.userInfo.userRole === 'CUSTOMER') {
-                        $scope.sidebarList = {
-                            lists: [
-                                {
-                                    "title": "Utente",
-                                    "num": 5,
-                                    "icon": "fa-user",
-                                    item: [
-                                        {
-                                            "nome": "Informazioni Utente",
-                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Ticket",
-                                    "num": 6,
-                                    "icon": "fa-ticket",
-                                    item: [{
-                                        "nome": "Inserisci Ticket",
-                                        "state": "ticket.create"
-                                    },
-                                        {
-                                            "nome": "Elenco Ticket",
-                                            "state": "ticket.customer"
-                                        }]
-                                }
-                            ]
-                        }
-                    } else if ($scope.userInfo.userRole === 'TEAM_LEADER') {
-                        $scope.sidebarList = {
-                            lists: [
-                                {
-                                    "title": "Utente",
-                                    "num": 5,
-                                    "icon": "fa-user",
-                                    item: [
-                                        {
-                                            "nome": "Informazioni Utente",
-                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Ticket",
-                                    "num": 6,
-                                    "icon": "fa-ticket",
-                                    item: [
-                                        {
-                                            "nome": "Elenco Ticket",
-                                            "state": "ticket.list"
-                                        }/*,
-                                        {
-                                            "nome": "Ticket acquisiti",
-                                            "state": "ticket.ofCurrentAssistant"
-                                        }*/
-                                    ]
-                                },
-                                {
-                                    "title": "Team",
-                                    "num": 7,
-                                    "icon": "fa-users",
-                                    item: [{
-                                        "nome": "Informazioni Team",
-                                        "state": "team.list"
-                                    }]
-                                },
-                                {
-                                    "title": "Prodotto Software",
-                                    "num": 8,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Elenco Prodotti Software",
-                                            "state": "productsoftware.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Pianificazione",
-                                    "num": 9,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Visualizza Gantt",
-                                            "state": "gantt.list"
-                                        }
-                                        /*,
-                                      {
-                                            "nome": "Pianifica",
-                                            "state": "gantt.planning"
-                                        }*/]
-
-                                },
-                                {
-                                    "title": "Workflow",
-                                    "num": 14,
-                                    //"icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "Gestione workflow",
-                                            "state": "workflow.dashboard"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    } else if ($scope.userInfo.userRole === 'TEAM_COORDINATOR') {
-                        $scope.sidebarList = {
-                            lists: [
-                                {
-                                    "title": "Utente",
-                                    "num": 5,
-                                    "icon": "fa-user",
-                                    item: [
-                                        {
-                                            "nome": "Informazioni Utente",
-                                            "state": "user.info({userId:" + $scope.userInfo.userId + "})"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Ticket",
-                                    "num": 6,
-                                    "icon": "fa-ticket",
-                                    item: [
-                                        {
-                                            "nome": "Elenco Ticket",
-                                            "state": "ticket.list"
-                                        },
-                                        {
-                                            "nome": "Ticket acquisiti",
-                                            "state": "ticket.ofCurrentAssistant"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "Team",
-                                    "num": 7,
-                                    "icon": "fa-users",
-                                    item: [{
-                                        "nome": "Informazioni Team",
-                                        "state": "team.list"
-                                    }]
-                                },
-                                {
-                                    "title": "Prodotto Software",
-                                    "num": 8,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Elenco Prodotti Software",
-                                            "state": "productsoftware.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Pianificazione",
-                                    "num": 9,
-                                    "icon": "fa-desktop",
-                                    item: [
-                                        {
-                                            "nome": "Visualizza Gantt",
-                                            "state": "gantt.list"
-                                        }]
-                                },
-                                {
-                                    "title": "Workflow",
-                                    "num": 14,
-                                    //"icon": "fa-list-alt",
-                                    item: [
-                                        {
-                                            "nome": "Gestione workflow",
-                                            "state": "workflow.dashboard"
-                                        }
-                                    ]
-                                }
-                            ]}
+                    let authorities = $scope.userInfo.authorities;
+                    let sidebar = JSON.parse(storageService.get('sidebar'));
+                    $scope.sidebarList = { lists: []};
+                    var subsidebar;
+                    if(authorities.length > 0) {
+                        $scope.sidebarList.lists= $scope.sidebarList.lists.concat(sidebar[authorities[0].authority]);
                     }
+                    for(var i = 1; i < authorities.length; ++i) {
+                         subsidebar = sidebar[authorities[i].authority];
+                        for (var j in subsidebar) {
+                            var notIn = true;
+                            for(var z = 0; z < $scope.sidebarList.lists.length; ++z) {
+                                if($scope.sidebarList.lists[z].title === subsidebar[j].title) {
+                                    var notIn = false;
+                                    break;
+                                }
+                            }
+                            if(notIn) {$scope.sidebarList.lists.push(subsidebar[j]);}
+                        }
+                    }
+                    // let _sidebarList = JSON.parse(storageService.get('sidebar'));
+                    // $scope.sidebarList.lists = $scope.sidebarList.lists.concat(_sidebarList[$scope.userInfo.userRole]);
+                    function compare( a, b ) {
+                        if ( a.num < b.num ){
+                            return -1;
+                        }
+                        if ( a.num > b.num ){
+                            return 1;
+                        }
+                        return 0;
+                    }
+
+                    $scope.sidebarList.lists.sort( compare );
 
                 };
 

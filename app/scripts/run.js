@@ -11,6 +11,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
             AclService.setAbilities(aclData.roles);
             storageService.save('routes', JSON.stringify(aclData.routes));
             storageService.save('simbolicPermissions', JSON.stringify(aclData.simbolicPermissions));
+            storageService.save('sidebar', JSON.stringify(aclData.sidebar));
             //var obj = JSON.parse(prova);
             //console.log(obj);
         }, function (response) {
