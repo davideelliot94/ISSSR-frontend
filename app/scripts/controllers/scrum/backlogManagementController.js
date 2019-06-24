@@ -17,19 +17,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.isActiveSprint = false;
     $scope.isSelectedProduct = false;
 
-    // Questa funzione valorizza la priorità di un item in modo tale da poter
-    // ordinare le voci all'interno dello Sprint Backlog
-    $scope.priorityLevel = function(backlogItem) {
-        if (backlogItem.priority === 'HIGH') {
-            return 1;
-        } else if (backlogItem.priority === 'MEDIUM') {
-            return 2;
-        } else if (backlogItem.priority === 'LOW'){
-            return 3;
-        } else {
-            return 4;
-        }
-    };
+
 
     // Si inizializza la combobox con tutti i prodotti su cui lavora uno Scrum Team di cui fa parte l'utente loggato
     let initializeProductList = function () {
@@ -95,33 +83,6 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             }, function errorCallback(response){
                 ToasterNotifierHandler.handleError(response);
             });
-        // Popolamento dello sprint backlog
-        BacklogItemService.getSprintBacklogItemService($scope.backlogItem.product.id)
-            .then(function successCallback(items) {
-                // Alla lista degli item viene aggiunto un item fittizio che servirà da placeholder nell'interfaccia grafica
-                items.push({'id': '', title: 'placeholder', description: 'placeholder', status: '', effortEstimation: 0, priority: 'PLACEHOLDER'});
-                $scope.sprintBacklogItems = items;
-                $scope.isActiveSprint = true;
-            }, function errorCallback(response){
-                if (response.status === 404){
-                    $scope.isActiveSprint = false;
-                } else{
-                    ToasterNotifierHandler.handleError(response);
-                }
-            });
-    };
-
-    $scope.setItemToChange = function(event, ui, backlogItem){
-        $scope.backlogItemToChange = backlogItem;
-    };
-
-    $scope.changeItemStateTo = function(event, ui, newState){
-        BacklogItemService.changeItemStateToService($scope.backlogItemToChange.id, newState)
-            .then(function successCallback() {
-                $scope.populateBacklog();
-            }, function errorCallback(response){
-                ToasterNotifierHandler.handleError(response);
-            });
     };
 
     $scope.deleteBacklogItem = function (itemId){
@@ -134,24 +95,5 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     };
 
     initializeProductList();
-
-    //////////////////////////////////////////////////TUTTO QUESTO NON VA QUI
-    $scope.states = [];
-
-    // Apre la finestra di dettaglio contenente le informazioni sull'item del backlog
-    $scope.openSprintBacklogItemDetailDialog = function(sprintBacklogItem) {
-        $mdDialog.show({
-            controller: 'backlogItemDetailDialogController',
-            templateUrl: 'views/scrum/backlogItemDetailDialog.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-            // Passaggio del prodotto e dell'item selezionato
-            resolve: {
-                selectedBacklogItem: function () {
-                    return sprintBacklogItem;
-                }
-            }
-        });
-    };
 
 }]);

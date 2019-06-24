@@ -18,8 +18,6 @@
                             ng-model="ctrl.selectedTarget"
                             ng-required="true"
                             ng-change="ctrl.visualizeSprintsTrigger()">
-
-
                     </select>
                 </div>
             </div>
@@ -43,13 +41,11 @@
                                dt-options="dtOptions">
                             <thead>
                             <tr>
-
                                 <th class="col-md-1">Numero</th>
-                                <th class="col-md-1.5">Durata (Settimane)</th>
-                                <th class="col-md-1.5">Sprint Goal</th>
-
-                                <th class="col-md-1.5">Stato Attivazione</th>
-
+                                <th class="col-md-1">Durata (Settimane)</th>
+                                <th class="col-md-2">Sprint Goal</th>
+                                <th class="col-md-1">Stato Attivazione</th>
+                                <th class="col-md-1">Sprint Backlog</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -60,10 +56,19 @@
                                 <td>{{u.number}}</td>
                                 <td>{{u.duration}}</td>
                                 <td>{{u.sprintGoal}}</td>
-                                <td align = "center">
-                                    <span ng-class="{'badge progress-bar-danger': u.isActive == false,'badge progress-bar-success': u.isActive == true, 'badge progress-bar-secondary': u.isActive == null}">
+                                <td align="center">
+                                    <span ng-class="{'badge progress-bar-danger': u.isActive == false,
+                                                     'badge progress-bar-success': u.isActive == true,
+                                                     'badge progress-bar-secondary': u.isActive == null}">
                                         {{u.isActive | activeSprintFilter}}
                                     </span>
+                                </td>
+                                <td align="center">
+                                    <button title="Visualizza Sprint Backlog"
+                                            ng-click="ctrl.viewSprintBacklog(u)"
+                                            class="btn btn-primary">
+                                        <i class="fa fa-book"></i>
+                                    </button>
                                 </td>
 
 
