@@ -45,6 +45,9 @@
     <script src="bower_components/angular-swx-session-storage/release/swx-session-storage.js"></script>
     <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
     <script src="bower_components/angular-acl/src/angular-acl.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/Chart.js/dist/Chart.min.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -149,6 +152,7 @@
     <script src="scripts/controllers/scrum/scrumCeremonyDetailDialogController.js"></script>
 
 
+    <script src="scripts/controllers/scrum/burnDownChartController.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/services.js -->
@@ -167,7 +171,7 @@
     <script src="scripts/service/RequestsLogsDataFactory.js"></script>
     <script src="scripts/service/AuditingLogDataFactory.js"></script>
     <script src="scripts/service/ErrorStateRedirector.js"></script>
-    <script src="scripts/service/AclRouteProtector.js"></script>
+    <script src="scripts/service/AclProtector.js"></script>
     <script src='scripts/service/PlanningDataFactory.js'></script>
     <script src='scripts/service/BacklogItemService.js'></script>
     <script src='scripts/service/ScrumProductService.js'></script>
@@ -175,6 +179,7 @@
     <script src='scripts/service/ScrumProductWorkflowService.js'></script>
     <script src='scripts/service/SprintService.js'></script>
     <script src="scripts/states/scrum.state.js"></script>
+    <script src="scripts/service/BurndownChartDataFactory.js"></script>
     <script src="scripts/states/scrumCeremonies.state.js"></script>
     <script src="scripts/service/ScrumCeremonyService.js"></script>
 

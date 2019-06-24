@@ -68,13 +68,13 @@
                                 <div class="form-group"
                                      ng-class="{'has-success': ctrl.currentSoftwareProduct.categories}">
                                     <label>Categorie ticket</label>
-                                    <tags-input  ng-model="ctrl.currentSoftwareProduct.categories" style="margin-left: 10px;min-width: 680px;min-height: 41px"></tags-input>
+                                    <tags-input ng-model="ctrl.currentSoftwareProduct.categories"></tags-input>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <button type="submit" class="btn btn-primary"
-                            ng-disabled="!(!formCreateSP.$invalid && hasPermission('software_create'))"
+                            ng-disabled="(formCreateSP.$invalid  )"
                             ng-click="ctrl.insertProduct()">Inserisci Prodotto
                     </button>
                     <button type="reset" class="btn btn-danger" ng-click="ctrl.resetFields()">Reset</button>

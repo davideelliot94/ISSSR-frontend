@@ -20,8 +20,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: "ctrlNewRelation",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateRelationNew);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateRelationNew);
                     }
                 }
             })
@@ -31,8 +31,8 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl: 'views/planning/relation.html',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateRelationCreate);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateRelationCreate);
                     }
                 }
             })
@@ -40,8 +40,8 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl:"views/planning/dialog1.tmpl.html",
                 url: '/relationview',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateRelationView);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateRelationView);
                     }
                 }
             })

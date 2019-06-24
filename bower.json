@@ -18,7 +18,7 @@
     "angular-ui-router": "^1.0.18",
     "angular-toggle-switch": "~1.2.1",
     "metisMenu": "~1.1.3",
-    "angular-chart.js": "~0.5.2",
+    "angular-chart.js": "1.0.0",
     "angular-ui-select": "^0.19.8",
     "angularjs-datatables": "^0.5.9",
     "datatables.net-jqui": "^2.1.1",

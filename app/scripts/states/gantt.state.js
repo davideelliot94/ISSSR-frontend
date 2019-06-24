@@ -21,8 +21,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: "showGantt",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('gantt.list');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('gantt.list');
                     }
                 }
             })
@@ -32,8 +32,8 @@ mainAngularModule.config(['$stateProvider',
                 controller:"MainGanttCtrl",
                 controllerAs: 'ctrl',
                 /*resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('gantt');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('gantt');
                     }
                 }*/
             })
@@ -42,8 +42,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: "planningDialog",
                 url: '/planning',
                 /*resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission('gantt');
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission('gantt');
                     }
                 }*/
             })

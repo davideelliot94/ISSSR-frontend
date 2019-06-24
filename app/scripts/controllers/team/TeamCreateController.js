@@ -9,13 +9,11 @@
 mainAngularModule
     .controller('TeamCreateCtrl', ['$scope', '$state', 'TeamDataFactory', 'ErrorStateRedirector',
         function ($scope, $state, TeamDataFactory, ErrorStateRedirector) {
-
             var ctrl = this;
             resetFieldsFn();
 
             ctrl.resetFields = resetFieldsFn;
             ctrl.insertTeam = insertTeamFn;
-
             function resetFieldsFn() {
                 ctrl.currentTeam = {};
             }

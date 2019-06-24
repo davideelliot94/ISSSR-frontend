@@ -19,8 +19,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'TicketListCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateTicketList);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateTicketList);
                     }
                 }
             })
@@ -30,8 +30,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'TicketCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateTicketCreate);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateTicketCreate);
                     }
                 }
             })

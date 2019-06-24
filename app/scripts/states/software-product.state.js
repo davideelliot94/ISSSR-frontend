@@ -20,8 +20,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'ProductSoftwareListCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateSoftwareProductList);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateSoftwareProductList);
                     }
                 }
             })
@@ -31,8 +31,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'ProductSoftwareCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateSoftwareProductCreate);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateSoftwareProductCreate);
                     }
                 }
             })
@@ -42,8 +42,8 @@ mainAngularModule.config(['$stateProvider',
                 controller: 'ProductSoftwareEditCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclRouteProtector) {
-                        return AclRouteProtector.checkRoutePermission(stateSoftwareProductEdit);
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(stateSoftwareProductEdit);
                     }
                 }
             });

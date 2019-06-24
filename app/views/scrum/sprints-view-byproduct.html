@@ -45,7 +45,9 @@
                                 <th class="col-md-1">Durata (Settimane)</th>
                                 <th class="col-md-2">Sprint Goal</th>
                                 <th class="col-md-1">Stato Attivazione</th>
+                                <th class="col-md-1">Avvia/Termina Sprint</th>
                                 <th class="col-md-1">Sprint Backlog</th>
+                                <th class="col-md-1">Burndown Chart</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,10 +66,31 @@
                                     </span>
                                 </td>
                                 <td align="center">
+                                    <button title="Termina Sprint"
+                                            ng-click="ctrl.closeSprint(u)"
+                                            ng-if="u.isActive"
+                                            class="btn btn-danger">
+                                        <i class="fa fa-stop"></i>
+                                    </button>
+                                    <button title="Avvia Sprint"
+                                            ng-click="ctrl.activateSprint(u)"
+                                            ng-if="ctrl.isFollowingSprint(u)"
+                                            class="btn btn-success">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </td>
+                                <td align="center">
                                     <button title="Visualizza Sprint Backlog"
                                             ng-click="ctrl.viewSprintBacklog(u)"
                                             class="btn btn-primary">
                                         <i class="fa fa-book"></i>
+                                    </button>
+                                </td>
+                                <td align="center">
+                                    <button title="Visualizza Burndown Chart"
+                                            ng-click="ctrl.viewBurndownChart(u)"
+                                            class="btn btn-primary">
+                                        <i class="fa fa-area-chart"></i>
                                     </button>
                                 </td>
 

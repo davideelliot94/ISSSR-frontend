@@ -21,8 +21,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(statePermissionTeam);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(statePermissionTeam);
                 }
             }
         }).state(statePermissionTicket, {
@@ -31,8 +31,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(statePermissionTicket);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(statePermissionTicket);
                 }
             }
         }).state(statePermissionProduct, {
@@ -41,8 +41,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(statePermissionProduct);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(statePermissionProduct);
                 }
             }
         }).state(statePermissionGroup, {
@@ -51,8 +51,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'UserPermissionController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(statePermissionGroup);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(statePermissionGroup);
                 }
             }
         }).state('permissions.details', {

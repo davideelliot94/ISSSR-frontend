@@ -20,8 +20,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'GroupListController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(stateGroupList);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(stateGroupList);
                 }
             }
         }).state(stateGroupCreate, {
@@ -30,8 +30,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'GroupCreateController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(stateGroupCreate);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(stateGroupCreate);
                 }
             }
         }).state(stateGroupEdit, {
@@ -40,8 +40,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'GroupEditController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(stateGroupEdit);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(stateGroupEdit);
                 }
             }
         }).state(stateGroupDetails, {
@@ -50,8 +50,8 @@ mainAngularModule.config(['$stateProvider',
             controller: 'GroupHandlerController',
             controllerAs: 'ctrl',
             resolve: {
-                acl: function (AclRouteProtector) {
-                    return AclRouteProtector.checkRoutePermission(stateGroupDetails);
+                acl: function (AclProtector) {
+                    return AclProtector.checkRoutePermission(stateGroupDetails);
                 }
             }
         })

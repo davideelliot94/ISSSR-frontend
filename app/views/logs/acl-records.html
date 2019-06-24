@@ -79,7 +79,7 @@
             <div class="row">
                 <button class="btn btn-primary default" ng-click="ctrl.refreshRecords()">Aggiorna records</button>
                 <button class="btn btn-danger" ng-click="ctrl.removeAllRecords()"
-                        ng-disabled="!hasPermission('log_delete')">Rimuovi Tutti i Logs
+                        ng-if ="hasPermission('logDeleteButton')">Rimuovi Tutti i Logs
                 </button>
             </div>
 
