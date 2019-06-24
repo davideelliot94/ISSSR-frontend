@@ -5,6 +5,18 @@ mainAngularModule.controller('scrumCeremoniesController', ['$scope', 'SprintServ
 
     $scope.sprints = [];
 
+    // funzione usata per il rendering del tipo della scrum ceremony
+    $scope.formatType = function (type) {
+        if (type === 'SPRINT_REVIEW') {
+            return 'Sprint Review';
+        } else if (type === 'SPRINT_RETROSPECTIVE') {
+            return 'Sprint Retrospective';
+        } else {
+            return 'Sprint Planning Meeting';
+        }
+    };
+
+    // restituisce gli sprint su cui l'utente lavora
     $scope.getSprints = function () {
         let userId = AuthFactory.getAuthInfo().userId;
         SprintService.getUserSprints(userId).then(
@@ -16,6 +28,7 @@ mainAngularModule.controller('scrumCeremoniesController', ['$scope', 'SprintServ
         );
     };
 
+    // riempie lo storico delle scrum ceremonies
     $scope.populateScrumCeremoniesHistory = function() {
         ScrumCeremonyService.getSprintScrumCeremonies($scope.selectedSprint.id).
         then(function successCallback(response) {
@@ -25,6 +38,7 @@ mainAngularModule.controller('scrumCeremoniesController', ['$scope', 'SprintServ
         });
     };
 
+    // si attiva quando l'utente seleziona lo sprint di cui intende visionare le ceremonies
     $scope.visualizeScrumCeremoniesHistoryTrigger = function () {
         $scope.populateScrumCeremoniesHistory();
         $scope.visualizeScrumCeremonies = true;

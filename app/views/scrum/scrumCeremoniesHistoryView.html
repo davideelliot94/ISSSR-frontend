@@ -41,9 +41,9 @@
                                    dt-options="dtOptions">
                                 <thead>
                                 <tr>
-                                    <th class="col-md-1">Data</th>
-                                    <th class="col-md-1">Tipo</th>
-                                    <th class="col-md-1"></th>
+                                    <th class="col-md-5">Data</th>
+                                    <th class="col-md-5">Tipo</th>
+                                    <th class="col-md-2"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,7 +52,7 @@
                                     <!--                            <tr ng-repeat="u in ctrl.sprints" ng-show="u.isActive==null">-->
 
                                     <td>{{u.date | date}}</td>
-                                    <td>{{u.type}}</td>
+                                    <td>{{formatType(u.type)}}</td>
                                     <td align="center">
                                         <button title="Dettagli" ng-click="showCeremonyDetail(u)"
                                         class="btn btn-primary">
@@ -71,6 +71,7 @@
             </div>
             <!-- /.panel -->
             <div class="row">
+<!--           TODO     ng-disabled="!selectedSprint.isUserScrumMaster"-->
                 <button class="btn btn-primary" ng-click="addScrumCeremony()">Aggiungi un evento</button>
 
             </div>
