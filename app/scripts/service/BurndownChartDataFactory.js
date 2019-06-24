@@ -41,7 +41,7 @@ mainAngularModule
                 console.log('getStoryPoint');
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/backlog/getStoryPoint/' + sprintId + '/' + date,
+                    url: BACKEND_BASE_URL + '/backlog/getStoryPoint/' + sprintId,
                 })
                     .then(function (response) {
                             if (successCB) {

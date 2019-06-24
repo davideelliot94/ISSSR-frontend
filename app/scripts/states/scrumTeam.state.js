@@ -20,7 +20,7 @@ mainAngularModule.config(['$stateProvider',
                 controllerAs: 'ctrl'
             })
             .state('scrumteam.burnDownChart', {
-                url: '/{sprintId:int}/viewGraph',
+                url: '/{sprintId:int}/{productName:string}/{sprintNumber:int}/viewGraph',
                 templateUrl: 'views/scrum/burnDownChart.html',
                 controller: 'LineCtrl',
                 controllerAs: 'ctrl'
