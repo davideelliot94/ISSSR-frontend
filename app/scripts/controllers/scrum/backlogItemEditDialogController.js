@@ -6,6 +6,7 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
 
         $scope.backlogItemPriorityClasses = ['LOW', 'MEDIUM', 'HIGH'];
         $scope.backlogItem = angular.copy(selectedBacklogItem);
+        $scope.productSprints = [];
 
         $scope.closeDialog = function() {
             $mdDialog.cancel();
@@ -27,16 +28,21 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
                 });
         };
 
-        let getAllSprintOfProduct = function () {
+        //Restituisce l'elenco degli sprint non chiusi per il prodotto selezionato
+        let getAllNotClosedSprintOfProduct = function () {
             SprintService.getAllSprintOfProductService(productId)
                 .then(function successCallback(response) {
-                        $scope.productSprints = response;
+                        for(let i = 0; i < response.length; i++){
+                            if (response[i].isActive !== false){
+                                ($scope.productSprints).push(response[i]);
+                            }
+                        }
                     },
                     function errorCallback(response){
                         ToasterNotifierHandler.handleError(response);
                     });
         };
 
-        getAllSprintOfProduct();
+        getAllNotClosedSprintOfProduct();
 
     }]);
