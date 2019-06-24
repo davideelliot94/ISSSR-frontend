@@ -25,15 +25,25 @@ mainAngularModule
 
                 $scope.setSidebar = function () {
                     console.log("entro nella setSidebar");
-                    $scope.userInfo = AuthFactory.getAuthInfo();
-                    let x = AuthFactory.getAuthInfo;
-                    console.log("userinfo scope: " + JSON.stringify($scope.userInfo));
-                    console.log("rolep " + $scope.userInfo.userRole);
-                    let x2 = console.log("rolep2 " + JSON.stringify(x.userRole));
+
+                    let response = localStorage.getItem("response");
+                    let response2 = JSON.parse(response);
+                    if(response2 !== null && response2 !== undefined){
+                        let authInfo = response2.data;
+                        let debugJWT = true;
+                        AuthFactory.retrieveJWTAuthInfo(authInfo);
+                        $scope.userInfo = AuthFactory.getAuthInfo();
+                    }
+                    else{
+                        $scope.userInfo = AuthFactory.getAuthInfo();
+
+                    }
+
                     if ($scope.userInfo == null) {
                         //$state.go('login');
                         //} else if ($scope.userInfo.userType === 'admin') {
                     } else if ($scope.userInfo.userRole === 'ADMIN') {
+                        console.log("it's admin");
                         $scope.sidebarList = {
                             lists: [
                                 {

@@ -58,7 +58,12 @@ mainAngularModule
                             }
                         }, function (response) {
                             console.error(response);
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nell\'inserimento del ticket'});
+                            let msgErr = "Errore nell'inserimento del ticket";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+                            //ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nell\'inserimento del ticket'});
                         });
                 }
 

@@ -117,7 +117,7 @@ console.log("targets", response);
 
                 }, function error(response) {
                 });
-        }
+        };
 
 
         /**

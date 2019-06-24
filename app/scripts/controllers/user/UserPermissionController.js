@@ -36,7 +36,11 @@ mainAngularModule
                     TeamDataFactory.GetSingle(ctrl.currentObject.id, function (team) {
                         ctrl.currentObject.name = team.name;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del team"});
+                        let msgErr = "Errore nel recupero del team";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     })
 
                 } else if (objectType === "ticket") {
@@ -45,7 +49,11 @@ mainAngularModule
                     TicketDataFactory.GetSingle(ctrl.currentObject.id, function (ticket) {
                         ctrl.currentObject.name = ticket.title;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del ticket"});
+                        let msgErr = "Errore nel recupero del ticket";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     })
 
                 } else if (objectType === "group") {
@@ -56,7 +64,11 @@ mainAngularModule
                         ctrl.currentObject.name = group.name;
                         console.log(ctrl.currentObject);
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del gruppo"});
+                        let msgErr = "Errore nel recupero del gruppo";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     })
 
                 }
@@ -67,7 +79,11 @@ mainAngularModule
                         ctrl.currentObject.name = product.name;
                         console.log(product);
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del prodotto"});
+                        let msgErr = "Errore nel recupero del prodotto";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     })
 
                 }

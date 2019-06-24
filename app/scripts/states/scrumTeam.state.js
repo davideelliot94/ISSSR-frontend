@@ -16,10 +16,11 @@ mainAngularModule.config(['$stateProvider',
             .state('scrumteam.create', {
                 url: '/create',
                 templateUrl: 'views/scrumTeam/scrum-team-create.html',
-                controller: 'ScrumTeamCreateCtrl',
-                controllerAs: 'ctrl',
+                controller: ['ScrumTeamCreateCtrl','SessionCtrl.js'],
+                controllerAs: ['ctrl','ctrl2'],
                 resolve: {
                     acl: function (AclRouteProtector) {
+                        console.log("AclRouteProtector");
                         return AclRouteProtector.checkRoutePermission('scrum_team_create');
                     }
                 }

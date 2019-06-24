@@ -9,15 +9,17 @@
  */
 
 mainAngularModule
-    .factory('TeamDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL', 'TEAM_ENDPOINT_URL', '$q',
-        function ($http, ToasterNotifierHandler, BACKEND_BASE_URL, TEAM_ENDPOINT_URL, $q) {
+    .factory('TeamDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL','TEAM_ENDPOINT_URL','SESSION_ENDPOINT_URL','$q',
+        function ($http, ToasterNotifierHandler, BACKEND_BASE_URL, TEAM_ENDPOINT_URL,SESSION_ENDPOINT_URL, $q) {
             var thisCrudService = {};
 
-            var _endPointJSON = BACKEND_BASE_URL + TEAM_ENDPOINT_URL;
+            var _endPointJSON = BACKEND_BASE_URL + SESSION_ENDPOINT_URL;
+            //var _endPointJSON = BACKEND_BASE_URL + TEAM_ENDPOINT_URL;
 
             thisCrudService.GetAll = GetAllFn;
             thisCrudService.GetSingle = GetSingleFn;
             thisCrudService.Insert = InsertFn;
+            //thisCrudService.checkExpiredToken=checkExpiredTokenFn;
             thisCrudService.Update = UpdateFn;
             thisCrudService.Remove = RemoveFn;
 
@@ -29,15 +31,15 @@ mainAngularModule
             // get all data from database
             function GetAllFn(successCB, errorCB) {
 
-               // alert("team get all fn: " + _endPointJSON);
+                // alert("team get all fn: " + _endPointJSON);
                 $http({
                     method: 'GET',
                     url: _endPointJSON,
-                   //url: 'http://localhost:8200/ticketingsystem/users',
-                   // url: 'http://localhost:8200/ticketingsystem/teams'
+                    //url: 'http://localhost:8200/ticketingsystem/users',
+                    // url: 'http://localhost:8200/ticketingsystem/teams'
                 })
                     .then(function (response) {
-                        console.log(response);
+                            console.log(response);
                             if (successCB) {
                                 successCB(response.data);
                             }
@@ -76,18 +78,24 @@ mainAngularModule
                         });
             }
 
+
+
+
+
             // post the data from database
             function InsertFn(team, successCB, errorCB) {
-                console.log("insertFn")
+                console.log("insertFn");
+                _endPointJSON = BACKEND_BASE_URL + TEAM_ENDPOINT_URL;
+
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
                     data: team
                 })
                     .then(function (response) {
-                            console.log("function response")
+                            console.log("function response");
                             if (successCB) {
-                                console.log(response.data)
+                                console.log(response.data);
                                 successCB(response.data);
                                 ToasterNotifierHandler.handleCreation(response);
                             }
@@ -240,4 +248,3 @@ mainAngularModule
 
             return thisCrudService;
         }]);
-

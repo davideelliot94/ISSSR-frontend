@@ -15,14 +15,14 @@ mainAngularModule
 
             softwareProductDataFactory.metadata(function (response) {
                 ctrl.targetTypes = response.data.targetTypes;
-                console.log("types", ctrl.targetTypes)
+                console.log("types", ctrl.targetTypes);
             }, function () {
                 alert("Invalid metadata");
             });
 
             StateMachineDataFactory.getStateMachines(function (response) {
                 ctrl.stateMachines = response.data;
-                console.log("stateMachines", ctrl.stateMachines)
+                console.log("stateMachines", ctrl.stateMachines);
             }, function () {
                 alert("Error: getStateMachines")
             });
@@ -34,7 +34,12 @@ mainAngularModule
                         ctrl.currentSoftwareProduct = response;
                         console.log("curreSoft", response);
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del prodotto"});
+                            let msgError = "Errore nel recuper del prodotto";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+                        //ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del prodotto"});
                     });
             }
 

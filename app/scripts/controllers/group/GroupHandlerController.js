@@ -69,7 +69,11 @@ mainAngularModule
                         mergeSidsFn();
                         mergeUserFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del gruppo"});
+                        let msgErr = "Errore nel recupero del gruppo";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -81,7 +85,11 @@ mainAngularModule
 
                         promise.resolve();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei SID"});
+                        let msgErr = "Errore nel recupero dei SID";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -94,7 +102,11 @@ mainAngularModule
 
                         promise.resolve();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli utenti"});
+                        let msgErr = "Errore nel recupero degli utenti";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -105,7 +117,11 @@ mainAngularModule
                         console.log(resp);
                         $state.go('group.list')
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella costruzione del gruppo"});
+                        let msgErr = "Errore nella costruzione del gruppo";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 

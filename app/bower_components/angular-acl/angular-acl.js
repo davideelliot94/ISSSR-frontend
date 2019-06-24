@@ -152,9 +152,7 @@ angular.module('mm.acl').provider('AclService', [
      * @param role
      */
     AclService.attachRole = function (role) {
-        console.log("role: " + role);
       if (data.roles.indexOf(role) === -1) {
-        console.log("indexOf");
         data.roles.push(role);
         save();
       }
@@ -272,10 +270,12 @@ angular.module('mm.acl').provider('AclService', [
         abilities = getRoleAbilities(role);
         if (abilities.indexOf(ability) > -1) {
           // Ability is in role abilities
+          console.log("istrue0");
           return true;
         }
       }
       // We made it here, so the ability wasn't found in attached roles
+      console.log("returning false can");
       return false;
     };
 

@@ -51,14 +51,27 @@ mainAngularModule
             }
 
             function insertScrumTeamFn() {
-                console.log('insertScurmTeamFn')
+
+                //chiamare controller sessione per vedere se token è scaduto!!!!!!"
+
+                $scope.$on('someEvent', function(event, data) {
+                    console.log(data); });
+
+
+
+
+                console.log('insertScrumTeamFn')
                 ScrumTeamDataFactory.Insert(ctrl.currentScrumTeam,
                     function (response) {
                         console.log(response);
                         resetFieldsFn();
                         $state.go('dashboard.home');
                     }, function (response) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento dello scrum team"})
+                        let msgErr = "Errore nell'inserimento dello scrum team";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 

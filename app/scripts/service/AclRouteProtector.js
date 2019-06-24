@@ -7,6 +7,7 @@ mainAngularModule
             if (AclService.can(permission)) {
                 return true;
             } else {
+                console.log("returning unauthoriized");
                 return $q.reject('Unathorized');
             }
         };

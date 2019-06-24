@@ -21,8 +21,11 @@ mainAngularModule
                 $scope.Logout = LogoutFn;
 
                 function LogoutFn() {
+                    let logUs = localStorage.getItem(AuthFactory.getAuthInfo().username);
+                    console.log("was logged user: " + logUs);
+                    sessionStorage.removeItem("authInfo");
+                    localStorage.removeItem(AuthFactory.getAuthInfo().username);
                     AuthFactory.deleteAuthInfo();
-                    localStorage.removeItem("response");
                 }
             }
         }

@@ -30,7 +30,11 @@ mainAngularModule
                     function (logs) {
                         ctrl.auditingLogs = logs;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell recupero dei dati di auditing"});
+                        let msgErr = "Errore nell recupero dei dati di auditing";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -41,7 +45,11 @@ mainAngularModule
                     function () {
                         refreshAuditingLogsFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella rimozione del record di auditing"});
+                        let msgErr = "Errore nella rimozione del record di auditing";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -51,7 +59,11 @@ mainAngularModule
                     function () {
                         refreshAuditingLogsFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella rimozione dei record di auditing"});
+                        let msgErr = "Errore nella rimozione dei record di auditing";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 

@@ -5,65 +5,44 @@
  * @description
  * # LoginCtrl
  */
+
+
+
 mainAngularModule
-    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory',
-        function ($scope, $state, AuthFactory) {
+    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory','ToasterNotifierHandler',
+        function ($scope, $state, AuthFactory,ToasterNotifierHandler) {
 
             let ctrl = this;
-            let response = localStorage.getItem("response");
-            let response2 = JSON.parse(response);
+            let authInfo = JSON.parse(sessionStorage.getItem("authInfo"));
+
+            //check if user already logged in session
+            if(authInfo !== null && authInfo !== undefined){
+                AuthFactory.retrieveJWTAuthInfo(authInfo);
+                $state.go("dashboard.home");
+
+            }
 
 
             ctrl.authRequest = {username: 'admin', password: 'password'};
-
-
-            //check if user already logged
-            if(response2 !== null && response2 !== undefined){
-                let authInfo = response2.data;
-                let debugJWT = true;
-                AuthFactory.retrieveJWTAuthInfo(authInfo);
-                $state.go("dashboard.home");
-            }
-
-
             ctrl.doLogin = doLoginFn;
-
-
             ctrl.authMessage = '';
-
-
-            /*let sessionStorage_transfer = function(event) {
-                if(!event) { event = window.event; } // ie suq
-                if(!event.newValue) return;          // do nothing if no value to work with
-                if (event.key === 'getSessionStorage') {
-                    // another tab asked for the sessionStorage -> send it
-                    localStorage.setItem('sessionStorage', JSON.stringify(sessionStorage));
-                    // the other tab should now have it, so we're done with it.
-                } else if (event.key === 'sessionStorage' && !sessionStorage.length) {
-                    // another tab sent data <- get it
-                    var data = JSON.parse(event.newValue);
-                    for (var key in data) {
-                        sessionStorage.setItem(key, data[key]);
-                    }
-                }
-            };*/
-
-// listen for changes to localStorage
-            if(window.addEventListener) {
-                window.addEventListener("storage", sessionStorage_transfer, false);
-            } else {
-                window.attachEvent("onstorage", sessionStorage_transfer);
-            }
 
 
 
 
             function doLoginFn() {
+                console.log("sending login");
                 AuthFactory.sendLogin(ctrl.authRequest, successCB, errorCB);
+                console.log("sended login");
+
 
                 function successCB(response) {
+                    console.log("success login");
                     let authInfo = response.data;
+
+
                     let header = response.headers();
+                    console.log("retrieved data: " + JSON.stringify(response));
                     authInfo.jwtToken = header['authorization'];
 
                     let debugJWT = true;
@@ -76,13 +55,26 @@ mainAngularModule
                         console.log("ended.");
                     }
 
-                    localStorage.setItem("response",JSON.stringify(response));
+                    sessionStorage.setItem("authInfo",JSON.stringify(authInfo));
 
-                    AuthFactory.setJWTAuthInfo(authInfo);
-                    $state.go("dashboard.home");
+                    let userL = localStorage.getItem(authInfo.username);
+
+                    console.log("userL: " + userL);
+                    if(userL !== null && userL !== undefined){
+                        ToasterNotifierHandler.showErrorToast("User already logged in another tab");
+                    }
+
+                    else {
+                        localStorage.setItem(authInfo.username,authInfo.username);
+                        AuthFactory.setJWTAuthInfo(authInfo);
+                        $state.go("dashboard.home");
+                    }
                 }
 
                 function errorCB(response) {
+                    console.log("error login");
+                    console.log("errorCB: " + JSON.stringify(response.data));
+                    console.log("error status: " + JSON.stringify(response.data.status));
                     let error = response.data;
                     if (error && error.status === 401) {
                         ctrl.authMessage = error.message;

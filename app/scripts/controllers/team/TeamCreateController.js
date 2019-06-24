@@ -9,9 +9,10 @@
 mainAngularModule
     .controller('TeamCreateCtrl', ['$scope', '$state', 'TeamDataFactory', 'ErrorStateRedirector',
         function ($scope, $state, TeamDataFactory, ErrorStateRedirector) {
-            //console.log("creating");
+
             var ctrl = this;
             resetFieldsFn();
+
             ctrl.resetFields = resetFieldsFn;
             ctrl.insertTeam = insertTeamFn;
 
@@ -20,14 +21,23 @@ mainAngularModule
             }
 
             function insertTeamFn() {
-                console.log('insertTeamFn: ' + ctrl.currentTeam.productOwner + "  " + ctrl.currentTeam.name + "   " + ctrl.currentTeam.scrumMaster + "    " + ctrl.currentTeam.teamMembers );
+                console.log("inside insert team fn");
                 TeamDataFactory.Insert(ctrl.currentTeam,
                     function (response) {
+                        console.log("ok response");
+                        console.log(response);
                         resetFieldsFn();
                         $state.go('team.list', {}, {reload: 'team.list'});
                     }, function (response) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del team"})
-                    });
+                        console.log("error response");
+                        let msgErr = "Errore nell'inserimento del team";
+
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+
+                });
             }
         }
 

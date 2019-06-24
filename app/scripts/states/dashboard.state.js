@@ -9,6 +9,7 @@ mainAngularModule.config(['$stateProvider', '$urlRouterProvider',
             .state('dashboard', {
                 url: '/dashboard',
                 templateUrl: 'views/dashboard/main.html',
+                //templateUrl: 'views/dashboard/home.html',
                 data: {
                     requiresLogin: true
                 },

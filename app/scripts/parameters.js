@@ -15,6 +15,11 @@ mainAngularModule
     .constant('SOFTWARE_PRODUCTS_ENDPOINT_URL', '/targets/')
     .constant('TEAM_ENDPOINT_URL', '/teams/')
     .constant('SCRUMTEAM_ENDPOINT_URL', '/scrumteams/')
+    .constant('SESSION_ENDPOINT_URL','/sessionUser')
+
+    //        "checkSessionUser": CONNECTION.url + '/sessionUser',
+
+
     .constant('USER_ENDPOINT_URL', '/users/')
     .constant('TICKET_ENDPOINT_URL', '/tickets/')
     .constant('LOGIN_ENDPOINT_URL', '/public/login/')

@@ -27,7 +27,11 @@ mainAngularModule
                             ctrl.tickets = tickets;
                             console.log("TicketListController", ctrl.tickets)
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei ticket"});
+                            let msgErr = "Errore nel recupero dei ticket";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                         });
                 }
 

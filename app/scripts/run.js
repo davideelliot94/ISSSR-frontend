@@ -30,9 +30,10 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
         console.info('isDebug: ' + $rootScope.isDebug);
 
         $transitions.onError({}, ($transition$) => {
+            console.log("transition on Error");
             var toStateName = $transition$.to().name;
             var fromStateName = $transition$.from().name;
-        if (toStateName != fromStateName) {
+        if (toStateName !== fromStateName) {
 
             let Msg = "Rotta non autorizzata";
             if (DEBUG) {
