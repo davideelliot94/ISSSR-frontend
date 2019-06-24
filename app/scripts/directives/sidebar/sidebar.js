@@ -186,10 +186,6 @@ mainAngularModule
                                             "state": "scrumteam.listassociate"
                                         },
                                         {
-                                            "nome": "Visualizza Sprint",
-                                            "state": "sprint.view"
-                                        },
-                                        {
                                             "nome": "Gestione Backlog",
                                             "state": "backlog_management.view"
                                         },
