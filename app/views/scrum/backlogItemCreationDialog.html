@@ -1,0 +1,51 @@
+<md-dialog aria-label="Inserimento Item nel Backlog">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #457AB2">
+            <h2>Inserimento Item nel Backlog</h2>
+        </div>
+    </md-toolbar>
+    <div class="container">
+        <form name="backlogItemCreationForm">
+            <br>
+            <div class="form-group" ng-class="{'has-error': backlogItemCreationForm.backlogItemTitle.$invalid && backlogItemCreationForm.backlogItemTitle.$dirty, 'has-success': backlogItemCreationForm.backlogItemTitle.$valid && backlogItemCreationForm.backlogItemTitle.$dirty}">
+                <label>Titolo *</label>
+                <input name="backlogItemTitle" type="text" class="form-control" ng-required="true" ng-maxlength="255" ng-model="backlogItem.title">
+            </div>
+            <div class="form-group" ng-class="{'has-error': backlogItemCreationForm.backlogItemDescription.$invalid && backlogItemCreationForm.backlogItemDescription.$dirty, 'has-success': backlogItemCreationForm.backlogItemDescription.$valid && backlogItemCreationForm.backlogItemDescription.$dirty}">
+                <label>Descrizione</label>
+                <textarea name="backlogItemDescription" class="form-control" ng-maxlength="255" ng-model="backlogItem.description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Priorità
+                    <select class="form-control"
+                            ng-init="backlogItem.priority = backlogItemPriorityClasses[1]"
+                            ng-options="priorityClass for priorityClass in backlogItemPriorityClasses"
+                            ng-model="backlogItem.priority">
+                    </select>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Stima dell'effort (Story Point)
+                    <input name="backlogItemEffortEstimation"
+                           type="number"
+                           class="form-control"
+                           min="1"
+                           ng-model="backlogItem.effortEstimation">
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="closeDialog()">
+                    Annulla
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-disabled="backlogItemCreationForm.$invalid"
+                        ng-click="insertBacklogItem()">
+                    Conferma
+                </button>
+            </div>
+        </form>
+    </div>
+</md-dialog>
