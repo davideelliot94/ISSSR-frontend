@@ -19,4 +19,20 @@ mainAngularModule
                     });
                 return deferred.promise;
             };
+            // La funzione cerca gli sprint associati ai prodotti su cui l'utente lavora
+            // o sta lavorando
+            this.getUserSprints = function (userId) {
+                let deferred = $q.defer();
+                $http.get(BACKEND_BASE_URL + SPRINT_ENDPOINT_URL + 'findByTeamMember/' + userId)
+                    .then(function successCallback(response) {
+                        if (response.status === 200) {
+                            deferred.resolve(response.data);
+                        } else {
+                            deferred.reject(response);
+                        }
+                    }, function errorCallback(response) {
+                        deferred.reject(response);
+                    });
+                return deferred.promise;
+            };
         }]);

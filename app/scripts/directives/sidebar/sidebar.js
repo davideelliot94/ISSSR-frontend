@@ -196,7 +196,12 @@ mainAngularModule
                                         {
                                             "nome": "Gestione Sprint",
                                             "state": "sprint.selectTargetForCreate"
+                                        },
+                                        {
+                                            "nome": "Gestione Scrum Ceremonies",
+                                            "state": "scrum_ceremonies.view"
                                         }
+
                                     ]
                                 }
                             ]
