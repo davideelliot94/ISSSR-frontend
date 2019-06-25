@@ -29,6 +29,7 @@ mainAngularModule
     .constant('AUDITING_ENDPOINT_URL', '/auditing-logs/')
     .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
     .constant('SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL', '/backlog/')
+    .constant('SCRUM_CEREMONY_ENDPOINT_URL', '/scrumCeremony/')
 
 
 ;

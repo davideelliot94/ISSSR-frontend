@@ -1,0 +1,40 @@
+<md-dialog aria-label="Dettaglio Scrum Ceremony">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #457AB2">
+            <h2>Dettaglio Scrum Ceremony</h2>
+        </div>
+    </md-toolbar>
+    <div class="container">
+        <br>
+        <label>Tipo</label>
+        <p>{{formatType(scrumCeremony.type)}}</p>
+        <label>Data</label>
+        <p>{{scrumCeremony.date | date}}</p>
+        <label>Durata (h)</label>
+        <p>{{scrumCeremony.duration}}</p>
+        <label>Partecipanti</label>
+        <ul>
+            <li ng-repeat="user in scrumCeremony.participants">
+                {{user.firstName + ' ' + user.lastName}}
+            </li>
+        </ul>
+        <label>Attività Svolte</label>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th class="col-md-1">Attività</th>
+                    <th class="col-md-3">Commento</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat= "activity in scrumCeremony.activities">
+                    <td>{{activity.name}}</td>
+                    <td>{{activity.comment}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</md-dialog>

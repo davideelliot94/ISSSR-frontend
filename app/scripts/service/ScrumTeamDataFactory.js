@@ -16,6 +16,7 @@ mainAngularModule
             var _endPointJSON = BACKEND_BASE_URL + SCRUMTEAM_ENDPOINT_URL;
 
             thisCrudService.Insert = InsertFn;
+            thisCrudService.FindScrumTeamBySprint = FindScrumTeamBySprintFn;
 
 
             // POST request to backend for srum team creation
@@ -52,6 +53,25 @@ mainAngularModule
                             console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
+            }
+
+            function FindScrumTeamBySprintFn(sprintId) {
+                let deferred = $q.defer();
+                $http.get(BACKEND_BASE_URL + SCRUMTEAM_ENDPOINT_URL + 'sprint/' + sprintId)
+                    .then(function successCallback(response) {
+                            if (response.status === 200) {
+                                deferred.resolve(response.data);
+                            } else {
+                                deferred.reject(new Error('Errore Interno'));
+                            }
+                        }, function errorCallback(response) {
+                            if (response.status === 400) {
+                                deferred.reject(new Error(' Richiesta non valida'));
+                            } else{
+                                deferred.reject(new Error('Errore Interno'));
+                            }}
+                    );
+                return deferred.promise;
             }
 
 
