@@ -16,7 +16,9 @@
                     <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
                          class="col col-2"
                          ng-repeat="state in product.scrumProductWorkflow.states"
-                         ng-if="sprint.isActive != false || state.split('*')[1] === 'Completato'"
+                         ng-if="(sprint.isActive == true) ||
+                                (sprint.isActive == false && state.split('*')[1] === 'Completato') ||
+                                (sprint.isActive == null && state.split('*')[1] === 'To do')"
                          data-drop="true"
                          data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
                          ng-style="">

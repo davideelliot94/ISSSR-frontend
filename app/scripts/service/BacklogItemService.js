@@ -81,6 +81,7 @@ mainAngularModule
                 return deferred.promise;
             };
 
+            // La funzione permette di cambiare lo stato di un item nello sprint backlog
             this.changeItemStateToService = function (itemId, newState) {
                 let deferred = $q.defer();
                 $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + itemId + '/' + newState)
@@ -96,9 +97,28 @@ mainAngularModule
                 return deferred.promise;
             };
 
+            // La funzione invia una richiesta al backedn per eliminare un item dal ProductBacklog
             this.deleteBacklogItemService = function(itemId){
                 let deferred = $q.defer();
                 $http.delete(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + itemId)
+                    .then(function successCallback(response) {
+                        if (response.status === 200) {
+                            deferred.resolve(response);
+                        } else {
+                            deferred.reject(response);
+                        }
+                    }, function errorCallback(response) {
+                        deferred.reject(response);
+                    });
+                return deferred.promise;
+            };
+
+            // La funzione invia una richiesta al backend per modificare un item del Product Backlog
+            this.editBacklogItemService = function(backlogItem){
+                let deferred = $q.defer();
+                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'edit',
+                    {'id': backlogItem.id, 'title': backlogItem.title, 'description' : backlogItem.description,
+                        'priority' : backlogItem.priority, 'effortEstimation': backlogItem.effortEstimation})
                     .then(function successCallback(response) {
                         if (response.status === 200) {
                             deferred.resolve(response);

@@ -3,7 +3,6 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
     'ToasterNotifierHandler', 'ScrumProductWorkflowService', 'scrumProductWorkflow',
     function($scope, $mdDialog, $state, ToasterNotifierHandler, ScrumProductWorkflowService, scrumProductWorkflow) {
 
-        console.log(scrumProductWorkflow)
         // Se scrumProductWorkflow è null significa che si sta creando un nuovo scrum Product Workflow altrimenti
         // ci si trova in fase di visualizzazione dello scrum Product Workflow.
         $scope.newStateName = '';
@@ -96,7 +95,13 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
                     $state.go('scrum.product_workflow');
 
                 }, function errorCallback(response){
-                    ToasterNotifierHandler.handleError(response);
+                    if (response.status === 409){
+                        ToasterNotifierHandler.showErrorToast('Impossibile modificare un Workflow se esso è associato' +
+                            ' a un Prodotto avente uno Sprint attivo');
+                        $mdDialog.hide();
+                    }else {
+                        ToasterNotifierHandler.handleError(response);
+                    }
                 });
         };
 

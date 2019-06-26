@@ -12,6 +12,18 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
             $mdDialog.cancel();
         };
 
+        $scope.editBacklogItem = function() {
+            BacklogItemService.editBacklogItemService($scope.backlogItem)
+                .then(function successCallback() {
+                    ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
+                    $mdDialog.hide();
+                    $state.go('backlog_management.view');
+                }, function errorCallback(){
+                    ToasterNotifierHandler.showErrorToast('Operazione Fallita');
+                });
+        };
+
+        // WARNING: NOT USED
         $scope.insertBacklogItemToSprintBacklog = function () {
             BacklogItemService.insertBacklogItemToSprintBacklogService(productId, $scope.backlogItem)
                 .then(function successCallback() {
