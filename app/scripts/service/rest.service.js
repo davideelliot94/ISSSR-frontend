@@ -90,6 +90,12 @@ mainAngularModule.service('restService', function () {
 
 
 
+
+        //check user session
+        "checkSessionUser": CONNECTION.url + '/sessionUser',
+
+
+
         "getTeams": CONNECTION.url + '/teams',
         "updateTeamMember": CONNECTION.url + '/teams/add_team_member',
 
