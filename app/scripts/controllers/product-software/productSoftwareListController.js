@@ -1,9 +1,10 @@
 'use strict';
 mainAngularModule
     .controller('ProductSoftwareListCtrl', ['$scope', '$window', 'ToasterNotifierHandler', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
-        'DTColumnDefBuilder', 'ScrumProductWorkflowService',
-        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory, ErrorStateRedirector,
-                  DTOptionsBuilder, DTColumnDefBuilder, ScrumProductWorkflowService) {
+        'DTColumnDefBuilder', 'ScrumProductWorkflowService', 'ScrumProductService',
+        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory,
+                  ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder,
+                  ScrumProductWorkflowService, ScrumProductService) {
 
             var ctrl = this;
             ctrl.refreshProduct = refreshProductFn;
@@ -12,6 +13,7 @@ mainAngularModule
             ctrl.retireTarget = retireTargetFN;
             ctrl.rehabTarget = rehabTargetFN;
             ctrl.isRetired = isRetiredFN;
+            ctrl.products = [];
 
 
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -24,10 +26,13 @@ mainAngularModule
             function refreshProductFn() {
                 softwareProductDataFactory.GetAll(
                     function (products) {
-                        ctrl.products = products;
-                        console.log(products);
-                    }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei prodotti"});
+                        for (let i = 0; i < products.length; i++){
+                            if (products[i].scrumTeamId === -1){
+                                ctrl.products.push(products[i]);
+                            }
+                        }
+                    }, function () {
+                        ToasterNotifierHandler.showErrorToast('Errore nel recupero dei prodotti');
                     });
 
             }
@@ -163,7 +168,21 @@ mainAngularModule
 
             };
 
+            // Associazione in fase di costruzione
             $scope.association = {};
+            // Associazioni preesistenti
+            $scope.assignments = {};
+
+            // Recupera tutti gli assegnamenti tra prodotti e scrum team esistenti
+            function getExistentAssignments(){
+                ScrumProductService.getExistentAssignmentsService()
+                    .then(function successCallback(response) {
+                        $scope.assignments = response;
+                    }, function errorCallback(){
+                        ToasterNotifierHandler.showErrorToast('Errore nel recupero delle ' +
+                            'associazioni esistenti');
+                    });
+            }
 
             // Recupera tutti i workflow per i prodotti Scrum
             function getScrumProductWorkflows(){
@@ -195,8 +214,8 @@ mainAngularModule
                 $scope.association.workflow = workflow;
             };
 
+            getExistentAssignments();
             getScrumTeams();
             getScrumProductWorkflows();
-
 
         }]);

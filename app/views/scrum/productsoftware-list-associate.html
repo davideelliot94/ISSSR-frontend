@@ -1,19 +1,54 @@
 <div>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Elenco dei Prodotti Software non ancora assegnati</h1>
+            <h1 class="page-header">Gestione Prodotti Scrum</h1>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
+
+    <!-- Tabella assegnamenti esistenti -->
     <div class="col-lg-12">
         <div class="row">
             <div class="panel panel-primary">
-                <div class="panel-heading">Selezionare Prodotto Software</div>
+                <div class="panel-heading">Elenco assegnamenti esistenti</div>
                 <div class="panel-body">
                     <div ng-controller="ProductSoftwareListCtrl"></div>
                     <div class="table-responsive">
-                        <table id="datatable" datatable="ng" class="table table-striped table-bordered"
-                               dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                        <table class="table table-striped table-bordered"
+                               dt-options="dtOptions"
+                               dt-column-defs="dtColumnDefs">
+                            <thead>
+                            <tr>
+                                <th class="col-md-1">Prodotto</th>
+                                <th class="col-md-1">Scrum Team</th>
+                                <th class="col-md-1">Workflow</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="assignment in assignments">
+                                <td>{{assignment.product}}</td>
+                                <td>{{assignment.scrumTeam}}</td>
+                                <td>{{assignment.scrumProductWorkflow}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tabella nuovo assegnamento -->
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Inserisci nuovo assegnamento</div>
+                <div class="panel-body">
+                    <div ng-if="ctrl.products.length === 0"> Non ci sono prodotti da assegnare</div>
+                    <div class="table-responsive" ng-if="ctrl.products.length !== 0">
+                        <table id="datatable"
+                               datatable="ng"
+                               class="table table-striped table-bordered"
+                               dt-options="dtOptions"
+                               dt-column-defs="dtColumnDefs">
                             <thead>
                             <tr>
                                 <th class="col-md-1"></th>

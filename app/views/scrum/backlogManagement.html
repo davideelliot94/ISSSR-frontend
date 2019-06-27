@@ -43,7 +43,7 @@
                             <th class="col-md-1">Descrizione</th>
                             <th class="col-md-1">Priorità</th>
                             <th class="col-md-1">Stima dell'effort</th>
-                            <th class="col-md-1"></th>
+                            <th class="col-md-1" ng-if="backlogItem.product.isUserProductOwner"></th>
                         </tr>
                         </thead>
 
@@ -54,7 +54,8 @@
                             <td>{{item.description}}</td>
                             <td>{{item.priority}}</td>
                             <td>{{item.effortEstimation}}</td>
-                            <td align="center">
+                            <td align="center"
+                                ng-if="backlogItem.product.isUserProductOwner">
                                 <!-- Bottone aggiunta Item allo Sprint Backlog -->
                                 <button ng-if="item.status != 'COMPLETED'"
                                      title="Modifica item"
@@ -82,6 +83,7 @@
 <button type="button"
         class="btn btn-primary"
         ng-click="openBacklogItemCreationDialog()"
-        ng-disabled= "!backlogItem.product">
+        ng-disabled= "!backlogItem.product"
+        ng-if="backlogItem.product.isUserProductOwner">
         Aggiungi Item al Backlog
 </button>

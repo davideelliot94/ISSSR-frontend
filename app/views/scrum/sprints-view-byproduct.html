@@ -45,7 +45,7 @@
                                 <th class="col-md-1">Durata (Settimane)</th>
                                 <th class="col-md-2">Sprint Goal</th>
                                 <th class="col-md-1">Stato Attivazione</th>
-                                <th class="col-md-1">Avvia/Termina Sprint</th>
+                                <th class="col-md-1" ng-if="ctrl.selectedTarget.isUserScrumMaster">Avvia/Termina Sprint</th>
                                 <th class="col-md-1">Sprint Backlog</th>
                                 <th class="col-md-1">Burndown Chart</th>
                             </tr>
@@ -65,7 +65,7 @@
                                         {{u.isActive | activeSprintFilter}}
                                     </span>
                                 </td>
-                                <td align="center">
+                                <td align="center" ng-if="ctrl.selectedTarget.isUserScrumMaster">
                                     <button title="Termina Sprint"
                                             ng-click="ctrl.closeSprint(u)"
                                             ng-if="u.isActive"
@@ -107,8 +107,11 @@
         </div>
         <!-- /.panel -->
         <div class="row">
-            <button class="btn btn-primary" ng-click="ctrl.addSprint()">Aggiungi uno sprint</button>
-
+            <button class="btn btn-primary"
+                    ng-click="ctrl.addSprint()"
+                    ng-if="ctrl.selectedTarget.isUserScrumMaster">
+                Aggiungi uno sprint
+            </button>
         </div>
 
     </div>

@@ -23,6 +23,17 @@ mainAngularModule
 
                 $scope.counter = 5;
 
+                var containsObjectByName = function(obj, list) {
+                    var i;
+                    for (i = 0; i < list.length; i++) {
+                        if (list[i].nome === obj.nome) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
                 $scope.setSidebar = function () {
                     //console.log("entro nella setSidebar");
                     $scope.userInfo = AuthFactory.getAuthInfo();
@@ -37,14 +48,20 @@ mainAngularModule
                     for(var i = 1; i < authorities.length; ++i) {
                         subsidebar = sidebar[authorities[i].authority];
                         for (var j in subsidebar) {
-                            var notIn = true;
+                            var In = false;
                             for(var z = 0; z < $scope.sidebarList.lists.length; ++z) {
                                 if($scope.sidebarList.lists[z].title === subsidebar[j].title) {
-                                    var notIn = false;
+                                    for(var w = 0; w < subsidebar[j].item.length; w++) {
+                                        if(containsObjectByName(subsidebar[j].item[w], $scope.sidebarList.lists[z].item) === false) {
+                                            $scope.sidebarList.lists[z].item.push(subsidebar[j].item[w]);
+
+                                        }
+                                    }
+                                    In = true;
                                     break;
                                 }
                             }
-                            if(notIn) {$scope.sidebarList.lists.push(subsidebar[j]);}
+                            if(!In) {$scope.sidebarList.lists.push(subsidebar[j]);}
                         }
                     }
                     // let _sidebarList = JSON.parse(storageService.get('sidebar'));
@@ -60,6 +77,9 @@ mainAngularModule
                     }
 
                     $scope.sidebarList.lists.sort( compare );
+                    for (let t = 0; t < $scope.sidebarList.lists.length; t++){
+                        $scope.sidebarList.lists[t].item.sort();
+                    }
 
                 };
 
@@ -92,6 +112,8 @@ mainAngularModule
                     else
                         $scope.multiCollapseVar = y;
                 };
+
+
             }
         }
     }]);

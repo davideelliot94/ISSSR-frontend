@@ -15,7 +15,7 @@ mainAngularModule
             ctrl.deleteUser = deleteUserFn;
             ctrl.showInfo = showInfoFn;
             ctrl.isAdmin = isAdminFn;
-            $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">');
+            $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
             $scope.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(6).notSortable()
             ];
