@@ -42,8 +42,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Inserisci nuovo assegnamento</div>
                 <div class="panel-body">
-                    <div ng-if="ctrl.products.length === 0"> Non ci sono prodotti da assegnare</div>
-                    <div class="table-responsive" ng-if="ctrl.products.length !== 0">
+                    <div ng-if="ctrl.notAssignedproducts.length === 0"> Non ci sono prodotti da assegnare</div>
+                    <div class="table-responsive" ng-if="ctrl.notAssignedproducts.length !== 0">
                         <table id="datatable"
                                datatable="ng"
                                class="table table-striped table-bordered"
@@ -65,7 +65,7 @@
 
                             <div class="radio">
 
-                                <tr ng-repeat="p in ctrl.products" ng-if="p.scrumTeamId == -1">
+                                <tr ng-repeat="p in ctrl.notAssignedproducts" ng-if="p.scrumTeamId == -1">
 
                                     <td><input ng-model="result" type="radio" name="rdoResult" value=""
                                                ng-click="GetData(item.id); GetSelected(p.id)"></td>

@@ -13,7 +13,7 @@ mainAngularModule
             ctrl.retireTarget = retireTargetFN;
             ctrl.rehabTarget = rehabTargetFN;
             ctrl.isRetired = isRetiredFN;
-            ctrl.products = [];
+            ctrl.notAssignedproducts = [];
 
 
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -26,9 +26,10 @@ mainAngularModule
             function refreshProductFn() {
                 softwareProductDataFactory.GetAll(
                     function (products) {
+                        ctrl.products = products;
                         for (let i = 0; i < products.length; i++){
                             if (products[i].scrumTeamId === -1){
-                                ctrl.products.push(products[i]);
+                                ctrl.notAssignedproducts.push(products[i]);
                             }
                         }
                     }, function () {
