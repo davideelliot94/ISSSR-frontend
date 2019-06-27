@@ -28,7 +28,11 @@ mainAngularModule
                         function (response) {
                             ctrl.requestsLogs = response;
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero delle richieste"});
+                            let msgErr = "Errore nel recupero delle richieste";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                         });
 
                 }
@@ -39,7 +43,11 @@ mainAngularModule
                         function () {
                             refreshRequestsLogsFn();
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella rimozione della richiesta"});
+                            let msgErr = "Errore nella rimozione della richiesta";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                         });
                 }
 
@@ -49,7 +57,11 @@ mainAngularModule
                         function () {
                             refreshRequestsLogsFn();
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione delle richieste"});
+                            let msgErr = "Errore nell'eliminazione delle richieste";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                         });
                 }
 

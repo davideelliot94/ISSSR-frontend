@@ -11,7 +11,7 @@ mainAngularModule.config(['$stateProvider',
                 abstract: true,
                 url: '/permissions',
                 templateUrl: 'views/dashboard/main.html',
-
+                //templateUrl: 'views/permission/team-permission.html',
                 data: {
                     requiresLogin: true
                 }

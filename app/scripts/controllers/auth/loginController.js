@@ -6,14 +6,22 @@
  * # LoginCtrl
  */
 mainAngularModule
-    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory', 'BacklogItemService',
-        function ($scope, $state, AuthFactory) {
+    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory','ToasterNotifierHandler',  'BacklogItemService',
+        function ($scope, $state, AuthFactory,ToasterNotifierHandler) {
 
             let ctrl = this;
+            let authInfo = JSON.parse(sessionStorage.getItem("authInfo"));
+
+            //check if user already logged in session
+            if(authInfo !== null && authInfo !== undefined){
+                AuthFactory.retrieveJWTAuthInfo(authInfo);
+                $state.go("dashboard.home");
+
+            }
+
+
             ctrl.authRequest = {username: 'admin', password: 'password'};
             ctrl.doLogin = doLoginFn;
-
-
             ctrl.authMessage = '';
 
             function doLoginFn() {
@@ -36,9 +44,21 @@ mainAngularModule
                         console.log("jwtToken: " + authInfo.jwtToken);
                         console.log("userType: " + authInfo.userRole);
                     }
-                    AuthFactory.setJWTAuthInfo(authInfo);
 
-                    $state.go("dashboard.home");
+                    sessionStorage.setItem("authInfo",JSON.stringify(authInfo));
+
+                    let userL = localStorage.getItem(authInfo.username);
+
+                    console.log("userL: " + userL);
+                    if(userL !== null && userL !== undefined){
+                        ToasterNotifierHandler.showErrorToast("User already logged in another tab");
+                    }
+
+                    else {
+                        localStorage.setItem(authInfo.username,authInfo.username);
+                        AuthFactory.setJWTAuthInfo(authInfo);
+                        $state.go("dashboard.home");
+                    }
                 }
 
                 function errorCB(response) {

@@ -188,6 +188,8 @@ module.exports = function (grunt) {
     // additional tasks can operate on them
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
+      //html: '<%= yeoman.app %>/main.html',
+
       options: {
         dest: '<%= yeoman.dist %>',
         flow: {

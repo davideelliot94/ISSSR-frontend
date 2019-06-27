@@ -54,8 +54,13 @@ mainAngularModule
                     ctrl.currentTeam = completeTeam;
                     getAllAssistantFn();
                 }, function (error) {
-                    ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del team"})
-                })
+                        let msgErr = "Errore nell'asswegnamento del team";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+                        //ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del team"})
+                    })
             }
 
             function getAllAssistantFn() {

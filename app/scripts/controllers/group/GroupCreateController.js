@@ -31,7 +31,11 @@ mainAngularModule
                         ctrl.sids = sidList;
                         ctrl.oldSids = angular.copy(ctrl.sids);
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei SID"});
+                        let msgErr = "Errore nel recupero dei SID";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -41,7 +45,11 @@ mainAngularModule
                         console.log(group);
                         $state.go('group.list', {}, {reload: 'group.list'});
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del gruppo"});
+                        let msgErr = "Errore nell'inserimento del gruppo";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
                 resetFieldsFn();
             }

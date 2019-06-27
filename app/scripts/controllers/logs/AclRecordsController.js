@@ -40,7 +40,11 @@ mainAngularModule
                         function (response) {
                             ctrl.aclRecords = response;
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei record"});
+                            let msgErr = "Errore nel recupero dei record";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                         });
 
                 }
@@ -62,7 +66,11 @@ mainAngularModule
                         function () {
                             refreshRecordsFn();
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella rimozione dei record"});
+                            let msgErr = "Errore nella rimozione dei record";
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                         });
 
                 }

@@ -117,7 +117,7 @@ console.log("targets", response);
 
                 }, function error(response) {
                 });
-        }
+        };
 
 
         /**
@@ -135,7 +135,7 @@ console.log("targets", response);
         $scope.updateTarget = function () {
             //Find the role of the logged user (i.e. "TeamMember" or "TeamLeader")
             let userInfo = AuthFactory.getAuthInfo();
-            console.log(userInfo);
+            console.log("user infoo " + userInfo);
             var role = userInfo.userRole;
             //var role = JSON.parse(sessionStorage.getItem('userInformation'))['@type'];
             //Retrieve all the states managed by the logged user (the role itself)

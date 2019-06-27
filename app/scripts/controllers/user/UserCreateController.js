@@ -49,13 +49,13 @@ mainAngularModule
                         resetFieldsFn();
                         $state.go('user.list', {}, {reload: 'user.list'});
                     }, function (response) {
-                        ErrorStateRedirector.GoToErrorPage(
-                            {
-                                Info: "Errore in inserimento utente. Riprova."
-                            }
-                        )
-                    }
-                );
+                        let msgErr = "Errore in inserimento utente. Riprova";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+
+                    });
             }
         }
 

@@ -45,7 +45,7 @@ mainAngularModule
                 RegistrationFactory.sendRegistration(user, successCB, errorCB);
 
                 function successCB(response) {
-                    alert("Registration successfully")
+                    alert("Registration successfully");
                     $state.go("login");
                 }
 

@@ -84,14 +84,22 @@ mainAngularModule
                     function (resp) {
                         ctrl.sidList = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei SID"});
+                        let msgErr = "Errore nel recupero dei SID";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
 
                 UserDataFactory.GetAll(
                     function (users) {
                         ctrl.usersList = users;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli utenti"});
+                        let msgErr = "Errore nel recupero degli utenti";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     })
 
 
@@ -132,21 +140,33 @@ mainAngularModule
                         console.log(resp);
                         return ctrl.objects = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei Team"});
+                        let msgErr = "Errore nel recupero dei team";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
                 } else if (ctrl.tipo === 'ticket') {
                     TicketDataFactory.GetAll(function (resp) {
                         console.log(resp);
                         return ctrl.objects = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei team "});
+                        let msgErr = "Errore nel recupero dei team";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
                 } else if (ctrl.tipo === 'product') {
                     softwareProductDataFactory.GetAll(function (resp) {
                         console.log(resp);
                         return ctrl.objects = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei prodotti"});
+                        let msgErr = "Errore nel recupero dei prodotti";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
                 }
             }
@@ -175,13 +195,22 @@ mainAngularModule
 
             function modifyPermissionFn() {
                 PermissionDataFactory.updateAcl(ctrl.tipo, ctrl.idTipo, ctrl.sid, ctrl.perm, function (error) {
-                    ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell"});
+                    let msgErr = "Errore nell";
+                    if(response.data === "expiration"){
+                        msgErr = "Login session expired"
+                    }
+                    ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+
                 });
             }
 
             function deletePermissionFn() {
                 PermissionDataFactory.deleteAcl(ctrl.tipo, ctrl.idTipo, ctrl.sid, function (error) {
-                    ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell"});
+                    let msgErr = "Errore nell";
+                    if(response.data === "expiration"){
+                        msgErr = "Login session expired"
+                    }
+                    ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                 })
             }
 
@@ -197,7 +226,11 @@ mainAngularModule
                             $state.go('permissions.product', {objectType: 'product' ,productId: object.domain_object_id}, {reload: 'permissions.product'});
                         }
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella creazione del permesso"});
+                        let msgErr = "Errore nella creazione del permesso";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
 
 

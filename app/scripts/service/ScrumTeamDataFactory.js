@@ -9,9 +9,11 @@
  */
 
 mainAngularModule
-    .factory('ScrumTeamDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL', 'SCRUMTEAM_ENDPOINT_URL', '$q',
+    .factory('ScrumTeamDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL', 'SCRUMTEAM_ENDPOINT_URL','SESSIONUSER_ENDPOINT_URL','$q',
         function ($http, ToasterNotifierHandler, BACKEND_BASE_URL, SCRUMTEAM_ENDPOINT_URL, $q) {
             var thisCrudService = {};
+
+            var _endPointJSON2 = BACKEND_BASE_URL + SESSIONUSER_ENDPOINT_URL;
 
             var _endPointJSON = BACKEND_BASE_URL + SCRUMTEAM_ENDPOINT_URL;
 
@@ -29,6 +31,12 @@ mainAngularModule
                 for (i = 0; i < team.teamMembers.length; i++) {
                     teamMemberIds.push(team.teamMembers[i].id);
                 }
+
+
+
+
+
+
 
                 console.log(teamMemberIds);
                 $http({

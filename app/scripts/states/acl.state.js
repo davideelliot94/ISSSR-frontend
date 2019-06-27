@@ -8,6 +8,7 @@ mainAngularModule.config([
                 abstract: true,
                 url: '/record',
                 templateUrl: 'views/dashboard/main.html',
+                //$routeprovidertemplateUrl: 'views/dashboard/main.html',
                 data: {
                     requiresLogin: true
                 },

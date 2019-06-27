@@ -19,7 +19,9 @@ mainAngularModule
 
             var _endPointJSON = BACKEND_BASE_URL + LOGIN_ENDPOINT_URL;
 
+           // thisAuthService.retriveSession = retrieveSessionFn;
             thisAuthService.sendLogin = sendLoginFn;
+            thisAuthService.retrieveJWTAuthInfo = retrieveJWTAuthInfoFn;
             thisAuthService.setJWTAuthInfo = setJWTAuthInfoFn;
             thisAuthService.getJWTToken = getJWTTokenFn;
             thisAuthService.invalidateJWTToken = invalidateJWTTokenFN;
@@ -52,6 +54,8 @@ mainAngularModule
 
             }
 
+
+
             function sendLoginFn(authInfo, successCB, errorCB) {
 
                 $http({
@@ -76,6 +80,16 @@ mainAngularModule
             }
 
 
+            function retrieveJWTAuthInfoFn(authInfo){
+
+                $sessionStorage.put('authInfo', authInfo);
+               authManager.authenticate();
+               authInfo.authorities.forEach(function (a) {
+                    AclService.attachRole(a.authority);
+               })
+            }
+
+
             function setJWTAuthInfoFn(authInfo) {
                 $sessionStorage.put('authInfo', authInfo);
                 authManager.authenticate();
@@ -92,7 +106,6 @@ mainAngularModule
             }
 
             function isAuthenticatedFn() {
-                console.log("isAuthenticated: ", authManager.isAuthenticated);
                 return authManager.isAuthenticated;
             }
 
@@ -106,8 +119,16 @@ mainAngularModule
             }
 
             function getAuthInfoFn() {
-                console.log("getAuthenticated: ", $sessionStorage.get('authInfo'));
-                return $sessionStorage.get('authInfo');
+                  let authInfo = $sessionStorage.get('authInfo');
+                  if(authInfo !== null && authInfo !== undefined){
+                      console.log("returning");
+                      return authInfo;
+                  }
+                  console.log("null/undefined");
+                  let response = localStorage.getItem("response");
+                  let response2 = JSON.parse(response);
+                  console.log("retrieved " + JSON.stringify(response.data));
+                  return response2.data;
             }
 
             function deleteAuthInfoFn() {

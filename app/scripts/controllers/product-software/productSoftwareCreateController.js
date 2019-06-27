@@ -22,14 +22,14 @@ mainAngularModule
 
             softwareProductDataFactory.metadata(function (response) {
                 ctrl.targetTypes = response.data.targetTypes;
-                console.log("types", ctrl.targetTypes)
+                console.log("types", ctrl.targetTypes);
             }, function () {
                 alert("Invalid metadata");
             });
 
             StateMachineDataFactory.getStateMachines(function (response) {
                 ctrl.stateMachines = response.data;
-                console.log("stateMachines", ctrl.stateMachines)
+                console.log("stateMachines", ctrl.stateMachines);
             }, function () {
                 alert("Error: getStateMachines")
             });
@@ -54,7 +54,11 @@ mainAngularModule
                         console.log(response);
                         $state.go('productsoftware.list', {}, {reload: true});
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del prodotto"});
+                        let msgErr = "Errore nell'inserimento del prodotto"
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
 
                 resetFieldsFn();
