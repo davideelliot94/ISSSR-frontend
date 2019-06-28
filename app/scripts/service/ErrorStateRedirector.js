@@ -6,4 +6,4 @@ mainAngularModule
             $state.go('error.details', {errorObject: errorMsgObject});
         };
 
-    }])
+    }]) 
