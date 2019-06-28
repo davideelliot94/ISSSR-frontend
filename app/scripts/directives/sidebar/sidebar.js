@@ -74,7 +74,7 @@ mainAngularModule
                 $scope.$watch(function () {
                     return AuthFactory.getAuthInfo;
                 }, function () {
-                    $scope.setSidebar();
+                    $scope.setSidebar(); 
                 });
 
                 $scope.check = function (x) {
