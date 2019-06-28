@@ -6,8 +6,8 @@
  *  @name   restService
  *  @description   Service manages the endpoints for REST API call.
  */
-mainAngularModule.service('restService', function () {
-    let CONNECTION = {url: "http://localhost:8200/ticketingsystem"};
+mainAngularModule.service('restService', function (BACKEND_BASE_URL) {
+    let CONNECTION = {url: BACKEND_BASE_URL};
 
     return {
 
