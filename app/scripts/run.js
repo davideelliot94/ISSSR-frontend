@@ -4,6 +4,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
     function ($rootScope, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService,AclProtector) {
 
         var aclData = {};
+        var oldState = null;
 
         AuthFactory.getPermission(function(response){
             aclData = JSON.parse(JSON.stringify(response.data));
@@ -29,14 +30,22 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
         console.info('isDebug: ' + $rootScope.isDebug);
 
         $transitions.onError({}, ($transition$) => {
+            console.log("transition onError");
+
             var toStateName = $transition$.to().name;
             var fromStateName = $transition$.from().name;
-            if (toStateName != fromStateName) {
+            console.log("tostate:" + toStateName + " fromstate: " + fromStateName + "  oldstqte:" + oldState);
+            var currentTime = new Date().getTime();
+
+            while (currentTime + 1000 >= new Date().getTime()) {
+            }
+            if (toStateName != fromStateName && oldState  != fromStateName) {
 
                 let Msg = "Rotta non autorizzata";
                 if (DEBUG) {
                     Msg += ": " + toStateName;
                 }
+                oldState = fromStateName;
                 ErrorStateRedirector.GoToErrorPage({Messaggio: Msg});
             }
         });
