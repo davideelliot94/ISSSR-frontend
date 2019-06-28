@@ -7,6 +7,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
         var oldState = null;
 
         AuthFactory.getPermission(function(response){
+            console.log("trying to get permission");
             aclData = JSON.parse(JSON.stringify(response.data));
             console.log(aclData);
             AclService.setAbilities(aclData.roles);
@@ -31,7 +32,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
 
         $transitions.onError({}, ($transition$) => {
             console.log("transition onError");
-
+            console.log('transition: ' +$transition$.toString());
             var toStateName = $transition$.to().name;
             var fromStateName = $transition$.from().name;
             console.log("tostate:" + toStateName + " fromstate: " + fromStateName + "  oldstqte:" + oldState);
@@ -39,7 +40,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
 
             while (currentTime + 1000 >= new Date().getTime()) {
             }
-            if (toStateName != fromStateName && oldState  != fromStateName) {
+            if (toStateName != fromStateName /*&& oldState  != fromStateName*/) {
 
                 let Msg = "Rotta non autorizzata";
                 if (DEBUG) {

@@ -93,7 +93,11 @@ mainAngularModule
                         $state.go('ticket.ofCurrentAssistant');
                     }, function (error) {
                         console.error(error);
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nell\'update del ticket'});
+                        let msgErr = "Errore nell\' update del ticket";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
             }
 
@@ -108,7 +112,11 @@ mainAngularModule
                         ctrl.ticket = ticket;
                     }, function (error) {
                         console.log(error);
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nell\'import del ticket per l\'assistant: ' + assistantId});
+                        let msgErr = 'Errore nell\'import del ticket per l\'assistant: ' + assistantId
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
 
                     }
                 );
