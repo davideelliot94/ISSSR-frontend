@@ -42,7 +42,12 @@ mainAngularModule
                     ToasterNotifierHandler.showSuccessToast('Eliminazione avvenuta con successo', '');
                     $scope.populateScrumProductWorkflowTable();
                 }, function errorCallback(response){
-                    ToasterNotifierHandler.handleError(response);
+                    if(response.status === 409){
+                        ToasterNotifierHandler.showErrorToast('Impossibile eliminare un Workflow se esso è associato' +
+                            ' a un Prodotto');
+                    } else{
+                        ToasterNotifierHandler.handleError(response);
+                    }
                 });
         };
 

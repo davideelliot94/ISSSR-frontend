@@ -66,7 +66,6 @@ mainAngularModule
                             deferred.reject(response);
                         }
                     }, function errorCallback(response) {
-                        console.log(response.status);
                         deferred.reject(response);
                     });
                 return deferred.promise;

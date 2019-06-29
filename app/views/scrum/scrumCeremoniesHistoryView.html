@@ -71,8 +71,7 @@
             </div>
             <!-- /.panel -->
             <div class="row">
-<!--           TODO     ng-disabled="!selectedSprint.isUserScrumMaster"-->
-                <button class="btn btn-primary" ng-click="addScrumCeremony()">Aggiungi un evento</button>
+                <button class="btn btn-primary" ng-click="addScrumCeremony()" ng-if="selectedSprint.isUserScrumMaster">Aggiungi un evento</button>
 
             </div>
 

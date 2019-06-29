@@ -1,7 +1,7 @@
 'use strict';
 
-mainAngularModule.config(['$stateProvider',
-    function ($stateProvider) {
+mainAngularModule.config(['$stateProvider', 'SCRUM_STATE',
+    function ($stateProvider, SCRUM_STATE) {
 
         $stateProvider
             .state('scrum_ceremonies', {
@@ -10,13 +10,22 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl: 'views/dashboard/main.html',
                 data: {
                     requiresLogin: true
+                },
+                resolve: {
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(SCRUM_STATE);
+                    }
                 }
             })
             .state('scrum_ceremonies.view', {
                 url: '/view',
                 controller:'scrumCeremoniesController',
                 templateUrl: 'views/scrum/scrumCeremoniesHistoryView.html',
-                controllerAs: 'ctrl'
-                //TODO mettere un resolve ?? per la gestione dei permessi
+                controllerAs: 'ctrl',
+                resolve: {
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(SCRUM_STATE);
+                    }
+                }
             });
     }]);

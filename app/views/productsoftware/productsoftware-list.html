@@ -35,8 +35,8 @@
                                 <td>{{p.targetType}}</td>
                                 <td>{{p.targetState}}</td>
                                 <td>{{p.stateMachineName}}</td>
-                                <td align="right" ng-if="hasPermission('softwareDeleteButton')">
-                                    <button class="btn btn-danger"
+                                <td align="right">
+                                    <button class="btn btn-danger" ng-if="hasPermission('softwareDeleteButton')"
                                             ng-click="ctrl.retireTarget($index)" ng-show="!ctrl.isRetired($index)" title="Ritira">
                                         <i class="fa fa-dashcube"></i></button>
                                     <button class="btn btn-success"

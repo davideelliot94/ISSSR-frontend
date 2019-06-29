@@ -58,20 +58,6 @@
                            ng-required="true">
                 </label>
             </div>
-            <div class="form-group"
-                 ng-class="{'has-error': backlogItemEditForm.selectedSprint.$invalid &&
-                                         backlogItemEditForm.selectedSprint.$dirty,
-                            'has-success': backlogItemEditForm.selectedSprint.$valid &&
-                                           backlogItemEditForm.selectedSprint.$dirty}">
-                <label>Sprint in cui inserire l'Item *
-                    <select class="form-control"
-                            name="selectedSprint"
-                            ng-options="productSprint.number for productSprint in productSprints"
-                            ng-model="backlogItem.sprint"
-                            ng-required="true">
-                    </select>
-                </label>
-            </div>
             <div class="modal-footer">
                 <button type="button"
                         class="btn btn-danger"
@@ -81,8 +67,8 @@
                 <button type="button"
                         class="btn btn-primary"
                         ng-disabled="backlogItemEditForm.$invalid"
-                        ng-click="insertBacklogItemToSprintBacklog()">
-                    Conferma
+                        ng-click="editBacklogItem()">
+                    Modifica
                 </button>
             </div>
         </form>
