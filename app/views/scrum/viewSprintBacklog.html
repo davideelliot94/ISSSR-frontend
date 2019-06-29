@@ -11,7 +11,7 @@
     <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-heading">Sprint Backlog</div>
-            <div class="panel-body"  >
+            <div class="panel-body">
                 <div style="overflow-x: scroll; white-space: nowrap" >
                     <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
                          class="col col-2"
@@ -21,7 +21,7 @@
                                 (sprint.isActive == null && state.split('*')[1] === 'To do')"
                          data-drop="true"
                          data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemStateTo(state)'}"
-                         ng-style="">
+                         ng-Cloak>
                         <br>
                         <h4 style="vertical-align: super; ">{{state.split('*')[1]}}</h4>
                         <div  class="panel panel-primary"
@@ -30,10 +30,18 @@
                               data-drag="item.title != 'placeholder'"
                               data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
                               jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
-                              ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
-                            <div class="container" style="width: 250px; height: 100px;" ng-if="item.title === 'placeholder'">
+                              ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}"
+                              ng-Cloak>
+
+                            <div class="container"
+                                 style="width: 250px; height: 100px;"
+                                 ng-if="item.title === 'placeholder'"
+                                 ng-Cloak>
                             </div>
-                            <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
+                            <div class="panel-heading"
+                                 style="width: 250px; border: 0;"
+                                 ng-if="item.title != 'placeholder'"
+                                 ng-Cloak>
                                 <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
                                 <span class="badge pull-right">{{item.effortEstimation}}</span>
                                 <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
@@ -41,9 +49,11 @@
                                 <button class="btn btn-info btn-circle" ng-click="openSprintBacklogItemDetailDialog(item)">
                                     <i class="glyphicon glyphicon-new-window"></i>
                                 </button>
-                                <!-- Vecchio class="btn btn-xs btn-default"                            -->
                             </div>
-                            <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
+                            <div class="panel-body"
+                                 style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px"
+                                 ng-show="execution[$index]"
+                                 ng-Cloak>
                                 Titolo: {{item.title}}<br>
                                 Descrizione: {{item.description}}<br>
                                 Priorità: {{item.priority}}<br>

@@ -1,11 +1,12 @@
 'use strict';
 
 mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state', '$stateParams', 'BacklogItemService',
-    'ToasterNotifierHandler', '$mdDialog',
-    function ($scope, $state, $stateParams, BacklogItemService, ToasterNotifierHandler, $mdDialog){
+    'ToasterNotifierHandler', '$mdDialog', '$filter',
+    function ($scope, $state, $stateParams, BacklogItemService, ToasterNotifierHandler, $mdDialog, $filter){
 
     $scope.sprint = JSON.parse(sessionStorage.getItem('sprint'));
     $scope.product = JSON.parse(sessionStorage.getItem('product'));
+    $scope.sprintBacklogItems = [];
 
     $scope.setItemToChange = function(event, ui, backlogItem){
         $scope.backlogItemToChange = backlogItem;
@@ -38,8 +39,10 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
     // Porta lo stato dell'item in trascinamento al valore specificato
     $scope.changeItemStateTo = function(event, ui, newState){
         BacklogItemService.changeItemStateToService($scope.backlogItemToChange.id, newState)
-            .then(function successCallback() {
-                populateSprintBacklog();
+            .then(function successCallback(response) {
+                $scope.sprintBacklogItems = $filter('filter')($scope.sprintBacklogItems,
+                    function(value) {return value.id !== $scope.backlogItemToChange.id;});
+                $scope.sprintBacklogItems.push(response.data);
             }, function errorCallback(response){
                 ToasterNotifierHandler.handleError(response);
             });
