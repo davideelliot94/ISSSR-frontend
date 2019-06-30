@@ -66,7 +66,7 @@ mainAngularModule
             this.insertBacklogItemToSprintBacklogService = function (productId, backlogItem) {
                 let deferred = $q.defer();
                 $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'target/' + productId +
-                    '/item/sprint/' + backlogItem.sprint.number,
+                    '/item/sprint/' + 1,
                     {'id': backlogItem.id, 'title': backlogItem.title, 'description' : backlogItem.description,
                         'priority' : backlogItem.priority, 'effortEstimation': backlogItem.effortEstimation})
                     .then(function successCallback(response) {

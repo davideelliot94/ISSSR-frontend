@@ -178,6 +178,7 @@ mainAngularModule
 
                                             if (successCB) {
                                                 successCB(response.data);
+                                                console.log( 'response dopo GET     ' + response.data);
                                                 ToasterNotifierHandler.handleCreation(response);
 
                                                 $http({
@@ -187,6 +188,7 @@ mainAngularModule
                                                     .then(function (response) {
 
                                                             if (successCB) {
+                                                                console.log( 'response dopo POST     ' + response.data);
                                                                 successCB(response.data);
                                                                 ToasterNotifierHandler.handleCreation(response);
                                                             }

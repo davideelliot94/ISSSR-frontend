@@ -59,7 +59,7 @@ mainAngularModule
                     function (response) {
                         console.log(response);
                         resetFieldsFn();
-                        $state.go('dashboard.home');
+                        $state.go('scrumteam.view');
                     }, function (response) {
                         ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento dello scrum team"})
                     });

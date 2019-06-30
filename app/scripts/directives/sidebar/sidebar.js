@@ -32,7 +32,7 @@ mainAngularModule
                     }
 
                     return false;
-                }
+                };
 
                 $scope.setSidebar = function () {
                     //console.log("entro nella setSidebar");
@@ -77,9 +77,10 @@ mainAngularModule
                     }
 
                     $scope.sidebarList.lists.sort( compare );
-                    for (let t = 0; t < $scope.sidebarList.lists.length; t++){
+                    for(var t = 0; t < $scope.sidebarList.lists.length; ++t) {
                         $scope.sidebarList.lists[t].item.sort();
                     }
+
 
                 };
 
@@ -112,8 +113,6 @@ mainAngularModule
                     else
                         $scope.multiCollapseVar = y;
                 };
-
-
             }
         }
     }]);

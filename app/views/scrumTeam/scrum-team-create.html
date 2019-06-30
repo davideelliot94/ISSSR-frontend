@@ -212,7 +212,7 @@
     <div class="row">
         <div class="col-lg-12">
             <button class="btn btn-primary"
-                    ng-disabled="!(!formScrumMaster.$invalid && !formProductOwner.$invalid  && ctrl.currentScrumTeam.teamMembers.length)"
+                    ng-disabled="!(!formScrumMaster.$invalid && !formProductOwner.$invalid && !formCreateScrumTeam.$invalid && ctrl.currentScrumTeam.teamMembers.length)"
                     ng-click="ctrl.insertScrumTeam()">Costruisci Scrum Team
             </button>
             <button class="btn btn-danger" ng-click="ctrl.resetFields()">Reset campi</button>
