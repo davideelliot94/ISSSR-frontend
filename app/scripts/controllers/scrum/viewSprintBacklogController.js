@@ -26,13 +26,8 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
                     priority: 'PLACEHOLDER'
                 });
                 $scope.sprintBacklogItems = items;
-                $scope.isActiveSprint = true;
-            }, function errorCallback(response) {
-                if (response.status === 404) {
-                    $scope.isActiveSprint = false;
-                } else {
-                    ToasterNotifierHandler.handleError(response);
-                }
+            }, function errorCallback() {
+                ToasterNotifierHandler.showErrorToast('Errore nel recupero degli item nello Sprint Backlog');
             });
     };
 
