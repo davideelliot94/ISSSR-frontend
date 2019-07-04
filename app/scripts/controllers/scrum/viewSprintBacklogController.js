@@ -23,7 +23,7 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
                     description: 'placeholder',
                     status: '',
                     effortEstimation: 0,
-                    priority: 'PLACEHOLDER'
+                    priority: 0
                 });
                 $scope.sprintBacklogItems = items;
             }, function errorCallback() {
@@ -57,20 +57,6 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
                 }
             }
         });
-    };
-
-    // Questa funzione valorizza la priorità di un item in modo tale da poter
-    // ordinare le voci all'interno dello Sprint Backlog
-    $scope.priorityLevel = function(backlogItem) {
-        if (backlogItem.priority === 'HIGH') {
-            return 1;
-        } else if (backlogItem.priority === 'MEDIUM') {
-            return 2;
-        } else if (backlogItem.priority === 'LOW'){
-            return 3;
-        } else {
-            return 4;
-        }
     };
 
     populateSprintBacklog();

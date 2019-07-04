@@ -35,7 +35,7 @@
                                             ng-if="hasPermission('groupUpdateButton')"
                                             title="Modifica"><i class="fa fa-edit"></i></button>
                                     <button class="btn btn-danger" ng-click="ctrl.deleteGroup(g.id)"
-                                            ng-if="hasPermission('groupDeleteButton')" title="Elimina"><i
+                                            ng-if="hasPermission('groupDeleteButton') && isDeletable(g.name)" title="Elimina"><i
                                             class="fa fa-trash"></i></button>
                                 </td>
                             </tr>

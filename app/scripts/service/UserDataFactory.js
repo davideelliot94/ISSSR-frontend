@@ -57,8 +57,8 @@ mainAngularModule
                     url: _endPointJSON + "metadata"
                 })
                     .then(function (response) {
-                        success(response);
-                    },
+                            success(response);
+                        },
                         function (response) {
                             if (error) {
                                 error(response);
@@ -178,7 +178,6 @@ mainAngularModule
 
                                             if (successCB) {
                                                 successCB(response.data);
-                                                console.log( 'response dopo GET     ' + response.data);
                                                 ToasterNotifierHandler.handleCreation(response);
 
                                                 $http({
@@ -188,7 +187,6 @@ mainAngularModule
                                                     .then(function (response) {
 
                                                             if (successCB) {
-                                                                console.log( 'response dopo POST     ' + response.data);
                                                                 successCB(response.data);
                                                                 ToasterNotifierHandler.handleCreation(response);
                                                             }
@@ -212,11 +210,15 @@ mainAngularModule
                             }
                         },
                         function (response) {
-                            if (errorCB) {
-                                errorCB(response.data);
+                            if (response.status === 409) {
+                                ToasterNotifierHandler.showErrorToast('Username specificato già esistente');
+                            } else {
+                                if (errorCB) {
+                                    errorCB(response.data);
+                                }
+                                console.error(response.data);
+                                ToasterNotifierHandler.handleError(response);
                             }
-                            console.error(response.data);
-                            ToasterNotifierHandler.handleError(response);
                         });
             }
 

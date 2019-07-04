@@ -25,7 +25,7 @@
                         <br>
                         <h4 style="vertical-align: super; ">{{state.split('*')[1]}}</h4>
                         <div  class="panel panel-primary"
-                              ng-repeat="item in sprintBacklogItems | orderBy:priorityLevel"
+                              ng-repeat="item in sprintBacklogItems | orderBy: '-priority'"
                               ng-if="item.title === 'placeholder' || item.status === state"
                               data-drag="item.title != 'placeholder'"
                               data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
@@ -42,7 +42,6 @@
                                  style="width: 250px; border: 0;"
                                  ng-if="item.title != 'placeholder'"
                                  ng-Cloak>
-                                <span ng-class="{'glyphicon glyphicon-arrow-up' : item.priority === 'HIGH', 'glyphicon glyphicon-arrow-down': item.priority === 'LOW', 'glyphicon glyphicon-resize-horizontal': item.priority === 'MEDIUM' }"></span>
                                 <span class="badge pull-right">{{item.effortEstimation}}</span>
                                 <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
                                 <br>
