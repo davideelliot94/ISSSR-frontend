@@ -1,7 +1,7 @@
 <!-- Titolo -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Gestione Backlog {{backlogItem.product.name}}</h1>
+        <h1 class="page-header">Gestione Backlog {{product.name}}</h1>
     </div>
 </div>
 
@@ -14,9 +14,9 @@
                 <label>Prodotto:</label>
                 <select class="form-control"
                         ng-options="product.name for product in productsOfScrumMember"
-                        ng-model="backlogItem.product"
+                        ng-model="selectedProduct"
                         ng-required="true"
-                        ng-change="populateBacklog()">
+                        ng-change="populateBacklog();getSprintsItemsRelatedToProduct()">
                 </select>
             </div>
         </div>
@@ -46,7 +46,7 @@
                             <th class="col-md-1" ng-if="backlogItem.product.isUserProductOwner"></th>
                         </tr>
                         </thead>
-
+                        <!--DETAILED_PRODUCT_BACKLOG-->
                         <tbody>
                         <tr ng-repeat="item  in backlogItems">
                             <td>{{item.id}}</td>
@@ -57,8 +57,7 @@
                             <td align="center"
                                 ng-if="backlogItem.product.isUserProductOwner">
                                 <!-- Bottone aggiunta Item allo Sprint Backlog -->
-                                <button ng-if="item.status != 'COMPLETED'"
-                                        title="Modifica item"
+                                <button title="Modifica item"
                                         ng-click="openBacklogItemEditDialog(item)"
                                         class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
@@ -83,7 +82,86 @@
 <button type="button"
         class="btn btn-primary"
         ng-click="openBacklogItemCreationDialog()"
-        ng-disabled="!backlogItem.product"
+        ng-disabled="!isSelectedProduct.product"
         ng-if="backlogItem.product.isUserProductOwner">
     Aggiungi Item al Backlog
 </button>
+
+            </div>
+        </div>
+        <!--                DRAG N DROP     -->
+        <div class="panel panel-primary" >
+            <div class="panel-heading">Pianifica gli Sprint Backlog</div>
+            <div class="panel-body"  >
+                <div  style="overflow-x: scroll; white-space: nowrap" ng-hide= "!isSelectedProduct">
+                    <!--PRODUCT BACKLOG -->
+                    <div class="panel-body"  style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 5px; margin-right: 5px; "
+                         data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'moveInProductBacklog'}">
+                        <br>
+                        <h4 style="vertical-align: super; ">PRODUCT BACKLOG</h4>
+                        <div style=" display: inline-block;margin-left: 7px; "
+                             class="panel panel-primary" ng-repeat="item in backlogItems"
+                             data-drag="item.title != 'placeholder'"
+                             data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
+                             jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
+                             ng-style="" ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}">
+                            <div class="container" style="width: 250px; height: 100px;" ng-if="item.title === 'placeholder'">
+                            </div>
+                            <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
+                                <span class="badge pull-right">{{item.effortEstimation}}</span>
+                                <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
+                                <br>
+                                <button class="btn btn-info btn-circle" ng-click="openItemDetailDialog(item)">
+                                    <i class="glyphicon glyphicon-new-window"></i>
+                                </button>
+                            </div>
+                            <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
+                                Titolo: {{item.title}}<br>
+                                Descrizione: {{item.description}}<br>
+                                Priorità: {{item.priority}}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                        <!--SPRINT BACKLOGS-->
+                        <div style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; width: 250px"
+                             class="col col-2"
+                             ng-repeat="sprint in sprints | filter: filterSprints | orderBy:'number'"
+                             data-drop="true"
+                             data-jqyoui-options jqyoui-droppable="{onDrop:'changeItemSprintBacklog(sprint)'}"
+                             ng-style="">
+                            <br>
+                            <h4 style="vertical-align: super; ">Sprint {{sprint.number}}</h4>
+                            <div  class="panel panel-primary"
+                                  ng-repeat="item in sprint.items| orderBy: '-priority'"
+                                  data-drag="item.title != 'placeholder'"
+                                  data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
+                                  jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
+                                  ng-class="{'backlogItemPlaceholder': item.title === 'placeholder', 'backlogItem': item.title != 'placeholder'}"
+                            ng-Cloak>
+                                <div class="container"
+                                     style="width: 250px; height: 100px;"
+                                     ng-if="item.title === 'placeholder'">
+                                </div>
+                                <div class="panel-heading" style="width: 250px; border: 0;" ng-if="item.title != 'placeholder'">
+                                    <span class="badge pull-right">{{item.effortEstimation}}</span>
+                                    <div style="white-space: normal; word-wrap:break-word;">{{item.title}}</div>
+                                    <br>
+                                    <button class="btn btn-info btn-circle" ng-click="openItemDetailDialog(item)">
+                                        <i class="glyphicon glyphicon-new-window"></i>
+                                    </button>
+                                </div>
+                                <div class="panel-body" style="font-size: 11px; white-space: normal; word-wrap:break-word; width: 250px" ng-show="execution[$index]">
+                                    Titolo: {{item.title}}<br>
+                                    Descrizione: {{item.description}}<br>
+                                    Priorità: {{item.priority}}<br>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

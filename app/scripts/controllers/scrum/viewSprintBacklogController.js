@@ -23,7 +23,7 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
                     description: 'placeholder',
                     status: '',
                     effortEstimation: 0,
-                    priority: 0
+                    priority: -1
                 });
                 $scope.sprintBacklogItems = items;
             }, function errorCallback() {
