@@ -28,6 +28,7 @@
                                         <th class="col-md-1">Scrum Master</th>
                                         <th class="col-md-1">Product Owner</th>
                                         <th class="col-md-1">Team Members</th>
+                                        <th class="col-md-1" ng-if="hasPermission('scrumTeamButton')"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -39,6 +40,12 @@
                                             <button class="btn btn-primary" ng-click="ctrl.openViewMemberDialog(t)"
                                                     title="Visualizza tutti i membri"><i class="fa fa-users"></i></button>
                                         </td>
+                                        <td ng-if="hasPermission('scrumTeamButton')"><button class="btn btn-danger "
+                                                    ng-if = "t.products == null || t.products.length === 0"
+                                                    ng-click="ctrl.deleteScrumTeam(t)">
+                                            <i class="fa fa-trash"></i>
+
+                                        </button></td>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -7,8 +7,8 @@
  * Controller of the sbAdminApp
  */
 mainAngularModule
-    .controller('ScrumTeamViewCtrl', ['$scope', '$state', 'softwareProductDataFactory', 'ErrorStateRedirector','$mdDialog' , 'DTOptionsBuilder',
-        function ($scope, $state, softwareProductDataFactory, ErrorStateRedirector, $mdDialog, DTOptionsBuilder) {
+    .controller('ScrumTeamViewCtrl', ['$scope', '$state', 'softwareProductDataFactory', 'ErrorStateRedirector','$mdDialog' , 'DTOptionsBuilder', 'ScrumTeamDataFactory',
+        function ($scope, $state, softwareProductDataFactory, ErrorStateRedirector, $mdDialog, DTOptionsBuilder,ScrumTeamDataFactory) {
 
             // default option for datatable
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -47,8 +47,17 @@ mainAngularModule
                 });
             };
 
+            function deleteScrumTeamFn(scrumTeam) {
+                ScrumTeamDataFactory.RemoveScrumTeam(scrumTeam.id, function () {
+                    init();
+                }, function (error) {
+                    ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nella cancellazione dello scrum Team'});
+                });
+            };
+
 
             ctrl.addScrumTeam = addScrumTeamFn;
+            ctrl.deleteScrumTeam = deleteScrumTeamFn;
             ctrl.openViewMemberDialog = openViewMemberDialogFn;
 
 

@@ -17,6 +17,7 @@ mainAngularModule
 
             thisCrudService.Insert = InsertFn;
             thisCrudService.FindScrumTeamBySprint = FindScrumTeamBySprintFn;
+            thisCrudService.RemoveScrumTeam = RemoveScrumTeam;
 
 
             // POST request to backend for srum team creation
@@ -54,6 +55,29 @@ mainAngularModule
                             ToasterNotifierHandler.handleError(response);
                         });
             }
+
+            function RemoveScrumTeam(scrumTeamId, successCB, errorCB) {
+
+                $http({
+                    method: 'DELETE',
+                    url: _endPointJSON + scrumTeamId
+                })
+                    .then(function (response) {
+                            if (successCB) {
+                                successCB(response.data);
+                            }
+                            //return response.data;
+                        },
+                        function (response) {
+                            if (errorCB) {
+                                errorCB(response);
+                            }
+                            console.error(response.data);
+                            ToasterNotifierHandler.handleError(response);
+                        });
+            }
+
+
 
             function FindScrumTeamBySprintFn(sprintId) {
                 let deferred = $q.defer();
