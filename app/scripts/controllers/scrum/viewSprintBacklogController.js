@@ -37,6 +37,7 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
 
     // Porta lo stato dell'item in trascinamento al valore specificato
     $scope.changeItemStateTo = function(event, ui, newState){
+        console.log('CHANGING ITEM BACKLOG' ,event,ui,'newBacklogItem:',newState);
         BacklogItemService.changeItemStateToService($scope.backlogItemToChange.id, newState)
             .then(function successCallback() {
                 populateSprintBacklog();

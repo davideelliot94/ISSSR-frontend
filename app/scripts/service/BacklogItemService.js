@@ -81,6 +81,24 @@ mainAngularModule
                 return deferred.promise;
             };
 
+            // move backlog item from sprint backlog back to Product backlog
+            this.moveItemToProductBacklog = function (itemId) {
+                let deferred = $q.defer();
+                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + itemId + '/' + 'backToBacklog')
+                    .then(function successCallback(response) {
+                        if (response.status === 200) {
+                            deferred.resolve(response);
+                        } else {
+                            deferred.reject(response);
+                        }
+                    }, function errorCallback(response) {
+                        deferred.reject(response);
+                    });
+                return deferred.promise;
+            };
+
+
+
             // La funzione permette di cambiare lo stato di un item nello sprint backlog
             this.changeItemStateToService = function (itemId, newState) {
                 let deferred = $q.defer();
