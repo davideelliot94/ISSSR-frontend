@@ -28,7 +28,6 @@ mainAngularModule
             thisCrudService.GetProductOwnerBySTId = GetProductOwnerBySTIdFn;
             thisCrudService.GetScrumMasterBySTId = GetScrumMasterBySTIdFn;
             thisCrudService.GetMembersBySTId = GetMembersBySTIdFn;
-            thisCrudService.AssignProdToST = AssignProdToSTFn;
 
             function RetireFn(id, success, error) {
 
@@ -288,14 +287,5 @@ mainAngularModule
 
             }
 
-            function AssignProdToSTFn(tid, pid, workflowId) {
-
-                httpService.post(restService.assignProductToST + '/' + tid + '/' + pid + '/' + workflowId)
-                    .then(function (secondData) {
-                        },
-                        function (err) {
-                            console.log(err);
-                        });
-            }
         }]);
 

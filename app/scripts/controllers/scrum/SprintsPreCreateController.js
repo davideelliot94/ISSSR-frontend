@@ -47,7 +47,7 @@ mainAngularModule
                     console.clear();
                     console.log(ctrl.selectedTarget);
                     //TODO
-                    ScrumProductService
+
                     SprintCreateDataFactory.GetAllByProduct(ctrl.selectedTarget.id,
                         function (sprints) {
                             ctrl.sprints = sprints;

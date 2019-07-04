@@ -53,7 +53,7 @@ mainAngularModule
                             {
                                 Info: "Errore in inserimento utente. Riprova."
                             }
-                        )
+                        );
                     }
                 );
             }

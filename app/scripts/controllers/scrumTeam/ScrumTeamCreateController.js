@@ -59,7 +59,7 @@ mainAngularModule
                     function (response) {
                         console.log(response);
                         resetFieldsFn();
-                        $state.go('dashboard.home');
+                        $state.go('scrumteam.view');
                     }, function (response) {
                         ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento dello scrum team"})
                     });
@@ -152,11 +152,11 @@ mainAngularModule
             function mergeAssistantFn() {
 
                 ctrl.assistantList.forEach(function (assistant) {
-                    if (ctrl.currentScrumTeam.scrumMaster.id === assistant.id) {
+                    if (ctrl.currentScrumTeam.scrumMaster.id !== null && ctrl.currentScrumTeam.scrumMaster.id === assistant.id) {
                         let index = ctrl.assistantList.indexOf(assistant);
                         ctrl.assistantList.splice(index, 1);
                     }
-                    if (ctrl.currentScrumTeam.productOwner.id === assistant.id) {
+                    if (ctrl.currentScrumTeam.productOwner.id !== null && ctrl.currentScrumTeam.productOwner.id === assistant.id) {
                         let index = ctrl.assistantList.indexOf(assistant);
                         ctrl.assistantList.splice(index, 1);
                     }

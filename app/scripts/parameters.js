@@ -10,7 +10,7 @@
 mainAngularModule
     .constant('DEBUG', false)
     //.constant('BACKEND_BASE_URL','http://192.168.10.210:8200/esempioisssr')
-    .constant('BACKEND_BASE_URL', 'http://54.93.98.69/ticketingsystem')
+    .constant('BACKEND_BASE_URL', 'http://localhost:8200/ticketingsystem')
     //.constant('BACKEND_BASE_URL','http://localhost:3000')
     .constant('SOFTWARE_PRODUCTS_ENDPOINT_URL', '/targets/')
     .constant('TEAM_ENDPOINT_URL', '/teams/')
@@ -31,6 +31,7 @@ mainAngularModule
     .constant('SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL', '/backlog/')
     .constant('SCRUM_CEREMONY_ENDPOINT_URL', '/scrumCeremony/')
     .constant('SCRUM_STATE', 'scrum.*')
+    .constant('SCRUM_STATE_PLUS', 'scrum.plus')
 
 
 ;

@@ -1,11 +1,12 @@
 'use strict';
 
 mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state', '$stateParams', 'BacklogItemService',
-    'ToasterNotifierHandler', '$mdDialog',
-    function ($scope, $state, $stateParams, BacklogItemService, ToasterNotifierHandler, $mdDialog){
+    'ToasterNotifierHandler', '$mdDialog', '$filter',
+    function ($scope, $state, $stateParams, BacklogItemService, ToasterNotifierHandler, $mdDialog, $filter){
 
     $scope.sprint = JSON.parse(sessionStorage.getItem('sprint'));
     $scope.product = JSON.parse(sessionStorage.getItem('product'));
+    $scope.sprintBacklogItems = [];
 
     $scope.setItemToChange = function(event, ui, backlogItem){
         $scope.backlogItemToChange = backlogItem;
@@ -22,24 +23,21 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
                     description: 'placeholder',
                     status: '',
                     effortEstimation: 0,
-                    priority: 'PLACEHOLDER'
+                    priority: 0
                 });
                 $scope.sprintBacklogItems = items;
-                $scope.isActiveSprint = true;
-            }, function errorCallback(response) {
-                if (response.status === 404) {
-                    $scope.isActiveSprint = false;
-                } else {
-                    ToasterNotifierHandler.handleError(response);
-                }
+            }, function errorCallback() {
+                ToasterNotifierHandler.showErrorToast('Errore nel recupero degli item nello Sprint Backlog');
             });
     };
 
     // Porta lo stato dell'item in trascinamento al valore specificato
     $scope.changeItemStateTo = function(event, ui, newState){
         BacklogItemService.changeItemStateToService($scope.backlogItemToChange.id, newState)
-            .then(function successCallback() {
-                populateSprintBacklog();
+            .then(function successCallback(response) {
+                $scope.sprintBacklogItems = $filter('filter')($scope.sprintBacklogItems,
+                    function(value) {return value.id !== $scope.backlogItemToChange.id;});
+                $scope.sprintBacklogItems.push(response.data);
             }, function errorCallback(response){
                 ToasterNotifierHandler.handleError(response);
             });
@@ -59,20 +57,6 @@ mainAngularModule.controller('viewSprintBacklogController', ['$scope', '$state',
                 }
             }
         });
-    };
-
-    // Questa funzione valorizza la priorità di un item in modo tale da poter
-    // ordinare le voci all'interno dello Sprint Backlog
-    $scope.priorityLevel = function(backlogItem) {
-        if (backlogItem.priority === 'HIGH') {
-            return 1;
-        } else if (backlogItem.priority === 'MEDIUM') {
-            return 2;
-        } else if (backlogItem.priority === 'LOW'){
-            return 3;
-        } else {
-            return 4;
-        }
     };
 
     populateSprintBacklog();

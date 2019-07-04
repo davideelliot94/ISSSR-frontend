@@ -1,7 +1,7 @@
 'use strict';
 
-mainAngularModule.config(['$stateProvider', 'SCRUM_STATE',
-    function ($stateProvider, SCRUM_STATE) {
+mainAngularModule.config(['$stateProvider', 'SCRUM_STATE', 'SCRUM_STATE_PLUS',
+    function ($stateProvider, SCRUM_STATE, SCRUM_STATE_PLUS) {
 
         $stateProvider
             .state('scrumteam', {
@@ -16,16 +16,24 @@ mainAngularModule.config(['$stateProvider', 'SCRUM_STATE',
                         return AclProtector.checkRoutePermission(SCRUM_STATE);
                     }
                 }
-            })
-
-            .state('scrumteam.create', {
+            }).state('scrumteam.view', {
+                url: '/view',
+                templateUrl: 'views/scrumTeam/scrum-team-view.html',
+                controller: 'ScrumTeamViewCtrl',
+                controllerAs: 'ctrl',
+                resolve: {
+                    acl: function (AclProtector) {
+                        return AclProtector.checkRoutePermission(SCRUM_STATE);
+                    }
+                }
+         }).state('scrumteam.create', {
                 url: '/create',
                 templateUrl: 'views/scrumTeam/scrum-team-create.html',
                 controller: 'ScrumTeamCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(SCRUM_STATE);
+                        return AclProtector.checkRoutePermission(SCRUM_STATE_PLUS);
                     }
                 }
             })
@@ -47,7 +55,7 @@ mainAngularModule.config(['$stateProvider', 'SCRUM_STATE',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(SCRUM_STATE);
+                        return AclProtector.checkRoutePermission(SCRUM_STATE_PLUS);
                     }
                 }
         });

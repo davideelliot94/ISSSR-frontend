@@ -6,10 +6,12 @@ mainAngularModule
 
             var ctrl = this;
             ctrl.groups = {};
+            var mandatoryGroups = ['GRUPPO ADMIN', 'GRUPPO TEAM MEMBER', 'GRUPPO TEAM LEADER', 'GRUPPO CUSTOMER', 'GRUPPO TEAM COORDINATOR', 'GRUPPO SCRUM'];
 
             ctrl.showGroups = showGroupsFn;
             ctrl.refreshGroups = refreshGroupsFn;
             ctrl.deleteGroup = deleteGroupFn;
+            ctrl.isDeletable = isDeletableFn;
 
             refreshGroupsFn();
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -34,10 +36,20 @@ mainAngularModule
                 GroupDataFactory.Remove(
                     idGroup,
                     function () {
-                        refreshGroupsFn()
+                        refreshGroupsFn();
                     }, function () {
                         ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione del gruppo"});
                     });
+            }
+            
+            function isDeletableFn(name) {
+                
+                if (mandatoryGroups.indexOf(name) >= 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+
             }
 
 

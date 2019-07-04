@@ -43,9 +43,11 @@ mainAngularModule
                 let tags = ctrl.currentSoftwareProduct.categories;
                 ctrl.currentSoftwareProduct.categories = [];
                 ctrl.currentSoftwareProduct.targetState = "ACTIVE";
-
-                for (let i = 0; i < tags.length; i++) {
-                    ctrl.currentSoftwareProduct.categories[i] = tags[i].text;
+                
+                if (tags != null) {
+                    for (let i = 0; i < tags.length; i++) {
+                        ctrl.currentSoftwareProduct.categories[i] = tags[i].text;
+                    }
                 }
 
                 softwareProductDataFactory.Insert(

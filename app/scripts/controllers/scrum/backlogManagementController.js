@@ -9,8 +9,6 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.backlogItem = {};
     // list of item in product backlog for selected product
     $scope.backlogItems = {};
-    // list of item in sprint backlog for selected product
-    $scope.sprintBacklogItems = {};
     // default option for datatable
     $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
     $scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(4).notSortable()];
