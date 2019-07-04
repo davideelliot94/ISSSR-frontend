@@ -16,6 +16,13 @@ mainAngularModule
 
             ctrl.authMessage = '';
 
+            let authInfo = JSON.parse(sessionStorage.getItem('authInfo'));
+            console.log("myauthinfo: " + JSON.stringify(authInfo));
+            if(authInfo !== null && authInfo !== undefined){
+                $state.go('dashboard.home');
+            }
+
+
             function doLoginFn() {
                 console.log("doLoginFn");
                 AuthFactory.sendLogin(ctrl.authRequest, successCB, errorCB);
@@ -37,7 +44,7 @@ mainAngularModule
                         console.log("userType: " + authInfo.userRole);
                     }
                     AuthFactory.setJWTAuthInfo(authInfo);
-
+                    sessionStorage.setItem('authInfo',JSON.stringify(authInfo.username));
                     $state.go("dashboard.home");
                 }
 

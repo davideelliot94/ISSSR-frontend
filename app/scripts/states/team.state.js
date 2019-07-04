@@ -37,6 +37,7 @@ mainAngularModule.config(['$stateProvider',
                 controllerAs: 'ctrl',
                 resolve: {
                     acl: function (AclProtector) {
+                        console.log('aclProtector');
                         return AclProtector.checkRoutePermission(stateTeamCreate);
                     }
                 }

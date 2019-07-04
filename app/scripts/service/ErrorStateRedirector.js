@@ -8,7 +8,7 @@ mainAngularModule
             console.log('error state redirector');
             if(errorMsgObject["Messaggio"] === "Login session expired"){
                 console.log('msg is login expired');
-                ToasterNotifierHandler.handleError("Expired session; please, do login");
+                ToasterNotifierHandler.showErrorToast("Expired session; please, do login");
                 $state.go('login');
             }else{
                 console.log("msg is: "+ JSON.stringify(errorMsgObject));

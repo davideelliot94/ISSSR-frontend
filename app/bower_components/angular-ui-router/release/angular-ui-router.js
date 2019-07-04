@@ -1000,6 +1000,7 @@
         };
         /** Returns a Rejection due to transition superseded */
         Rejection.superseded = function (detail, options) {
+            console.log('rejection.superseded');
             var message = 'The transition has been superseded by a different transition';
             var rejection = new Rejection(exports.RejectType.SUPERSEDED, message, detail);
             if (options && options.redirected) {

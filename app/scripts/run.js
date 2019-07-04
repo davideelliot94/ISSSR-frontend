@@ -40,7 +40,7 @@ mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions',
 
             while (currentTime + 1000 >= new Date().getTime()) {
             }
-            if (toStateName != fromStateName /*&& oldState  != fromStateName*/) {
+            if (toStateName !== fromStateName /*&& oldState  != fromStateName*/) {
 
                 let Msg = "Rotta non autorizzata";
                 if (DEBUG) {

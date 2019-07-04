@@ -21,10 +21,9 @@ mainAngularModule
                 $scope.Logout = LogoutFn;
 
                 function LogoutFn() {
+                    sessionStorage.removeItem('authInfo');
                     AuthFactory.deleteAuthInfo();
                 }
             }
-        }
+        };
     }]);
-
-
