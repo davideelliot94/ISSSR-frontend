@@ -43,7 +43,7 @@
                             <th class="col-md-1">Descrizione</th>
                             <th class="col-md-1">Priorità</th>
                             <th class="col-md-1">Stima dell'effort</th>
-                            <th class="col-md-1" ng-if="backlogItem.product.isUserProductOwner"></th>
+                            <th class="col-md-1" ng-if="selectedProduct.isUserProductOwner"></th>
                         </tr>
                         </thead>
                         <!--DETAILED_PRODUCT_BACKLOG-->
@@ -55,7 +55,7 @@
                             <td>{{item.priority}}</td>
                             <td>{{item.effortEstimation}}</td>
                             <td align="center"
-                                ng-if="backlogItem.product.isUserProductOwner">
+                                ng-if="selectedProduct.isUserProductOwner">
                                 <!-- Bottone aggiunta Item allo Sprint Backlog -->
                                 <button title="Modifica item"
                                         ng-click="openBacklogItemEditDialog(item)"
@@ -77,15 +77,16 @@
         </div>
     </div>
 </div>
-
 <!-- Bottone aggiunta Item al Backlog -->
 <button type="button"
         class="btn btn-primary"
         ng-click="openBacklogItemCreationDialog()"
-        ng-disabled="!isSelectedProduct.product"
-        ng-if="backlogItem.product.isUserProductOwner">
+        ng-disabled="!isSelectedProduct"
+        ng-if="selectedProduct.isUserProductOwner">
     Aggiungi Item al Backlog
 </button>
+<br>
+<br>
 
 </div>
 <!--                DRAG N DROP     -->
@@ -101,7 +102,7 @@
                 <h4 style="vertical-align: super; ">Product Backlog</h4>
                 <div style=" display: inline-block;margin-left: 7px; width: 250px "
                      class="panel panel-primary" ng-repeat="item in backlogItems | orderBy: '-priority'"
-                     data-drag="item.title != 'placeholder'"
+                     data-drag="item.effortEstimation!=null"
                      data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
                      jqyoui-draggable='{animate: true, onStart:"setItemToChange(item)"}'
                      ng-style=""
