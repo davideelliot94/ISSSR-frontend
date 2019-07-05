@@ -52,14 +52,14 @@
                                dt-column-defs="dtColumnDefs">
                             <thead>
                             <tr>
-                                <th class="col-md-1"></th>
-                                <th class="col-md-1">ID</th>
-                                <th class="col-md-1">Nome</th>
+                                <th class="col-md-0.5"></th>
+                                <th class="col-md-0.5">ID</th>
+                                <th class="col-md-2">Nome</th>
                                 <th class="col-md-2">Descrizione</th>
-                                <th class="col-md-1">Versione</th>
-                                <th class="col-md-1">Seleziona Scrum Team</th>
-                                <th class="col-md-2">Seleziona Workflow per il prodotto Scrum</th>
-                                <th class="col-md-1"></th>
+                                <th class="col-md-1.5">Versione</th>
+                                <th class="col-md-2">Seleziona Scrum Team</th>
+                                <th class="col-md-2">Seleziona Workflow Prodotto </th>
+                                <th class="col-md-1.5"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,7 +68,7 @@
 
                                 <tr ng-repeat="p in notAssignedproducts">
 
-                                    <td><input ng-model="result" type="radio" name="rdoResult" value=""
+                                    <td align="center"><input ng-model="result" type="radio" name="rdoResult" value=""
                                                ng-click="setProduct(p)"></td>
                                     <td>{{p.id}}</td>
                                     <td>{{p.name}}</td>
@@ -79,7 +79,8 @@
                                                 ng-model="scrumTeam"
                                                 ng-change="setScrumTeam(scrumTeam)"
                                                 ng-disabled="!association.product.id > 0"
-                                                ng-options="scrumTeam.name for scrumTeam in scrumTeams">
+                                                ng-options="scrumTeam.name for scrumTeam in scrumTeams"
+                                                style="width: 100%">
                                         </select>
                                     </td>
                                     <td>
@@ -87,7 +88,8 @@
                                                 ng-model="workflow"
                                                 ng-change="setWorkflow(workflow)"
                                                 ng-disabled="!association.product.id > 0"
-                                                ng-options="workflow.name for workflow in scrumProductWorkflows">
+                                                ng-options="workflow.name for workflow in scrumProductWorkflows"
+                                                style="width: 100%">
                                         </select>
                                     </td>
                                     <td align="center"
@@ -97,7 +99,8 @@
                                                 ng-click="assignProduct( p.id); refreshProduct()"
                                                 ng-disabled="!association.product.id > 0 ||
                                                              !association.scrumTeam.id > 0 ||
-                                                             !association.workflow.id > 0">
+                                                             !association.workflow.id > 0"
+                                                style="width: 100%">
                                             Assegna
                                         </button>
                                     </td>
