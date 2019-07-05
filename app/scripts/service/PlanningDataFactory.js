@@ -44,7 +44,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateEquality",
+                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateEquality',
                     params: params
                 })
                     .then(function (response) {
@@ -70,7 +70,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findFatherTicket/" + id,
+                    url: BACKEND_BASE_URL + '/tickets/findFatherTicket/' + id,
                     params: data
                 })
                     .then(function (response) {
@@ -93,7 +93,7 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: "http://localhost:8200/ticketingsystem/gantt/createGanttInstance/" + teamName + "/"+ date +"/"+ durat +"/"+idtick,
+                    url: BACKEND_BASE_URL + '/gantt/createGanttInstance/' + teamName + '/'+ date +'/'+ durat +'/'+idtick,
                     data: data
                 })
                     .then(function (response) {
@@ -117,7 +117,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForGantt/" + team,
+                    url: BACKEND_BASE_URL + '/tickets/findTicketForGantt/' + team,
                     params: data
                 })
                     .then(function (response) {
@@ -141,7 +141,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/relationInstance/findRelations/" + ticketId,
+                    url: BACKEND_BASE_URL + '/relationInstance/findRelations/' + ticketId,
                     params: data
                 })
                     .then(function (response) {
@@ -165,7 +165,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/relation",
+                    url: BACKEND_BASE_URL + '/relation',
                     params: data
                 })
                     .then(function (response) {
@@ -188,7 +188,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/relation/equivalence/" + ticketId,
+                    url: BACKEND_BASE_URL + '/tickets/relation/equivalence/' + ticketId,
                     params: data
                 })
                     .then(function (response) {
@@ -213,7 +213,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketInQueue",
+                    url: BACKEND_BASE_URL + '/tickets/findTicketInQueue',
                     params: params
                 })
                     .then(function (response) {
@@ -238,7 +238,7 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: "http://localhost:8200/ticketingsystem/relationInstance/" + data.relation.name + "/" + data.fatherTicket.id + "/" + data.sonTicket.id,
+                    url: BACKEND_BASE_URL + '/relationInstance/' + data.relation.name + '/' + data.fatherTicket.id + '/' + data.sonTicket.id,
                     data: data
                 })
                     .then(function (response) {
@@ -283,7 +283,7 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: "http://localhost:8200/ticketingsystem/tickets/addRegression/" + choose + "/" + idChoose,
+                    url: BACKEND_BASE_URL + '/tickets/addRegression/' + choose + '/' + idChoose,
                     data: data
                 })
                     .then(function (response) {
@@ -314,7 +314,7 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: "http://localhost:8200/ticketingsystem/tickets/addDependentTicket/"+ idChoose + "/" + choose,
+                    url: BACKEND_BASE_URL + '/tickets/addDependentTicket/'+ idChoose + '/' + choose,
                     data: data
                 })
                     .then(function (response) {
@@ -344,7 +344,7 @@ mainAngularModule
 
                 $http({
                     method: 'PUT',
-                    url: "http://localhost:8200/ticketingsystem/tickets/addEqualityTicket/"+ choose + "/" + data.sameTicket.id,
+                    url: BACKEND_BASE_URL + '/tickets/addEqualityTicket/'+ choose + '/' + data.sameTicket.id,
                     data: data
                 })
                     .then(function (response) {
@@ -382,7 +382,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateEquality",
+                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateEquality',
                     params: params
                 })
                     .then(function (response) {
@@ -407,7 +407,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateRegression",
+                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateRegression',
                     params: params
                 })
                     .then(function (response) {
@@ -431,7 +431,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateDependency",
+                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateDependency',
                     params: params
                 })
                     .then(function (response) {
@@ -456,7 +456,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/relation",
+                    url: BACKEND_BASE_URL + '/relation',
                     params: params
                 })
                     .then(function (response) {
@@ -481,7 +481,7 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: "http://localhost:8200/ticketingsystem/escalation",
+                    url: BACKEND_BASE_URL + '/escalation',
                     data: data
                 })
                     .then(function (response) {
@@ -505,7 +505,7 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: "http://localhost:8200/ticketingsystem/relation/"+ data.name,
+                    url: BACKEND_BASE_URL + '/relation/'+ data.name,
                     data: data
                 })
                     .then(function (response) {
@@ -527,7 +527,7 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: "http://localhost:8200/ticketingsystem/tickets",
+                    url: BACKEND_BASE_URL + '/tickets',
                     params: params
                 })
                     .then(function (response) {
@@ -547,10 +547,9 @@ mainAngularModule
 
 
             function getDetailsTicket(data,idTicket, successCB, errorCB) {
-                //alert("http://localhost:8200/ticketingsystem/tickets/" + idTicket);
                 $http({
                     method: "GET",
-                    url: "http://localhost:8200/ticketingsystem/tickets/" + idTicket,
+                    url: BACKEND_BASE_URL + '/tickets/' + idTicket,
                     params: data
                 })
                     .then(function (response) {
@@ -574,7 +573,7 @@ mainAngularModule
             function getTeamsByTeamMember(username, successCB, errorCB) {
                 $http({
                     method: "GET",
-                    url: "http://localhost:8200/ticketingsystem/teams/findAllTeamsByPerson/" + username,
+                    url: BACKEND_BASE_URL + '/teams/findAllTeamsByPerson/' + username,
                     //params: data
                 })
                     .then(function (response) {

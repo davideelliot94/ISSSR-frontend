@@ -20,11 +20,11 @@
                                 >
                             </div>
                         </fieldset>
+                        <!-- Change this to a button or input when using this as a form -->
+                        <button ng-click="ctrl.doLogin()" ng-disabled="loginForm.$invalid || loginForm.$pending"
+                                class="btn btn-lg btn-success btn-block">Login
+                        </button>
                     </form>
-                    <!-- Change this to a button or input when using this as a form -->
-                    <button ng-click="ctrl.doLogin()" ng-disabled="loginForm.$invalid || loginForm.$pending"
-                            class="btn btn-lg btn-success btn-block">Login
-                    </button>
 
                 </div>
             </div>

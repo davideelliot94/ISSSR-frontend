@@ -26,7 +26,7 @@ mainAngularModule
                     console.log('reset ticket form');
                     //inseriamo l'id del PO
                     ctrl.max_sprint_duration = 5;           //TODO HEADER GET
-                    ctrl.durationsAvaibles=Array.from(Array(ctrl.max_sprint_duration).keys());
+                    ctrl.durationsAvaibles=[1,2,3,4];
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                 }

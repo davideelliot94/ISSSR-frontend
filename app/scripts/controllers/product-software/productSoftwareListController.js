@@ -1,9 +1,10 @@
 'use strict';
 mainAngularModule
     .controller('ProductSoftwareListCtrl', ['$scope', '$window', 'ToasterNotifierHandler', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
-        'DTColumnDefBuilder', 'ScrumProductWorkflowService',
-        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory, ErrorStateRedirector,
-                  DTOptionsBuilder, DTColumnDefBuilder, ScrumProductWorkflowService) {
+        'DTColumnDefBuilder', 'ScrumProductWorkflowService', 'ScrumProductService', '$filter',
+        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory,
+                  ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder,
+                  ScrumProductWorkflowService, ScrumProductService, $filter) {
 
             var ctrl = this;
             ctrl.refreshProduct = refreshProductFn;
@@ -13,11 +14,8 @@ mainAngularModule
             ctrl.rehabTarget = rehabTargetFN;
             ctrl.isRetired = isRetiredFN;
 
-
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
-            $scope.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(4).notSortable()
-            ];
+            $scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(4).notSortable()];
 
             refreshProductFn();
 
@@ -25,9 +23,14 @@ mainAngularModule
                 softwareProductDataFactory.GetAll(
                     function (products) {
                         ctrl.products = products;
-                        console.log(products);
-                    }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei prodotti"});
+                        // Costruzione dell'array contenente tutti i prodotti non assegnati
+                        for (let i = 0; i < products.length; i++){
+                            if (products[i].scrumTeamId === -1){
+                                $scope.notAssignedproducts.push(products[i]);
+                            }
+                        }
+                    }, function () {
+                        ToasterNotifierHandler.showErrorToast('Errore nel recupero dei prodotti');
                     });
 
             }
@@ -113,65 +116,48 @@ mainAngularModule
             };
 
 
-            $scope.GetData = function (id) {
-                if (id > 0) {
+// ___________________________________________________PARTE SCRUM_______________________________________________
 
-                    softwareProductDataFactory.GetProductOwnerBySTId(id, function (productOwner) {
-
-                        $scope.productOwner = productOwner;
-
-                    }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
+            $scope.assignProduct = function() {
+                ScrumProductService.assignProductToScrumTeam($scope.association.scrumTeam.id,
+                    $scope.association.product.id, $scope.association.workflow.id)
+                    .then(function successCallback(association) {
+                        ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo');
+                        $scope.assignments.push(association);
+                        $scope.notAssignedproducts = $filter('filter')($scope.notAssignedproducts,
+                            function(value) {return value.name !== association.product;});
+                    }, function errorCallback(){
+                        ToasterNotifierHandler.showErrorToast('Errore nell\'assegnamento del prodotto');
                     });
-
-                    softwareProductDataFactory.GetScrumMasterBySTId(id, function (scrumMaster) {
-
-                        $scope.scrumMaster = scrumMaster;
-
-                    }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
-                    });
-
-                    softwareProductDataFactory.GetMembersBySTId(id, function (members) {
-
-                        $scope.members = members;
-                    }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Scrum Team"});
-                    });
-
-                    $scope.value = true;
-
-                } else {
-
-                    $scope.value = false;
-
-                }
-
             };
 
-            $scope.GetSelected = function (id) {
-                $scope.selected = id;
-            };
-
-            $scope.assignProduct = function(pid) {
-                if (!angular.isUndefined($scope.association.scrumTeam) && !angular.isUndefined($scope.association.workflow)) {
-                    softwareProductDataFactory.AssignProdToST($scope.association.scrumTeam.id, pid, $scope.association.workflow.id);
-                    $window.location.reload();
-                } else {
-                    ToasterNotifierHandler.showErrorToast('Selezionare uno Scrum Team e uno Scrum Product Workflow');
-                }
-
-            };
-
+            // Associazione in fase di costruzione
             $scope.association = {};
+            // Associazioni preesistenti
+            $scope.assignments = [];
+            // Prodotti non assegnati
+            $scope.notAssignedproducts = [];
+
+
+            // Recupera tutti gli assegnamenti tra prodotti e scrum team esistenti
+            function getExistentAssignments(){
+                ScrumProductService.getExistentAssignmentsService()
+                    .then(function successCallback(response) {
+                        $scope.assignments = response;
+                    }, function errorCallback(){
+                        ToasterNotifierHandler.showErrorToast('Errore nel recupero delle ' +
+                            'associazioni esistenti');
+                    });
+            }
 
             // Recupera tutti i workflow per i prodotti Scrum
             function getScrumProductWorkflows(){
                 ScrumProductWorkflowService.getAllScrumProductWorkflowService()
                     .then(function successCallback(response) {
                         $scope.scrumProductWorkflows = response.data;
-                    }, function errorCallback(response){
-                        ToasterNotifierHandler.handleError(response);
+                    }, function errorCallback(){
+                        ToasterNotifierHandler.showErrorToast('Errore nel recupero degli Scrum' +
+                            ' Product Workflow ');
                     });
             }
 
@@ -181,11 +167,8 @@ mainAngularModule
                     function successCallback(response) {
                         $scope.scrumTeams = response;
                     }, function errorCallback(){
-                        ErrorStateRedirector.GoToErrorPage(
-                            {Messaggio: 'Errore nel recupero degli Scrum Team'
-                        });
+                        ToasterNotifierHandler.showErrorToast('Errore nel recupero degli Scrum Team');
                     });
-                $scope.value = false;
             }
 
             $scope.setScrumTeam = function (scrumTeam) {
@@ -195,8 +178,12 @@ mainAngularModule
                 $scope.association.workflow = workflow;
             };
 
+            $scope.setProduct = function (product) {
+                $scope.association.product = product;
+            };
+
+            getExistentAssignments();
             getScrumTeams();
             getScrumProductWorkflows();
-
 
         }]);

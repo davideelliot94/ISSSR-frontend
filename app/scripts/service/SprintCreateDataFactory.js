@@ -3,8 +3,9 @@
  * @ngdoc overview
  * @name sbAdminApp
  * @description
- * # sbAdminApp
  *
+ SPRINT MANAGEMENT
+
  * Main module of the application.
  */
 
@@ -60,7 +61,7 @@ mainAngularModule
             }
 
 
-            // get all data from database
+            // get all sprints associated to product
             function GetAllFnByProduct(productId, successCB, errorCB) {
 
                 $http({

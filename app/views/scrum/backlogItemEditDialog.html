@@ -35,15 +35,22 @@
                           ng-model="backlogItem.description">
                 </textarea>
             </div>
-            <div class="form-group">
+
+            <div class="form-group"
+                 ng-class="{'has-error': backlogItemEditForm.backlogItemPriority.$invalid &&
+                                         backlogItemEditForm.backlogItemPriority.$dirty,
+                            'has-success': backlogItemEditForm.backlogItemPriority.$valid &&
+                                           backlogItemEditForm.backlogItemPriority.$dirty}">
                 <label>Priorità
-                    <select class="form-control"
-                            ng-init="backlogItem.priority"
-                            ng-options="priorityClass for priorityClass in backlogItemPriorityClasses"
-                            ng-model="backlogItem.priority">
-                    </select>
+                    <input name="backlogItemPriority"
+                           type="number"
+                           class="form-control"
+                           min="1"
+                           ng-model="backlogItem.priority"
+                           ng-required="true">
                 </label>
             </div>
+
             <div class="form-group"
                  ng-class="{'has-error': backlogItemEditForm.backlogItemEffortEstimation.$invalid &&
                                          backlogItemEditForm.backlogItemEffortEstimation.$dirty,

@@ -63,15 +63,15 @@ mainAngularModule
 
             // La funzione invia una richiesta al backend per inserire un item nello sprint backlog del prodotto passato
             // come parametro.
-            this.insertBacklogItemToSprintBacklogService = function (productId, backlogItem) {
+            this.insertBacklogItemToSprintBacklogService = function (productId, backlogItem,destSprintNum) {
                 let deferred = $q.defer();
                 $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'target/' + productId +
-                    '/item/sprint/' + backlogItem.sprint.number,
+                    '/item/sprint/' + destSprintNum,
                     {'id': backlogItem.id, 'title': backlogItem.title, 'description' : backlogItem.description,
                         'priority' : backlogItem.priority, 'effortEstimation': backlogItem.effortEstimation})
                     .then(function successCallback(response) {
                         if (response.status === 200) {
-                            deferred.resolve(response);
+                            deferred.resolve(response.data);
                         } else {
                             deferred.reject(response);
                         }
@@ -80,6 +80,24 @@ mainAngularModule
                     });
                 return deferred.promise;
             };
+
+            // move backlog item from sprint backlog back to Product backlog
+            this.moveItemToProductBacklog = function (itemId) {
+                let deferred = $q.defer();
+                $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + itemId + '/' + 'backToBacklog')
+                    .then(function successCallback(response) {
+                        if (response.status === 200) {
+                            deferred.resolve(response.data);
+                        } else {
+                            deferred.reject(response);
+                        }
+                    }, function errorCallback(response) {
+                        deferred.reject(response);
+                    });
+                return deferred.promise;
+            };
+
+
 
             // La funzione permette di cambiare lo stato di un item nello sprint backlog
             this.changeItemStateToService = function (itemId, newState) {

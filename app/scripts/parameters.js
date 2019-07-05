@@ -30,6 +30,8 @@ mainAngularModule
     .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
     .constant('SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL', '/backlog/')
     .constant('SCRUM_CEREMONY_ENDPOINT_URL', '/scrumCeremony/')
+    .constant('SCRUM_STATE', 'scrum.*')
+    .constant('SCRUM_STATE_PLUS', 'scrum.plus')
 
 
 ;
