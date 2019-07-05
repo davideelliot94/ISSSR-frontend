@@ -40,7 +40,7 @@
                                             <button class="btn btn-primary" ng-click="ctrl.openViewMemberDialog(t)"
                                                     title="Visualizza tutti i membri"><i class="fa fa-users"></i></button>
                                         </td>
-                                        <td ng-if="hasPermission('scrumTeamButton')"><button class="btn btn-danger "
+                                        <td align="center" ng-if="hasPermission('scrumTeamButton')"><button class="btn btn-danger "
                                                     ng-if = "t.products == null || t.products.length === 0"
                                                     ng-click="ctrl.deleteScrumTeam(t)">
                                             <i class="fa fa-trash"></i>

@@ -51,7 +51,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="u in ctrl.sprints" >
+                            <tr ng-repeat="u in ctrl.sprints | orderBy :'number'" >
 
                             <!--                            <tr ng-repeat="u in ctrl.sprints" ng-show="u.isActive==null">-->
 

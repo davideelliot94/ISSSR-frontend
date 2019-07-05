@@ -32,7 +32,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.populateBacklog = function() {
         $scope.isSelectedProduct = true;
         $scope.states = $scope.selectedProduct.scrumProductWorkflow.states;
-
+        $scope.getSprintsItemsRelatedToProduct();
         // Popolamento del product backlog
         BacklogItemService.getProductBacklogItemService($scope.selectedProduct.id)
             .then(function successCallback(items) {
@@ -72,6 +72,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
 
     //get all sprints and related items of selected product from backend
     $scope.getSprintsItemsRelatedToProduct= function () {
+        $scope.sprints=[];
             SprintCreateDataFactory.GetAllByProduct($scope.selectedProduct.id, function (sprints) {
                 for (let i=0; i<sprints.length; i++) {
                     if (sprints[i].isActive !== false) {
