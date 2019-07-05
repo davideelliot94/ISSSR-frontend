@@ -23,22 +23,7 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
                 });
         };
 
-        // WARNING: NOT USED
-        $scope.insertBacklogItemToSprintBacklog = function () {
-            BacklogItemService.insertBacklogItemToSprintBacklogService(productId, $scope.backlogItem)
-                .then(function successCallback() {
-                    ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
-                    $mdDialog.hide();
-                    $state.go('backlog_management.view');
-                }, function errorCallback(response){
-                    if (response.status === 422){
-                        ToasterNotifierHandler.showErrorToast(
-                            'Prima di inserire un item nello Sprint Backlog è necessario creare lo sprint.');
-                    } else {
-                        ToasterNotifierHandler.handleError(response);
-                    }
-                });
-        };
+
 
         //Restituisce l'elenco degli sprint non chiusi per il prodotto selezionato
         let getAllNotClosedSprintOfProduct = function () {
