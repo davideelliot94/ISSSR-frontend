@@ -19,7 +19,9 @@ mainAngularModule
             let authInfo = JSON.parse(sessionStorage.getItem('authInfo'));
             console.log("myauthinfo: " + JSON.stringify(authInfo));
             if(authInfo !== null && authInfo !== undefined){
-                $state.go('dashboard.home');
+           //     $state.go('dashboard.home');
+                AuthFactory.setJWTAuthInfo(authInfo);
+                $state.go("dashboard.home");
             }
 
 
@@ -44,7 +46,7 @@ mainAngularModule
                         console.log("userType: " + authInfo.userRole);
                     }
                     AuthFactory.setJWTAuthInfo(authInfo);
-                    sessionStorage.setItem('authInfo',JSON.stringify(authInfo.username));
+                    sessionStorage.setItem('authInfo',JSON.stringify(authInfo));
                     $state.go("dashboard.home");
                 }
 

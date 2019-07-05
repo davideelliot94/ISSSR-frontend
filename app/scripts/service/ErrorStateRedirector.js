@@ -1,14 +1,15 @@
 'use strict';
 
 mainAngularModule
-    .service('ErrorStateRedirector', ['$state', function ($state) {
-        this.GoToErrorPage = function (errorMsgObject,ToasterNotifierHandler) {
+    .service('ErrorStateRedirector', ['$state',function ($state) {
+        this.GoToErrorPage = function (errorMsgObject) {
             console.log("going to error page");
             //sleep(10);
             console.log('error state redirector');
             if(errorMsgObject["Messaggio"] === "Login session expired"){
-                console.log('msg is login expired');
-                ToasterNotifierHandler.showErrorToast("Expired session; please, do login");
+
+                let r = sessionStorage.getItem('authInfo');
+                console.log('authinfo removed?: ' + JSON.stringify(r));
                 $state.go('login');
             }else{
                 console.log("msg is: "+ JSON.stringify(errorMsgObject));

@@ -7,8 +7,8 @@
  * Controller of the sbAdminApp
  */
 mainAngularModule
-    .controller('TeamCreateCtrl', ['$scope', '$state', 'TeamDataFactory', 'ErrorStateRedirector',
-        function ($scope, $state, TeamDataFactory, ErrorStateRedirector) {
+    .controller('TeamCreateCtrl', ['$scope', '$state', 'jwtHelper','AuthFactory','TeamDataFactory', 'ErrorStateRedirector',
+        function ($scope, $state,jwtHelper, AuthFactory,TeamDataFactory, ErrorStateRedirector) {
 
             console.log('inside team create controller');
             var ctrl = this;
@@ -28,6 +28,10 @@ mainAngularModule
                         console.log("ok response");
                         console.log(response);
                         resetFieldsFn();
+                        let authInfo = JSON.parse(sessionStorage.get("authInfo"));
+                        let token = authInfo.jwtToken;
+                        console.log("is token expired?: " + jwtHelper.isTokenExpired(token));
+
                         $state.go('team.list', {}, {reload: 'team.list'});
                     }, function (response) {
                         console.log('error response');
@@ -35,6 +39,10 @@ mainAngularModule
 
                         if(response.data === 'expiration'){
                             msgErr = 'Login session expired';
+                            AuthFactory.deleteAuthInfo();
+                            console.log('ok1');
+                            sessionStorage.removeItem('authInfo');
+                            console.log('ok2');
                         }
                         ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 

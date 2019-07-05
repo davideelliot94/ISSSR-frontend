@@ -22,6 +22,8 @@ mainAngularModule
 
                 function LogoutFn() {
                     sessionStorage.removeItem('authInfo');
+                    let r = sessionStorage.getItem('authInfo');
+                    console.log('authinfo deleted?: ' + r);
                     AuthFactory.deleteAuthInfo();
                 }
             }
