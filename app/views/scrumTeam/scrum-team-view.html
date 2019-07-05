@@ -35,7 +35,7 @@
                                     <tr ng-repeat="t in ctrl.currentScrumTeams">
                                         <td>{{t.name}}</td>
                                         <td>{{t.scrumMaster.firstName +' ' + t.scrumMaster.lastName }}</td>
-                                        <td>{{t.productOwner.firstName + ' '+ t.scrumMaster.lastName}}</td>
+                                        <td>{{t.productOwner.firstName + ' '+ t.productOwner.lastName}}</td>
                                         <td align="center">
                                             <button class="btn btn-primary" ng-click="ctrl.openViewMemberDialog(t)"
                                                     title="Visualizza tutti i membri"><i class="fa fa-users"></i></button>
