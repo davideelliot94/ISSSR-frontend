@@ -6,8 +6,8 @@
  * # LoginCtrl
  */
 mainAngularModule
-    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory', 'BacklogItemService',
-        function ($scope, $state, AuthFactory) {
+    .controller('LoginCtrl', ['$scope', '$state','$window', 'AuthFactory','AclService','storageService', 'ToasterNotifierHandler','BacklogItemService',
+        function ($scope, $state,$window, AuthFactory,AclService,storageService,ToasterNotifierHandler) {
 
             let ctrl = this;
             ctrl.authRequest = {username: 'admin', password: 'password'};
@@ -17,6 +17,10 @@ mainAngularModule
             ctrl.authMessage = '';
 
             let authInfo = JSON.parse(sessionStorage.getItem('authInfo'));
+
+            let x = JSON.parse(sessionStorage.getItem('doneLogin'));
+            console.log('x is: ' + JSON.stringify(x));
+
             console.log("myauthinfo: " + JSON.stringify(authInfo));
             if(authInfo !== null && authInfo !== undefined){
            //     $state.go('dashboard.home');
@@ -47,7 +51,13 @@ mainAngularModule
                     }
                     AuthFactory.setJWTAuthInfo(authInfo);
                     sessionStorage.setItem('authInfo',JSON.stringify(authInfo));
-                    $state.go("dashboard.home");
+                    let userLog = localStorage.getItem(authInfo.username);
+                   if(userLog === null || userLog === undefined) {
+                        localStorage.setItem(authInfo.username, authInfo.username);
+                        $state.go("dashboard.home");
+                    }else{
+                        ToasterNotifierHandler.showErrorToast('user already logged');
+                    }
                 }
 
                 function errorCB(response) {
