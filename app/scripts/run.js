@@ -7,15 +7,12 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
         var oldState = null;
 
         AuthFactory.getPermission(function(response){
-            console.log("trying to get permission; response data: " + JSON.stringify(response.data));
+            console.log("trying to get permission");
             aclData = JSON.parse(JSON.stringify(response.data));
-            sessionStorage.setItem('doneLogin','true');
-            sessionStorage.setItem('aclData',aclData);
             console.log(aclData);
             AclService.setAbilities(aclData.roles);
             storageService.save('routes', JSON.stringify(aclData.routes));
             storageService.save('simbolicPermissions', JSON.stringify(aclData.simbolicPermissions));
-            console.log('saving sidebar');
             storageService.save('sidebar', JSON.stringify(aclData.sidebar));
             //var obj = JSON.parse(prova);
             //console.log(obj);
@@ -46,7 +43,7 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
             let expToken = exp.jwtToken;
 
 
-          /*  while (currentTime + 1000 >= new Date().getTime()) {
+           /* while (currentTime + 1000 >= new Date().getTime()) {
             }*/
             if (toStateName !== fromStateName /*&& oldState  != fromStateName*/) {
 
