@@ -4,7 +4,7 @@
  * @name sbAdminApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the sbAdminApp
+ * Controller of the sbAdminApp 
  */
 mainAngularModule
     .controller('MainCtrl', function ($scope, $position,$window,AuthFactory) {
