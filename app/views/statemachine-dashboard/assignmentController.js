@@ -13,7 +13,7 @@
  * @param restService           restService
  * @param httpService           httpService
  */
-var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction, getRole, getTicket, restService, httpService, AuthFactory, ToasterNotifierHandler) {
+var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, getAction, getRole, getTicket, restService, httpService, AuthFactory, ToasterNotifierHandler) {
 //mainAngularModule.controller('AssignmentModalCtrl', ['$scope', '$modalInstance', 'getState', 'getAction', 'getRole', 'getTicket', 'restService', 'httpService',
 //    function ($scope, $modalInstance, getState, getAction, getRole, getTicket, restService, httpService) {
     const ctrl = this;
@@ -223,6 +223,11 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
 
     //Used to populate the "SELECT"
     $scope.searchResolverUsers();
+
+
+    $window.onbeforeunload = function(event){
+        localStorage.removeItem(AuthFactory.getAuthInfo().username);
+    }
 };
 
 //]);

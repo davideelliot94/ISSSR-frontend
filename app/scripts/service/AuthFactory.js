@@ -106,7 +106,7 @@ mainAngularModule
             }
 
             function getAuthInfoFn() {
-                console.log("getAuthenticated: ", $sessionStorage.get('authInfo'));
+                console.log("getAuthenticated-: ", JSON.stringify($sessionStorage.get('authInfo')));
                 return $sessionStorage.get('authInfo');
             }
 

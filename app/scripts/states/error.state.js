@@ -19,6 +19,6 @@ mainAngularModule.config(['$stateProvider',
             templateUrl: 'views/error/error.html',
             controller: 'ErrorController',
             controllerAs: 'ctrl'
-        })
+        });
 
     }]);

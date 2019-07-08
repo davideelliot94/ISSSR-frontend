@@ -96,8 +96,8 @@ mainAngularModule
                     });
                     */
 
-                let userId = AuthFactory.getAuthInfo().userId;
-                if (1){
+                let userId = $stateParams.userId;
+                if (checkUserId(userId)) {
                     UserDataFactory.GetSingle(userId,
                         function (user) {
                             ctrl.user = user;
@@ -139,16 +139,16 @@ mainAngularModule
                     });
             }
 
-            // function checkUserId(userId) {
-            //     let authInfo = AuthFactory.getAuthInfo();
-            //     if (authInfo.userRole === "ADMIN") {
-            //         return true;
-            //     }
-            //     if (userId != authInfo.userId) {
-            //         return false;
-            //     }
-            //     return true;
-            // }
+            function checkUserId(userId) {
+                let authInfo = AuthFactory.getAuthInfo();
+                if (authInfo.userRole === "ADMIN") {
+                    return true;
+                }
+                if (userId != authInfo.userId) {
+                    return false;
+                }
+                return true;
+            }
 
             function resetFieldsFn() {
                 ctrl.user = ctrl.oldUser;

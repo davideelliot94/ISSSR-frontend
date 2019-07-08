@@ -59,13 +59,13 @@
                                 <!-- Bottone aggiunta Item allo Sprint Backlog -->
                                 <button title="Modifica item"
                                         ng-click="openBacklogItemEditDialog(item)"
-                                        class="btn btn-primary">
+                                        class="btn btn-primary" style="width: 49%">
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <!-- Bottone eliminazioen Item-->
                                 <button title="Elimina item dal Product Backlog"
                                         ng-click="deleteBacklogItem(item.id)"
-                                        class="btn btn-danger">
+                                        class="btn btn-danger"style="width: 49%">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -90,13 +90,13 @@
 
 </div>
 <!--                DRAG N DROP     -->
-<div class="panel panel-primary" ng-show="isSelectedProduct">
+<div class="panel panel-primary" ng-show="isSelectedProduct" ng-if="selectedProduct.isUserProductOwner">
     <div class="panel-heading">Pianifica gli Sprint Backlog</div>
     <div class="panel-body">
         <div style="overflow-x: scroll; white-space: nowrap" ng-hide="!isSelectedProduct">
             <!--PRODUCT BACKLOG -->
             <div class="panel-body"
-                 style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px; margin-right: 10px; height: 150px"
+                 style=" display: inline-table; padding: 25px 25px 25px 25px; border:1px solid steelblue; margin-left: 10px;height: 200px; width: 308px"
                  ng-Cloak
                  data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'moveInProductBacklog'}">
                 <br>
@@ -141,6 +141,7 @@
                 <br>
                 <h4 style="vertical-align: super; ">Sprint {{sprint.number}}</h4>
                 <div class="panel panel-primary"
+                     style="margin-left: 6px; "
                      ng-repeat="item in sprint.items| orderBy: '-priority'"
                      data-drag="item.title != 'placeholder'"
                      data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"

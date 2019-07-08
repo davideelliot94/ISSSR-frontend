@@ -30,7 +30,12 @@ mainAngularModule
                     function (teams) {
                         ctrl.teams = teams;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import dei team"});
+                        let msgErr = "Errore nell'import dei team";
+                        if(response.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
+                        //ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import dei team"});
                     });
             }
 

@@ -83,7 +83,7 @@ mainAngularModule
                     data: team
                 })
                     .then(function (response) {
-                            console.log("function response")
+                            console.log("function response");
                             if (successCB) {
                                 console.log(response.data)
                                 successCB(response.data);
