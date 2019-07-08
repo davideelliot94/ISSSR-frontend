@@ -24,11 +24,11 @@
                                        dt-column-defs="dtColumnDefsLeft">
                                     <thead>
                                     <tr>
-                                        <th class="col-md-1">Nome Team</th>
-                                        <th class="col-md-1">Scrum Master</th>
-                                        <th class="col-md-1">Product Owner</th>
-                                        <th class="col-md-1">Team Members</th>
-                                        <th class="col-md-1" ng-if="hasPermission('scrumTeamButton')"></th>
+                                        <th class="col-md-4">Nome Team</th>
+                                        <th class="col-md-3">Scrum Master</th>
+                                        <th class="col-md-3">Product Owner</th>
+                                        <th class="col-md-1">Members</th>
+                                        <th class="col-md-1.5" ng-if="hasPermission('scrumTeamButton')"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -38,11 +38,11 @@
                                         <td>{{t.productOwner.firstName + ' '+ t.productOwner.lastName}}</td>
                                         <td align="center">
                                             <button class="btn btn-primary" ng-click="ctrl.openViewMemberDialog(t)"
-                                                    title="Visualizza tutti i membri"><i class="fa fa-users"></i></button>
+                                                    title="Visualizza tutti i membri" style="width: 100%"><i class="fa fa-users"></i></button>
                                         </td>
                                         <td align="center" ng-if="hasPermission('scrumTeamButton')"><button class="btn btn-danger "
                                                     ng-if = "t.products == null || t.products.length === 0"
-                                                    ng-click="ctrl.deleteScrumTeam(t)">
+                                                    ng-click="ctrl.deleteScrumTeam(t)" style="width: 100%">
                                             <i class="fa fa-trash"></i>
 
                                         </button></td>
