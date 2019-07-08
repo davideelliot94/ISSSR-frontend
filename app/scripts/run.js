@@ -43,8 +43,8 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
             let expToken = exp.jwtToken;
 
 
-            while (currentTime + 1000 >= new Date().getTime()) {
-            }
+           /* while (currentTime + 1000 >= new Date().getTime()) {
+            }*/
             if (toStateName !== fromStateName /*&& oldState  != fromStateName*/) {
 
                 let Msg = "Rotta non autorizzata";
