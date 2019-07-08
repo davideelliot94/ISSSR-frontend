@@ -97,6 +97,10 @@ mainAngularModule
                     */
 
                 let userId = $stateParams.userId;
+                if(userId === null) {
+                    userId = AuthFactory.getAuthInfo().userId;
+
+                }
                 if (checkUserId(userId)) {
                     UserDataFactory.GetSingle(userId,
                         function (user) {

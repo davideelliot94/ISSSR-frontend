@@ -33,6 +33,9 @@ $stateProvider
         templateUrl: 'views/user/user-info.html',
         controller: 'UserInfoController',
         controllerAs: 'ctrl',
+        params: {
+            userId: null
+        },
         resolve: {
             acl: function (AclProtector) {
                 return AclProtector.checkRoutePermission(stateUserInfo);
