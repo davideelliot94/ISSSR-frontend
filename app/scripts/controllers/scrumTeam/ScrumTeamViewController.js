@@ -9,7 +9,6 @@ mainAngularModule
 
 
             let ctrl = this;
-
             ctrl.currentScrumTeams = [];
 
             /* Al caricamento della pagina, si recupera la lista degli Scrum Team*/
