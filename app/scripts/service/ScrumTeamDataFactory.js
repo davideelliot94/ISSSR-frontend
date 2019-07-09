@@ -1,61 +1,44 @@
 'use strict';
-/**
- * @ngdoc overview
- * @name sbAdminApp
- * @description
- * # sbAdminApp
- *
- * Main module of the application.
- */
-
+/* Oggetto Factory che incapsula l'interazione con lo strato di Back-End, necessaria per la Gestione degli Scrum Team*/
 mainAngularModule
     .factory('ScrumTeamDataFactory', ['$http', 'ToasterNotifierHandler', 'BACKEND_BASE_URL', 'SCRUMTEAM_ENDPOINT_URL', '$q',
         function ($http, ToasterNotifierHandler, BACKEND_BASE_URL, SCRUMTEAM_ENDPOINT_URL, $q) {
-            var thisCrudService = {};
+            let thisCrudService = {};
 
-            var _endPointJSON = BACKEND_BASE_URL + SCRUMTEAM_ENDPOINT_URL;
-
-            thisCrudService.Insert = InsertFn;
-            thisCrudService.FindScrumTeamBySprint = FindScrumTeamBySprintFn;
-            thisCrudService.RemoveScrumTeam = RemoveScrumTeam;
+            let _endPointJSON = BACKEND_BASE_URL + SCRUMTEAM_ENDPOINT_URL;
 
 
-            // POST request to backend for srum team creation
+            // Invia allo strato di back-end una richiesta HTTP Post per la creazione di uno Scrum Team
             function InsertFn(team, successCB, errorCB) {
-                console.log("inserting");
-                console.log(team);
-                console.log(_endPointJSON);
                 let teamMemberIds = [];
-                var i;
+                let i;
                 for (i = 0; i < team.teamMembers.length; i++) {
                     teamMemberIds.push(team.teamMembers[i].id);
                 }
-
-                console.log(teamMemberIds);
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
-                    headers: { "Content-Type": "application/json", "Accept" : "application/json" },
-                    data: {"name": team.name, "productOwner": team.productOwner.id, "scrumMaster": team.scrumMaster.id, "teamMembers": teamMemberIds}
+                    headers: { 'Content-Type': 'application/json', 'Accept' : 'application/json' },
+                    data: {'name': team.name, 'productOwner': team.productOwner.id, 'scrumMaster': team.scrumMaster.id, 'teamMembers': teamMemberIds}
                 })
                     .then(function (response) {
                             if (successCB) {
-                                console.log(response.data)
                                 successCB(response.data);
+                                // in caso di successo, viene visualizzato un toast che informa l'utente della creazione avvenuta con successo
                                 ToasterNotifierHandler.handleCreation(response);
                             }
                             //return response.data;
                         },
                         function (response) {
-                            console.log("returning error")
                             if (errorCB) {
                                 errorCB(response);
                             }
-                            console.error(response.data);
+                            // in caso di errore, viene visualizzato un toast che informa l'utente della mancata creazione
                             ToasterNotifierHandler.handleError(response);
                         });
             }
 
+            // Invia allo strato di back-end una richiesta HTTP DELETE per la cancellazione dello scrumTeam avente l'id specificato
             function RemoveScrumTeam(scrumTeamId, successCB, errorCB) {
 
                 $http({
@@ -66,13 +49,12 @@ mainAngularModule
                             if (successCB) {
                                 successCB(response.data);
                             }
-                            //return response.data;
                         },
                         function (response) {
                             if (errorCB) {
                                 errorCB(response);
                             }
-                            console.error(response.data);
+                            // In caso di errore, un apposito toast di notifica viene visualizzato
                             ToasterNotifierHandler.handleError(response);
                         });
             }
@@ -98,7 +80,9 @@ mainAngularModule
                 return deferred.promise;
             }
 
-
+            thisCrudService.Insert = InsertFn;
+            thisCrudService.FindScrumTeamBySprint = FindScrumTeamBySprintFn;
+            thisCrudService.RemoveScrumTeam = RemoveScrumTeam;
 
             return thisCrudService;
         }]);

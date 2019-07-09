@@ -1,14 +1,8 @@
 'use strict';
-/**
- * @ngdoc function
- * @name sbAdminApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the sbAdminApp
- */
+/* Controller che gestisce la finestra di visualizzazione degli Scrum Team*/
 mainAngularModule
-    .controller('ScrumTeamViewCtrl', ['$scope', '$state', 'softwareProductDataFactory', 'ErrorStateRedirector','$mdDialog' , 'DTOptionsBuilder', 'ScrumTeamDataFactory',
-        function ($scope, $state, softwareProductDataFactory, ErrorStateRedirector, $mdDialog, DTOptionsBuilder,ScrumTeamDataFactory) {
+    .controller('ScrumTeamViewCtrl', ['$scope', '$state', 'softwareProductDataFactory', 'ErrorStateRedirector','$mdDialog','DTOptionsBuilder', 'ScrumTeamDataFactory', 'ToasterNotifierHandler',
+        function ($scope, $state, softwareProductDataFactory, ErrorStateRedirector, $mdDialog, DTOptionsBuilder,ScrumTeamDataFactory, ToasterNotifierHandler) {
 
             // default option for datatable
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -18,6 +12,7 @@ mainAngularModule
 
             ctrl.currentScrumTeams = [];
 
+            /* Al caricamento della pagina, si recupera la lista degli Scrum Team*/
             function init() {
                 softwareProductDataFactory.GetScrumTeamList(
                     function successCallback(response) {
@@ -27,17 +22,19 @@ mainAngularModule
                     });
             }
 
+            /* Handler per il bottone che redireziona verso la finestra di creazione di un nuovo Scrum Team */
             function addScrumTeamFn() {
                 $state.go('scrumteam.create');
             }
 
+            /* Handler del pulsante per la visualizzazione del dialog contenente i dettagli su uno Scrum Team */
             function openViewMemberDialogFn(scrumTeam) {
                 $mdDialog.show({
                     controller: 'ScrumTeamDialogController',
                     templateUrl: 'views/scrumTeam/scrum-team-dialog.html',
                     parent: angular.element(document.body),
                     clickOutsideToClose: true,
-                    // Passaggio dello sprint selezionato
+                    // Passaggio dello Scrum Team selezionato
                     resolve: {
                         scrumTeam: function () {
                             return scrumTeam;
@@ -45,15 +42,16 @@ mainAngularModule
 
                     }
                 });
-            };
+            }
 
+            /* Cancella uno Scrum Team*/
             function deleteScrumTeamFn(scrumTeam) {
                 ScrumTeamDataFactory.RemoveScrumTeam(scrumTeam.id, function () {
                     init();
-                }, function (error) {
+                }, function () {
                     ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nella cancellazione dello scrum Team'});
                 });
-            };
+            }
 
 
             ctrl.addScrumTeam = addScrumTeamFn;

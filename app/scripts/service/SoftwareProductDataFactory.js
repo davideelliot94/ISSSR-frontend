@@ -196,6 +196,7 @@ mainAngularModule
                         });
             }
 
+            /* Restituisce la lista degli Scrum Team*/
             function GetScrumTeamListFn(successCB, errorCB) {
 
                 $http({
@@ -211,7 +212,6 @@ mainAngularModule
                             if (errorCB) {
                                 errorCB(response);
                             }
-                            console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
 
