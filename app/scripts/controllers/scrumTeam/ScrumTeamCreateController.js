@@ -39,7 +39,6 @@ mainAngularModule
             ctrl.insertScrumTeam = insertScrumTeamFn;
 
             function resetFieldsFn() {
-                console.log('ResetScurmTeamFn')
 
                 ctrl.currentScrumTeam = {
                     "name": null,
@@ -59,11 +58,8 @@ mainAngularModule
 
 
 
-
-                console.log('insertScrumTeamFn')
                 ScrumTeamDataFactory.Insert(ctrl.currentScrumTeam,
                     function (response) {
-                        console.log(response);
                         resetFieldsFn();
                         $state.go('scrumteam.view');
                     }, function (response) {

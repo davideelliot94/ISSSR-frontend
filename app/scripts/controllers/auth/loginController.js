@@ -19,10 +19,7 @@ mainAngularModule
             let authInfo = JSON.parse(sessionStorage.getItem('authInfo'));
 
 
-            console.log("myauthinfo: " + JSON.stringify(authInfo));
             if(authInfo !== null && authInfo !== undefined){
-           //     $state.go('dashboard.home');
-                console.log('already logged');
 
                 AuthFactory.setJWTAuthInfo(authInfo);
                 $state.go("dashboard.home");
@@ -30,7 +27,6 @@ mainAngularModule
 
 
             function doLoginFn() {
-                console.log("doLoginFn");
                 AuthFactory.sendLogin(ctrl.authRequest, successCB, errorCB);
 
                 function successCB(response) {
@@ -38,9 +34,7 @@ mainAngularModule
                     let header = response.headers();
                     authInfo.jwtToken = header['authorization'];
 
-                    console.log("authInfo", authInfo);
-                    // AuthFactory.user.username = authInfo.username;
-                    // AuthFactory.user.role = authInfo.role;
+
                     let debugJWT = true;
                     //if (debugJWT) {
                     if (true) {
@@ -52,18 +46,14 @@ mainAngularModule
                     AuthFactory.setJWTAuthInfo(authInfo);
                     sessionStorage.setItem('authInfo',JSON.stringify(authInfo));
 
-                    console.log('setting authinfo');
-                    console.log('authinfo username: ' + authInfo.username);
                     let userLog = localStorage.getItem(authInfo.username);
-                    //let userLog = localStorage.getItem('apapa');
+
                    if(userLog === null || userLog === undefined) {
                         localStorage.setItem(authInfo.username, JSON.stringify(authInfo.username));
-                        console.log('going to dashboard');
                         $state.go("dashboard.home");
                     }else{
                         authInfo = null;
                         ToasterNotifierHandler.showErrorToast('user already logged');
-                        //console.log('is null? ' + JSON.stringify(sessionStorage.getItem('authInfo')));
                        sessionStorage.setItem('authInfo',null);
                     }
                 }
@@ -74,7 +64,6 @@ mainAngularModule
                         ctrl.authMessage = error.message;
                     }
                     else {
-                        console.error(response);
                         ctrl.authMessage = 'No response from server';
                     }
                 }

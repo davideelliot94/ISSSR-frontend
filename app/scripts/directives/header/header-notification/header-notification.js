@@ -24,7 +24,6 @@ mainAngularModule
                     sessionStorage.removeItem('authInfo');
                     localStorage.removeItem(AuthFactory.getAuthInfo().username);
                     let r = sessionStorage.getItem('authInfo');
-                    console.log('authinfo deleted?: ' + r);
 
                     AuthFactory.deleteAuthInfo();
                 }
