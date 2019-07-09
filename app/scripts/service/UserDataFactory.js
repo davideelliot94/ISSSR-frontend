@@ -80,6 +80,7 @@ mainAngularModule
                                 successCB(response.data);
                             }
                             //return response.data;
+                            //return response.data;
                         },
                         function (response) {
                             if (errorCB) {
@@ -95,6 +96,7 @@ mainAngularModule
                 $http({
                     method: 'GET',
                     url: _endPointJSON + id
+                    //url: '/ticketingsystem/users.info'
                 })
                     .then(function (response) {
                             if (successCB) {
