@@ -132,7 +132,7 @@ var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, ge
 
                 if (err.status === 424) { // Codice d'errore restituito quando si prova a far avanzare nel workflow un ticket che dipende da altri.
 
-                    httpService.get('http://localhost:8200/ticketingsystem/tickets/findFatherTicket/' + getTicket.id).then(function(response) {
+                    httpService.get('http://18.185.139.8/ticketingsystem/tickets/findFatherTicket/' + getTicket.id).then(function(response) {
                         if (response.status === 200) {
                             var dependingTickets = '';
 
