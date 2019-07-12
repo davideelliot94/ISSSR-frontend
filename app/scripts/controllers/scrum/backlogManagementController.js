@@ -10,7 +10,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.backlogItem = {};
     // list of item in product backlog for selected product
     $scope.backlogItems = [];
-    //All sprints of a product
+    //All sprints of selected product in form of a map, mapped sprintNUM->sprint
     $scope.sprints = [];
 
     $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
@@ -41,11 +41,11 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 ToasterNotifierHandler.handleError(response);
             });
     };
-    // populate sprint backlog of given the sprint with items from backend of the inputted sprint
+    // populate sprint backlog of the given the sprint with items from backend
     let populateSprintBacklog = function(sprint) {
             BacklogItemService.getSprintBacklogItemService($scope.selectedProduct.id, sprint.number)
                 .then(function successCallback(items) {
-                    // Alla lista degli item viene aggiunto un item fittizio che servirà da placeholder nell'interfaccia grafica
+                    // fake item push for better grafic effect
                     items.push({
                         'id': '',
                         title: 'placeholder',
@@ -70,13 +70,13 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 });
         };
 
-    //get all sprints and related items of selected product from backend
+    //get all sprints and related sprint backlog items of selected product from backend
     $scope.getSprintsItemsRelatedToProduct= function () {
         $scope.sprints=[];
             SprintCreateDataFactory.GetAllByProduct($scope.selectedProduct.id, function (sprints) {
-                for (let i=0; i<sprints.length; i++) {
+                for (let i=0; i<sprints.length; i++) {      //get sprint backlog items
                     if (sprints[i].isActive !== false) {
-                        $scope.sprints[sprints[i].number] = sprints[i];
+                        $scope.sprints[sprints[i].number] = sprints[i]; //set sprint map by sprintNumber
                         populateSprintBacklog($scope.sprints[sprints[i].number]);
                     }
                 }
@@ -85,6 +85,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 ToasterNotifierHandler.showErrorToast('Errore nel recupero degli Sprint');
             });
         };
+
     //// DIALOGS    //
     // Apertura di una finestra di dialogo per l'inserimento del Backlog Item
     $scope.openBacklogItemCreationDialog = function() {
@@ -146,6 +147,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     };
 
     //// DRAG N DROP    //
+
     $scope.deleteBacklogItem = function (itemId){
         BacklogItemService.deleteBacklogItemService(itemId)
             .then(function successCallback() {
@@ -155,34 +157,35 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             });
     };
 
-    // move item to product backlog
-    $scope.moveInProductBacklog=function(event, ui) {
+    // move selected item to product backlog
+    $scope.moveInProductBacklog=function() {
         let sourceSprintNumber = null;
-        //check if sprint num is undefined or null to avoid
+        //check if sprint num is undefined or null to avoid javascript crash
         if (typeof ($scope.itemToMove.sprintNumber)!=='undefined' && $scope.itemToMove.sprintNumber!==null){
             sourceSprintNumber = $scope.itemToMove.sprintNumber;
         }
-        else {console.log('moving item from prodBacklog to itself',$scope.itemToMove);
-        //try avoiding
+        else {console.log('moving item from prodBacklog to itself',$scope.itemToMove); //no sprint link=>not in a sprint
+        //try avoiding duplicate insert in backend without graphic glitches
             // $scope.backlogItems = $filter('filter')($scope.backlogItems,
             //     function(value) {return value.id !== $scope.itemToMove.id;});
             // $scope.backlogItems.push(angular.copy($scope.itemToMove)); return;
 
         }
-        BacklogItemService.moveItemToProductBacklog($scope.itemToMove.id)
+        BacklogItemService.moveItemToProductBacklog($scope.itemToMove.id)   //backend movement of item
             .then(function successCallback(item) {
                 ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
-                //removing item from source list
-                if(sourceSprintNumber===null){  //moving item from prodBacklog to itself
+
+                ////removing item from source list to minimize page parts rebuild jobs for angular
+                if(sourceSprintNumber===null){  //case moving item from prodBacklog to itself
                     console.log('moving item from prodBacklog to itself')
                     $scope.backlogItems = $filter('filter')($scope.backlogItems,
                         function(value) {return value.id !== $scope.itemToMove.id;});
                 }
-                else {
+                else {                          //case moving item from sprint backlog to product backlog (generic)
                     $scope.sprints[sourceSprintNumber].items = $filter('filter')($scope.sprints[sourceSprintNumber].items,
                         function(value) {return value.id !== $scope.itemToMove.id;});
                 }
-                //adding item to product backlog
+                //adding item to product backlog in view also
                 item.sprintNumber=null;
                 $scope.backlogItems.push(item);
                 $scope.itemToMove.sprintNumber=null;
@@ -194,7 +197,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
 
     };
 
-    // move item to target Sprint backlog
+    // move dragged item to target Sprint backlog
     $scope.changeItemSprintBacklog = function(event, ui, destSprint){
         //get source sprint number from item to move
         let sourceSprintNumber = null;
@@ -202,19 +205,22 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
         //check if sprint num is undefined or null to avoid
         if (typeof ($scope.itemToMove.sprintNumber)!=='undefined' && $scope.itemToMove.sprintNumber!==null){
             sourceSprintNumber = $scope.itemToMove.sprintNumber;
-            if(sourceSprintNumber===destSprintNumber){
+            if(sourceSprintNumber===destSprintNumber){      //not really moving the item at all!
                 console.log('item is already in this sprint backlog');
+                //graphic glitches if avoiding reinsert of itself
             }
         }
+        //backend item insert in sprint backlog
         BacklogItemService.insertBacklogItemToSprintBacklogService($scope.selectedProduct.id, $scope.itemToMove,destSprint.number)
             .then(function successCallback(item) {
                 ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
                 item.sprintNumber=destSprintNumber;                         //set destination sprint N in item to push
                 $scope.sprints[destSprintNumber].items.push(item);          //add item to dest sprint list in view
-                if(sourceSprintNumber===null){              //moved item is from product backlog -> removing from source list
+                //removing item from source backlog to minimize page parts rebuild jobs for angular
+                if(sourceSprintNumber===null){              //case: moved item is from product backlog -> removing from source list
                     $scope.backlogItems.splice($scope.backlogItems.indexOf($scope.itemToMove),1);
                 }
-                else {                                      //moved item is from another sprint backlog -> removing from source list
+                else {                                      //case: moved item is from another sprint backlog -> removing from source list
                     $scope.sprints[sourceSprintNumber].items.splice($scope.sprints[sourceSprintNumber].items.indexOf($scope.itemToMove),1);
                 }
             }, function errorCallback(response){
@@ -227,7 +233,10 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
             });
 
     };
-    $scope.setItemToChange = function(event, ui, item){ //set global ref. from fired item for dragNdrop
+
+
+    //set global ref. of the dragged item in view, used in onDrops functions
+    $scope.setItemToChange = function(event, ui, item){
         $scope.itemToMove = item;
         console.log( 'fired item:',item);
     };
