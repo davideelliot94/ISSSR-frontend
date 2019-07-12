@@ -24,7 +24,11 @@ mainAngularModule
                     function (groups) {
                         ctrl.groups = groups;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei gruppi"});
+                        let msgErr = "Errore nel recupero dei gruppi";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
             }
 

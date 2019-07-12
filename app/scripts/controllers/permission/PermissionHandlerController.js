@@ -84,14 +84,22 @@ mainAngularModule
                     function (resp) {
                         ctrl.sidList = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei SID"});
+                        let msgErr = "Errore nel recupero dei SID";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
 
                 UserDataFactory.GetAll(
                     function (users) {
                         ctrl.usersList = users;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli utenti"});
+                        let msgErr = "Errore nel recupero degli utenti";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     })
 
 
@@ -132,21 +140,33 @@ mainAngularModule
                         console.log(resp);
                         return ctrl.objects = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei Team"});
+                        let msgErr = "Errore nel recupero dei team";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
                 } else if (ctrl.tipo === 'ticket') {
                     TicketDataFactory.GetAll(function (resp) {
                         console.log(resp);
                         return ctrl.objects = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei team "});
+                        let msgErr = "Errore nel recupero dei team";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
                 } else if (ctrl.tipo === 'product') {
                     softwareProductDataFactory.GetAll(function (resp) {
                         console.log(resp);
                         return ctrl.objects = resp;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei prodotti"});
+                        let msgErr = "Errore nel recupero dei prodotti";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio:msgErr});
                     });
                 }
             }
@@ -164,7 +184,11 @@ mainAngularModule
                 PermissionDataFactory.getAllSid(function (response) {
                     ctrl.sidList = response;
                 }, function (error) {
-                    ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell"});
+                    let msgErr = "Errore nell";
+                    if(error.data === "expiration"){
+                        msgErr = "Login session expired"
+                    }
+                    ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                 });
             }
 

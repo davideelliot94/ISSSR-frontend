@@ -40,7 +40,11 @@ mainAngularModule
                         function (response) {
                             ctrl.aclRecords = response;
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei record"});
+                            let msgErr = "Errore nel recupero dei record";
+                            if(error.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                         });
 
                 }

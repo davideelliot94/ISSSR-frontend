@@ -22,7 +22,11 @@ mainAngularModule
                             ctrl.sprints = sprints;
                             console.log("SprintsController", ctrl.sprints)
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Sprint"});
+                            let msgErr = "Errore nel recupero degli Sprint";
+                            if(error.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                         });
                 }
 
@@ -37,7 +41,11 @@ mainAngularModule
                             console.log("closed");
                             sprint.isActive = false;
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella chiusura dello Sprint"});
+                            let msgErr = "Errore nella chiusura dello SPrint";
+                            if(error.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                         });
                 };
 

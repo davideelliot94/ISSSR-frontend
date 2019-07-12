@@ -1,4 +1,11 @@
 'use strict';
+/**
+ * @ngdoc function
+ * @name sbAdminApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the sbAdminApp
+ */
 mainAngularModule
     .controller(
         'SprintCreateCtrl',
@@ -8,16 +15,23 @@ mainAngularModule
 
                 ctrl.currentSprint = {};
 
+                console.log("SprintCreate");
+
+
+                //prende i metadati che li servono con una get
+
+
+
                 function resetFieldsFn() {
                     console.log('reset ticket form');
                     //inseriamo l'id del PO
-                    ctrl.max_sprint_duration = 5;
+                    ctrl.max_sprint_duration = 5;           //TODO HEADER GET
                     ctrl.durationsAvaibles=[1,2,3,4];
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                 }
 
-                //i campi lo presi dalla view.
+                // i campi lo prende dalla view.
                 //se la post ha successo faccio resetFieldsFn e visualizzo un'altra pagina
                 //altrimenti vado alla pagina di errore.
                 function insertSprintFn() {
@@ -34,7 +48,11 @@ mainAngularModule
                             $state.go('sprint.selectTargetForCreate', {target: ctrl.target}); //TODO link to sprint backlog insert??
                         }, function (response) {
                             console.error(response);
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nella creazione dello sprint'});
+                            let msgErr = 'Errore nella creazione dello sprint';
+                            if(response.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                         });
                 }
 

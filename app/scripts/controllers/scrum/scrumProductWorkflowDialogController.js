@@ -1,6 +1,4 @@
 'use strict';
-/* Controller che gestisce la finestra di dialogo usata per la creazione di un Product Workflow Scrum o per la visualizzazione di
-* un workflow esistente*/
 mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', '$mdDialog',  '$state',
     'ToasterNotifierHandler', 'ScrumProductWorkflowService', 'scrumProductWorkflow',
     function($scope, $mdDialog, $state, ToasterNotifierHandler, ScrumProductWorkflowService, scrumProductWorkflow) {
@@ -17,7 +15,6 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
             $scope.statesNumber = scrumProductWorkflow.states.length;
         }
 
-        // Handler per la chiusura della finestra di dialogo
         $scope.closeDialog = function() {
             $mdDialog.cancel();
         };
@@ -32,7 +29,7 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
         // Rimuove uno stato dall'elenco degli stati del product workflow
         $scope.deleteScrumProductWorkflowState = function (state) {
             $scope.scrumProductWorkflow.states.splice($scope.scrumProductWorkflow.states.indexOf(state), 1);
-            let stateNumber = $scope.getNumber(state);
+            let stateNumber = $scope.getNumber(state)
             for (let index = 0; index < $scope.scrumProductWorkflow.states.length; index++) {
                 let currentStateNumber = $scope.getNumber($scope.scrumProductWorkflow.states[index]);
                 if (currentStateNumber > stateNumber) {
@@ -44,7 +41,6 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
             $scope.statesNumber -= 1;
         };
 
-        // Parsa dal nome di uno stato il suo indice
         $scope.getNumber = function (state) {
             let number = state.split('*')[0];
             return parseInt(number);
@@ -64,7 +60,7 @@ mainAngularModule.controller('scrumProductWorkflowDialogController', ['$scope', 
             } else {
                 $scope.modifyScrumProductWorkflow();
             }
-        };
+        }
 
         // Invoca il servizio responsabile alla chiamata al backend per l'inserimento
         $scope.insertScrumProductWorkflow = function () {

@@ -28,7 +28,11 @@ mainAngularModule
                     function (users) {
                         ctrl.users = users;
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import degli user"});
+                        let msgErr = "Errore nell'import degli user";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 
                     });
             }
@@ -39,7 +43,11 @@ mainAngularModule
                     function () {
                         refreshUsersFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione dell'utente"});
+                        let msgErr = "Errore nell'eliminazione dell'utente";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 
                     });
             }

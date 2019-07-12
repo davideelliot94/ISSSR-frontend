@@ -1,5 +1,4 @@
-'use strict';
-/* Oggetto service che incapsula l'interazione con lo strato di Backend necessaria alla gestione dei workflow Scrum*/
+'use strict'
 mainAngularModule
     .service('ScrumProductWorkflowService', ['$http', 'BACKEND_BASE_URL', 'SCRUM_PRODUCT_WORKFLOW_ENDPOINT_URL', '$q',
         function ($http, BACKEND_BASE_URL, SCRUM_PRODUCT_WORKFLOW_ENDPOINT_URL, $q) {
@@ -71,5 +70,10 @@ mainAngularModule
                     });
                 return deferred.promise;
             };
+
+
+
+
+
         }
     ]);

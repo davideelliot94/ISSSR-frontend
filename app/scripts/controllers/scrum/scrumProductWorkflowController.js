@@ -1,5 +1,5 @@
 'use strict';
-/* Controller che gestisce la finestra per le operazioni CRUD relative ad un Product Workflow Scrum*/
+
 mainAngularModule
     .controller('scrumProductWorkflowController', ['$scope', '$state', '$mdDialog', 'ScrumProductWorkflowService',
     'ToasterNotifierHandler',
@@ -7,7 +7,6 @@ mainAngularModule
 
         $scope.scrumProductWorkflows = [];
 
-        // Ottiene i dati che popoleranno la tabella dei Product Workflow esistenti
         $scope.populateScrumProductWorkflowTable = function () {
             ScrumProductWorkflowService.getAllScrumProductWorkflowService()
                 .then(function successCallback(response) {

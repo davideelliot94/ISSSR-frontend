@@ -24,7 +24,11 @@ mainAngularModule
                         ctrl.currentTicket = ticket;
                         ctrl.userInfo = AuthFactory.getAuthInfo();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nel recupero del Ticket'})
+                        let msgErr = "Errore nel recupero del Ticket";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
                     });
 
             }

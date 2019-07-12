@@ -41,7 +41,11 @@ mainAngularModule
                     function () {
                         refreshProductFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella modifica del prodotto"});
+                        let msgErr = "Errore nella modifica del prodotto";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
 
             }
@@ -52,7 +56,11 @@ mainAngularModule
                     function () {
                         refreshProductFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione del prodotto"});
+                        let msgErr = "Errore nell'eliminazione del prodotto";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
 
             }

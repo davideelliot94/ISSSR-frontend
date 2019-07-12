@@ -56,7 +56,11 @@ mainAngularModule
                         console.log(response);
                         $state.go('productsoftware.list', {}, {reload: true});
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del prodotto"});
+                        let msgErr = "Errore nell'inserimento del prodotto";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
 
                 resetFieldsFn();
