@@ -1,5 +1,5 @@
 'use strict';
-
+// Controller che gestisce la finestra di visualizzazione del product backlog
 mainAngularModule.controller('backlogManagementController', ['$scope', '$state', '$mdDialog', 'ScrumProductService',
     'ToasterNotifierHandler', 'BacklogItemService', 'SprintCreateDataFactory','DTOptionsBuilder', 'DTColumnDefBuilder', '$filter',
     function ($scope, $state, $mdDialog, ScrumProductService, ToasterNotifierHandler, BacklogItemService,SprintCreateDataFactory,
@@ -41,7 +41,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                 ToasterNotifierHandler.handleError(response);
             });
     };
-    // populate sprint backlog of given the sprint with items from backend of the inputted sprint
+    // popola uno sprint backlog con gli item ricevuti dal backend
     let populateSprintBacklog = function(sprint) {
             BacklogItemService.getSprintBacklogItemService($scope.selectedProduct.id, sprint.number)
                 .then(function successCallback(items) {
@@ -56,7 +56,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
                     });
 
                     sprint.items = items;
-                    //add extra link in item to sprint for cheaper refresh on drop
+                    // viene aggiunto un riferimento extra allo sprint agli item per velocizzare il refresh
                     for (let i=0; i<sprint.items.length; i++) {
                         sprint.items[i].sprintNumber=sprint.number;
                     }

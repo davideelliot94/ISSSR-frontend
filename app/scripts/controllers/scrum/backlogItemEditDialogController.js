@@ -1,4 +1,5 @@
 'use strict';
+// Controller che gestisce la finestra di modifia di un backlog item
 mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdDialog', 'selectedBacklogItem',
     'BacklogItemService', 'ToasterNotifierHandler', '$state', 'productId', 'SprintService',
     function($scope, $mdDialog, selectedBacklogItem, BacklogItemService, ToasterNotifierHandler, $state, productId,
@@ -12,6 +13,7 @@ mainAngularModule.controller('backlogItemEditDialogController', ['$scope', '$mdD
             $mdDialog.cancel();
         };
 
+        // Modifica il backlog item con le nuove informazioni immesse
         $scope.editBacklogItem = function() {
             BacklogItemService.editBacklogItemService($scope.backlogItem)
                 .then(function successCallback() {
