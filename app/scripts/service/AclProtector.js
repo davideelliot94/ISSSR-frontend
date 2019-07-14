@@ -24,6 +24,10 @@ mainAngularModule
         -route check == restrizioni rotta da roles associati all'utente corrente
         -html event disables (button disable) = restrizioni ulteriori specifiche su vista
          */
+         // Controlla il file permission.json per verificare che l'utente loggato abbia l'autorizzazione per accedere allo
+         // stato avente il nome specificato come parametro
+        // Viene invocata nel blocco resolve in ogni dichiarazione di stato, che è il blocco dove si specifica di cosa
+        // lo state ha bisogno in input
          this.checkRoutePermission = function (stateName) {
              var permissionList=JSON.parse(storageService.get('routes')) ;
              var permission=permissionList[stateName];

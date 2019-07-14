@@ -19,16 +19,7 @@ mainAngularModule
 
             var _endPointJSON = BACKEND_BASE_URL + LOGIN_ENDPOINT_URL;
 
-            thisAuthService.sendLogin = sendLoginFn;
-            thisAuthService.setJWTAuthInfo = setJWTAuthInfoFn;
-            thisAuthService.getJWTToken = getJWTTokenFn;
-            thisAuthService.invalidateJWTToken = invalidateJWTTokenFN;
-            thisAuthService.isAuthenticated = isAuthenticatedFn;
-            thisAuthService.getAuthInfo = getAuthInfoFn;
-            thisAuthService.deleteAuthInfo = deleteAuthInfoFn;
-            thisAuthService.getPermission = getPermissionFn;
-
-
+            // preleva dal back-end il file contenente i ruoli e le abilità di ognuno di essi
             function getPermissionFn(successCB, errorCB) {
                 $http({
                     method: 'GET',
@@ -46,7 +37,6 @@ mainAngularModule
                             if (errorCB) {
                                 errorCB(response);
                             }
-                            console.error(response.data);
                             ToasterNotifierHandler.handleError(response);
                         });
 
@@ -81,7 +71,7 @@ mainAngularModule
                 authManager.authenticate();
                 authInfo.authorities.forEach(function (a) {
                     AclService.attachRole(a.authority);
-                })
+                });
 
             }
 
@@ -114,6 +104,15 @@ mainAngularModule
                 invalidateJWTTokenFN();
                 $state.go('login');
             }
+
+            thisAuthService.sendLogin = sendLoginFn;
+            thisAuthService.setJWTAuthInfo = setJWTAuthInfoFn;
+            thisAuthService.getJWTToken = getJWTTokenFn;
+            thisAuthService.invalidateJWTToken = invalidateJWTTokenFN;
+            thisAuthService.isAuthenticated = isAuthenticatedFn;
+            thisAuthService.getAuthInfo = getAuthInfoFn;
+            thisAuthService.deleteAuthInfo = deleteAuthInfoFn;
+            thisAuthService.getPermission = getPermissionFn;
 
             return thisAuthService;
         }]);

@@ -1,5 +1,5 @@
 'use strict';
-
+// Eseguito subito dopo app.config()
 mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService','AclProtector',
     function ($rootScope,$state,jwtHelper, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService,AclProtector) {
 
