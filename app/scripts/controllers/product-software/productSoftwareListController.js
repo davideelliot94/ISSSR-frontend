@@ -41,7 +41,11 @@ mainAngularModule
                     function () {
                         refreshProductFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella modifica del prodotto"});
+                        let msgErr = "Errore nella modifica del prodotto";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
 
             }
@@ -52,7 +56,11 @@ mainAngularModule
                     function () {
                         refreshProductFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione del prodotto"});
+                        let msgErr = "Errore nell'eliminazione del prodotto";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
 
             }
@@ -118,12 +126,14 @@ mainAngularModule
 
 // ___________________________________________________PARTE SCRUM_______________________________________________
 
+            /* Crea l'associazione tra prodotto, Scrum Team e Scrum Workflow selezionati*/
             $scope.assignProduct = function() {
                 ScrumProductService.assignProductToScrumTeam($scope.association.scrumTeam.id,
                     $scope.association.product.id, $scope.association.workflow.id)
                     .then(function successCallback(association) {
                         ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo');
                         $scope.assignments.push(association);
+                        // aggiornamento tabella prodotti non assegnati
                         $scope.notAssignedproducts = $filter('filter')($scope.notAssignedproducts,
                             function(value) {return value.name !== association.product;});
                     }, function errorCallback(){

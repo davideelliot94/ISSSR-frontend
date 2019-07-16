@@ -1,12 +1,11 @@
 'use strict';
-
+// Eseguito subito dopo app.config()
 mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService','AclProtector',
     function ($rootScope,$state,jwtHelper, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService,AclProtector) {
 
         var aclData = {};
         var oldState = null;
 
-        //get permission json from backend, setting security restriction in sessionStorage
         AuthFactory.getPermission(function(response){
             aclData = JSON.parse(JSON.stringify(response.data));
             console.log(aclData);
@@ -18,10 +17,12 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
             ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore server"});
         });
 
+
+
         //AclService.setAbilities(aclData);
         // $rootScope.hasPermission = AclService.can;
         $rootScope.hasPermission = AclProtector.hasPermissionSimbolic; //to check symbolic permissions inside DOM by json retrieved
-        $rootScope.hasPermissionDirect = AclProtector.can;             //for a direct permission evaluation
+        $rootScope.hasPermissionDirect = AclProtector.can; //to direct permission evaluation
 
 
         $rootScope.isDebug = DEBUG;

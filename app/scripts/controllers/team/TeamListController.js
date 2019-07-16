@@ -45,7 +45,11 @@ mainAngularModule
                     function () {
                         refreshTeamFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'update del team"});
+                        let msgErr = "Errore nell'update del team";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 
                     });
             }
@@ -56,7 +60,11 @@ mainAngularModule
                     function () {
                         refreshTeamFn();
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione del team"});
+                        let msgErr = "Errore nell'eliminazione del team";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 
                     });
             }

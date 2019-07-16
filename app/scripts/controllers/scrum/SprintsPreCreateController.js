@@ -40,12 +40,13 @@ mainAngularModule
                         );
                 }
 
-                //get sprints of the selected product
+
                 function populateSprintsFn() {
                     console.log('refresh sprints');
                     let authInfo = AuthFactory.getAuthInfo();
                     console.clear();
                     console.log(ctrl.selectedTarget);
+                    //TODO
 
                     SprintCreateDataFactory.GetAllByProduct(ctrl.selectedTarget.id,
                         function (sprints) {
@@ -56,18 +57,18 @@ mainAngularModule
                             ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero degli Sprint"});
                         });
                 }
-                //link to actual sprint creation
+
                 function addSprintFn() {
                     sessionStorage.setItem('target', JSON.stringify(ctrl.selectedTarget));
                     console.log(JSON.parse(sessionStorage.getItem('target')));
                     $state.go('sprint.create');
                 }
-                //on selection of target trigger sprints population and show them  switching the ng-if in view by a flag
+
                 function visualizeSprintsTriggerFn() {
                     populateSprintsFn();
                     ctrl.visualizeSprints = true;
                 }
-                //link to sprint backlog
+
                 this.viewSprintBacklog = function (sprint) {
                     sessionStorage.setItem('product', JSON.stringify(ctrl.selectedTarget));
                     sessionStorage.setItem('sprint', JSON.stringify(sprint));

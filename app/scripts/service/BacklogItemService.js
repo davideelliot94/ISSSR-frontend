@@ -81,7 +81,7 @@ mainAngularModule
                 return deferred.promise;
             };
 
-            // move backlog item from sprint backlog back to Product backlog in the backend
+            // move backlog item from sprint backlog back to Product backlog
             this.moveItemToProductBacklog = function (itemId) {
                 let deferred = $q.defer();
                 $http.put(BACKEND_BASE_URL + SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL + 'items/sprint/' + itemId + '/' + 'backToBacklog')

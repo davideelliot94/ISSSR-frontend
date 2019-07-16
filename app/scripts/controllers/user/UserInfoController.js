@@ -111,7 +111,11 @@ mainAngularModule
                                     ctrl.userGroups = userGroups;
                                 });
                         }, function (error) {
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import dell' user"});
+                            let msgErr = "Errore nell'import dell'user";
+                            if(error.data === "expiration"){
+                                msgErr = "Login session expired"
+                            }
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 
                         });
                 } else {
@@ -138,7 +142,11 @@ mainAngularModule
                     function () {
                         $state.go("dashboard.home");
                     }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'update dell'utente"});
+                        let msgErr = "Errore nell'update dell'utente";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
 
                     });
             }

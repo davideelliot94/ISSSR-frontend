@@ -40,8 +40,11 @@ mainAngularModule
                     function (group) {
                         console.log(group);
                         $state.go('group.list', {}, {reload: 'group.list'});
-                    }, function (error) {
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del gruppo"});
+                    }, function (error) {                            let msgErr = "Errore nell'inserimento del gruppo";
+                        if(error.data === "expiration"){
+                            msgErr = "Login session expired"
+                        }
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
                     });
                 resetFieldsFn();
             }
