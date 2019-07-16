@@ -51,7 +51,6 @@ mainAngularModule
 
             function insertScrumTeamFn() {
 
-                //chiamare controller sessione per vedere se token è scaduto!!!!!!"
 
                 $scope.$on('someEvent', function(event, data) {
                     console.log(data); });

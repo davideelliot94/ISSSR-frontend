@@ -39,13 +39,10 @@ mainAngularModule
                     $scope.userInfo = AuthFactory.getAuthInfo();
                     console.log($scope.userInfo);
                     let authorities = $scope.userInfo.authorities;
-                    console.log('storage service is: ' + JSON.stringify(storageService));
                     let sidebar = JSON.parse(storageService.get('sidebar'));
                     $scope.sidebarList = { lists: []};
                     var subsidebar;
                     if(authorities.length > 0) {
-                        console.log('sidebar is: ' + sidebar);
-                        console.log('autorities[o].authority is: ' + sidebar[authorities[0].authority]);
                         $scope.sidebarList.lists= $scope.sidebarList.lists.concat(sidebar[authorities[0].authority]);
                     }
                     for(var i = 1; i < authorities.length; ++i) {

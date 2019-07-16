@@ -23,7 +23,6 @@ mainAngularModule
             refreshUsersFn();
 
             function refreshUsersFn() {
-                console.log("refresh users");
                 UserDataFactory.GetAll(
                     function (users) {
                         ctrl.users = users;

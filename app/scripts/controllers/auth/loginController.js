@@ -16,6 +16,21 @@ mainAngularModule
 
             ctrl.authMessage = '';
 
+
+
+
+            /********************************************************************
+             * QUANDO L'UTENTE SI CONNETTE, SALVO LE INFORMAZIONI DI SESSIONE   *
+             * ALL'INTERNO DEL SESSION STORAGE CON LA KEY 'authInfo'. PRIMA     *
+             * DELL'AUTENTICAZIONE, RECUPERO QUESTO PARAMETRO DAL SESSION       *
+             * STORAGE: SE NON È NULL, L'UTENTE NON DOVRÀ RILOGGARSI MA VERRÀ   *
+             * REINDIRIZZATO ALLA DASHBOARD. SE NON È NULL, L'UTENTE NON È      *
+             * LOGGATO IN QUELLA SCHEDA E DOVRÀ QUINDI EFFETTUARE IL LOGIN      *
+             ********************************************************************/
+
+
+
+
             let authInfo = JSON.parse(sessionStorage.getItem('authInfo'));
 
 
@@ -44,9 +59,22 @@ mainAngularModule
                         console.log("userType: " + authInfo.userRole);
                     }
                     AuthFactory.setJWTAuthInfo(authInfo);
+
+                    /*SALVO ALL'INTERNO DEL SESSION STORAGE LE INFORMAZIONI DELLA SESSIONE DELL'UTENTE*/
+
                     sessionStorage.setItem('authInfo',JSON.stringify(authInfo));
 
                     let userLog = localStorage.getItem(authInfo.username);
+
+
+                    /**************************************************************************
+                    * SE NEL LOCAL STORAGE NON È PRESENTE LO USERNAME DELL'UTENTE, SIGNIFICA  *
+                    * CHE QUESTO NON È CONNESSO AL SISTEMA: PUÒ QUINDI EFFETTUARE IL LOGIN.   *
+                    * SE È GIÀ PRESENTE, L'UTENTE È GIÀ CONNESSO IN UN'ALTRA SCHEDA E NON PUÒ *
+                    * QUINDI RILOGGARSI.                                                      *
+                    *                                                                         *
+                    ****************************************************************************/
+
 
                    if(userLog === null || userLog === undefined) {
                         localStorage.setItem(authInfo.username, JSON.stringify(authInfo.username));
