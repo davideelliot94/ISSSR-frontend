@@ -164,16 +164,9 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
         if (typeof ($scope.itemToMove.sprintNumber)!=='undefined' && $scope.itemToMove.sprintNumber!==null){
             sourceSprintNumber = $scope.itemToMove.sprintNumber;
         }
-        else {console.log('moving item from prodBacklog to itself',$scope.itemToMove); //no sprint link=>not in a sprint
-        //try avoiding duplicate insert in backend without graphic glitches
-            // $scope.backlogItems = $filter('filter')($scope.backlogItems,
-            //     function(value) {return value.id !== $scope.itemToMove.id;});
-            // $scope.backlogItems.push(angular.copy($scope.itemToMove)); return;
-
-        }
         BacklogItemService.moveItemToProductBacklog($scope.itemToMove.id)   //backend movement of item
             .then(function successCallback(item) {
-                ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
+                //ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
 
                 ////removing item from source list to minimize page parts rebuild jobs for angular
                 if(sourceSprintNumber===null){  //case moving item from prodBacklog to itself
@@ -213,7 +206,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
         //backend item insert in sprint backlog
         BacklogItemService.insertBacklogItemToSprintBacklogService($scope.selectedProduct.id, $scope.itemToMove,destSprint.number)
             .then(function successCallback(item) {
-                ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
+                //ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo', '');
                 item.sprintNumber=destSprintNumber;                         //set destination sprint N in item to push
                 $scope.sprints[destSprintNumber].items.push(item);          //add item to dest sprint list in view
                 //removing item from source backlog to minimize page parts rebuild jobs for angular
