@@ -37,7 +37,7 @@ mainAngularModule
                         ctrl.currentObject.name = team.name;
                     }, function (error) {
                         let msgErr = "Errore nel recupero del team";
-                        if(response.data === "expiration"){
+                        if(error.data === "expiration"){
                             msgErr = "Login session expired"
                         }
                         ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
@@ -50,7 +50,7 @@ mainAngularModule
                         ctrl.currentObject.name = ticket.title;
                     }, function (error) {
                         let msgErr = "Errore nel recupero del ticket";
-                        if(response.data === "expiration"){
+                        if(error.data === "expiration"){
                             msgErr = "Login session expired"
                         }
                         ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
@@ -65,7 +65,7 @@ mainAngularModule
                         console.log(ctrl.currentObject);
                     }, function (error) {
                         let msgErr = "Errore nel recupero del gruppo";
-                        if(response.data === "expiration"){
+                        if(error.data === "expiration"){
                             msgErr = "Login session expired"
                         }
                         ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
@@ -80,7 +80,7 @@ mainAngularModule
                         console.log(product);
                     }, function (error) {
                         let msgErr = "Errore nel recupero del prodotto";
-                        if(response.data === "expiration"){
+                        if(error.data === "expiration"){
                             msgErr = "Login session expired"
                         }
                         ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})

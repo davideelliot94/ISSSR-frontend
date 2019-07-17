@@ -34,21 +34,22 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
             var fromStateName = $transition$.from().name;
 
 
-
-           /* while (currentTime + 1000 >= new Date().getTime()) {
-            }*/
-            if (toStateName !== fromStateName /*&& oldState  != fromStateName*/) {
+            if (toStateName !== fromStateName) {
 
                 let Msg = "Rotta non autorizzata";
                 if (DEBUG) {
                     Msg += ": " + toStateName;
                 }
                 oldState = fromStateName;
+                let expToken = null;
                 let exp = JSON.parse(sessionStorage.getItem('authInfo'));
-                let expToken = exp.jwtToken;
-                if(jwtHelper.isTokenExpired(expToken)){
-                    Msg = 'Login session expired';
+                if(exp !== null) {
+                    expToken = exp.jwtToken;
+                    if (expToken !== null && jwtHelper.isTokenExpired(expToken)) {
+                        Msg = 'Login session expired';
+                    }
                 }
+
                 ErrorStateRedirector.GoToErrorPage({Messaggio: Msg});
             }
         });

@@ -27,6 +27,7 @@ $stateProvider
                 return AclProtector.checkRoutePermission(stateUserList);
             }
         }
+
     })
     .state(stateUserInfo, {
         url: '/info',

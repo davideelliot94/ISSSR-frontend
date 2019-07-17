@@ -55,7 +55,7 @@ mainAngularModule
                     getAllAssistantFn();
                 }, function (error) {
                         let msgErr = "Errore nell'asswegnamento del team";
-                        if(response.data === "expiration"){
+                        if(error.data === "expiration"){
                             msgErr = "Login session expired"
                         }
                         ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})

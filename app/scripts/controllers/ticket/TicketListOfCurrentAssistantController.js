@@ -71,7 +71,7 @@ mainAngularModule
                             ctrl.tickets = tickets;
                         }, function (error) {
                             let msgErr = "Errore nel recupero dei ticket";
-                            if(response.data === "expiration"){
+                            if(error.data === "expiration"){
                                 msgErr = "Login session expired"
                             }
                             ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
@@ -93,7 +93,7 @@ mainAngularModule
                             console.error(error);
                         }, function (error) {
                             let msgErr = "Errore nella revoca del ticket";
-                            if(response.data === "expiration"){
+                            if(error.data === "expiration"){
                                 msgErr = "Login session expired"
                             }
                             ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
