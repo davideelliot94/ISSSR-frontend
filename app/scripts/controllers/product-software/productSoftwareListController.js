@@ -127,9 +127,9 @@ mainAngularModule
 // ___________________________________________________PARTE SCRUM_______________________________________________
 
             /* Crea l'associazione tra prodotto, Scrum Team e Scrum Workflow selezionati*/
-            $scope.assignProduct = function() {
-                ScrumProductService.assignProductToScrumTeam($scope.association.scrumTeam.id,
-                    $scope.association.product.id, $scope.association.workflow.id)
+            $scope.assignProduct = function(productToAssign) {
+                ScrumProductService.assignProductToScrumTeam(productToAssign.scrumTeam.id,
+                    productToAssign.id, productToAssign.workflow.id)
                     .then(function successCallback(association) {
                         ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo');
                         $scope.assignments.push(association);
@@ -181,11 +181,13 @@ mainAngularModule
                     });
             }
 
-            $scope.setScrumTeam = function (scrumTeam) {
-                $scope.association.scrumTeam = scrumTeam;
+            $scope.setScrumTeam = function (product, scrumTeam) {
+                //$scope.association.scrumTeam = scrumTeam;
+                product.scrumTeam = scrumTeam;
             };
-            $scope.setWorkflow = function (workflow) {
-                $scope.association.workflow = workflow;
+            $scope.setWorkflow = function (product, workflow) {
+                //$scope.association.workflow = workflow;
+                product.workflow = workflow;
             };
 
             $scope.setProduct = function (product) {

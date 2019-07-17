@@ -16,7 +16,7 @@ mainAngularModule.controller('backlogManagementController', ['$scope', '$state',
     $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
     $scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(4).notSortable()];
     $scope.isSelectedProduct = false;
-    
+
 
 
 

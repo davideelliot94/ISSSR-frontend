@@ -52,7 +52,7 @@
                                dt-column-defs="dtColumnDefs">
                             <thead>
                             <tr>
-                                <th class="col-md-0.5"></th>
+<!--                                <th class="col-md-0.5"></th>-->
                                 <th class="col-md-0.5">ID</th>
                                 <th class="col-md-2">Nome</th>
                                 <th class="col-md-2">Descrizione</th>
@@ -64,12 +64,12 @@
                             </thead>
                             <tbody>
 
-                            <div class="radio">
+                            <div>
 
                                 <tr ng-repeat="p in notAssignedproducts">
 
-                                    <td align="center"><input ng-model="result" type="radio" name="rdoResult" value=""
-                                               ng-click="setProduct(p)"></td>
+<!--                                    <td align="center"><input ng-model="result" type="radio" name="rdoResult" value=""-->
+<!--                                               ng-click="setProduct(p)"></td>-->
                                     <td>{{p.id}}</td>
                                     <td>{{p.name}}</td>
                                     <td>{{p.description}}</td>
@@ -77,17 +77,15 @@
                                     <td>
                                         <select class="form-control"
                                                 ng-model="scrumTeam"
-                                                ng-change="setScrumTeam(scrumTeam)"
-                                                ng-disabled="!association.product.id > 0"
+                                                ng-change="setScrumTeam(p, scrumTeam)"
                                                 ng-options="scrumTeam.name for scrumTeam in scrumTeams"
                                                 style="width: 100%">
                                         </select>
                                     </td>
                                     <td>
                                         <select class="form-control"
-                                                ng-model="workflow"
-                                                ng-change="setWorkflow(workflow)"
-                                                ng-disabled="!association.product.id > 0"
+                                                ng-model="scrumWorkflow"
+                                                ng-change="setWorkflow(p, scrumWorkflow)"
                                                 ng-options="workflow.name for workflow in scrumProductWorkflows"
                                                 style="width: 100%">
                                         </select>
@@ -96,10 +94,9 @@
                                         style="vertical-align:middle">
                                         <button type="button"
                                                 class="btn btn-primary"
-                                                ng-click="assignProduct( p.id); refreshProduct()"
-                                                ng-disabled="!association.product.id > 0 ||
-                                                             !association.scrumTeam.id > 0 ||
-                                                             !association.workflow.id > 0"
+                                                ng-click="assignProduct(p); refreshProduct()"
+                                                ng-disabled="!p.scrumTeam.id > 0 ||
+                                                             !p.workflow.id > 0"
                                                 style="width: 100%">
                                             Assegna
                                         </button>
