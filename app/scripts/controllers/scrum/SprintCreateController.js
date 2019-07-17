@@ -1,11 +1,4 @@
 'use strict';
-/**
- * @ngdoc function
- * @name sbAdminApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the sbAdminApp
- */
 mainAngularModule
     .controller(
         'SprintCreateCtrl',
@@ -15,23 +8,16 @@ mainAngularModule
 
                 ctrl.currentSprint = {};
 
-                console.log("SprintCreate");
-
-
-                //prende i metadati che li servono con una get
-
-
-
                 function resetFieldsFn() {
                     console.log('reset ticket form');
                     //inseriamo l'id del PO
-                    ctrl.max_sprint_duration = 5;           //TODO HEADER GET
+                    ctrl.max_sprint_duration = 5;
                     ctrl.durationsAvaibles=[1,2,3,4];
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                 }
 
-                // i campi lo prende dalla view.
+                //campi  presi dalla view.
                 //se la post ha successo faccio resetFieldsFn e visualizzo un'altra pagina
                 //altrimenti vado alla pagina di errore.
                 function insertSprintFn() {

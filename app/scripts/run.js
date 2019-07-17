@@ -6,6 +6,7 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
         var aclData = {};
         var oldState = null;
 
+        //get permission json from backend, setting security restriction in sessionStorage
         AuthFactory.getPermission(function(response){
             aclData = JSON.parse(JSON.stringify(response.data));
             console.log(aclData);

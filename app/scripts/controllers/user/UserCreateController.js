@@ -45,7 +45,6 @@ mainAngularModule
                 UserDataFactory.Insert(
                     ctrl.currentUser,
                     function (user) {
-                        console.log("insertUser: ", user);
                         resetFieldsFn();
                         $state.go('user.list', {}, {reload: 'user.list'});
                     }, function (response) {
