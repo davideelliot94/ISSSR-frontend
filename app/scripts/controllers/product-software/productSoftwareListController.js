@@ -136,6 +136,10 @@ mainAngularModule
                         // aggiornamento tabella prodotti non assegnati
                         $scope.notAssignedproducts = $filter('filter')($scope.notAssignedproducts,
                             function(value) {return value.name !== association.product;});
+                        for (let i = 0; i < $scope.notAssignedproducts.length; i++){
+                            $scope.notAssignedproducts[i].workflow = null;
+                            $scope.notAssignedproducts[i].scrumTeam = null;
+                        }
                     }, function errorCallback(){
                         ToasterNotifierHandler.showErrorToast('Errore nell\'assegnamento del prodotto');
                     });
