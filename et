@@ -1,0 +1,468 @@
+[1mdiff --git a/app/.htaccess b/app/.htaccess[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/404.html b/app/404.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/favicon.ico b/app/favicon.ico[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mindex 6527905..f975499[m
+Binary files a/app/favicon.ico and b/app/favicon.ico differ
+[1mdiff --git a/app/gantt/.npmignore b/app/gantt/.npmignore[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/dhtmlxgantt.css b/app/gantt/codebase/dhtmlxgantt.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/dhtmlxgantt.js b/app/gantt/codebase/dhtmlxgantt.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/dhtmlxgantt.js.map b/app/gantt/codebase/dhtmlxgantt.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_csp.js b/app/gantt/codebase/ext/dhtmlxgantt_csp.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_csp.js.map b/app/gantt/codebase/ext/dhtmlxgantt_csp.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_fullscreen.js b/app/gantt/codebase/ext/dhtmlxgantt_fullscreen.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_fullscreen.js.map b/app/gantt/codebase/ext/dhtmlxgantt_fullscreen.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js b/app/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js.map b/app/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_marker.js b/app/gantt/codebase/ext/dhtmlxgantt_marker.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_marker.js.map b/app/gantt/codebase/ext/dhtmlxgantt_marker.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_multiselect.js b/app/gantt/codebase/ext/dhtmlxgantt_multiselect.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_multiselect.js.map b/app/gantt/codebase/ext/dhtmlxgantt_multiselect.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_quick_info.js b/app/gantt/codebase/ext/dhtmlxgantt_quick_info.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_quick_info.js.map b/app/gantt/codebase/ext/dhtmlxgantt_quick_info.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_smart_rendering.js b/app/gantt/codebase/ext/dhtmlxgantt_smart_rendering.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_smart_rendering.js.map b/app/gantt/codebase/ext/dhtmlxgantt_smart_rendering.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_tooltip.js b/app/gantt/codebase/ext/dhtmlxgantt_tooltip.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_tooltip.js.map b/app/gantt/codebase/ext/dhtmlxgantt_tooltip.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_undo.js b/app/gantt/codebase/ext/dhtmlxgantt_undo.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/ext/dhtmlxgantt_undo.js.map b/app/gantt/codebase/ext/dhtmlxgantt_undo.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale.js b/app/gantt/codebase/locale/locale.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale.js.map b/app/gantt/codebase/locale/locale.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ar.js b/app/gantt/codebase/locale/locale_ar.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ar.js.map b/app/gantt/codebase/locale/locale_ar.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_be.js b/app/gantt/codebase/locale/locale_be.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_be.js.map b/app/gantt/codebase/locale/locale_be.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ca.js b/app/gantt/codebase/locale/locale_ca.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ca.js.map b/app/gantt/codebase/locale/locale_ca.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_cn.js b/app/gantt/codebase/locale/locale_cn.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_cn.js.map b/app/gantt/codebase/locale/locale_cn.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_cs.js b/app/gantt/codebase/locale/locale_cs.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_cs.js.map b/app/gantt/codebase/locale/locale_cs.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_da.js b/app/gantt/codebase/locale/locale_da.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_da.js.map b/app/gantt/codebase/locale/locale_da.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_de.js b/app/gantt/codebase/locale/locale_de.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_de.js.map b/app/gantt/codebase/locale/locale_de.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_el.js b/app/gantt/codebase/locale/locale_el.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_el.js.map b/app/gantt/codebase/locale/locale_el.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_es.js b/app/gantt/codebase/locale/locale_es.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_es.js.map b/app/gantt/codebase/locale/locale_es.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_fa.js b/app/gantt/codebase/locale/locale_fa.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_fa.js.map b/app/gantt/codebase/locale/locale_fa.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_fi.js b/app/gantt/codebase/locale/locale_fi.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_fi.js.map b/app/gantt/codebase/locale/locale_fi.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_fr.js b/app/gantt/codebase/locale/locale_fr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_fr.js.map b/app/gantt/codebase/locale/locale_fr.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_he.js b/app/gantt/codebase/locale/locale_he.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_he.js.map b/app/gantt/codebase/locale/locale_he.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_hr.js b/app/gantt/codebase/locale/locale_hr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_hr.js.map b/app/gantt/codebase/locale/locale_hr.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_hu.js b/app/gantt/codebase/locale/locale_hu.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_hu.js.map b/app/gantt/codebase/locale/locale_hu.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_id.js b/app/gantt/codebase/locale/locale_id.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_id.js.map b/app/gantt/codebase/locale/locale_id.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_it.js b/app/gantt/codebase/locale/locale_it.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_it.js.map b/app/gantt/codebase/locale/locale_it.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_jp.js b/app/gantt/codebase/locale/locale_jp.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_jp.js.map b/app/gantt/codebase/locale/locale_jp.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_kr.js b/app/gantt/codebase/locale/locale_kr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_kr.js.map b/app/gantt/codebase/locale/locale_kr.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_nb.js b/app/gantt/codebase/locale/locale_nb.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_nb.js.map b/app/gantt/codebase/locale/locale_nb.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_nl.js b/app/gantt/codebase/locale/locale_nl.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_nl.js.map b/app/gantt/codebase/locale/locale_nl.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_no.js b/app/gantt/codebase/locale/locale_no.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_no.js.map b/app/gantt/codebase/locale/locale_no.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_pl.js b/app/gantt/codebase/locale/locale_pl.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_pl.js.map b/app/gantt/codebase/locale/locale_pl.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_pt.js b/app/gantt/codebase/locale/locale_pt.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_pt.js.map b/app/gantt/codebase/locale/locale_pt.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ro.js b/app/gantt/codebase/locale/locale_ro.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ro.js.map b/app/gantt/codebase/locale/locale_ro.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ru.js b/app/gantt/codebase/locale/locale_ru.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ru.js.map b/app/gantt/codebase/locale/locale_ru.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_si.js b/app/gantt/codebase/locale/locale_si.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_si.js.map b/app/gantt/codebase/locale/locale_si.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_sk.js b/app/gantt/codebase/locale/locale_sk.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_sk.js.map b/app/gantt/codebase/locale/locale_sk.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_sv.js b/app/gantt/codebase/locale/locale_sv.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_sv.js.map b/app/gantt/codebase/locale/locale_sv.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_tr.js b/app/gantt/codebase/locale/locale_tr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_tr.js.map b/app/gantt/codebase/locale/locale_tr.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ua.js b/app/gantt/codebase/locale/locale_ua.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/locale/locale_ua.js.map b/app/gantt/codebase/locale/locale_ua.js.map[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_broadway.css b/app/gantt/codebase/skins/dhtmlxgantt_broadway.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_contrast_black.css b/app/gantt/codebase/skins/dhtmlxgantt_contrast_black.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_contrast_white.css b/app/gantt/codebase/skins/dhtmlxgantt_contrast_white.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_material.css b/app/gantt/codebase/skins/dhtmlxgantt_material.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_meadow.css b/app/gantt/codebase/skins/dhtmlxgantt_meadow.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_skyblue.css b/app/gantt/codebase/skins/dhtmlxgantt_skyblue.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/skins/dhtmlxgantt_terrace.css b/app/gantt/codebase/skins/dhtmlxgantt_terrace.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/dhtmlxgantt.css b/app/gantt/codebase/sources/dhtmlxgantt.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/dhtmlxgantt.js b/app/gantt/codebase/sources/dhtmlxgantt.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_csp.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_csp.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_fullscreen.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_fullscreen.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_keyboard_navigation.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_keyboard_navigation.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_marker.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_marker.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_multiselect.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_multiselect.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_quick_info.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_quick_info.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_smart_rendering.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_smart_rendering.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_tooltip.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_tooltip.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/ext/dhtmlxgantt_undo.js b/app/gantt/codebase/sources/ext/dhtmlxgantt_undo.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale.js b/app/gantt/codebase/sources/locale/locale.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_ar.js b/app/gantt/codebase/sources/locale/locale_ar.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_be.js b/app/gantt/codebase/sources/locale/locale_be.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_ca.js b/app/gantt/codebase/sources/locale/locale_ca.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_cn.js b/app/gantt/codebase/sources/locale/locale_cn.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_cs.js b/app/gantt/codebase/sources/locale/locale_cs.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_da.js b/app/gantt/codebase/sources/locale/locale_da.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_de.js b/app/gantt/codebase/sources/locale/locale_de.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_el.js b/app/gantt/codebase/sources/locale/locale_el.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_es.js b/app/gantt/codebase/sources/locale/locale_es.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_fa.js b/app/gantt/codebase/sources/locale/locale_fa.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_fi.js b/app/gantt/codebase/sources/locale/locale_fi.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_fr.js b/app/gantt/codebase/sources/locale/locale_fr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_he.js b/app/gantt/codebase/sources/locale/locale_he.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_hr.js b/app/gantt/codebase/sources/locale/locale_hr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_hu.js b/app/gantt/codebase/sources/locale/locale_hu.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_id.js b/app/gantt/codebase/sources/locale/locale_id.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_it.js b/app/gantt/codebase/sources/locale/locale_it.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_jp.js b/app/gantt/codebase/sources/locale/locale_jp.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_kr.js b/app/gantt/codebase/sources/locale/locale_kr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_nb.js b/app/gantt/codebase/sources/locale/locale_nb.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_nl.js b/app/gantt/codebase/sources/locale/locale_nl.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_no.js b/app/gantt/codebase/sources/locale/locale_no.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_pl.js b/app/gantt/codebase/sources/locale/locale_pl.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_pt.js b/app/gantt/codebase/sources/locale/locale_pt.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_ro.js b/app/gantt/codebase/sources/locale/locale_ro.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_ru.js b/app/gantt/codebase/sources/locale/locale_ru.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_si.js b/app/gantt/codebase/sources/locale/locale_si.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_sk.js b/app/gantt/codebase/sources/locale/locale_sk.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_sv.js b/app/gantt/codebase/sources/locale/locale_sv.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_tr.js b/app/gantt/codebase/sources/locale/locale_tr.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/locale/locale_ua.js b/app/gantt/codebase/sources/locale/locale_ua.js[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_broadway.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_broadway.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_contrast_black.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_contrast_black.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_contrast_white.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_contrast_white.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_material.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_material.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_meadow.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_meadow.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_skyblue.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_skyblue.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/codebase/sources/skins/dhtmlxgantt_terrace.css b/app/gantt/codebase/sources/skins/dhtmlxgantt_terrace.css[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/license.txt b/app/gantt/license.txt[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/package.json b/app/gantt/package.json[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/readme.txt b/app/gantt/readme.txt[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/samples/01_initialization/01_basic_init.html b/app/gantt/samples/01_initialization/01_basic_init.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/samples/01_initialization/02_load_json.html b/app/gantt/samples/01_initialization/02_load_json.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/samples/01_initialization/03_load_xml.html b/app/gantt/samples/01_initialization/03_load_xml.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/samples/01_initialization/04_connector_json.html b/app/gantt/samples/01_initialization/04_connector_json.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/samples/01_initialization/05_connector_xml.html b/app/gantt/samples/01_initialization/05_connector_xml.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a/app/gantt/samples/01_initialization/06_touch_forced.html b/app/gantt/samples/01_initialization/06_touch_forced.html[m
+[1mold mode 100755[m
+[1mnew mode 100644[m
+[1mdiff --git a
