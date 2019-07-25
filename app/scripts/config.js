@@ -10,9 +10,7 @@ mainAngularModule.config(function Config($httpProvider, jwtOptionsProvider, AclS
         tokenGetter: ['AuthFactory', function (AuthFactory) {
             return AuthFactory.getJWTToken();
         }],
-        //TODO in questa lista va inserito l'indirizzo IP dell'host che ospita il back-end dell'applicazione (e.g.IP pubblico di un'istanza EC2)
-        //TODO altrimenti l'authorization header non viene popolato correttamente
-        whiteListedDomains: ['localhost', '10.220.233.144', '192.168.1.11', '10.220.240.230', '192.168.10.210', '54.93.98.69']
+        whiteListedDomains: ['localhost', '10.220.233.144', '192.168.1.11', '10.220.240.230', '192.168.10.210', '172.20.0.50']
     });
 
     $httpProvider.interceptors.push('jwtInterceptor');

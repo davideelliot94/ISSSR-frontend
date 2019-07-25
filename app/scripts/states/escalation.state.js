@@ -1,6 +1,5 @@
 'use strict';
-var stateEscalationNew='escalation.new';
-var stateEscalationQueue='escalation.queue';
+
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -13,25 +12,25 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state(stateEscalationNew, {
+            .state('escalation.new', {
                 url: '/defineEscalation',
                 controller:"ctrlEscalation",
                 templateUrl: "views/planning/defineEscalation.html",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateEscalationNew);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('define_escalation');
                     }
                 }
             })
-            .state(stateEscalationQueue, {
+            .state('escalation.queue', {
                 controller:"ctrlQueue",
                 url: '/showQueue',
                 templateUrl: "views/planning/showQueue.html",
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateEscalationQueue);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('show_queue');
                     }
                 }
             })

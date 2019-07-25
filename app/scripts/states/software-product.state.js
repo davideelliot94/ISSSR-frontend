@@ -1,7 +1,5 @@
 'use strict';
-var stateSoftwareProductList='productsoftware.list';
-var stateSoftwareProductCreate='productsoftware.create';
-var stateSoftwareProductEdit='productsoftware.edit';
+
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -14,37 +12,37 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state(stateSoftwareProductList, {
+            .state('productsoftware.list', {
                 url: '/list',
                 templateUrl: 'views/productsoftware/productsoftware-list.html',
                 controller: 'ProductSoftwareListCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateSoftwareProductList);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('software_view');
                     }
                 }
             })
-            .state(stateSoftwareProductCreate, {
+            .state('productsoftware.create', {
                 url: '/create',
                 templateUrl: 'views/productsoftware/productsoftware-create.html',
                 controller: 'ProductSoftwareCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateSoftwareProductCreate);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('software_create');
                     }
                 }
             })
-            .state(stateSoftwareProductEdit, {
+            .state('productsoftware.edit', {
                 url: '/{spId:int}/edit',
                 templateUrl: 'views/productsoftware/productsoftware-edit.html',
                 controller: 'ProductSoftwareEditCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateSoftwareProductEdit);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('software_update');
                     }
                 }
-            });
+            })
     }]);

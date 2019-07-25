@@ -24,6 +24,7 @@
                                 <th class="col-md-1">State Machine</th>
                                 <th class="col-md-1">Active/Retire</th>
                                 <th class="col-md-2"></th>
+                                <th class="col-md-0.5" ng-controller="ChatCtrl as chatctrl"  ng-show="chatctrl.userInfo.userRole == 'ADMIN'">Chat</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,24 +37,35 @@
                                 <td>{{p.targetState}}</td>
                                 <td>{{p.stateMachineName}}</td>
                                 <td align="right">
-                                    <button class="btn btn-danger" ng-if="hasPermission('softwareDeleteButton')"
+                                    <button class="btn btn-danger" ng-disabled="!hasPermission('software_delete')"
                                             ng-click="ctrl.retireTarget($index)" ng-show="!ctrl.isRetired($index)" title="Ritira">
                                         <i class="fa fa-dashcube"></i></button>
-                                    <button class="btn btn-success"
+                                    <button class="btn btn-success" ng-disabled="!hasPermission('software_delete')"
                                             ng-click="ctrl.rehabTarget($index)" ng-show="ctrl.isRetired($index)" title="Attiva">
                                         <i class="fa fa-reddit-square"></i></button>
                                 </td>
                                 <td align="right">
-                                    <button class="btn btn-primary" ng-if="hasPermission('softwarePermissionButton')"
+                                    <button class="btn btn-primary" ng-disabled="!hasPermission('software_permission')"
                                             ui-sref="permissions.product({objectType: 'product', productId: p.id})"
                                             title="Permessi"><i class="fa fa-lock"></i></button>
-                                    <button class="btn btn-warning" ng-if="hasPermission('softwareUpdateButton')"
+                                    <button class="btn btn-warning" ng-disabled="!hasPermission('software_update')"
                                             ui-sref="productsoftware.edit({spId: p.id})"
                                             title="Modifica"><i class="fa fa-edit"></i></button>
-                                    <button class="btn btn-danger" ng-if="hasPermission('softwareDeleteButton')"
+                                    <buttofn class="btn btn-danger" ng-disabled="!hasPermission('software_delete')"
                                             ng-click="ctrl.deleteProduct(p.id)" title="Elimina">
-                                        <i class="fa fa-trash"></i></button>
+                                        <i class="fa fa-trash"></i></buttof{{}}n>
                                 </td>
+
+                                <td ng-controller="ChatCtrl as chatctrl" ng-show="chatctrl.userInfo.userRole == 'ADMIN'">
+
+                                    <button title = "Avvia chat prodotto"
+                                            ui-sref="chat.visualizza({chatId: p.id, chatType: 'PRODUCT'})"
+                                            class="btn btn-primary">
+                                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f269bbc2a3bd8805b0dccb6c36dd2fac.png" width="16px" height="16px"/>
+                                    </button>
+
+                                </td>
+
                             </tr>
                             </tbody>
                         </table>
@@ -66,7 +78,7 @@
         </div>
         <div class="row">
             <button class="btn btn-primary" ng-click="ctrl.refreshProduct()">Aggiorna dati</button>
-            <button class="btn btn-success" ui-sref="productsoftware.create" ng-if="hasPermission('softwareCreateButton')">Aggiungi Prodotto Software</button>
+            <button class="btn btn-success" ui-sref="productsoftware.create" ng-disabled="!hasPermission('software_create')">Aggiungi Prodotto Software</button>
         </div>
     </div>
 </div>

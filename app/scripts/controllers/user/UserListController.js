@@ -15,7 +15,7 @@ mainAngularModule
             ctrl.deleteUser = deleteUserFn;
             ctrl.showInfo = showInfoFn;
             ctrl.isAdmin = isAdminFn;
-            $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
+            $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">');
             $scope.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(6).notSortable()
             ];
@@ -23,15 +23,12 @@ mainAngularModule
             refreshUsersFn();
 
             function refreshUsersFn() {
+                console.log("refresh users");
                 UserDataFactory.GetAll(
                     function (users) {
                         ctrl.users = users;
                     }, function (error) {
-                        let msgErr = "Errore nell'import degli user";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import degli user"});
 
                     });
             }
@@ -42,11 +39,7 @@ mainAngularModule
                     function () {
                         refreshUsersFn();
                     }, function (error) {
-                        let msgErr = "Errore nell'eliminazione dell'utente";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione dell'utente"});
 
                     });
             }

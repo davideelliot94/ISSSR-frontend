@@ -10,16 +10,13 @@
 mainAngularModule
     .constant('DEBUG', false)
     //.constant('BACKEND_BASE_URL','http://192.168.10.210:8200/esempioisssr')
+    //      DOCKER  .constant('BACKEND_BASE_URL', 'http://172.20.0.50:8200/ticketingsystem')
+    //.constant('BACKEND_BASE_URL','http://localhost:3000')
     .constant('BACKEND_BASE_URL', 'http://localhost:8200/ticketingsystem')
-    // .constant('BACKEND_BASE_URL', 'http://localhost:8200/ticketingsystem')
-    // .constant('BACKEND_BASE_URL','http://localhost:3000')
     .constant('SOFTWARE_PRODUCTS_ENDPOINT_URL', '/targets/')
     .constant('TEAM_ENDPOINT_URL', '/teams/')
-    .constant('SCRUMTEAM_ENDPOINT_URL', '/scrumteam/')
-    .constant('SCRUM_PRODUCT_WORKFLOW_ENDPOINT_URL', '/scrumProductWorkflow/')
     .constant('USER_ENDPOINT_URL', '/users/')
     .constant('TICKET_ENDPOINT_URL', '/tickets/')
-    .constant('SPRINT_ENDPOINT_URL', '/sprint/')
     .constant('LOGIN_ENDPOINT_URL', '/public/login/')
     .constant('REGISTRATION_ENDPOINT_URL', '/public/register/')
     .constant('PERMS_ENDPOINT_URL', '/permissions/')
@@ -28,11 +25,9 @@ mainAngularModule
     .constant('ACL_RECORDS_ENDPOINT_URL', '/acl-records/')
     .constant('REQUESTS_LOGS_ENDPOINT_URL', '/requests-logs/')
     .constant('AUDITING_ENDPOINT_URL', '/auditing-logs/')
-    .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
-    .constant('SCRUM_BACKLOG_MANAGEMENT_ENDPOINT_URL', '/backlog/')
-    .constant('SCRUM_CEREMONY_ENDPOINT_URL', '/scrumCeremony/')
-    .constant('SCRUM_STATE', 'scrum.*')
-    .constant('SCRUM_STATE_PLUS', 'scrum.plus')
+    .constant('CHAT_ENDPOINT_URL', '/chat/')
 
+
+    .constant('STATE_MACHINE_ENDPOINT_URL', '/state_machine')
 
 ;

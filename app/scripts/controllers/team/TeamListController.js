@@ -30,12 +30,7 @@ mainAngularModule
                     function (teams) {
                         ctrl.teams = teams;
                     }, function (error) {
-                        let msgErr = "Errore nell'import dei team";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
-                        //ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import dei team"});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import dei team"});
                     });
             }
 
@@ -45,11 +40,7 @@ mainAngularModule
                     function () {
                         refreshTeamFn();
                     }, function (error) {
-                        let msgErr = "Errore nell'update del team";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'update del team"});
 
                     });
             }
@@ -60,11 +51,7 @@ mainAngularModule
                     function () {
                         refreshTeamFn();
                     }, function (error) {
-                        let msgErr = "Errore nell'eliminazione del team";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione del team"});
 
                     });
             }

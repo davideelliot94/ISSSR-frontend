@@ -1,17 +1,9 @@
 'use strict';
 
 mainAngularModule
-    .service('ErrorStateRedirector', ['$state','AuthFactory',function ($state,AuthFactory) {
+    .service('ErrorStateRedirector', ['$state', function ($state) {
         this.GoToErrorPage = function (errorMsgObject) {
-
-
-            if(errorMsgObject["Messaggio"] === "Login session expired"){
-                localStorage.removeItem(AuthFactory.getAuthInfo().username);
-                AuthFactory.deleteAuthInfo();
-                $state.go('login');
-            }else{
-                $state.go('error.details', {errorObject: errorMsgObject});
-            }
+            $state.go('error.details', {errorObject: errorMsgObject});
         };
 
-    }]);
+    }])

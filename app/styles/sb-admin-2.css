@@ -3,6 +3,7 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 body {
     background-color: #f8f8f8;
@@ -14,16 +15,17 @@ body {
 
 #page-wrapper {
     padding: 0 15px;
-    min-height: 1200px !important;
     background-color: #fff;
+    margin-bottom: 100%;
 }
 
 @media (min-width: 768px) {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
-        padding: 0 30px;
         border-left: 1px solid #e7e7e7;
+        padding: 4% 30px 5%;
+        overflow-y:hidden;
     }
 }
 
@@ -146,6 +148,10 @@ body {
     color: inherit;
     background-color: transparent;
     transition: all .5s;
+}
+
+.btn-primary{
+    vertical-align: center;
 }
 
 .btn-primary.btn-outline {
@@ -365,7 +371,9 @@ table.dataTable thead .sorting:after {
 */
 
 .navbar-static-top {
-    z-index: 60
+    z-index: 60;
+    position: fixed;
+    width: 100%;
 }
 
 
@@ -375,4 +383,331 @@ table.dataTable thead .sorting:after {
 
 #md-date-pane-0 {
     z-index: 10000
+}
+
+
+/*
+FOOTER
+*/
+
+.my-footer {
+    bottom: 0;
+    height: 8.5%;
+    width: 100%;
+    clear: both;
+    position: fixed;
+    background-color: #f8f8f8;
+    padding-top: 0.5%;
+    padding-right: 2%;
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: dodgerblue;
+}
+
+.btn_footer {
+    position: relative;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    transition-duration: 0.4s;
+    margin: auto;
+    float: right;
+}
+
+.btn_footer:hover {
+    background: dodgerblue;
+    color: #ffffff;
+}
+
+.info {
+    border: 2px solid dodgerblue;
+    background-color: #ffffff;
+    color: dodgerblue;
+}
+
+
+/*
+CHAT CSS
+*/
+.textarea_chat{
+    width:90%;
+    height:20%;
+    resize: none;
+    margin-right: 1%;
+    margin-top: 0.5%;
+    display: inline;
+}
+
+.message-box{
+    border-top: 1px solid #E0E0E0;
+    position: fixed;
+    right: 0;
+    bottom: 7%;
+    /*margin-bottom: 3.8%;*/
+    /*width: 83.5%;*/
+    width: auto;
+    left: 250px;    /* aggiunta luigi */
+    /*float: right;*/
+    height: 16.5%;
+    background: #f8f8f8;
+}
+
+@media (max-width: 1200px) and (min-width: 400px){
+    #page-wrapper{
+        padding-bottom:10%;
+    }
+    .textarea_chat{
+        width: 70%;
+    }
+}
+
+@media (max-height: 700px) and (min-height: 200px){
+    .message-box{
+        padding-bottom: 8%;
+    }
+}
+
+@media (max-height: 700px) and (max-width: 1200px){
+    #page-wrapper{
+        padding-bottom:8%;
+    }
+    .message-box{
+        padding-bottom: 12%;
+    }
+}
+
+.messaggio{
+    color: black;
+    font-size: 14px;
+    margin: 0;
+    word-break: break-word;
+    white-space: pre-line;
+    clear: both;
+}
+
+.messaggio_out {
+    background: #0084ff none repeat scroll 0 0;
+    padding: 5px 10px 5px 12px;
+    float: right;
+    text-align: right;
+    width: fit-content;
+    border-top-left-radius: 15px;
+    color: white;
+}
+
+.messaggio_info{
+    font-size: 16px;
+}
+
+.messaggio_out:first-line, .messaggio_in:first-line {
+    line-height: 0px;
+}
+
+.messaggio_in {
+    background: #eee none repeat scroll 0 0;
+    padding: 10px 10px 0px 12px;
+    float:left;
+    border-top-right-radius: 15px;
+}
+
+.messaggio_out + .messaggio_out{
+    border-radius: 15px 5px 0px 15px;
+}
+
+.messaggio_in + .messaggio_in{
+    border-radius: 0px 15px 15px 0px;
+}
+
+.messaggio_in:first-of-type{
+    border-bottom-right-radius: 0px;
+}
+
+.messaggio_out:first-of-type{
+    border-bottom-left-radius: 0px;
+}
+
+.messaggio_out:last-of-type {
+    border-bottom-left-radius: 30px;
+}
+
+.messaggio_in:last-of-type {
+    border-bottom-right-radius: 30px;
+}
+
+.messaggio_in:only-of-type, .messaggio_out:only-of-type{
+    border-radius: 15px;
+}
+
+.colonna {
+    font-family: 'Muli', sans-serif;
+}
+
+.colonna_right{
+    float: right;
+}
+
+.btn-chat {
+    margin-top: 15px;
+    margin-bottom: 1.5%;
+}
+
+.btn_snippet {
+    background: #428bca;
+    border: #0C789E;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    transition-duration: 0.4s;
+    /*margin-top: 5%;*/
+    margin-bottom: 5%;
+    vertical-align: center;
+}
+
+.btn_snippet:hover {
+    background: dodgerblue;
+    color: #ffffff;
+}
+
+.btn_out{
+    background: #eee;
+    color: black;
+}
+
+.table_ul{
+    padding-top: 2%;
+    margin-bottom: 8.5%;
+}
+
+.btn_submit_chat{
+    margin-top: 1.1%;
+}
+
+.btn_file_chat {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+/*
+CHAT CSS - SNIPPET
+ */
+
+.viewDialog {
+    min-width: 90%;
+}
+
+.viewTable {
+    width:100%;
+    height: 100%;
+}
+
+.viewButton {
+    margin-bottom: 5%;
+}
+
+.snippetDialog {
+    width: 80%;
+    height: 70%;
+    overflow-x: hidden;
+}
+
+.snippetTextArea {
+    width: 100%;
+    height: 250px;
+    resize: vertical;
+}
+
+.snippetDisplayArea {
+    width: 100%;
+    height: 40%;
+    resize: vertical;
+}
+
+.snippetButton {
+    width: 80%;
+    /*height: 10%;*/
+    padding: 5px 10px;
+    margin: 3% 10%;
+}
+
+.snippetCancelButton {
+    /*margin: 0% 30%;*/
+    width: fit-content;
+    margin: auto;
+    display: block;
+}
+
+/*
+BOTTONE DETTAGLIO TICKET - CHAT PRODOTTO
+ */
+
+.btn_ticketDetail {
+    background: #428bca;
+    border: #0C789E;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    transition-duration: 0.4s;
+    margin-top: 5%;
+    /*margin-bottom: 5%;*/
+    vertical-align: center;
+}
+
+.btn_ticketDetail:hover {
+    background: dodgerblue;
+    color: #ffffff;
+}
+
+/*
+VIEW DETTAGLIO TICKET
+ */
+
+.dettaglioTicketInterlinea {
+    height: 15px;
+}
+
+.dettaglioTicketRiga {
+    background: lightgrey;
+    font-size: 16px;
+}
+
+.dettaglioTicketColonna {
+    float: right;
+}
+
+
+/* NUOVE AGGIUNTE */
+
+.padding-12{
+    padding-bottom: 12%;
+}
+
+.padding-dashboard{
+    padding-bottom: 30%;
+}
+
+hr{
+    /*border: 1px solid black;*/
+    margin: 0px;
+    padding: 0px;
+    color: black;
+    background: black;
+    border-color: black;
+}
+
+hr.out {
+    /*border: 1px solid white;*/
+    color: white;
+    background: white;
+    border-color: white;
 }

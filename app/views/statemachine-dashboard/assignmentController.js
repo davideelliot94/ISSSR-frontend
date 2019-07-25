@@ -13,7 +13,7 @@
  * @param restService           restService
  * @param httpService           httpService
  */
-var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, getAction, getRole, getTicket, restService, httpService, AuthFactory, ToasterNotifierHandler) {
+var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction, getRole, getTicket, restService, httpService, AuthFactory, ToasterNotifierHandler) {
 //mainAngularModule.controller('AssignmentModalCtrl', ['$scope', '$modalInstance', 'getState', 'getAction', 'getRole', 'getTicket', 'restService', 'httpService',
 //    function ($scope, $modalInstance, getState, getAction, getRole, getTicket, restService, httpService) {
     const ctrl = this;
@@ -130,22 +130,9 @@ var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, ge
                     ToasterNotifierHandler.showErrorToast(messageError);
                 }
 
-                if (err.status === 424) { // Codice d'errore restituito quando si prova a far avanzare nel workflow un ticket che dipende da altri.
+                if (err.status === 424) {
 
-                    httpService.get('http://localhost:8200/ticketingsystem/tickets/findFatherTicket/' + getTicket.id).then(function(response) {
-                        if (response.status === 200) {
-                            var dependingTickets = '';
-
-                            for (var i = 0; i < response.data.length; i++) {
-                                dependingTickets = dependingTickets + ' ' +  (response.data[i]).id;
-                            }
-                            ToasterNotifierHandler.showErrorToast('Operazione non consentita. Devi prima risolvere i seguenti ticket: ' + dependingTickets);
-                        }
-                    }, function() {
-
-                    });
-
-                    /*var init = function () {
+                    var init = function () {
                         var param = {};
                         PlanningDataFactory.getFatherTicket(param, $scope.ticket, function (response) {
                             messageError = "Planning failed. Need to resolve the following ticket first: ";
@@ -164,7 +151,7 @@ var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, ge
 
                             ToasterNotifierHandler.showErrorToast(messageError);
                         });
-                    };*/
+                    };
                 }
             });
 
@@ -197,25 +184,12 @@ var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, ge
      */
     $scope.searchResolverUsers = function () {
         if (getRole !== "CUSTOMER") {
+            httpService.get(restService.getEmployedUserByRole + '/' + getRole)
+                .then(function (response) {
+                    $scope.membersList = response.data;
+                }, function err(response) {
 
-            if (AuthFactory.getAuthInfo().userRole === 'TEAM_COORDINATOR') {
-                httpService.get(restService.getEmployedUserByRole + '/' + 'TEAM_LEADER')
-                    .then(function (response) {
-                        $scope.membersList = response.data;
-                    }, function err(response) {
-
-                    });
-
-            } else if (AuthFactory.getAuthInfo().userRole === 'TEAM_LEADER') {
-
-                httpService.get(restService.getEmployedUserByRole + '/' + 'TEAM_MEMBER')
-                    .then(function (response) {
-                        $scope.membersList = response.data;
-                    }, function err(response) {
-
-                    });
-            }
-
+                });
         } else {
             return [];
         }
@@ -223,11 +197,6 @@ var AssignmentModalCtrl = function ($scope, $modalInstance,$window, getState, ge
 
     //Used to populate the "SELECT"
     $scope.searchResolverUsers();
-
-
-    $window.onbeforeunload = function(event){
-        localStorage.removeItem(AuthFactory.getAuthInfo().username);
-    }
 };
 
 //]);

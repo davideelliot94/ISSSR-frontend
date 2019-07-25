@@ -29,6 +29,7 @@
                                 <th class="col-md-1">Stato</th>
                                 <th class="col-md-1">Visibilità</th>
                                 <th class="col-md-2"></th>
+                                <th class="col-md-1" ng-controller="ChatCtrl as chatctrl" ng-show="chatctrl.userInfo.userRole == 'TEAM_LEADER' || chatctrl.userInfo.userRole == 'TEAM_MEMBER'">Chat</th>
 
                             </tr>
                             </thead>
@@ -52,17 +53,29 @@
                                             ng-click="ctrl.downloadAttachedFiles(t.id)">
                                         <i class="glyphicon glyphicon-floppy-save"></i>
                                     </button>
-                                    <!--<button class="btn btn-xl btn-success" title="Dettaglio ticket"
-                                            ng-click="ctrl.stateEditTicket(t.id)">
-                                        <i class="fa fa-edit"></i>
+
+                                </td>
+
+                                <td ng-controller="ChatCtrl as chatctrl" ng-show="chatctrl.userInfo.userRole == 'TEAM_LEADER' || chatctrl.userInfo.userRole == 'TEAM_MEMBER'">
+
+                                    <!-- TODO potremmo inserire il nome del team member e del team leader nei titoli -->
+
+
+                                    <button ng-if="chatctrl.userInfo.userRole == 'TEAM_LEADER'"
+                                            title = "Avvia chat con Team Member"
+                                            ui-sref="chat.visualizza({chatId: t.id, chatType: 'TICKET'})"
+                                            class="btn btn-primary">
+                                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f269bbc2a3bd8805b0dccb6c36dd2fac.png" width="16px" height="16px"/>
                                     </button>
 
-                                    <button class="btn btn-xl btn-danger" title="Revoca ticket"
-                                            ng-click="ctrl.unassignTicketFromAssistant(t.id,ctrl.userInfo.userId)">
-                                        <i class="fa fa-close"></i>
+                                    <button ng-if="ctrl.userInfo.userRole == 'TEAM_MEMBER'"
+                                            title = "Avvia chat con Team Leader"
+                                            ui-sref="chat.visualizza({chatId: t.id, chatType: 'TICKET'})"
+                                            class="btn btn-primary">
+                                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f269bbc2a3bd8805b0dccb6c36dd2fac.png" width="16px" height="16px"/>
                                     </button>
-                                    -->
                                 </td>
+
                             </tr>
                             </tbody>
                         </table>

@@ -97,10 +97,6 @@ mainAngularModule
                     */
 
                 let userId = $stateParams.userId;
-                if(userId === null) {
-                    userId = AuthFactory.getAuthInfo().userId;
-
-                }
                 if (checkUserId(userId)) {
                     UserDataFactory.GetSingle(userId,
                         function (user) {
@@ -111,11 +107,7 @@ mainAngularModule
                                     ctrl.userGroups = userGroups;
                                 });
                         }, function (error) {
-                            let msgErr = "Errore nell'import dell'user";
-                            if(error.data === "expiration"){
-                                msgErr = "Login session expired"
-                            }
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'import dell' user"});
 
                         });
                 } else {
@@ -142,11 +134,7 @@ mainAngularModule
                     function () {
                         $state.go("dashboard.home");
                     }, function (error) {
-                        let msgErr = "Errore nell'update dell'utente";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'update dell'utente"});
 
                     });
             }

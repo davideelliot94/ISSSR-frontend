@@ -1,6 +1,5 @@
 'use strict';
-var stateMachineCreate='state_machine.create';
-var stateMachineDashboard='state_machine.dashboard';
+
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -13,7 +12,7 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state(stateMachineCreate, {
+            .state('state_machine.create', {
                 templateUrl: 'views/createStateMachine/stateMachine.html',
                 controller: 'createStateMachineCtrl',
                 url: "/create",
@@ -22,12 +21,12 @@ mainAngularModule.config(['$stateProvider',
                     //access: ['Admin']
                 },
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateMachineCreate);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('state_machine_create');
                     }
                 }
             })
-            .state(stateMachineDashboard, {
+            .state('state_machine.dashboard', {
                 templateUrl: 'views/statemachine-dashboard/dashboard.html',
                 controller: 'dashboardController',
                 url: "/dashboard",
@@ -36,8 +35,8 @@ mainAngularModule.config(['$stateProvider',
                     //access: ['Admin']
                 },
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateMachineDashboard);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('state_machine_dashboard');
                     }
                 }
             })

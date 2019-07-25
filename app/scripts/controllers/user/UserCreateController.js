@@ -45,16 +45,17 @@ mainAngularModule
                 UserDataFactory.Insert(
                     ctrl.currentUser,
                     function (user) {
+                        console.log("insertUser: ", user);
                         resetFieldsFn();
                         $state.go('user.list', {}, {reload: 'user.list'});
                     }, function (response) {
-                        let msgErr = "Errore in inserimento utente. Riprova";
-                        if(response.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
-
-                    });
+                        ErrorStateRedirector.GoToErrorPage(
+                            {
+                                Info: "Errore in inserimento utente. Riprova."
+                            }
+                        )
+                    }
+                );
             }
         }
 

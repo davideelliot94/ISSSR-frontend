@@ -6,8 +6,8 @@
  * # LoginCtrl
  */
 mainAngularModule
-    .controller('LoginCtrl', ['$scope', '$state','$window', 'AuthFactory','AclService','storageService', 'ToasterNotifierHandler','BacklogItemService',
-        function ($scope, $state,$window, AuthFactory,AclService,storageService,ToasterNotifierHandler) {
+    .controller('LoginCtrl', ['$scope', '$state', 'AuthFactory',
+        function ($scope, $state, AuthFactory) {
 
             let ctrl = this;
             ctrl.authRequest = {username: 'admin', password: 'password'};
@@ -16,32 +16,8 @@ mainAngularModule
 
             ctrl.authMessage = '';
 
-
-
-
-            /********************************************************************
-             * QUANDO L'UTENTE SI CONNETTE, SALVO LE INFORMAZIONI DI SESSIONE   *
-             * ALL'INTERNO DEL SESSION STORAGE CON LA KEY 'authInfo'. PRIMA     *
-             * DELL'AUTENTICAZIONE, RECUPERO QUESTO PARAMETRO DAL SESSION       *
-             * STORAGE: SE NON È NULL, L'UTENTE NON DOVRÀ RILOGGARSI MA VERRÀ   *
-             * REINDIRIZZATO ALLA DASHBOARD. SE NON È NULL, L'UTENTE NON È      *
-             * LOGGATO IN QUELLA SCHEDA E DOVRÀ QUINDI EFFETTUARE IL LOGIN      *
-             ********************************************************************/
-
-
-
-
-            let authInfo = JSON.parse(sessionStorage.getItem('authInfo'));
-
-
-            if(authInfo !== null && authInfo !== undefined){
-
-                AuthFactory.setJWTAuthInfo(authInfo);
-                $state.go("dashboard.home");
-            }
-
-
             function doLoginFn() {
+                console.log("doLoginFn");
                 AuthFactory.sendLogin(ctrl.authRequest, successCB, errorCB);
 
                 function successCB(response) {
@@ -49,7 +25,9 @@ mainAngularModule
                     let header = response.headers();
                     authInfo.jwtToken = header['authorization'];
 
-
+                    console.log("authInfo", authInfo);
+                    // AuthFactory.user.username = authInfo.username;
+                    // AuthFactory.user.role = authInfo.role;
                     let debugJWT = true;
                     //if (debugJWT) {
                     if (true) {
@@ -59,31 +37,7 @@ mainAngularModule
                         console.log("userType: " + authInfo.userRole);
                     }
                     AuthFactory.setJWTAuthInfo(authInfo);
-
-                    /*SALVO ALL'INTERNO DEL SESSION STORAGE LE INFORMAZIONI DELLA SESSIONE DELL'UTENTE*/
-
-                    sessionStorage.setItem('authInfo',JSON.stringify(authInfo));
-
-                    let userLog = localStorage.getItem(authInfo.username);
-
-
-                    /**************************************************************************
-                    * SE NEL LOCAL STORAGE NON È PRESENTE LO USERNAME DELL'UTENTE, SIGNIFICA  *
-                    * CHE QUESTO NON È CONNESSO AL SISTEMA: PUÒ QUINDI EFFETTUARE IL LOGIN.   *
-                    * SE È GIÀ PRESENTE, L'UTENTE È GIÀ CONNESSO IN UN'ALTRA SCHEDA E NON PUÒ *
-                    * QUINDI RILOGGARSI.                                                      *
-                    *                                                                         *
-                    ****************************************************************************/
-
-
-                   if(userLog === null || userLog === undefined) {
-                        localStorage.setItem(authInfo.username, JSON.stringify(authInfo.username));
-                        $state.go("dashboard.home");
-                    }else{
-                        authInfo = null;
-                        ToasterNotifierHandler.showErrorToast('user already logged');
-                       sessionStorage.setItem('authInfo',null);
-                    }
+                    $state.go("dashboard.home");
                 }
 
                 function errorCB(response) {
@@ -92,6 +46,7 @@ mainAngularModule
                         ctrl.authMessage = error.message;
                     }
                     else {
+                        console.error(response);
                         ctrl.authMessage = 'No response from server';
                     }
                 }

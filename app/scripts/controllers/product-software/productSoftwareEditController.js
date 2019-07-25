@@ -53,12 +53,8 @@ mainAngularModule
                         console.log(response);
                         $state.go('productsoftware.list', {}, {reload: 'productsoftware.list'});
                     }, function (error) {
-                        let msgErr = "Errore nel salvataggio del prodotto";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
                         console.log("currSoftUpdate", ctrl.currentSoftwareProduct);
-                        ErrorStateRedirector.GoToErrorPage({Messaggio:msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel salvataggio del prodotto"});
                     });
 
             }

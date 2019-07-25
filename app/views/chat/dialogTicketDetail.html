@@ -1,0 +1,90 @@
+
+<md-dialog aria-label="Details ticket">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools" style="background-color: #457AB2">
+                <h2>Dettaglio ticket {{ctrl.ticket.id}}</h2>
+                <span flex></span>
+                <md-button ng-click="cancel()" style="color: white">
+                    <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                    <md-icon md-font-icon="fa-close" class="fa **fa-md**"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+
+        <md-dialog-content style="width:800px;max-height:810px; ">
+            <md-content class="md-padding">
+                <table class="table table-light">
+
+                    <tr>
+                        <td>ID</td>
+                        <td>{{ctrl.ticket.id}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Stato</td>
+                        <td>{{ctrl.ticket.currentTicketStatus}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Creato il</td>
+                        <td>{{ctrl.ticket.creationTimestamp}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Titolo</td>
+                        <td>{{ctrl.ticket.title}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Descrizione</td>
+                        <td>{{ctrl.ticket.description}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Assegnato a</td>
+                        <td>{{ctrl.ticket.assignee.firstName}} {{ctrl.ticket.assignee.lastName}} [Ruolo: {{ctrl.ticket.assignee.role}} , ID:{{ctrl.ticket.assignee.id}}]</td>
+                    </tr>
+
+                    <tr>
+                        <td>Del cliente</td>
+                        <td>{{ctrl.ticket.customer.firstName}} {{ctrl.ticket.customer.lastName}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Relativo al prodotto</td>
+                        <td>Nome: {{ctrl.ticket.target.name}} Descrizione: {{ctrl.ticket.target.description}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Priorità cliente</td>
+                        <td>{{ctrl.ticket.customerPriority}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Priorità team</td>
+                        <td>{{ctrl.ticket.teamPriority}}</td>
+                    </tr>
+
+                </table>
+            </md-content>
+
+        </md-dialog-content>
+
+
+        <md-dialog-actions layout="row">
+
+            <md-button >
+
+            </md-button>
+
+            <span flex></span>
+
+            <md-button ng-click="cancel()" style="margin-right:20px;" >
+                Chiudi
+            </md-button>
+        </md-dialog-actions>
+
+    </form>
+</md-dialog>

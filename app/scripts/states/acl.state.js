@@ -12,8 +12,8 @@ mainAngularModule.config([
                     requiresLogin: true
                 },
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission('acl');
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('log_view');
                     }
                 }
             })

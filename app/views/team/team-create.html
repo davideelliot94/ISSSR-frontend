@@ -21,7 +21,7 @@
                                 </div>
                             </form>
                             <button type="button" class="btn btn-primary"
-                                    ng-disabled="(formCreateTeam.$invalid)"
+                                    ng-disabled="!(!formCreateTeam.$invalid && hasPermission('team_create'))"
                                     ng-click="ctrl.insertTeam()">Inserisci
                                 Team
                             </button>

@@ -140,10 +140,6 @@ mainAngularModule.controller('ctrlRelation', ['$scope', 'PlanningDataFactory','$
 
                 if (response.status === 200)
                     $scope.ticketsforEqu =  response.data;
-                //     // Non possono essere usate per le relazioni di equivalenza le segnalazioni che non sono in VALIDATIO o REOPENED
-                //     $scope.ticketsforEqu = $scope.ticketsforEqu.filter( function(item) {
-                //     return item.currentTicketStatus === 'VALIDATION' || item.currentTicketStatus === 'REOPENED';
-                // });
 
             }, function () {
 /*

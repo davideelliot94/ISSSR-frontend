@@ -15,32 +15,16 @@ mainAngularModule
 
             var thisAuthService = {};
 
-
-
             var _endPointJSON = BACKEND_BASE_URL + LOGIN_ENDPOINT_URL;
 
-            // preleva dal back-end il file contenente i ruoli e le abilità di ognuno di essi
-            function getPermissionFn(successCB, errorCB) {
-                $http({
-                    method: 'GET',
-                    url: BACKEND_BASE_URL + '/public/perm',
-                    skipAuthorization: true
+            thisAuthService.sendLogin = sendLoginFn;
+            thisAuthService.setJWTAuthInfo = setJWTAuthInfoFn;
+            thisAuthService.getJWTToken = getJWTTokenFn;
+            thisAuthService.invalidateJWTToken = invalidateJWTTokenFN;
+            thisAuthService.isAuthenticated = isAuthenticatedFn;
+            thisAuthService.getAuthInfo = getAuthInfoFn;
+            thisAuthService.deleteAuthInfo = deleteAuthInfoFn;
 
-                })
-                    .then(function (response) {
-                            if (successCB) {
-                                successCB(response);
-                            }
-
-                        },
-                        function (response) {
-                            if (errorCB) {
-                                errorCB(response);
-                            }
-                            ToasterNotifierHandler.handleError(response);
-                        });
-
-            }
 
             function sendLoginFn(authInfo, successCB, errorCB) {
 
@@ -71,7 +55,7 @@ mainAngularModule
                 authManager.authenticate();
                 authInfo.authorities.forEach(function (a) {
                     AclService.attachRole(a.authority);
-                });
+                })
 
             }
 
@@ -87,7 +71,6 @@ mainAngularModule
             }
 
             function getJWTTokenFn() {
-
                 let authinfo = $sessionStorage.get('authInfo');
                 if (authinfo === undefined) {
                     return '';
@@ -96,6 +79,7 @@ mainAngularModule
             }
 
             function getAuthInfoFn() {
+                console.log("getAuthenticated: ", $sessionStorage.get('authInfo'));
                 return $sessionStorage.get('authInfo');
             }
 
@@ -104,16 +88,6 @@ mainAngularModule
                 $state.go('login');
             }
 
-            thisAuthService.sendLogin = sendLoginFn;
-            thisAuthService.setJWTAuthInfo = setJWTAuthInfoFn;
-            thisAuthService.getJWTToken = getJWTTokenFn;
-            thisAuthService.invalidateJWTToken = invalidateJWTTokenFN;
-            thisAuthService.isAuthenticated = isAuthenticatedFn;
-            thisAuthService.getAuthInfo = getAuthInfoFn;
-            thisAuthService.deleteAuthInfo = deleteAuthInfoFn;
-            thisAuthService.getPermission = getPermissionFn;
-
             return thisAuthService;
         }]);
-
 

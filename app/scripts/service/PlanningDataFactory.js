@@ -36,15 +36,15 @@ mainAngularModule
             thisCrudService.getTickets = getTickets;
             thisCrudService.getDetailsTicket = getDetailsTicket;
             thisCrudService.getTeamsByTeamMember = getTeamsByTeamMember;
-            thisCrudService.getEquivalentTickets = getEquivalentTickets;
-
 
             // delete the data from database
             function getTicketsForRel(params, successCB, errorCB) {
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateEquality',
+                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateEquality",
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/findTicketForCreateEquality",
                     params: params
                 })
                     .then(function (response) {
@@ -70,7 +70,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findFatherTicket/' + id,
+                    url: "http://localhost:8200/ticketingsystem/tickets/findFatherTicket/" + id,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/findFatherTicket/" + id,
                     params: data
                 })
                     .then(function (response) {
@@ -93,7 +95,9 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: BACKEND_BASE_URL + '/gantt/createGanttInstance/' + teamName + '/'+ date +'/'+ durat +'/'+idtick,
+                    url: "http://localhost:8200/ticketingsystem/gantt/createGanttInstance/" + teamName + "/"+ date +"/"+ durat +"/"+idtick,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/gantt/createGanttInstance/" + teamName + "/"+ date +"/"+ durat +"/"+idtick,
                     data: data
                 })
                     .then(function (response) {
@@ -117,7 +121,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findTicketForGantt/' + team,
+                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForGantt/" + team,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/findTicketForGantt/" + team,
                     params: data
                 })
                     .then(function (response) {
@@ -141,7 +147,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/relationInstance/findRelations/' + ticketId,
+                    url: "http://localhost:8200/ticketingsystem/relationInstance/findRelations/" + ticketId,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/relationInstance/findRelations/" + ticketId,
                     params: data
                 })
                     .then(function (response) {
@@ -165,7 +173,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/relation',
+                    url: "http://localhost:8200/ticketingsystem/relation",
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/relation",
                     params: data
                 })
                     .then(function (response) {
@@ -182,30 +192,6 @@ mainAngularModule
                             ToasterNotifierHandler.handleError(response);
                         });
             }
-
-            //_______________________________________TOMMASO___________
-            function getEquivalentTickets(data, ticketId, successCB, errorCB) {
-
-                $http({
-                    method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/relation/equivalence/' + ticketId,
-                    params: data
-                })
-                    .then(function (response) {
-                            if (successCB) {
-                                successCB(response);
-                            }
-                            //return response.data;
-                        },
-                        function (response) {
-                            if (errorCB) {
-                                errorCB(response);
-                            }
-                            console.error(response.data);
-                            ToasterNotifierHandler.handleError(response);
-                        });
-            }
-            //_________________________________________________________
 
 
             // delete the data from database
@@ -213,7 +199,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findTicketInQueue',
+                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketInQueue",
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/findTicketInQueue",
                     params: params
                 })
                     .then(function (response) {
@@ -238,7 +226,9 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: BACKEND_BASE_URL + '/relationInstance/' + data.relation.name + '/' + data.fatherTicket.id + '/' + data.sonTicket.id,
+                    url: "http://localhost:8200/ticketingsystem/relationInstance/" + data.relation.name + "/" + data.fatherTicket.id + "/" + data.sonTicket.id,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/relationInstance/" + data.relation.name + "/" + data.fatherTicket.id + "/" + data.sonTicket.id,
                     data: data
                 })
                     .then(function (response) {
@@ -283,14 +273,16 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: BACKEND_BASE_URL + '/tickets/addRegression/' + choose + '/' + idChoose,
+                    url: "http://localhost:8200/ticketingsystem/tickets/addRegression/" + choose + "/" + idChoose,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/addRegression/" + choose + "/" + idChoose,
                     data: data
                 })
                     .then(function (response) {
                             if (successCB) {
                                 successCB(response);
                             }
-                            ToasterNotifierHandler.showSuccessToast("Operazione completata", "Relazione creata correttamente");
+                            ToasterNotifierHandler.showSuccessToast("Operation success", "Relation correctly created!");
                             $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             //return response.data;
                         },
@@ -301,7 +293,7 @@ mainAngularModule
                             console.error(response.data);
                             //ToasterNotifierHandler.handleError(response);
                             if (response.status === 424) {
-                                ToasterNotifierHandler.showErrorToast("Relazione riflessiva non ammessa");
+                                ToasterNotifierHandler.showErrorToast("cannot create regression with the same ticket ");
                             }
                         });
             }
@@ -314,14 +306,16 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: BACKEND_BASE_URL + '/tickets/addDependentTicket/'+ idChoose + '/' + choose,
+                    url: "http://localhost:8200/ticketingsystem/tickets/addDependentTicket/"+ idChoose + "/" + choose,
+
+                   // url: "http://172.20.0.50:8200/ticketingsystem/tickets/addDependentTicket/"+ idChoose + "/" + choose,
                     data: data
                 })
                     .then(function (response) {
                             if (successCB) {
                                 successCB(response);
                             }
-                            ToasterNotifierHandler.showSuccessToast("Operazione completata", "Relazione creata correttamente");
+                            ToasterNotifierHandler.showSuccessToast("Operation success", "Relation correctly created!");
                             $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             //return response.data;
                         },
@@ -332,8 +326,15 @@ mainAngularModule
                             console.error(response.data);
                             //ToasterNotifierHandler.handleError(response);
                             if (response.status === 424) {
-                                ToasterNotifierHandler.showErrorToast("Operazione non permessa. " +
-                                    "La relazione che stai provando a creare introduce un ciclo di dipendenze tra ticket.")
+                                if (response.data.length === 0) {
+                                    ToasterNotifierHandler.showErrorToast("Reflective relation is forbidden");
+                                } else {
+                                    var cicle = "" + response.data[0].id;
+                                    for (var i = 1; i < response.data.length; i++) {
+                                        cicle += ", " + response.data[i].id;
+                                    }
+                                    ToasterNotifierHandler.showErrorToast("Creation failed due to this cycle: " + cicle);
+                                }
                             }
                         });
             }
@@ -344,14 +345,16 @@ mainAngularModule
 
                 $http({
                     method: 'PUT',
-                    url: BACKEND_BASE_URL + '/tickets/addEqualityTicket/'+ choose + '/' + data.sameTicket.id,
+                    url: "http://localhost:8200/ticketingsystem/tickets/addEqualityTicket/"+ choose + "/" + data.sameTicket.id,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/addEqualityTicket/"+ choose + "/" + data.sameTicket.id,
                     data: data
                 })
                     .then(function (response) {
                             if (successCB) {
                                 successCB(response);
                             }
-                            ToasterNotifierHandler.showSuccessToast("Operazione completata", "Relazione creata correttamente");
+                            ToasterNotifierHandler.showSuccessToast("Operation success", "Relation correctly created!");
                             $state.go('ticket.list', {}, {reload: 'ticket.list'});
                             //return response.data;
                         },
@@ -363,15 +366,9 @@ mainAngularModule
                             //ToasterNotifierHandler.handleError(response);
 
                             if (response.status === 424) {
-                                if (response.data.ticketStatus === 'BAD_REQUEST') {
-                                    ToasterNotifierHandler.showSuccessToast("Nota!", "Relazione riflessiva");
-                                } else if (response.data.ticketStatus === 'FAILED_DEPENDENCY') {
-                                    ToasterNotifierHandler.showErrorToast('La relazione richiesta introdurrebbe un ciclo di dipendenze tra ticket');
-                                } else if (response.data.ticketStatus === 'BLOCKING_DEPENDENCY') {
-                                    ToasterNotifierHandler.showErrorToast('Il ticket dipende da un altro che ancora non è stato risolto');
-                                }
+                                ToasterNotifierHandler.showErrorToast("Cannot create equality with the same ticket");
                             } else {
-                                ToasterNotifierHandler.showErrorToast("Errore nella creazione della relazione");
+                                ToasterNotifierHandler.showErrorToast("Error in creation");
                             }
                         });
             }
@@ -382,7 +379,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateEquality',
+                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateEquality",
+
+                   // url: "http://172.20.0.50:8200/ticketingsystem/tickets/findTicketForCreateEquality",
                     params: params
                 })
                     .then(function (response) {
@@ -407,7 +406,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateRegression',
+                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateRegression",
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/findTicketForCreateRegression",
                     params: params
                 })
                     .then(function (response) {
@@ -431,7 +432,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets/findTicketForCreateDependency',
+                    url: "http://localhost:8200/ticketingsystem/tickets/findTicketForCreateDependency",
+
+                   // url: "http://172.20.0.50:8200/ticketingsystem/tickets/findTicketForCreateDependency",
                     params: params
                 })
                     .then(function (response) {
@@ -456,7 +459,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/relation',
+                    url: "http://localhost:8200/ticketingsystem/relation",
+
+                  //  url: "http://172.20.0.50:8200/ticketingsystem/relation",
                     params: params
                 })
                     .then(function (response) {
@@ -481,7 +486,9 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: BACKEND_BASE_URL + '/escalation',
+                    url: "http://localhost:8200/ticketingsystem/escalation",
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/escalation",
                     data: data
                 })
                     .then(function (response) {
@@ -505,7 +512,9 @@ mainAngularModule
 
                 $http({
                     method: 'POST',
-                    url: BACKEND_BASE_URL + '/relation/'+ data.name,
+                    url: "http://localhost:8200/ticketingsystem/relation/"+ data.name,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/relation/"+ data.name,
                     data: data
                 })
                     .then(function (response) {
@@ -527,7 +536,9 @@ mainAngularModule
 
                 $http({
                     method: 'GET',
-                    url: BACKEND_BASE_URL + '/tickets',
+                    url: "http://localhost:8200/ticketingsystem/tickets",
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets",
                     params: params
                 })
                     .then(function (response) {
@@ -547,9 +558,12 @@ mainAngularModule
 
 
             function getDetailsTicket(data,idTicket, successCB, errorCB) {
+                //alert("http://172.20.0.50:8200/ticketingsystem/tickets/" + idTicket);
                 $http({
                     method: "GET",
-                    url: BACKEND_BASE_URL + '/tickets/' + idTicket,
+                    url: "http://localhost:8200/ticketingsystem/tickets/" + idTicket,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/tickets/" + idTicket,
                     params: data
                 })
                     .then(function (response) {
@@ -573,7 +587,9 @@ mainAngularModule
             function getTeamsByTeamMember(username, successCB, errorCB) {
                 $http({
                     method: "GET",
-                    url: BACKEND_BASE_URL + '/teams/findAllTeamsByPerson/' + username,
+                    url: "http://localhost:8200/ticketingsystem/teams/findAllTeamsByPerson/" + username,
+
+                    //url: "http://172.20.0.50:8200/ticketingsystem/teams/findAllTeamsByPerson/" + username,
                     //params: data
                 })
                     .then(function (response) {

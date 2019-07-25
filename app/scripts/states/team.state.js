@@ -1,8 +1,5 @@
 'use strict';
-var stateTeamList='team.list';
-var stateTeamCreate='team.create';
-var stateTeamEdit='team.edit';
-var stateTeamAssign='team.assign';
+
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -15,52 +12,51 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state(stateTeamList, {
+            .state('team.list', {
                 url: '/list',
                 templateUrl: 'views/team/team-list.html',
                 controller: 'TeamListCtrl',
                 controllerAs: 'ctrl',
                 data: {
                     requiresLogin: true
-                }
-                ,
+                },
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateTeamList);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('team_view');
+                        //return AclRouteProtector.checkRoutePermission('user_list');
+                    }
                 }
-            }
             })
-            .state(stateTeamCreate, {
+            .state('team.create', {
                 url: '/create',
                 templateUrl: 'views/team/team-create.html',
                 controller: 'TeamCreateCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        console.log('aclProtector');
-                        return AclProtector.checkRoutePermission(stateTeamCreate);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('team_create');
                     }
                 }
             })
-            .state(stateTeamEdit, {
+            .state('team.edit', {
                 url: '/{teamId:int}/edit',
                 templateUrl: 'views/team/team-edit.html',
                 controller: 'TeamEditCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateTeamEdit);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('team_update');
                     }
                 }
             })
-            .state(stateTeamAssign, {
+            .state('team.assign', {
                 url: '/{teamId:int}/assign',
                 templateUrl: 'views/team/team-assign.html',
                 controller: 'TeamAssignCtrl',
                 controllerAs: 'ctrl',
                 resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateTeamAssign);
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('team_assign');
                     }
                 }
             })

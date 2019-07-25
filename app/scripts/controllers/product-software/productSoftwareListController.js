@@ -1,10 +1,15 @@
 'use strict';
+/**
+ * @ngdoc function
+ * @name sbAdminApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the sbAdminApp
+ */
 mainAngularModule
-    .controller('ProductSoftwareListCtrl', ['$scope', '$window', 'ToasterNotifierHandler', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
-        'DTColumnDefBuilder', 'ScrumProductWorkflowService', 'ScrumProductService', '$filter',
-        function ($scope, $window, ToasterNotifierHandler, softwareProductDataFactory,
-                  ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder,
-                  ScrumProductWorkflowService, ScrumProductService, $filter) {
+    .controller('ProductSoftwareListCtrl', ['$scope', 'softwareProductDataFactory', 'ErrorStateRedirector', 'DTOptionsBuilder',
+        'DTColumnDefBuilder', 'AclService', 'httpService',
+        function ($scope, softwareProductDataFactory, ErrorStateRedirector, DTOptionsBuilder, DTColumnDefBuilder, AclService, httpService) {
 
             var ctrl = this;
             ctrl.refreshProduct = refreshProductFn;
@@ -14,23 +19,24 @@ mainAngularModule
             ctrl.rehabTarget = rehabTargetFN;
             ctrl.isRetired = isRetiredFN;
 
+
+
             $scope.dtOptions = DTOptionsBuilder.newOptions().withDOM('C<"clear">lfrtip');
-            $scope.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(4).notSortable()];
+            $scope.dtColumnDefs = [
+                DTColumnDefBuilder.newColumnDef(4).notSortable()
+            ];
+
 
             refreshProductFn();
 
             function refreshProductFn() {
+                console.log("refresh Products");
                 softwareProductDataFactory.GetAll(
                     function (products) {
                         ctrl.products = products;
-                        // Costruzione dell'array contenente tutti i prodotti non assegnati
-                        for (let i = 0; i < products.length; i++){
-                            if (products[i].scrumTeamId === -1){
-                                $scope.notAssignedproducts.push(products[i]);
-                            }
-                        }
-                    }, function () {
-                        ToasterNotifierHandler.showErrorToast('Errore nel recupero dei prodotti');
+                        console.log(products);
+                    }, function (error) {
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero dei prodotti"});
                     });
 
             }
@@ -41,11 +47,7 @@ mainAngularModule
                     function () {
                         refreshProductFn();
                     }, function (error) {
-                        let msgErr = "Errore nella modifica del prodotto";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella modifica del prodotto"});
                     });
 
             }
@@ -56,11 +58,7 @@ mainAngularModule
                     function () {
                         refreshProductFn();
                     }, function (error) {
-                        let msgErr = "Errore nell'eliminazione del prodotto";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'eliminazione del prodotto"});
                     });
 
             }
@@ -73,17 +71,17 @@ mainAngularModule
              *
              * @param index         id row of the Target
              */
-            function retireTargetFN($index) {
+            function retireTargetFN ($index) {
 
                 let targetToRetire = ctrl.products[$index];
                 let id = targetToRetire.id;
 
                 softwareProductDataFactory.Retire(id, function (response) {
-                        ctrl.products[$index].targetState = "RETIRED";
-                    },
-                    function error(response) {
-                        console.log("Error!" + response);
-                    });
+                            ctrl.products[$index].targetState = "RETIRED";
+                        },
+                        function error(response) {
+                            console.log("Error!" + response);
+                        });
             };
 
 
@@ -94,17 +92,17 @@ mainAngularModule
              *
              * @param index         id row of the Target
              */
-            function rehabTargetFN($index) {
+            function rehabTargetFN ($index) {
 
                 let targetToRehab = ctrl.products[$index];
                 let id = targetToRehab.id;
 
                 softwareProductDataFactory.Rehab(id, function (response) {
-                        ctrl.products[$index].targetState = "ACTIVE";
-                    },
-                    function error(response) {
-                        console.log("Error!" + response);
-                    });
+                            ctrl.products[$index].targetState = "ACTIVE";
+                        },
+                        function error(response) {
+                            console.log("Error!" + response);
+                        });
             };
 
 
@@ -116,90 +114,11 @@ mainAngularModule
              * @param index         id row to check
              * @returns {boolean}   true is the Target is "Unavailable", false otherwise
              */
-            function isRetiredFN($index) {
+            function isRetiredFN ($index) {
                 if (ctrl.products[$index].targetState === "RETIRED")
                     return true;
                 else
                     return false;
             };
-
-
-// ___________________________________________________PARTE SCRUM_______________________________________________
-
-            /* Crea l'associazione tra prodotto, Scrum Team e Scrum Workflow selezionati*/
-            $scope.assignProduct = function(productToAssign) {
-                ScrumProductService.assignProductToScrumTeam(productToAssign.scrumTeam.id,
-                    productToAssign.id, productToAssign.workflow.id)
-                    .then(function successCallback(association) {
-                        ToasterNotifierHandler.showSuccessToast('Operazione avvenuta con successo');
-                        $scope.assignments.push(association);
-                        // aggiornamento tabella prodotti non assegnati
-                        $scope.notAssignedproducts = $filter('filter')($scope.notAssignedproducts,
-                            function(value) {return value.name !== association.product;});
-                        for (let i = 0; i < $scope.notAssignedproducts.length; i++){
-                            $scope.notAssignedproducts[i].workflow = null;
-                            $scope.notAssignedproducts[i].scrumTeam = null;
-                        }
-                    }, function errorCallback(){
-                        ToasterNotifierHandler.showErrorToast('Errore nell\'assegnamento del prodotto');
-                    });
-            };
-
-            // Associazione in fase di costruzione
-            $scope.association = {};
-            // Associazioni preesistenti
-            $scope.assignments = [];
-            // Prodotti non assegnati
-            $scope.notAssignedproducts = [];
-
-
-            // Recupera tutti gli assegnamenti tra prodotti e scrum team esistenti
-            function getExistentAssignments(){
-                ScrumProductService.getExistentAssignmentsService()
-                    .then(function successCallback(response) {
-                        $scope.assignments = response;
-                    }, function errorCallback(){
-                        ToasterNotifierHandler.showErrorToast('Errore nel recupero delle ' +
-                            'associazioni esistenti');
-                    });
-            }
-
-            // Recupera tutti i workflow per i prodotti Scrum
-            function getScrumProductWorkflows(){
-                ScrumProductWorkflowService.getAllScrumProductWorkflowService()
-                    .then(function successCallback(response) {
-                        $scope.scrumProductWorkflows = response.data;
-                    }, function errorCallback(){
-                        ToasterNotifierHandler.showErrorToast('Errore nel recupero degli Scrum' +
-                            ' Product Workflow ');
-                    });
-            }
-
-            // Recupera tutti gli scrum team nel sistema
-            function getScrumTeams(){
-                softwareProductDataFactory.GetScrumTeamList(
-                    function successCallback(response) {
-                        $scope.scrumTeams = response;
-                    }, function errorCallback(){
-                        ToasterNotifierHandler.showErrorToast('Errore nel recupero degli Scrum Team');
-                    });
-            }
-
-            $scope.setScrumTeam = function (product, scrumTeam) {
-                //$scope.association.scrumTeam = scrumTeam;
-                product.scrumTeam = scrumTeam;
-            };
-            $scope.setWorkflow = function (product, workflow) {
-                //$scope.association.workflow = workflow;
-                product.workflow = workflow;
-            };
-
-            $scope.setProduct = function (product) {
-                $scope.association.product = product;
-            };
-
-            getExistentAssignments();
-            getScrumTeams();
-            getScrumProductWorkflows();
 
         }]);

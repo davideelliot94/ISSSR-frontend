@@ -45,9 +45,9 @@
     <script src="bower_components/angular-swx-session-storage/release/swx-session-storage.js"></script>
     <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
     <script src="bower_components/angular-acl/src/angular-acl.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/Chart.js/dist/Chart.min.js"></script>
-    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
+    <script src="bower_components/stomp-websocket/lib/stomp.js"></script>
+    <script src="bower_components/angular-highlightjs/src/angular-highlightjs.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -72,7 +72,6 @@
     <script src="scripts/states/ticket.state.js"></script>
     <script src="scripts/states/user.state.js"></script>
     <script src="scripts/states/team.state.js"></script>
-    <script src="scripts/states/scrumTeam.state.js"></script>
     <script src="scripts/states/software-product.state.js"></script>
     <script src="scripts/states/permissions.state.js"></script>
     <script src="scripts/states/group.state.js"></script>
@@ -83,7 +82,7 @@
     <script src="scripts/states/relation.state.js"></script>
     <script src="scripts/states/escalation.state.js"></script>
     <script src="scripts/states/gantt.state.js"></script>
-    <script src="scripts/states/sprint.state.js"></script>
+    <script src="scripts/states/chat.state.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/directives.js -->
@@ -91,6 +90,7 @@
     <script src='scripts/directives/header/header-notification/header-notification.js'></script>
     <script src='scripts/directives/sidebar/sidebar.js'></script>
     <script src='scripts/directives/sidebar/sidebar-search/sidebar-search.js'></script>
+    <script src='scripts/directives/footer/footer.js'></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/controllers.js -->
@@ -102,18 +102,13 @@
     <script src='scripts/controllers/product-software/productSoftwareListController.js'></script>
     <script src='scripts/controllers/team/TeamAssignController.js'></script>
     <script src='scripts/controllers/team/TeamCreateController.js'></script>
-    <script src='scripts/controllers/team/TeamCreateController.js'></script>
     <script src='scripts/controllers/team/TeamEditController.js'></script>
     <script src='scripts/controllers/team/TeamListController.js'></script>
-    <script src='scripts/controllers/scrumTeam/ScrumTeamCreateController.js'></script>
-    <script src='scripts/controllers/scrumTeam/ScrumTeamViewController.js'></script>
-    <script src='scripts/controllers/scrumTeam/ScrumTeamDialogController.js'></script>
     <script src='scripts/controllers/ticket/TicketCreateController.js'></script>
     <script src='scripts/controllers/ticket/TicketListCustomerController.js'></script>
     <script src='scripts/controllers/ticket/TicketListController.js'></script>
     <script src='scripts/controllers/ticket/TicketListOfCurrentAssistantController.js'></script>
     <script src='scripts/controllers/ticket/TicketEditController.js'></script>
-    <script src='scripts/controllers/ticket/TicketUpdateController.js'></script>
     <script src='scripts/controllers/permission/PermissionHandlerController.js'></script>
     <script src='scripts/controllers/user/UserCreateController.js'></script>
     <script src='scripts/controllers/user/UserInfoController.js'></script>
@@ -138,23 +133,9 @@
     <script src="scripts/controllers/planning/planning.js"></script>
     <script src="scripts/controllers/planning/relation.js"></script>
     <script src="scripts/controllers/planning/showQueue.js"></script>
-    <script src='scripts/controllers/scrum/SprintCreateController.js'></script>
-    <script src='scripts/controllers/scrum/SprintsController.js'></script>
-    <script src='scripts/controllers/scrum/SprintsPreCreateController.js'></script>
-
-    <script src="scripts/controllers/scrum/backlogManagementController.js"></script>
-    <script src="scripts/controllers/scrum/backlogItemCreationDialogController.js"></script>
-    <script src="scripts/controllers/scrum/backlogItemEditDialogController.js"></script>
-    <script src="scripts/controllers/scrum/scrumProductWorkflowController.js"></script>
-    <script src="scripts/controllers/scrum/scrumProductWorkflowDialogController.js"></script>
-    <script src="scripts/controllers/scrum/backlogItemDetailDialogController.js"></script>
-    <script src="scripts/controllers/scrum/viewSprintBacklogController.js"></script>
-    <script src="scripts/controllers/scrum/scrumCeremoniesController.js"></script>
-    <script src="scripts/controllers/scrum/scrumCeremonyCreateDialogController.js"></script>
-    <script src="scripts/controllers/scrum/scrumCeremonyDetailDialogController.js"></script>
-
-
-    <script src="scripts/controllers/scrum/burnDownChartController.js"></script>
+    <script src='scripts/controllers/chat/ChatController.js'></script>
+    <script src='/scripts/controllers/footer/footerController.js'></script>
+    <script src='scripts/controllers/ticket/TicketDetailController.js'></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/services.js -->
@@ -164,32 +145,21 @@
     <script src='scripts/service/PermissionDataFactory.js'></script>
     <script src='scripts/service/SoftwareProductDataFactory.js'></script>
     <script src='scripts/service/TeamDataFactory.js'></script>
-    <script src='scripts/service/SprintCreateDataFactory.js'></script>
+    <script src='scripts/service/TeamDataFactory.js'></script>
     <script src='scripts/service/TicketDataFactory.js'></script>
-    <script src='scripts/service/ScrumTeamDataFactory.js'></script>
     <script src='scripts/service/UserDataFactory.js'></script>
     <script src='scripts/service/GroupDataFactory.js'></script>
     <script src="scripts/service/ACLRecordsDataFactory.js"></script>
     <script src="scripts/service/RequestsLogsDataFactory.js"></script>
     <script src="scripts/service/AuditingLogDataFactory.js"></script>
     <script src="scripts/service/ErrorStateRedirector.js"></script>
-    <script src="scripts/service/AclProtector.js"></script>
+    <script src="scripts/service/AclRouteProtector.js"></script>
     <script src='scripts/service/PlanningDataFactory.js'></script>
-    <script src='scripts/service/BacklogItemService.js'></script>
-    <script src='scripts/service/ScrumProductService.js'></script>
-    <script src="scripts/states/backlogManagement.state.js"></script>
-    <script src='scripts/service/ScrumProductWorkflowService.js'></script>
-    <script src='scripts/service/SprintService.js'></script>
-    <script src="scripts/states/scrum.state.js"></script>
-    <script src="scripts/service/BurndownChartDataFactory.js"></script>
-    <script src="scripts/states/scrumCeremonies.state.js"></script>
-    <script src="scripts/service/ScrumCeremonyService.js"></script>
-
+    <script src='scripts/service/ChatDataFactory.js'></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/filters.js -->
     <script src='scripts/filters/filterPermission.js'></script>
-    <script src='scripts/filters/activeSprintFilter.js'></script>
     <script src='scripts/filters/PrincipalFilter.js'></script>
     <script src='scripts/filters/PermissionMaskFilter.js'></script>
     <script src='scripts/filters/TicketCategoryFilter.js'></script>
@@ -247,17 +217,25 @@
     <script src="views/statemachine-dashboard/modal.js"></script>
 
 
+
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="styles/backlogItemStyle.css">
+    <!-- SNIPPET CONTROLLERS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/rainbow.min.css">
 
+    <script src="scripts/controllers/chat/DialogInsertSnippet.js"></script>
+    <script src="scripts/controllers/chat/DialogShowSnippet.js"></script>
+    <script src="scripts/controllers/chat/DialogTicketDetailController.js"></script>
 
 </head>
 
 <body>
 <div ng-app="TicketingSystemApp">
-    <toaster-container></toaster-container>
+    <toaster-container>
+
+    </toaster-container>
     <div ui-view></div>
 </div>
 </body>

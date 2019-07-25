@@ -52,8 +52,7 @@
                                     <button title = "Read Ticket comments" ng-controller="modalController" ng-if="t.currentTicketStatus == 'EDIT'" ng-click="showMessageForm(t)" class="btn btn-xs btn-info">
                                         <i class="fa fa-comments"></i>
                                     </button>
-                                    <button title = "Reject Ticket resolution" ng-if="t.currentTicketStatus == 'ACCEPTANCE'" ui-sref="ticket.update({ticketId:t.id})"
-                                            class="btn btn-xs btn-danger">
+                                    <button title = "Reject Ticket resolution" ng-controller="TicketListCtrl" ng-if="t.currentTicketStatus == 'ACCEPTANCE'" ng-click="rejectResolvedTicket(t)" class="btn btn-xs btn-danger">
                                         <i class="fa fa-minus-circle"></i>
                                     </button>
                                 </td>

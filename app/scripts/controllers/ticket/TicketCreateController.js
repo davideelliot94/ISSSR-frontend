@@ -26,7 +26,7 @@ mainAngularModule
                         ctrl.TICKET_STATUS = response.data.statuses;
                         ctrl.softwareProducts = response.data.activeTargets;
                     }, function () {
-                        alert("Invalid metadata");
+                        alert("Invalid metadat ba");
                     });
                 }
 
@@ -58,12 +58,7 @@ mainAngularModule
                             }
                         }, function (response) {
                             console.error(response);
-                            let msgErr = "Errore nell'inserimento del ticket";
-                            if(response.data === "expiration"){
-                                msgErr = "Login session expired"
-                            }
-                            ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr})
-                            //ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nell\'inserimento del ticket'});
+                            ErrorStateRedirector.GoToErrorPage({Messaggio: 'Errore nell\'inserimento del ticket'});
                         });
                 }
 
@@ -97,6 +92,7 @@ mainAngularModule
                     ctrl.userInfo = AuthFactory.getAuthInfo();
 
                     resetFieldsFn();
+                    ctrl.currentTicket.slackable = false;
                     //populateProductSoftwareListFn();
 
                     // Popola costanti per le ng-option

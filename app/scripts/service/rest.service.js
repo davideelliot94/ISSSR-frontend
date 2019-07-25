@@ -6,8 +6,9 @@
  *  @name   restService
  *  @description   Service manages the endpoints for REST API call.
  */
-mainAngularModule.service('restService', function (BACKEND_BASE_URL) {
-    let CONNECTION = {url: BACKEND_BASE_URL};
+mainAngularModule.service('restService', function () {
+//    let CONNECTION = {url: "http://172.20.0.50:8200/ticketingsystem"};
+    let CONNECTION = {url: "http://localhost:8200/ticketingsystem"};
 
     return {
 
@@ -28,9 +29,6 @@ mainAngularModule.service('restService', function (BACKEND_BASE_URL) {
         "discardedTickets": CONNECTION.url + '/tickets/findTicketByStatus/DISCARDED',
         "resolvedTickets": CONNECTION.url + '/tickets/findTicketByStatus/RESOLVED',
         "closedTickets": CONNECTION.url + '/tickets/findTicketByStatus/CLOSED',
-
-        "updateTickets": CONNECTION.url + '/tickets/getTicketById2',
-        "updt": CONNECTION.url + '/tickets/upd',
 
         //  Ticket by openerUser
         "readMyTickets": CONNECTION.url + '/tickets/ticketByOpenerUser',
@@ -82,8 +80,6 @@ mainAngularModule.service('restService', function (BACKEND_BASE_URL) {
         "getTeamCoordinator": CONNECTION.url + '/users/team_coordinator',
 
         "createTeam": CONNECTION.url + '/teams',
-        "createScrumTeam": CONNECTION.url + '/scrumteam',
-
         "getTeams": CONNECTION.url + '/teams',
         "updateTeamMember": CONNECTION.url + '/teams/add_team_member',
 
@@ -95,30 +91,7 @@ mainAngularModule.service('restService', function (BACKEND_BASE_URL) {
         "getEmployedUserByRole": CONNECTION.url + '/users/getEmployedUserByRole',
 
         //  change ticket difficulty
-        "changeTicketDifficulty": CONNECTION.url + '/tickets/changeDifficulty',
-
-        "insertUserInGroup": CONNECTION.url + '/groups/insertUserInGroup',
-
-        "getMaxId": CONNECTION.url + '/users/getMaxId',
-
-        "getScrumTeamList": CONNECTION.url + '/scrumteam/getScrumTeamList',
-
-        "getProductOwnerBySTId": CONNECTION.url + '/scrumteam/getProductOwnerBySTId',
-
-        "getScrumTeamBySTId": CONNECTION.url + '/scrumteam/getScrumMasterSTId',
-
-        "getMembersBySTId": CONNECTION.url + '/scrumteam/getMembersBySTId',
-
-        "assignProductToST": CONNECTION.url + '/scrumteam/assignProductToST',
-
-        "closeSprint": CONNECTION.url + '/sprint/close',
-
-        "getFinishedBacklogItem": CONNECTION.url + '/backlog/getFinishedBacklogItems',
-
-        "getDates": CONNECTION.url + '/sprint/getDates',
-
-        "getStoryPint": CONNECTION.url + '/backlog/getStoryPoint'
-
+        "changeTicketDifficulty": CONNECTION.url + '/tickets/changeDifficulty'
 
     };
 })

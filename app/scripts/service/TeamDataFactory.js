@@ -33,6 +33,8 @@ mainAngularModule
                 $http({
                     method: 'GET',
                     url: _endPointJSON,
+                   //url: 'http://172.20.0.50:8200/ticketingsystem/users',
+                   // url: 'http://172.20.0.50:8200/ticketingsystem/teams'
                 })
                     .then(function (response) {
                         console.log(response);
@@ -76,14 +78,13 @@ mainAngularModule
 
             // post the data from database
             function InsertFn(team, successCB, errorCB) {
-                console.log("insertFn")
+
                 $http({
                     method: 'POST',
                     url: _endPointJSON,
                     data: team
                 })
                     .then(function (response) {
-                            console.log("function response");
                             if (successCB) {
                                 console.log(response.data)
                                 successCB(response.data);

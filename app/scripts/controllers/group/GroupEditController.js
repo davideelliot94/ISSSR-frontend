@@ -20,11 +20,7 @@ mainAngularModule
                     function (group) {
                         ctrl.currentGroup = group;
                     }, function (error) {
-                        let msgErr = "Errore nel recupero del gruppo";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del gruppo"});
                     });
             }
 
@@ -33,11 +29,7 @@ mainAngularModule
                     function (response) {
                         $state.go('group.list', {}, {reload: 'group.list'});
                     }, function (error) {
-                        let msgErr = "Errore nell'aggiornamento del gruppo";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'aggiornamento del gruppo"});
                     });
             }
 

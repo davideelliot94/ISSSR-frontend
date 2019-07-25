@@ -105,11 +105,7 @@ mainAngularModule
                         console.log(resp);
                         $state.go('group.list')
                     }, function (error) {
-                        let msgErr = "Errore nella costruzione del gruppo";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nella costruzione del gruppo"});
                     });
             }
 

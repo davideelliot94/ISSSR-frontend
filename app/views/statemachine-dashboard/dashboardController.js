@@ -403,11 +403,5 @@ console.log("next state tickets", data);
             });
         };
 
-
-        $window.onbeforeunload = function(event){
-            localStorage.removeItem(AuthFactory.getAuthInfo().username);
-        }
-
-
-    }]);
+}]);
 

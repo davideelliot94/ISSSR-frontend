@@ -1,6 +1,5 @@
 'use strict';
-var stateTicketList='ticket.list';
-var stateTicketCreate='ticket.create';
+
 mainAngularModule.config(['$stateProvider',
     function ($stateProvider) {
 
@@ -13,33 +12,27 @@ mainAngularModule.config(['$stateProvider',
                     requiresLogin: true
                 }
             })
-            .state(stateTicketList, {
+            .state('ticket.list', {
                 url: '/list',
                 templateUrl: 'views/ticket/ticket-list.html',
                 controller: 'TicketListCtrl',
                 controllerAs: 'ctrl',
-                resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateTicketList);
+                /*resolve: {
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('ticket_view');
                     }
-                }
+                }*/
             })
-            .state(stateTicketCreate, {
+            .state('ticket.create', {
                 url: '/create',
                 templateUrl: 'views/ticket/ticket-create.html',
                 controller: 'TicketCreateCtrl',
                 controllerAs: 'ctrl',
-                resolve: {
-                    acl: function (AclProtector) {
-                        return AclProtector.checkRoutePermission(stateTicketCreate);
+                /*resolve: {
+                    acl: function (AclRouteProtector) {
+                        return AclRouteProtector.checkRoutePermission('ticket_create');
                     }
-                }
-            })
-            .state('ticket.update', {
-                url: '/{ticketId:int}/update',
-                templateUrl: 'views/ticket/ticket-update.html',
-                controller: 'TicketUpdateCtrl',
-                controllerAs: 'ctrl',
+                }*/
             })
             .state('ticket.ofCurrentAssistant', {
                 url: '/ofCurrentAssistant',
@@ -58,5 +51,18 @@ mainAngularModule.config(['$stateProvider',
                 templateUrl: 'views/ticket/ticket-list-customer.html',
                 controller: 'TicketListCustomerCtrl',
                 controllerAs: 'ctrl',
-            });
+            })
+            /*.state('ticket.detail', {
+                //url: '/{ticketID: int}/ticket-detail',
+                url: '/ticket-detail',
+                templateUrl: 'views/ticket/ticket-detail.html',
+                controller: 'TicketDetailCtrl',
+                controllerAs: 'ctrl',
+                params: {
+                    ticketID: null,
+                    assistantID: null
+                }
+
+            })*/
+            ;
     }]);

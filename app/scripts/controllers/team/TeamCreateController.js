@@ -7,10 +7,9 @@
  * Controller of the sbAdminApp
  */
 mainAngularModule
-    .controller('TeamCreateCtrl', ['$scope', '$state', 'jwtHelper','AuthFactory','TeamDataFactory', 'ErrorStateRedirector',
-        function ($scope, $state,jwtHelper, AuthFactory,TeamDataFactory, ErrorStateRedirector) {
+    .controller('TeamCreateCtrl', ['$scope', '$state', 'TeamDataFactory', 'ErrorStateRedirector',
+        function ($scope, $state, TeamDataFactory, ErrorStateRedirector) {
 
-            console.log('inside team create controller');
             var ctrl = this;
             resetFieldsFn();
 
@@ -24,19 +23,12 @@ mainAngularModule
             function insertTeamFn() {
                 TeamDataFactory.Insert(ctrl.currentTeam,
                     function (response) {
+                        console.log(response);
                         resetFieldsFn();
-
                         $state.go('team.list', {}, {reload: 'team.list'});
                     }, function (response) {
-                        let msgErr = "Errore nell'inserimento del team";
-
-                        if(response.data === 'expiration'){
-                            msgErr = 'Login session expired';
-                            sessionStorage.removeItem('authInfo');
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
-
-                });
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del team"})
+                    });
             }
         }
 

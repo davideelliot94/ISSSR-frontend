@@ -185,14 +185,14 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <div class="row" ng-if="hasPermission('groupUpdateButton')" >
+    <div class="row">
         <div class="col-lg-12">
-            <button class="btn btn-primary"
+            <button class="btn btn-primary" ng-disabled="!hasPermission('group_update')"
                     ng-click="ctrl.changeState()">
                 {{ ctrl.value ? "Abilita Modifica" : "Disabilita Modifica"}}
             </button>
             <button type="button" class="btn btn-warning"
-                    ng-disabled="(formGroupName.$invalid)"
+                    ng-disabled="!(!formGroupName.$invalid && hasPermission('group_update'))"
                     ng-click="ctrl.updateGroup()">Modifica
                 Gruppo
             </button>

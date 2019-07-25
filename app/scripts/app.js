@@ -12,8 +12,10 @@ var mainAngularModule = angular
         'swxSessionStorage',
         'toaster',
         'mm.acl',
+
         'ngMaterial', 'ngAnimate',
         'ngTagsInput',
+
         'drag-and-drop',
-        'chart.js'
+        'hljs'
     ]);

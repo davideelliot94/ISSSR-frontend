@@ -1,4 +1,4 @@
-<div>
+ <div>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Elenco Dei Ticket</h1>
@@ -28,8 +28,9 @@
                                 <th class="col-md-1">Segnalato da</th>
                                 <th class="col-md-1">Visibilità</th>
                                 <th class="col-md-1"></th>
-                                <th class="col-md-1"></th>
                                 <th class="col-md-1" ng-show="ctrl.userInfo.userRole == 'TEAM_MEMBER'"></th> <!--assistant-->
+                                <!--<th class="col-md-1" ng-show="ctrl.userInfo.userRole == 'TEAM_LEADER' || ctrl.userInfo.userRole == 'TEAM_MEMBER'">Chat</th>-->
+                                <th class="col-md-1" ng-show="ctrl.userInfo.userRole == 'TEAM_LEADER'">Chat</th>
                             </tr>
                             </thead>
 
@@ -44,7 +45,6 @@
                                 <td>{{t.customerPriority | TicketCustomerPriorityFilter}}</td>
                                 <td>{{t.teamPriority | TicketTeamPriorityFilter}}</td>
                                 <td>{{t.currentTicketStatus| TicketStateFilter}}</td>
-
                                 <td>{{t.customer.username}} (ruolo: {{t.customer.role}})</td>
                                 <td>{{t.visibility | TicketVisibilityFilter}}</td>
                                 <td> <!--assistant-->
@@ -53,17 +53,6 @@
                                             ng-click="showDetails(2,t.id)"
                                             class="btn btn-primary">
                                         <i class="fa fa-hand-o-down"></i>
-                                    </button>
-
-                                </td>
-                                <td>
-                                    <button title = "Close Ticket" ng-controller="TicketListCtrl"  ng-if="t.currentTicketStatus == 'ACCEPTANCE' || t.currentTicketStatus == 'EDIT'" ng-click="closeTicket(t)"
-                                            class="btn btn-xs btn-success">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    <button title = "Reject Ticket resolution" ng-if="t.currentTicketStatus == 'ACCEPTANCE'" ui-sref="ticket.update({ticketId:t.id})"
-                                            class="btn btn-xs btn-danger">
-                                        <i class="fa fa-minus-circle"></i>
                                     </button>
                                 </td>
                                 <!--
@@ -76,16 +65,45 @@
                                     </button>
                                 </td>
                                 -->
-                                <td>
+                                <td ng-show="ctrl.userInfo.userRole == 'TEAM_MEMBER'">
                                     <button title = "Modify Ticket" ng-controller="TicketListCtrl" ng-if="t.currentTicketStatus == 'EDIT'" ng-click="modifyTicket(t,$index); showEditForm(editTicket)"
                                             class="btn btn-xs btn-warning">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-
+                                    <button title = "Close Ticket" ng-controller="TicketListCtrl"  ng-if="t.currentTicketStatus == 'ACCEPTANCE' || t.currentTicketStatus == 'EDIT'" ng-click="closeTicket(t)"
+                                            class="btn btn-xs btn-success">
+                                        <i class="fa fa-check"></i>
+                                    </button>
                                     <button title = "Read Ticket comments" ng-controller="modalController" ng-if="t.currentTicketStatus == 'EDIT'" ng-click="showMessageForm(t)" class="btn btn-xs btn-info">
                                         <i class="fa fa-comments"></i>
                                     </button>
+                                    <button title = "Reject Ticket resolution" ng-controller="TicketListCtrl" ng-if="t.currentTicketStatus == 'ACCEPTANCE'" ng-click="rejectResolvedTicket(t)" class="btn btn-xs btn-danger">
+                                        <i class="fa fa-minus-circle"></i>
+                                    </button>
                                 </td>
+
+
+                            <!--    <td ng-controller="ChatCtrl as chatctrl" ng-show="chatctrl.userInfo.userRole == 'TEAM_LEADER' || chatctrl.userInfo.userRole == 'TEAM_MEMBER'">
+                            -->
+                                <td ng-controller="ChatCtrl as chatctrl" ng-show="chatctrl.userInfo.userRole == 'TEAM_LEADER'">
+
+                                    <button ng-if="(chatctrl.userInfo.userRole == 'TEAM_LEADER')"
+                                            title = "Avvia chat con Team Member"
+                                            ui-sref="chat.visualizza({chatId: t.id, chatType: 'TICKET'})"
+                                            class="btn btn-primary">
+                                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f269bbc2a3bd8805b0dccb6c36dd2fac.png" width="16px" height="16px"/>
+                                    </button>
+
+
+                                <!--    <button ng-if="(chatctrl.userInfo.userRole == 'TEAM_MEMBER')"
+                                            title = "Avvia chat con Team Leader"
+                                            ui-sref="chat.visualizza({chatId: t.id, chatType: 'TICKET'})"
+                                            class="btn btn-primary">
+                                        <i class="fa fa-wechat fa-spin"></i>
+                                    </button>
+                                -->
+                                </td>
+
                             </tr>
                             </tbody>
                         </table>

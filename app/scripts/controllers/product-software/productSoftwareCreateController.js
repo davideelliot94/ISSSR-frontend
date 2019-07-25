@@ -43,11 +43,9 @@ mainAngularModule
                 let tags = ctrl.currentSoftwareProduct.categories;
                 ctrl.currentSoftwareProduct.categories = [];
                 ctrl.currentSoftwareProduct.targetState = "ACTIVE";
-                
-                if (tags != null) {
-                    for (let i = 0; i < tags.length; i++) {
-                        ctrl.currentSoftwareProduct.categories[i] = tags[i].text;
-                    }
+
+                for (let i = 0; i < tags.length; i++) {
+                    ctrl.currentSoftwareProduct.categories[i] = tags[i].text;
                 }
 
                 softwareProductDataFactory.Insert(
@@ -56,11 +54,7 @@ mainAngularModule
                         console.log(response);
                         $state.go('productsoftware.list', {}, {reload: true});
                     }, function (error) {
-                        let msgErr = "Errore nell'inserimento del prodotto";
-                        if(error.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nell'inserimento del prodotto"});
                     });
 
                 resetFieldsFn();

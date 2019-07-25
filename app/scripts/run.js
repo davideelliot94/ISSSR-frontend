@@ -1,30 +1,29 @@
 'use strict';
-// Eseguito subito dopo app.config()
-mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions', 'AuthFactory', 'storageService','AclProtector',
-    function ($rootScope,$state,jwtHelper, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions, AuthFactory, storageService,AclProtector) {
 
-        var aclData = {};
-        var oldState = null;
+mainAngularModule.run(['$rootScope', 'DEBUG', 'authManager', 'DTDefaultOptions', 'AclService', 'ErrorStateRedirector', '$transitions',
+    function ($rootScope, DEBUG, authManager, DTDefaultOptions, AclService, ErrorStateRedirector, $transitions) {
 
-        //get permission json from backend, setting security restriction in sessionStorage
-        AuthFactory.getPermission(function(response){
-            aclData = JSON.parse(JSON.stringify(response.data));
-            console.log(aclData);
-            AclService.setAbilities(aclData.roles);
-            storageService.save('routes', JSON.stringify(aclData.routes));
-            storageService.save('simbolicPermissions', JSON.stringify(aclData.simbolicPermissions));
-            storageService.save('sidebar', JSON.stringify(aclData.sidebar));
-        }, function (response) {
-            ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore server"});
-        });
+        var aclData = {
+            ROLE_GROUP_COORDINATOR: ['group_view', 'group_create', 'group_update', 'group_delete', 'group_permission', 'group_details'],
+            ROLE_GROUP_READER: ['group_view'],
 
+            ROLE_SOFTWARE_PRODUCT_COORDINATOR: ['software_view', 'software_create', 'software_update', 'software_delete', 'software_permission'],
+            ROLE_SOFTWARE_PRODUCT_READER: ['software_view'],
 
+            ROLE_TEAM_COORDINATOR: ['team_view', 'team_create', 'team_update', 'team_delete', 'team_permission', 'team_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
+            ROLE_TEAM_READER: ['team_view'],
+            ROLE_TEAM_MEMBER: ['user_info', 'ticket_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
+            ROLE_TEAM_LEADER: ['user_info', 'ticket_assign', 'gantt', 'planning', 'state_machine_dashboard', 'workflow'],
 
-        //AclService.setAbilities(aclData);
-        // $rootScope.hasPermission = AclService.can;
-        $rootScope.hasPermission = AclProtector.hasPermissionSimbolic; //to check symbolic permissions inside DOM by json retrieved
-        $rootScope.hasPermissionDirect = AclProtector.can; //to direct permission evaluation
+            ROLE_TICKET_COORDINATOR: ['ticket_view', 'ticket_create', 'ticket_update', 'ticket_delete', 'ticket_permission'],
+            ROLE_TICKET_READER: ['ticket_view'],
 
+            ROLE_ADMIN: ['log_view', 'log_delete', 'users_list', 'user_create', 'user_permission', 'user_info', 'show_queue', 'define_escalation', 'new_relation', 'define_relation', 'state_machine_create'],
+            //ROLE_ASSISTANT: ['users_list'],
+            ROLE_CUSTOMER: ['ticket_create', 'ticket_view', 'user_info']
+        };
+        AclService.setAbilities(aclData);
+        $rootScope.hasPermission = AclService.can;
 
         $rootScope.isDebug = DEBUG;
         console.info('isDebug: ' + $rootScope.isDebug);
@@ -32,24 +31,12 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
         $transitions.onError({}, ($transition$) => {
             var toStateName = $transition$.to().name;
             var fromStateName = $transition$.from().name;
-
-
-            if (toStateName !== fromStateName) {
+            if (toStateName != fromStateName) {
 
                 let Msg = "Rotta non autorizzata";
                 if (DEBUG) {
                     Msg += ": " + toStateName;
                 }
-                oldState = fromStateName;
-                let expToken = null;
-                let exp = JSON.parse(sessionStorage.getItem('authInfo'));
-                if(exp !== null) {
-                    expToken = exp.jwtToken;
-                    if (expToken !== null && jwtHelper.isTokenExpired(expToken)) {
-                        Msg = 'Login session expired';
-                    }
-                }
-
                 ErrorStateRedirector.GoToErrorPage({Messaggio: Msg});
             }
         });

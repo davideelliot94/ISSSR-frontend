@@ -20,11 +20,7 @@ mainAngularModule
                     function (team) {
                         ctrl.currentTeam = team;
                     }, function (response) {
-                        let msgErr = "Errore nel recupero del team";
-                        if(response.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel recupero del Team"})
                     });
             }
 
@@ -34,11 +30,7 @@ mainAngularModule
                         console.log(response);
                         $state.go('team.list', {}, {reload: 'team.list'});
                     }, function (response) {
-                        let msgErr = "Errore nel salvataggio del Team";
-                        if(response.data === "expiration"){
-                            msgErr = "Login session expired"
-                        }
-                        ErrorStateRedirector.GoToErrorPage({Messaggio: msgErr});
+                        ErrorStateRedirector.GoToErrorPage({Messaggio: "Errore nel salvataggio del Team"})
                     });
             }
         }
