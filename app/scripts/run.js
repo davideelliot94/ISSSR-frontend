@@ -52,7 +52,7 @@ mainAngularModule.run(['$rootScope','$state','jwtHelper', 'DEBUG', 'authManager'
 
                 ErrorStateRedirector.GoToErrorPage({Messaggio: Msg});
             }
-        }); 
+        });
 
         authManager.checkAuthOnRefresh();
         authManager.redirectWhenUnauthenticated();
